@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc><helmet>
+<style>
+body { margin:0; background:#eae3d1; }
+a { color:#317263; text-decoration:none; }
+a:hover { color:#26594D; }
+</style>
+</helmet>
+<div style="font-family:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:#eae3d1;color:#2a261b;min-height:100vh;display:flex;flex-direction:column;">
+
+  <header style="position:sticky;top:0;z-index:40;background:rgba(250,251,254,0.5);backdrop-filter:blur(8px);">
+    <nav style="max-width:1024px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 16px;flex-wrap:wrap;">
+      <a href="Home.dc.html" style="display:flex;align-items:center;">
+        <img src="assets/logo-light.png" alt="Logo" style="height:64px;width:64px;object-fit:contain;"/>
+      </a>
+      <ul style="display:flex;align-items:center;gap:24px;font-size:14px;font-weight:500;color:#6b6552;padding:16px 0;list-style:none;margin:0;flex-wrap:wrap;">
+        <li><a href="Home.dc.html" style="color:#6b6552;">Home</a></li>
+        <li><a href="About.dc.html" style="color:#2a261b;font-weight:600;">Chi sono</a></li>
+        <li><a href="Projects.dc.html" style="color:#6b6552;">Progetti</a></li>
+        <li><a href="Contact.dc.html" style="color:#6b6552;">Contatti</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main style="flex:1;">
+    <section style="max-width:768px;margin:0 auto;padding:64px 16px 40px;text-align:center;">
+      <h1 style="margin:0;font-size:clamp(32px,5vw,48px);font-weight:700;letter-spacing:-0.01em;">Su di me</h1>
+    </section>
+
+    <div style="max-width:768px;margin:0 auto;padding:0 16px 64px;line-height:1.7;">
+      <h2 style="font-size:24px;font-weight:700;margin:0 0 16px;">Ciao, benvenuto/a</h2>
+      <p>Sono Leica Florian Robert, sviluppatore Web Full Stack, UI e UX Designer, sviluppatore Mobile, insegnante tecnologie web, grande appassionato d'informatica e di tecnologia.</p>
+      <p>Adoro questi settori in quanto offrono opportunità uniche e (a volte) semplificano di molto la vita o comunque la migliorano e questa mia passione cerco di trasmetterla anche ad altri.</p>
+      <p>Dall'inizio della mia carriera professionale questa passione mi ha spinto a voler imparare il più possibile come funziona il web, come funziona l'informatica e come posso a mia volta farne parte anche io.</p>
+      <p>Ho iniziato a programmare da autodidatta. Giorno dopo giorno, tassello dopo tassello, ho imparato cose nuove, mi sono costantemente messo alla prova, allargando i miei limiti, a volte anche fallendo, ma tutto questo mi ha fatto crescere professionalmente e acquisire le capacità necessarie per rendere questa passione un lavoro.</p>
+      <p>Attualmente ho la splendida opportunità di trasmettere anche ad altri la mia passione, la mia esperienza e le conoscenze acquisite, formando programmatori Full Stack ed insegnando loro tutto il necessario per poter contribuire attivamente al mondo della programmazione! Oltre ad insegnare, continuo a lavorare come sviluppatore e mi diletto nello sperimentare nuove tecnologie e continuare ad imparare cose nuove.</p>
+      <p>Anni di esperienza: <strong>17</strong></p>
+
+      <h2 style="font-size:24px;font-weight:700;margin:40px 0 8px;">Ecco alcune esperienze</h2>
+      <p style="color:#6b6552;">Queste sono alcune delle esperienze più significative che ho avuto nel corso della mia carriera. Ci sono stati molti altri progetti e collaborazioni, e tutte queste esperienze mi hanno permesso di crescere professionalmente, ma sicuramente queste sono le più importanti.</p>
+
+      <ol style="position:relative;margin:32px 0;max-width:672px;border-left:2px solid #d8cfae;padding:0;list-style:none;">
+        <sc-for list="{{ experience }}" as="exp" hint-placeholder-count="8">
+          <li style="position:relative;margin-left:24px;padding-bottom:32px;">
+            <span style="position:absolute;left:-31px;top:6px;height:12px;width:12px;border-radius:999px;background:#a89f7f;"></span>
+            <h3 style="margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;font-size:18px;font-weight:600;">
+              <sc-if value="{{ exp.link }}"><a href="{{ exp.link }}" target="_blank" rel="noopener">{{ exp.company }}</a></sc-if>
+              <sc-if value="{{ exp.noLink }}"><span>{{ exp.company }}</span></sc-if>
+              <sc-if value="{{ exp.year }}"><span style="font-size:14px;font-weight:400;color:#9a927a;">{{ exp.year }}</span></sc-if>
+            </h3>
+            <p style="margin:4px 0 0;color:#6b6552;">{{ exp.role }}</p>
+          </li>
+        </sc-for>
+      </ol>
+
+      <h2 style="font-size:24px;font-weight:700;margin:40px 0 8px;">Tecnologie e linguaggi</h2>
+      <div style="margin:24px 0;display:flex;flex-wrap:wrap;gap:8px;">
+        <sc-for list="{{ tech }}" as="t" hint-placeholder-count="15">
+          <span style="border-radius:999px;background:#f0ebd8;padding:4px 12px;font-size:14px;color:#4a4636;">{{ t }}</span>
+        </sc-for>
+      </div>
+    </div>
+
+    <section style="max-width:768px;margin:0 auto 64px;border-radius:16px;background:#f0ebd8;padding:48px 32px;text-align:center;">
+      <h2 style="margin:0;font-size:28px;font-weight:700;letter-spacing:-0.01em;">Ora sai qualcosa in più, scrivimi</h2>
+      <div style="margin:16px auto 0;max-width:576px;color:#6b6552;line-height:1.6;">
+        Se hai bisogno di un sito web, di un'applicazione mobile, di un logo o di un'identità visiva, o se hai semplicemente bisogno di un consiglio, non esitare a contattarmi! Sono sempre alla ricerca di nuove sfide, nuovi entusiasmanti progetti e nuove opportunità per migliorare come persona e come professionista.
+      </div>
+      <div style="margin-top:24px;display:flex;flex-wrap:wrap;justify-content:center;gap:16px;">
+        <a href="Contact.dc.html" style="display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:12px 24px;font-size:14px;font-weight:600;background:#317263;color:#fafbfe;">Contattami</a>
+      </div>
+    </section>
+  </main>
+
+  <footer style="border-top:1px solid #d8cfae;">
+    <div style="max-width:1024px;margin:0 auto;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:16px;padding:32px 16px;font-size:14px;color:#6b6552;">
+      <p style="margin:0;">© 2026 Leica Florian Robert — Tutti i diritti riservati</p>
+      <div style="display:flex;align-items:center;gap:16px;">
+        <a href="https://github.com/leicaflorian" target="_blank" rel="noopener" style="color:#6b6552;">GitHub</a>
+        <a href="https://www.linkedin.com/in/florian-robert-leica/" target="_blank" rel="noopener" style="color:#6b6552;">LinkedIn</a>
+        <a href="Contact.dc.html" style="color:#6b6552;">Contatti</a>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>class Component extends DCLogic {
+  renderVals() {
+    const experience = [
+      { company: 'Tecnobit s.r.l.', link: 'https://www.tecnobit.it/', role: 'Sviluppo software gestionale', year: null },
+      { company: 'Mediamotion s.r.l.', link: null, role: 'Junior Full Stack Developer', year: 2009 },
+      { company: 'Organizzazione no-profit', link: null, role: 'Desktop & Web Developer', year: 2010 },
+      { company: 'Self-employed', link: null, role: 'Full Stack Developer, Web Designer, Mobile Developer', year: 2017 },
+      { company: 'Zucchetti Software Giuridico s.r.l.', link: 'http://www.zucchettisoftwaregiuridico.it', role: 'Senior Front-End Developer', year: 2018 },
+      { company: 'Develon s.r.l.', link: 'https://www.develon.com', role: 'Senior Full Stack Developer', year: 2020 },
+      { company: 'Boolean Careers', link: 'https://www.boolean.careers', role: 'Main Teacher nel corso di Full-Stack Web Development', year: 2021 },
+      { company: 'Web Artisan Bros', link: 'https://webartisanbros.com', role: 'Co-founder & CTO', year: 2023 },
+    ].map(e => ({ ...e, noLink: !e.link }));
+    const tech = ['HTML5','CSS3 / SASS','JavaScript','TypeScript','jQuery','Vue.js / Nuxt.js','Node.js','Nest.js','NativeScript','Ionic','Webpack / Vite','PHP','Laravel','MongoDB / MySQL','Docker'];
+    return { experience, tech };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{
+  "name": "lfr-v3",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "directus:up": "docker compose -f directus/docker-compose.yml up -d",
+    "directus:down": "docker compose -f directus/docker-compose.yml down",
+    "directus:setup": "node directus/scripts/setup.mjs",
+    "directus:seed": "node directus/scripts/seed.mjs",
+    "directus:snapshot": "docker compose -f directus/docker-compose.yml exec -T directus node cli.js schema snapshot --yes /directus/uploads/snapshot.yaml && mv directus/uploads/snapshot.yaml directus/snapshot.yaml",
+    "typecheck": "nuxi typecheck"
+  },
+  "dependencies": {
+    "@directus/sdk": "^18.0.3",
+    "@nuxt/fonts": "^1.0.1",
+    "@nuxt/image": "^2.1.0",
+    "@nuxtjs/i18n": "^10.6.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "nuxt": "^4.5.1",
+    "vue": "^3.5.40",
+    "vue-router": "^5.2.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3",
+    "vue-tsc": "^3.3.13"
+  }
+}

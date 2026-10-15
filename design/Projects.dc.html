@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc><helmet>
+<style>
+body { margin:0; background:#eae3d1; }
+a { color:#317263; text-decoration:none; }
+a:hover { color:#26594D; }
+</style>
+</helmet>
+<div style="font-family:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:#eae3d1;color:#2a261b;min-height:100vh;display:flex;flex-direction:column;">
+
+  <header style="position:sticky;top:0;z-index:40;background:rgba(250,251,254,0.5);backdrop-filter:blur(8px);">
+    <nav style="max-width:1024px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 16px;flex-wrap:wrap;">
+      <a href="Home.dc.html" style="display:flex;align-items:center;">
+        <img src="assets/logo-light.png" alt="Logo" style="height:64px;width:64px;object-fit:contain;"/>
+      </a>
+      <ul style="display:flex;align-items:center;gap:24px;font-size:14px;font-weight:500;color:#6b6552;padding:16px 0;list-style:none;margin:0;flex-wrap:wrap;">
+        <li><a href="Home.dc.html" style="color:#6b6552;">Home</a></li>
+        <li><a href="About.dc.html" style="color:#6b6552;">Chi sono</a></li>
+        <li><a href="Projects.dc.html" style="color:#2a261b;font-weight:600;">Progetti</a></li>
+        <li><a href="Contact.dc.html" style="color:#6b6552;">Contatti</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main style="flex:1;">
+    <section style="max-width:768px;margin:0 auto;padding:64px 16px 40px;text-align:center;">
+      <h1 style="margin:0;font-size:clamp(32px,5vw,48px);font-weight:700;letter-spacing:-0.01em;">Progetti</h1>
+      <div style="margin:16px auto 0;max-width:576px;color:#6b6552;line-height:1.6;">
+        <p>Come disse qualcuno (non ricordo chi), "L'unico limite è la tua immaginazione" e questo è vero anche per i progetti che puoi realizzare con me. Non c'è nulla (quasi) che non possa essere fatto, se hai la voglia e ti rivolgi alla persona giusta.</p>
+        <p>Qui di seguito troverai una lista di alcuni dei progetti che ho realizzato in passato, ma non esitare a contattarmi per qualsiasi altra cosa tu possa desiderare.</p>
+      </div>
+    </section>
+
+    <div style="max-width:1280px;margin:0 auto;padding:0 16px 32px;">
+      <h2 style="margin:0 0 16px;font-size:22px;font-weight:600;">Elenco progetti</h2>
+      <div style="display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+        <sc-for list="{{ projects }}" as="p" hint-placeholder-count="11">
+          <a href="{{ p.url }}" target="_blank" rel="noopener" style="display:flex;flex-direction:column;gap:8px;border-radius:12px;border:1px solid #d8cfae;background:#fafbfe;padding:24px;box-shadow:0 1px 2px rgba(0,0,0,0.05);color:#2a261b;">
+            <h3 style="margin:0;font-size:18px;font-weight:600;">{{ p.name }}</h3>
+            <sc-if value="{{ p.note }}"><div style="font-size:14px;color:#6b6552;">{{ p.note }}</div></sc-if>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+
+    <section style="max-width:768px;margin:32px auto 64px;border-radius:16px;background:#f0ebd8;padding:48px 32px;text-align:center;">
+      <h2 style="margin:0;font-size:28px;font-weight:700;letter-spacing:-0.01em;">Ora sai qualcosa in più, scrivimi</h2>
+      <div style="margin:16px auto 0;max-width:576px;color:#6b6552;line-height:1.6;">
+        Sia che tu stia cercando di creare un sito web aziendale, un e-commerce, un blog o qualsiasi altra soluzione web, sono qui per aiutarti. Contattami oggi stesso per scoprire come possiamo collaborare e creare un sito web straordinario insieme!
+      </div>
+      <div style="margin-top:24px;display:flex;flex-wrap:wrap;justify-content:center;gap:16px;">
+        <a href="Contact.dc.html" style="display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:12px 24px;font-size:14px;font-weight:600;background:#317263;color:#fafbfe;">Contattami</a>
+      </div>
+    </section>
+  </main>
+
+  <footer style="border-top:1px solid #d8cfae;">
+    <div style="max-width:1024px;margin:0 auto;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:16px;padding:32px 16px;font-size:14px;color:#6b6552;">
+      <p style="margin:0;">© 2026 Leica Florian Robert — Tutti i diritti riservati</p>
+      <div style="display:flex;align-items:center;gap:16px;">
+        <a href="https://github.com/leicaflorian" target="_blank" rel="noopener" style="color:#6b6552;">GitHub</a>
+        <a href="https://www.linkedin.com/in/florian-robert-leica/" target="_blank" rel="noopener" style="color:#6b6552;">LinkedIn</a>
+        <a href="Contact.dc.html" style="color:#6b6552;">Contatti</a>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>class Component extends DCLogic {
+  renderVals() {
+    const projects = [
+      { name: 'My website V2', url: 'https://leicaflorianrobert.dev', note: 'Versione attuale del sito' },
+      { name: 'Web Artisan Bros', url: 'https://webartisanbros.com/', note: null },
+      { name: 'Slides.com downloader', url: 'https://chrome.google.com/webstore/detail/slidescom-downloader/bciknjamldhnbbckmgbchmkdcalngnco?hl=it', note: 'Estensione Chrome' },
+      { name: 'TvIt', url: 'https://tvit.leicaflorianrobert.dev/channels', note: null },
+      { name: 'Biologica Disinfestazioni', url: 'https://biologicadisinfestazioni.it', note: null },
+      { name: 'Enigma', url: 'https://leicaflorian.github.io/enigma_machine', note: 'Macchina Enigma' },
+      { name: 'Fold my paper', url: 'https://leicaflorian.github.io/fold_my_paper', note: null },
+      { name: 'Global Club App', url: 'https://globalgroup.consulting/club/', note: null },
+      { name: 'My website V1', url: 'https://v1.leicaflorianrobert.dev', note: null },
+      { name: 'Global Group Consulting', url: 'https://private.globalgroup.consulting/', note: null },
+      { name: 'Fibonacci Counter', url: 'https://leicaflorian.github.io/fibonacci_counter/', note: null },
+    ];
+    return { projects };
+  }
+}
+</script>
+</body>
+</html>

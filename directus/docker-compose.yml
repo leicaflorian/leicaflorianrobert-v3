@@ -1,0 +1,46 @@
+# Local Directus for development: `docker compose up -d` from this folder.
+# Variables live in `.env` (see `.env.example`).
+name: lfr-directus
+
+services:
+  database:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: directus
+      POSTGRES_PASSWORD: directus
+      POSTGRES_DB: directus
+    volumes:
+      - database:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "directus", "-d", "directus"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  directus:
+    image: directus/directus:12.5.0
+    ports:
+      - "8055:8055"
+    depends_on:
+      database:
+        condition: service_healthy
+    volumes:
+      - ./uploads:/directus/uploads
+      - ./extensions:/directus/extensions
+    env_file: .env
+    environment:
+      DB_CLIENT: pg
+      DB_HOST: database
+      DB_PORT: 5432
+      DB_DATABASE: directus
+      DB_USER: directus
+      DB_PASSWORD: directus
+      PUBLIC_URL: http://localhost:8055
+      CORS_ENABLED: "true"
+      CORS_ORIGIN: http://localhost:3000
+      EXTENSIONS_AUTO_RELOAD: "true"
+      # the variables flows can read with {{ $env.NAME }}
+      FLOWS_ENV_ALLOW_LIST: DEPLOY_WEBHOOK_URL,CONTACT_EMAIL_TO
+
+volumes:
+  database:

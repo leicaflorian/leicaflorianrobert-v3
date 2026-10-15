@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+@keyframes cursorBlink { 0%,50%{opacity:1} 51%,100%{opacity:0} }
+body { margin:0; background:#0C0C0C; }
+a { color:#FF5A00; text-decoration:none; }
+a:hover { color:#FF7A33; }
+::selection { background:#FF5A00; color:#0C0C0C; }
+@media (max-width: 640px) {
+  #b-services { display:flex !important; overflow-x:auto; scroll-snap-type:x mandatory; }
+  #b-services > * { flex:0 0 84%; scroll-snap-align:start; }
+}
+@media (max-width: 900px) {
+  #b-hero-row, #b-contact, #b-bento { grid-template-columns:1fr !important; }
+  #b-bento > * { grid-row:auto !important; grid-column:auto !important; }
+  #b-contact image-slot { aspect-ratio:16/9 !important; min-height:0 !important; }
+}
+</style>
+</helmet>
+<div style="font-family:'IBM Plex Mono',ui-monospace,monospace;background:#0C0C0C;color:#F5F3EE;min-height:100vh;display:flex;flex-direction:column;">
+
+  <header style="position:sticky;top:0;z-index:40;background:#0C0C0C;border-bottom:1px solid #2B2B2B;">
+    <nav style="max-width:1320px;margin:0 auto;display:flex;align-items:stretch;justify-content:space-between;flex-wrap:wrap;border-left:1px solid #2B2B2B;border-right:1px solid #2B2B2B;">
+      <a href="Home B Grid.dc.html" style="display:flex;align-items:center;gap:12px;padding:10px 20px;border-right:1px solid #2B2B2B;">
+        <img src="assets/logo-dark.png" alt="Logo" style="height:40px;width:40px;object-fit:contain;"/>
+      </a>
+      <ul style="display:flex;align-items:stretch;font-family:'Space Mono',monospace;font-size:13px;text-transform:uppercase;letter-spacing:0.04em;list-style:none;margin:0;padding:0;flex-wrap:wrap;">
+        <li style="display:flex;"><a href="Home B Grid.dc.html" style="display:flex;align-items:center;padding:0 22px;background:#FF5A00;color:#0C0C0C;font-weight:700;">Home</a></li>
+        <li style="display:flex;border-left:1px solid #2B2B2B;"><a href="About.dc.html" style="display:flex;align-items:center;padding:18px 22px;color:#F5F3EE;" style-hover="background:#1A1A1A;color:#FF5A00;">Chi sono</a></li>
+        <li style="display:flex;border-left:1px solid #2B2B2B;"><a href="Projects.dc.html" style="display:flex;align-items:center;padding:18px 22px;color:#F5F3EE;" style-hover="background:#1A1A1A;color:#FF5A00;">Progetti</a></li>
+        <li style="display:flex;border-left:1px solid #2B2B2B;"><a href="Contact.dc.html" style="display:flex;align-items:center;padding:18px 22px;color:#F5F3EE;" style-hover="background:#1A1A1A;color:#FF5A00;">Contatti</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main style="flex:1;">
+    <section style="border-bottom:1px solid #2B2B2B;">
+      <div style="max-width:1320px;margin:0 auto;border-left:1px solid #2B2B2B;border-right:1px solid #2B2B2B;">
+        <div style="padding:56px 24px 40px;border-bottom:1px solid #2B2B2B;">
+          <p style="margin:0 0 20px;font-size:13px;color:#9C9890;">👋 Ciao, sono</p>
+          <h1 style="margin:0;font-family:'Space Mono',monospace;font-size:clamp(44px,10.5vw,152px);font-weight:700;line-height:0.88;letter-spacing:-0.06em;text-transform:uppercase;text-wrap:balance;">Leica Florian <span style="color:#FF5A00;">Robert</span></h1>
+        </div>
+        <div id="b-hero-row" style="display:grid;grid-template-columns:1fr 1fr 1fr;">
+          <div style="padding:28px 24px;border-right:1px solid #2B2B2B;display:flex;flex-direction:column;justify-content:space-between;gap:32px;">
+            <p style="margin:0;font-family:'Space Mono',monospace;font-size:clamp(20px,2.2vw,28px);font-weight:700;line-height:1.15;">Full Stack Developer<span style="color:#FF5A00;animation:cursorBlink 1s step-start infinite;">_</span></p>
+            <a href="Contact.dc.html" style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px;background:#FF5A00;color:#0C0C0C;font-family:'Space Mono',monospace;font-weight:700;text-transform:uppercase;font-size:14px;" style-hover="background:#F5F3EE;color:#0C0C0C;">Contattami <span>→</span></a>
+          </div>
+          <div style="padding:28px 24px;border-right:1px solid #2B2B2B;">
+            <p style="margin:0;font-size:15px;color:#BDB9B0;line-height:1.75;">Da oltre 15 anni trasformo idee in siti, app e interfacce che funzionano davvero — caffè permettendo. Web, mobile, UI/UX: se è digitale, probabilmente l'ho già costruito (o rotto e rimesso a posto).</p>
+          </div>
+          <div style="background:#FF5A00;min-height:360px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;">
+            <img src="assets/me-transparent-dark.webp" alt="Leica Florian Robert" style="width:100%;max-width:380px;height:100%;max-height:440px;object-fit:contain;object-position:bottom;display:block;filter:grayscale(1) contrast(1.1);"/>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="border-bottom:1px solid #2B2B2B;">
+      <div style="max-width:1320px;margin:0 auto;border-left:1px solid #2B2B2B;border-right:1px solid #2B2B2B;">
+        <div style="padding:64px 24px 40px;display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:flex-end;border-bottom:1px solid #2B2B2B;">
+          <h2 style="margin:0;font-family:'Space Mono',monospace;font-size:clamp(32px,5vw,64px);font-weight:700;line-height:0.95;letter-spacing:-0.04em;text-transform:uppercase;"><span style="color:#FF5A00;">[01]</span> Cosa posso fare per te?</h2>
+          <p style="margin:0;max-width:440px;color:#BDB9B0;line-height:1.7;font-size:14px;">Che tu abbia bisogno di un sito, un'app o un'interfaccia che non faccia scappare gli utenti, sei nel posto giusto anche tu. Ecco come posso aiutarti:</p>
+        </div>
+        <div id="b-services" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1px;background:#2B2B2B;">
+          <sc-for list="{{ services }}" as="svc" hint-placeholder-count="6">
+            <div style="background:#0C0C0C;display:flex;flex-direction:column;transition:background .2s;" style-hover="background:#151515;">
+              <div style="padding:24px 24px 0;display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-family:'Space Mono',monospace;font-size:13px;color:#FF5A00;">{{ svc.num }}</span>
+                <div style="width:28px;height:28px;color:#F5F3EE;" dangerouslySetInnerHTML="{{ svc.iconHtml }}"></div>
+              </div>
+              <div style="padding:20px 24px;">
+                <image-slot id="b-svc-{{ svc.key }}" shape="rect" placeholder="Immagine — {{ svc.title }}" style="width:100%;aspect-ratio:4/3;display:block;"></image-slot>
+              </div>
+              <div style="padding:0 24px 28px;display:flex;flex-direction:column;gap:10px;">
+                <h3 style="margin:0;font-family:'Space Mono',monospace;font-size:19px;font-weight:700;text-transform:uppercase;letter-spacing:-0.01em;">{{ svc.title }}</h3>
+                <p style="margin:0;color:#BDB9B0;line-height:1.7;font-size:14px;">{{ svc.text }}</p>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="border-bottom:1px solid #2B2B2B;">
+      <div style="max-width:1320px;margin:0 auto;border-left:1px solid #2B2B2B;border-right:1px solid #2B2B2B;">
+        <div style="padding:64px 24px 40px;display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:flex-end;border-bottom:1px solid #2B2B2B;">
+          <h2 style="margin:0;font-family:'Space Mono',monospace;font-size:clamp(32px,5vw,64px);font-weight:700;line-height:0.95;letter-spacing:-0.04em;text-transform:uppercase;"><span style="color:#FF5A00;">[02]</span> Progetti</h2>
+          <a href="Projects.dc.html" style="font-family:'Space Mono',monospace;font-size:14px;text-transform:uppercase;font-weight:700;color:#F5F3EE;" style-hover="color:#FF5A00;">Tutti i progetti →</a>
+        </div>
+        <div id="b-bento" style="display:grid;grid-template-columns:2fr 1fr;grid-template-rows:auto auto;gap:1px;background:#2B2B2B;">
+          <a href="https://webartisanbros.com/" target="_blank" rel="noopener" style="grid-row:span 2;background:#141414;padding:48px 32px 28px;display:flex;flex-direction:column;justify-content:space-between;gap:32px;color:#F5F3EE;" style-hover="background:#191919;color:#F5F3EE;">
+            <div style="max-width:680px;width:100%;margin:0 auto;">
+              <div style="border:10px solid #262626;border-bottom-width:14px;background:#000;">
+                <image-slot id="b-prj-wab" shape="rect" placeholder="Screenshot Web Artisan Bros" style="width:100%;aspect-ratio:16/10;display:block;"></image-slot>
+              </div>
+              <div style="height:12px;margin:0 -6%;background:#333;"></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;">
+              <div>
+                <p style="margin:0 0 6px;font-size:12px;color:#9C9890;">webartisanbros.com</p>
+                <h3 style="margin:0;font-family:'Space Mono',monospace;font-size:clamp(22px,2.6vw,32px);font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;">Web Artisan Bros</h3>
+              </div>
+              <span style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:#FF5A00;color:#0C0C0C;font-size:20px;">↗</span>
+            </div>
+          </a>
+          <a href="https://globalgroup.consulting/club/" target="_blank" rel="noopener" style="background:#FF5A00;padding:32px 24px 24px;display:flex;flex-direction:column;gap:24px;color:#0C0C0C;" style-hover="background:#FF6A1A;color:#0C0C0C;">
+            <div style="display:flex;justify-content:center;">
+              <div style="width:150px;border:7px solid #0C0C0C;border-radius:26px;background:#000;overflow:hidden;">
+                <image-slot id="b-prj-gca" shape="rect" placeholder="Screenshot app" style="width:100%;aspect-ratio:9/19.5;display:block;"></image-slot>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <h3 style="margin:0;font-family:'Space Mono',monospace;font-size:18px;font-weight:700;text-transform:uppercase;">Global Club App</h3>
+              <span style="font-size:20px;">↗</span>
+            </div>
+          </a>
+          <a href="https://tvit.leicaflorianrobert.dev/channels" target="_blank" rel="noopener" style="background:#141414;padding:24px;display:flex;flex-direction:column;gap:20px;color:#F5F3EE;" style-hover="background:#191919;color:#F5F3EE;">
+            <image-slot id="b-prj-tvit" shape="rect" placeholder="Screenshot TvIt" style="width:100%;aspect-ratio:16/10;display:block;"></image-slot>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <h3 style="margin:0;font-family:'Space Mono',monospace;font-size:18px;font-weight:700;text-transform:uppercase;">TvIt</h3>
+              <span style="font-size:20px;color:#FF5A00;">↗</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section style="border-bottom:1px solid #2B2B2B;">
+      <div id="b-contact" style="max-width:1320px;margin:0 auto;border-left:1px solid #2B2B2B;border-right:1px solid #2B2B2B;display:grid;grid-template-columns:1fr 1fr;">
+        <div style="padding:64px 24px;border-right:1px solid #2B2B2B;">
+          <h2 style="margin:0 0 16px;font-family:'Space Mono',monospace;font-size:clamp(32px,5vw,64px);font-weight:700;line-height:0.95;letter-spacing:-0.04em;text-transform:uppercase;"><span style="color:#FF5A00;">[03]</span> Parliamone</h2>
+          <p style="margin:0;color:#BDB9B0;max-width:520px;line-height:1.7;font-size:14px;">Sito, app, consulenza o solo un parere tecnico — scrivimi e vediamo insieme come darti una mano, senza giri di parole.</p>
+          <form style="margin-top:40px;display:flex;flex-direction:column;" onSubmit="{{ handleSubmit }}">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
+              <input type="text" name="nome" placeholder="Nome" style="border:none;border-bottom:1px solid #3A3A3A;background:transparent;padding:18px 0;font-size:16px;color:#F5F3EE;font-family:inherit;outline:none;margin-right:16px;" style-focus="border-bottom-color:#FF5A00;"/>
+              <input type="text" name="cognome" placeholder="Cognome" style="border:none;border-bottom:1px solid #3A3A3A;background:transparent;padding:18px 0;font-size:16px;color:#F5F3EE;font-family:inherit;outline:none;" style-focus="border-bottom-color:#FF5A00;"/>
+            </div>
+            <input type="email" name="email" placeholder="Email" style="border:none;border-bottom:1px solid #3A3A3A;background:transparent;padding:18px 0;font-size:16px;color:#F5F3EE;font-family:inherit;outline:none;" style-focus="border-bottom-color:#FF5A00;"/>
+            <textarea name="messaggio" rows="4" placeholder="Raccontami del tuo progetto..." style="resize:vertical;border:none;border-bottom:1px solid #3A3A3A;background:transparent;padding:18px 0;font-size:16px;color:#F5F3EE;font-family:inherit;outline:none;" style-focus="border-bottom-color:#FF5A00;"></textarea>
+            <button type="submit" style="margin-top:32px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:20px 22px;font-size:15px;font-weight:700;text-transform:uppercase;background:#FF5A00;color:#0C0C0C;font-family:'Space Mono',monospace;" style-hover="background:#F5F3EE;">Invia messaggio <span>→</span></button>
+            <span style="margin-top:16px;font-size:11px;color:#77736C;line-height:1.6;">Questo sito è protetto da reCAPTCHA. Si applicano la Privacy Policy e i Termini di servizio di Google.</span>
+          </form>
+        </div>
+        <image-slot id="b-contact-image" shape="rect" placeholder="Foto o illustrazione di contatto" style="width:100%;height:100%;min-height:520px;display:block;"></image-slot>
+      </div>
+    </section>
+  </main>
+
+  <footer style="background:#0C0C0C;">
+    <div style="max-width:1320px;margin:0 auto;border-left:1px solid #2B2B2B;border-right:1px solid #2B2B2B;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:#2B2B2B;">
+      <div style="background:#0C0C0C;padding:40px 24px;">
+        <img src="assets/logo-dark.png" alt="Logo" style="height:44px;width:44px;object-fit:contain;margin-bottom:14px;"/>
+        <p style="margin:0;max-width:340px;font-size:13px;color:#9C9890;line-height:1.7;">Sviluppatore Web Full Stack, UI/UX Designer, Mobile Developer. Da oltre 15 anni trasformo idee in prodotti digitali.</p>
+      </div>
+      <div style="background:#0C0C0C;padding:40px 24px;">
+        <h3 style="margin:0 0 14px;font-family:'Space Mono',monospace;font-size:12px;text-transform:uppercase;color:#FF5A00;">Contatti</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:13px;">
+          <a href="mailto:info@leicaflorianrobert.dev" style="color:#F5F3EE;">info@leicaflorianrobert.dev</a>
+          <span style="color:#9C9890;">Schio, VI — Italia</span>
+        </div>
+      </div>
+      <div style="background:#0C0C0C;padding:40px 24px;">
+        <h3 style="margin:0 0 14px;font-family:'Space Mono',monospace;font-size:12px;text-transform:uppercase;color:#FF5A00;">Social</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:13px;">
+          <a href="https://github.com/leicaflorian" target="_blank" rel="noopener" style="color:#F5F3EE;">GitHub ↗</a>
+          <a href="https://www.linkedin.com/in/florian-robert-leica/" target="_blank" rel="noopener" style="color:#F5F3EE;">LinkedIn ↗</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #2B2B2B;">
+      <div style="max-width:1320px;margin:0 auto;padding:18px 24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:12px;color:#77736C;box-sizing:border-box;">
+        <p style="margin:0;">© 2026 Leica Florian Robert — Tutti i diritti riservati</p>
+        <p style="margin:0;">P. IVA 04329800249</p>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const icons = {
+      web: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="3"><rect x="10" y="14" width="22" height="18"/><path d="M30 8V40"/></svg>',
+      mobile: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="3"><rect x="16" y="8" width="16" height="32"/><path d="M8 30H40"/></svg>',
+      design: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="3"><rect x="8" y="10" width="20" height="20"/><circle cx="30" cy="30" r="10"/></svg>',
+      devops: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 14H35M9 24H27M9 34H39"/><path d="M29 8V40"/></svg>',
+      formazione: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="3"><path d="M8 36H18V26H28V16H40"/></svg>',
+      consulenza: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 12H10V28H24"/><path d="M28 36H38V20H24"/></svg>',
+    };
+    const data = [
+      { key: 'web', title: 'Web Developer', text: "Siti, web app e prodotti SaaS su misura — dall'idea al lancio, integrazioni e pagamenti compresi." },
+      { key: 'mobile', title: 'Mobile Developer', text: 'App native o cross-platform che i tuoi utenti aprono davvero, non solo scaricano una volta e dimenticano.' },
+      { key: 'design', title: 'UI / UX Designer', text: "Interfacce chiare che guidano l'utente dove deve arrivare — belle sì, ma soprattutto che funzionano." },
+      { key: 'devops', title: 'DevOps & Infrastruttura', text: 'Server, CI/CD, performance e manutenzione continua — perché "funziona sul mio computer" non dovrebbe essere una frase che senti mai.' },
+      { key: 'formazione', title: 'Formazione / Mentoring', text: 'Corsi e mentoring per sviluppatori che vogliono crescere sul serio — non solo copiare codice, ma capirlo davvero.' },
+      { key: 'consulenza', title: 'Consulenza tecnica', text: 'Code review, architettura, scelta dello stack — un parere esterno onesto, anche quando la risposta è "meglio riscriverlo".' },
+    ];
+    const services = data.map((d, i) => ({ key: d.key, title: d.title, text: d.text, num: String(i + 1).padStart(2, '0'), iconHtml: { __html: icons[d.key] } }));
+    return { services, handleSubmit: (e) => e.preventDefault() };
+  }
+}
+</script>
+</body>
+</html>

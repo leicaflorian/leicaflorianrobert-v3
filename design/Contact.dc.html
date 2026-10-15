@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc><helmet>
+<style>
+body { margin:0; background:#eae3d1; }
+a { color:#317263; text-decoration:none; }
+a:hover { color:#26594D; }
+</style>
+</helmet>
+<div style="font-family:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:#eae3d1;color:#2a261b;min-height:100vh;display:flex;flex-direction:column;">
+
+  <header style="position:sticky;top:0;z-index:40;background:rgba(250,251,254,0.5);backdrop-filter:blur(8px);">
+    <nav style="max-width:1024px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 16px;flex-wrap:wrap;">
+      <a href="Home.dc.html" style="display:flex;align-items:center;">
+        <img src="assets/logo-light.png" alt="Logo" style="height:64px;width:64px;object-fit:contain;"/>
+      </a>
+      <ul style="display:flex;align-items:center;gap:24px;font-size:14px;font-weight:500;color:#6b6552;padding:16px 0;list-style:none;margin:0;flex-wrap:wrap;">
+        <li><a href="Home.dc.html" style="color:#6b6552;">Home</a></li>
+        <li><a href="About.dc.html" style="color:#6b6552;">Chi sono</a></li>
+        <li><a href="Projects.dc.html" style="color:#6b6552;">Progetti</a></li>
+        <li><a href="Contact.dc.html" style="color:#2a261b;font-weight:600;">Contatti</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main style="flex:1;">
+    <div style="max-width:768px;margin:0 auto;padding:64px 16px 64px;line-height:1.7;">
+      <h1 style="margin:0 0 24px;font-size:clamp(28px,4vw,36px);font-weight:700;">Contatti</h1>
+
+      <p style="margin:0 0 4px;font-weight:700;">Leica Florian Robert</p>
+      <p style="margin:0 0 16px;color:#6b6552;">Via Pozza Maraschin, 44/B<br/>36015 Schio, VI</p>
+      <ul style="margin:0 0 32px;padding-left:20px;color:#6b6552;">
+        <li>P. Iva: 04329800249</li>
+        <li>REA: VI - 396256</li>
+        <li>SDI: M5UXCR1</li>
+      </ul>
+
+      <h2 style="font-size:22px;font-weight:700;margin:0 0 12px;">Contatti</h2>
+      <ul style="margin:0 0 32px;padding-left:20px;">
+        <li>Email: <a href="mailto:info@leicaflorianrobert.dev">info@leicaflorianrobert.dev</a></li>
+        <li>Pec: <a href="mailto:florian.leica@pec.it">florian.leica@pec.it</a></li>
+      </ul>
+
+      <h2 style="font-size:22px;font-weight:700;margin:0 0 12px;">Social</h2>
+      <ul style="margin:0 0 32px;padding-left:20px;">
+        <li>GitHub: <a href="https://github.com/leicaflorian" target="_blank" rel="noopener">github.com/leicaflorian</a></li>
+        <li>LinkedIn: <a href="https://www.linkedin.com/in/florian-robert-leica/" target="_blank" rel="noopener">linkedin.com/in/florian-robert-leica</a></li>
+      </ul>
+
+      <h2 style="font-size:22px;font-weight:700;margin:0 0 12px;">Note legali</h2>
+      <ul style="margin:0;padding-left:20px;color:#6b6552;">
+        <li>Privacy Policy: <code style="background:#f0ebd8;padding:2px 6px;border-radius:4px;">/privacy_policy</code></li>
+        <li>Cookie Policy: <code style="background:#f0ebd8;padding:2px 6px;border-radius:4px;">/cookie_policy</code></li>
+        <li>© 2026 Leica Florian Robert — Tutti i diritti riservati</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer style="border-top:1px solid #d8cfae;">
+    <div style="max-width:1024px;margin:0 auto;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:16px;padding:32px 16px;font-size:14px;color:#6b6552;">
+      <p style="margin:0;">© 2026 Leica Florian Robert — Tutti i diritti riservati</p>
+      <div style="display:flex;align-items:center;gap:16px;">
+        <a href="https://github.com/leicaflorian" target="_blank" rel="noopener" style="color:#6b6552;">GitHub</a>
+        <a href="https://www.linkedin.com/in/florian-robert-leica/" target="_blank" rel="noopener" style="color:#6b6552;">LinkedIn</a>
+        <a href="Contact.dc.html" style="color:#6b6552;">Contatti</a>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+</body>
+</html>

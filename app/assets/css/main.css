@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@theme {
+    /* fonts */
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    --font-legacy: "Times New Roman", Times, serif;
+    --font-legacy-mono: "Courier New", monospace;
+
+    /* surfaces */
+    --color-bg: #111113;
+    --color-bg-alt: #161618;
+    --color-surface: #18181B;
+    --color-surface-raised: #1C1C20;
+    --color-surface-hover: #222226;
+
+    /* borders */
+    --color-line: #222226;            /* section dividers */
+    --color-line-card: #26262B;       /* cards */
+    --color-line-control: #2C2C31;    /* buttons, fields, menus */
+    --color-line-strong: #303035;     /* secondary button */
+
+    /* text */
+    --color-ink: #EDEBE6;
+    --color-ink-soft: #BDBAB2;
+    --color-muted: #A3A09A;
+    --color-subtle: #8F8C85;
+    --color-faint: #77746D;
+    --color-dim: #6A675F;
+    --color-ghost: #5E5B55;
+
+    /* accent */
+    --color-accent: #FF5B14;
+    --color-accent-hover: #FF7434;
+    --color-accent-light: #FF8A52;
+    --color-accent-deep: #22150E;
+
+    /* "syntax highlighting" */
+    --color-code-string: #9FD36B;
+    --color-code-number: #7CC4FA;
+
+    /* legacy mode */
+    --color-legacy-link: #0000EE;
+    --color-legacy-visited: #551A8B;
+    --color-legacy-face: #C0C0C0;
+    --color-legacy-light: #FFFFFF;
+    --color-legacy-shadow: #404040;
+    --color-legacy-frame: #EEEEEE;
+    --color-legacy-note: #555555;
+
+    /* motion */
+    --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+
+    --animate-cursor: cursor-blink 1s step-start infinite;
+    --animate-pulse-dot: pulse-dot 2s infinite;
+    --animate-float: float-y 6s ease-in-out infinite;
+
+    @keyframes cursor-blink {
+        0%, 50% { opacity: 1 }
+        51%, 100% { opacity: 0 }
+    }
+    @keyframes pulse-dot {
+        0% { box-shadow: 0 0 0 0 rgb(255 91 20 / .6) }
+        70% { box-shadow: 0 0 0 8px rgb(255 91 20 / 0) }
+        100% { box-shadow: 0 0 0 0 rgb(255 91 20 / 0) }
+    }
+    @keyframes float-y {
+        0%, 100% { transform: translateY(0) }
+        50% { transform: translateY(-10px) }
+    }
+}
+
+/* Used with animate-[...] by the boot overlay: outside @theme so Tailwind always emits them. */
+@keyframes boot-overlay {
+    0% { opacity: 0 }
+    12% { opacity: 1 }
+    80% { opacity: 1 }
+    100% { opacity: 0 }
+}
+@keyframes boot-glitch {
+    0%, 100% { transform: translate(0, 0); clip-path: inset(0 0 0 0) }
+    20% { transform: translate(-8px, 2px); clip-path: inset(10% 0 60% 0) }
+    40% { transform: translate(6px, -3px); clip-path: inset(50% 0 20% 0) }
+    60% { transform: translate(-4px, 1px); clip-path: inset(30% 0 40% 0) }
+    80% { transform: translate(3px, 0); clip-path: inset(70% 0 5% 0) }
+}
+@keyframes boot-line {
+    from { opacity: 0; transform: translateY(6px) }
+    to { opacity: 1; transform: none }
+}
+
+/* The 1120px column with side gutters, the same on every page. */
+@utility page {
+    max-width: 1120px;
+    margin-inline: auto;
+    padding-inline: 24px;
+}
+
+/* The vertical space between sections. */
+@utility section-y {
+    padding-block: 240px;
+
+    @media (width < 860px) {
+        padding-block: 120px;
+    }
+}
+
+/* "Spring" hover for cards and buttons. */
+@utility spring {
+    transition: transform .5s var(--ease-spring), border-color .2s, background-color .2s, color .2s;
+}
+
+@layer base {
+    html {
+        background: var(--color-bg);
+        color-scheme: dark;
+    }
+
+    body {
+        margin: 0;
+    }
+
+    a {
+        color: var(--color-accent);
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: var(--color-accent-light);
+    }
+
+    ::selection {
+        background: var(--color-accent);
+        color: var(--color-bg);
+    }
+
+    /* Until the site has read the saved mode, the legacy page stays hidden
+       if the visitor had chosen native: no flash of Times New Roman. */
+    html.engine-native-pending [data-engine="legacy"] {
+        visibility: hidden;
+    }
+}

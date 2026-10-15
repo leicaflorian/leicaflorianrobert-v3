@@ -1,0 +1,219 @@
+{
+  "nav": {
+    "home": "./home",
+    "about": "./chi-sono",
+    "projects": "./progetti",
+    "contact": "./contatti",
+    "menu": "menu",
+    "close": "chiudi"
+  },
+  "path": {
+    "home": "~/leica",
+    "about": "~/leica/chi-sono",
+    "projects": "~/leica/progetti",
+    "contact": "~/leica/contatti",
+    "caseStudy": "~/leica/progetti/v3"
+  },
+  "legacyNav": {
+    "home": "Home",
+    "about": "Chi sono",
+    "projects": "Progetti",
+    "contact": "Contatti"
+  },
+  "engine": {
+    "gpu": "GPU",
+    "gpuTitle": "Torna al DOM legacy",
+    "mobileSwitch": "engine: GPU → legacy DOM",
+    "activate": "▶ Attiva Rendering Nativo",
+    "optimized": "Ottimizzato per Netscape Navigator 4.0 — 800×600",
+    "profession": "Professione: {profession}",
+    "toNative": ["detach DOM tree", "init wgpu device", "compile shaders", "render {'@'}120fps"],
+    "toLegacy": ["drop GPU context", "restore document.body", "load Times New Roman", "ready"]
+  },
+  "lang": {
+    "label": "Lingua"
+  },
+  "common": {
+    "available": "Disponibile per nuovi progetti",
+    "contactMe": "Contattami →",
+    "allProjects": "Tutti i progetti",
+    "imagePlaceholder": "Immagine in arrivo"
+  },
+  "cta": {
+    "title": "Ora sai qualcosa in più,",
+    "accent": "scrivimi"
+  },
+  "footer": {
+    "contacts": "// contatti",
+    "social": "// social",
+    "legal": "// note legali",
+    "privacy": "Privacy Policy",
+    "cookie": "Cookie Policy",
+    "location": "{city}, {province} — Italia",
+    "rights": "© {year} {name} — Tutti i diritti riservati",
+    "vat": "P. IVA {vat}"
+  },
+  "form": {
+    "name": "nome",
+    "namePlaceholder": "Il tuo nome",
+    "surname": "cognome",
+    "surnamePlaceholder": "Il tuo cognome",
+    "email": "email",
+    "emailPlaceholder": "nome{'@'}esempio.it",
+    "message": "messaggio",
+    "messagePlaceholder": "Raccontami del tuo progetto...",
+    "submit": "Invia messaggio →",
+    "sending": "Invio in corso...",
+    "sent": "Messaggio inviato: ti rispondo al più presto.",
+    "error": "Non sono riuscito a inviare il messaggio. Riprova, oppure scrivimi via email.",
+    "recaptcha": "Questo sito è protetto da reCAPTCHA. Si applicano la Privacy Policy e i Termini di servizio di Google.",
+    "legacy": {
+      "title": "Modulo di contatto",
+      "name": "Nome:",
+      "email": "Email:",
+      "message": "Messaggio:",
+      "submit": "Invia",
+      "reset": "Cancella"
+    }
+  },
+  "home": {
+    "comment": "// {name} — {role}",
+    "seeProjects": "Vedi i progetti",
+    "services": {
+      "label": "01 / servizi",
+      "title": "Cosa posso fare per te?"
+    },
+    "projects": {
+      "label": "02 / progetti",
+      "title": "Lavori selezionati",
+      "all": "Tutti i progetti →"
+    },
+    "contact": {
+      "label": "03 / contatti",
+      "title": "Parliamone"
+    },
+    "legacy": {
+      "title": "Benvenuto nel mio ipertesto",
+      "figure": "Fig. 1 — L'autore",
+      "services": "Servizi",
+      "projects": "Progetti",
+      "write": "Scrivimi:"
+    }
+  },
+  "about": {
+    "comment": "// su di me",
+    "title": "Ciao, benvenuto/a",
+    "years": "anni di esperienza",
+    "tech": "tecnologie nello stack",
+    "portrait": "Ritratto",
+    "story": {
+      "label": "01 / storia",
+      "title": "Da autodidatta a formatore"
+    },
+    "gallery": ["Al lavoro", "In aula / mentoring", "Il setup"],
+    "experiences": {
+      "label": "02 / esperienze",
+      "title": "Ecco alcune esperienze"
+    },
+    "stack": {
+      "label": "03 / stack",
+      "title": "Tecnologie e linguaggi"
+    },
+    "legacy": {
+      "title": "Su di me",
+      "years": "Anni di esperienza:",
+      "experiences": "Esperienze",
+      "tech": "Tecnologie e linguaggi"
+    }
+  },
+  "projects": {
+    "count": "// {n} progetti",
+    "title": "Progetti",
+    "featured": "01 / in evidenza",
+    "archive": {
+      "label": "02 / archivio",
+      "title": "Elenco progetti"
+    },
+    "caseStudy": "case study →",
+    "mobileApp": "App mobile",
+    "legacy": {
+      "list": "Elenco progetti"
+    }
+  },
+  "contact": {
+    "title": "Contatti",
+    "write": {
+      "label": "01 / scrivimi",
+      "title": "Parliamone"
+    },
+    "where": {
+      "label": "02 / recapiti",
+      "title": "Dove trovarmi"
+    },
+    "contacts": "// contatti",
+    "social": "// social",
+    "company": "// dati aziendali",
+    "email": "email",
+    "pec": "pec",
+    "contactImage": "Contatti",
+    "legacy": {
+      "email": "Email:",
+      "pec": "Pec:",
+      "vat": "P. Iva: {vat} — REA: {rea} — SDI: {sdi}"
+    }
+  },
+  "caseStudy": {
+    "back": "← ./progetti",
+    "comment": "// case study",
+    "facts": {
+      "role": "ruolo",
+      "year": "anno",
+      "type": "tipo",
+      "pages": "pagine"
+    },
+    "start": {
+      "label": "01 / punto di partenza",
+      "title": "Chiaro, ma silenzioso"
+    },
+    "concept": {
+      "label": "02 / concept",
+      "title": "Il Motore Duale"
+    },
+    "visual": {
+      "label": "03 / sistema visivo",
+      "title": "Pochi elementi, molto contrasto",
+      "swatches": {
+        "bg": "sfondo",
+        "surface": "superficie",
+        "text": "testo",
+        "accent": "accento"
+      }
+    },
+    "details": {
+      "label": "04 / dettagli",
+      "title": "Movimento e respiro"
+    },
+    "next": {
+      "comment": "// prossimo passo",
+      "title": "Hai un progetto simile in mente?"
+    },
+    "shots": {
+      "cover": "Home, versione native",
+      "legacy": "legacy",
+      "native": "native",
+      "about": "Chi sono",
+      "mobile": "Versione mobile"
+    },
+    "legacy": {
+      "back": "<< Torna ai progetti",
+      "title": "{name} — case study",
+      "facts": "Ruolo: {role}. Anno: {year}.",
+      "notice": "State visualizzando questo case study con il motore Legacy. Per vedere il sito come è stato progettato, attivate il rendering nativo con il pulsante qui sotto."
+    }
+  },
+  "error": {
+    "title": "Pagina non trovata",
+    "text": "Questa pagina non esiste, o non esiste più.",
+    "back": "← ./home"
+  }
+}

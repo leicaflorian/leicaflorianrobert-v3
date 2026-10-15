@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc><helmet>
+<style>
+@keyframes cursorBlink { 0%,50%{opacity:1} 51%,100%{opacity:0} }
+body { margin:0; background:#EFE9DC; }
+a { color:#409783; text-decoration:none; }
+a:hover { color:#2E7A69; }
+</style>
+<script src="./image-slot.js"></script>
+<style>
+@media (max-width: 640px) {
+  #services-grid {
+    display: flex !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+  }
+  #services-grid > * {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
+  }
+}
+@media (max-width: 768px) {
+  #contact-grid {
+    grid-template-columns: 1fr !important;
+  }
+  #contact-grid image-slot {
+    order: -1;
+    aspect-ratio: 16/9 !important;
+  }
+}
+</style>
+</helmet>
+<div style="font-family:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:#EFE9DC;color:#2B2620;min-height:100vh;display:flex;flex-direction:column;">
+
+  <header style="position:sticky;top:0;z-index:40;background:rgba(250,251,254,0.5);backdrop-filter:blur(8px);">
+    <nav style="max-width:1024px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 16px;flex-wrap:wrap;">
+      <a href="Home.dc.html" style="display:flex;align-items:center;">
+        <img src="assets/logo-light.png" alt="Logo" style="height:64px;width:64px;object-fit:contain;"/>
+      </a>
+      <ul style="display:flex;align-items:center;gap:24px;font-size:14px;font-weight:500;color:#6E6656;padding:16px 0;list-style:none;margin:0;flex-wrap:wrap;">
+        <li><a href="Home.dc.html" style="color:#2B2620;font-weight:600;">Home</a></li>
+        <li><a href="About.dc.html" style="color:#6E6656;">Chi sono</a></li>
+        <li><a href="Projects.dc.html" style="color:#6E6656;">Progetti</a></li>
+        <li><a href="Contact.dc.html" style="color:#6E6656;">Contatti</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main style="flex:1;">
+    <section style="position:relative;overflow:hidden;background:linear-gradient(to bottom right,#DCEFEA,#FBF9F4,#EFE9DC);">
+      <div style="max-width:1280px;margin:0 auto;padding:0 16px;display:grid;grid-template-columns:1fr;gap:32px;align-items:center;">
+        <div style="text-align:center;padding:64px 0;">
+          <p style="margin:0 0 16px;font-size:14px;font-weight:600;letter-spacing:0.02em;color:#6E6656;">👋 Ciao, sono</p>
+          <h1 style="margin:0;font-size:clamp(40px,9vw,96px);font-weight:800;line-height:0.95;letter-spacing:-0.02em;color:#409783;">Leica Florian Robert</h1>
+          <p style="margin:16px 0 0;font-size:20px;font-weight:700;color:#2B2620;">Full Stack Developer <span style="color:#409783;animation:cursorBlink 1s step-start infinite;">|</span></p>
+          <div style="margin:24px auto 0;max-width:448px;color:#6E6656;line-height:1.6;">
+            <p>Da oltre 15 anni trasformo idee in siti, app e interfacce che funzionano davvero — caffè permettendo. Web, mobile, UI/UX: se è digitale, probabilmente l'ho già costruito (o rotto e rimesso a posto).</p>
+          </div>
+          <div style="margin-top:32px;display:flex;flex-wrap:wrap;justify-content:center;gap:16px;">
+            <a href="Contact.dc.html" style="display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:12px 24px;font-size:14px;font-weight:600;background:#409783;color:#FBF9F4;">Contattami</a>
+          </div>
+        </div>
+        <div style="position:relative;margin:0 auto;aspect-ratio:1/1;width:100%;max-width:384px;">
+          <div style="position:absolute;width:125%;left:-12.5%;bottom:0;aspect-ratio:1/1;border-radius:999px;background:linear-gradient(to bottom right,#DCEFEA,#409783,#B84E0C);filter:blur(64px);opacity:0.2;"></div>
+          <img src="assets/me-transparent.webp" alt="Leica Florian Robert" style="position:relative;height:100%;width:100%;margin:0 auto;object-fit:contain;object-position:bottom;display:block;"/>
+        </div>
+      </div>
+    </section>
+
+    <div style="max-width:1280px;margin:0 auto;padding:64px 16px;">
+      <h2 style="margin:0 0 8px;font-size:clamp(28px,4vw,36px);font-weight:600;">Cosa posso fare per te?</h2>
+      <div style="color:#6E6656;max-width:768px;line-height:1.6;">Che tu abbia bisogno di un sito, un'app o un'interfaccia che non faccia scappare gli utenti, sei nel posto giusto anche tu. Ecco come posso aiutarti:</div>
+
+      <div id="services-grid" style="margin-top:32px;display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+        <sc-for list="{{ services }}" as="svc" hint-placeholder-count="6">
+          <div style="position:relative;overflow:hidden;border-radius:20px;padding:28px;box-shadow:0 1px 3px rgba(42,38,27,0.08);background:#FBF9F4;transition:box-shadow 0.2s,transform 0.2s;" style-hover="box-shadow:0 12px 28px rgba(42,38,27,0.12);transform:translateY(-2px);">
+            <div style="position:absolute;right:-20px;bottom:-20px;width:140px;height:140px;color:#409783;opacity:0.12;pointer-events:none;" dangerouslySetInnerHTML="{{ svc.iconHtml }}"></div>
+            <div style="position:relative;margin-bottom:20px;display:flex;aspect-ratio:1/1;width:56px;align-items:center;justify-content:center;border-radius:999px;border:2px solid #D8CBA8;background:#DCEFEA;color:#409783;padding:12px;" dangerouslySetInnerHTML="{{ svc.iconHtml }}"></div>
+            <h3 style="position:relative;margin:0 0 8px;font-size:20px;font-weight:600;">{{ svc.title }}</h3>
+            <div style="position:relative;color:#6E6656;line-height:1.6;">{{ svc.text }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <section style="background:#E6DFC9;padding:64px 0 80px;">
+      <div id="contact-grid" style="max-width:1280px;margin:0 auto;padding:0 16px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:center;">
+      <div>
+      <h2 style="margin:0 0 8px;font-size:clamp(28px,4vw,36px);font-weight:600;">Parliamone</h2>
+      <div style="color:#6E6656;max-width:768px;line-height:1.6;">
+        <p>Sito, app, consulenza o solo un parere tecnico — scrivimi e vediamo insieme come darti una mano, senza giri di parole.</p>
+      </div>
+
+      <form style="margin-top:32px;max-width:640px;display:flex;flex-direction:column;gap:20px;" onSubmit="{{ handleSubmit }}">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <label style="font-size:14px;font-weight:600;color:#2B2620;">Nome</label>
+            <input type="text" name="nome" placeholder="Il tuo nome" style="border-radius:10px;border:1px solid #D8CBA8;background:#FBF9F4;padding:12px 14px;font-size:15px;color:#2B2620;font-family:inherit;outline:none;" style-focus="border-color:#409783;box-shadow:0 0 0 3px rgba(49,114,99,0.15);"/>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <label style="font-size:14px;font-weight:600;color:#2B2620;">Cognome</label>
+            <input type="text" name="cognome" placeholder="Il tuo cognome" style="border-radius:10px;border:1px solid #D8CBA8;background:#FBF9F4;padding:12px 14px;font-size:15px;color:#2B2620;font-family:inherit;outline:none;" style-focus="border-color:#409783;box-shadow:0 0 0 3px rgba(49,114,99,0.15);"/>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <label style="font-size:14px;font-weight:600;color:#2B2620;">Email</label>
+          <input type="email" name="email" placeholder="nome@esempio.it" style="border-radius:10px;border:1px solid #D8CBA8;background:#FBF9F4;padding:12px 14px;font-size:15px;color:#2B2620;font-family:inherit;outline:none;" style-focus="border-color:#409783;box-shadow:0 0 0 3px rgba(49,114,99,0.15);"/>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <label style="font-size:14px;font-weight:600;color:#2B2620;">Messaggio</label>
+          <textarea name="messaggio" rows="5" placeholder="Raccontami del tuo progetto..." style="resize:vertical;border-radius:10px;border:1px solid #D8CBA8;background:#FBF9F4;padding:12px 14px;font-size:15px;color:#2B2620;font-family:inherit;outline:none;" style-focus="border-color:#409783;box-shadow:0 0 0 3px rgba(49,114,99,0.15);"></textarea>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:8px;">
+          <button type="submit" style="border:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:12px 28px;font-size:14px;font-weight:600;background:#409783;color:#FBF9F4;font-family:inherit;" style-hover="background:#2E7A69;">Invia messaggio</button>
+          <span style="font-size:12px;color:#6E6656;">Questo sito è protetto da reCAPTCHA. Si applicano la Privacy Policy e i Termini di servizio di Google.</span>
+        </div>
+      </form>
+      </div>
+      <image-slot id="contact-image" shape="rounded" radius="24" placeholder="Foto o illustrazione di contatto" style="width:100%;aspect-ratio:4/5;"></image-slot>
+      </div>
+    </section>
+  </main>
+
+  <footer style="border-top:1px solid #D8CBA8;background:#E6DFC9;">
+    <div style="max-width:1024px;margin:0 auto;padding:56px 16px 32px;display:grid;gap:40px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
+      <div>
+        <img src="assets/logo-light.png" alt="Logo" style="height:56px;width:56px;object-fit:contain;margin-bottom:12px;"/>
+        <p style="margin:0;max-width:340px;font-size:14px;color:#6E6656;line-height:1.6;">Sviluppatore Web Full Stack, UI/UX Designer, Mobile Developer. Da oltre 15 anni trasformo idee in prodotti digitali.</p>
+      </div>
+      <div>
+        <h3 style="margin:0 0 14px;font-size:13px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#2B2620;">Contatti</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14px;">
+          <a href="mailto:info@leicaflorianrobert.dev" style="color:#6E6656;">info@leicaflorianrobert.dev</a>
+          <span style="color:#6E6656;">Schio, VI — Italia</span>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin:0 0 14px;font-size:13px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#2B2620;">Social</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14px;">
+          <a href="https://github.com/leicaflorian" target="_blank" rel="noopener" style="color:#6E6656;">GitHub</a>
+          <a href="https://www.linkedin.com/in/florian-robert-leica/" target="_blank" rel="noopener" style="color:#6E6656;">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #D8CBA8;">
+      <div style="max-width:1024px;margin:0 auto;padding:20px 16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;font-size:13px;color:#6E6656;">
+        <p style="margin:0;">© 2026 Leica Florian Robert — Tutti i diritti riservati</p>
+        <p style="margin:0;">P. IVA 04329800249</p>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>class Component extends DCLogic {
+  renderVals() {
+    const icons = {
+      web: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="3"><rect x="10" y="14" width="22" height="18"/><path d="M30 8V40"/></svg>',
+      mobile: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="3"><rect x="16" y="8" width="16" height="32"/><path d="M8 30H40"/></svg>',
+      design: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="3"><rect x="8" y="10" width="20" height="20"/><circle cx="30" cy="30" r="10"/></svg>',
+      devops: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 14H35M9 24H27M9 34H39"/><path d="M29 8V40"/></svg>',
+      formazione: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="3"><path d="M8 36H18V26H28V16H40"/></svg>',
+      consulenza: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 12H10V28H24"/><path d="M28 36H38V20H24"/></svg>',
+    };
+    const data = [
+      { key: 'web', title: 'Web Developer', text: "Siti, web app e prodotti SaaS su misura — dall'idea al lancio, integrazioni e pagamenti compresi." },
+      { key: 'mobile', title: 'Mobile Developer', text: 'App native o cross-platform che i tuoi utenti aprono davvero, non solo scaricano una volta e dimenticano.' },
+      { key: 'design', title: 'UI / UX Designer', text: "Interfacce chiare che guidano l'utente dove deve arrivare — belle sì, ma soprattutto che funzionano." },
+      { key: 'devops', title: 'DevOps & Infrastruttura', text: 'Server, CI/CD, performance e manutenzione continua — perché "funziona sul mio computer" non dovrebbe essere una frase che senti mai.' },
+      { key: 'formazione', title: 'Formazione / Mentoring', text: 'Corsi e mentoring per sviluppatori che vogliono crescere sul serio — non solo copiare codice, ma capirlo davvero.' },
+      { key: 'consulenza', title: 'Consulenza tecnica', text: 'Code review, architettura, scelta dello stack — un parere esterno onesto, anche quando la risposta è "meglio riscriverlo".' },
+    ];
+    var services = [];
+    for (var i = 0; i < data.length; i++) {
+      services.push({ title: data[i].title, text: data[i].text, iconHtml: { __html: icons[data[i].key] } });
+    }
+    return {
+      services: services,
+      handleSubmit: function(e) { e.preventDefault(); },
+    };
+  }
+}
+</script>
+</body>
+</html>

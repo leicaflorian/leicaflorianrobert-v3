@@ -1,0 +1,31 @@
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# Local Directus
+directus/.env
+directus/uploads/*
+!directus/uploads/.gitkeep
+# Directus extensions are written directly in dist/, with no build step
+!directus/extensions/*/dist
