@@ -8,9 +8,9 @@ import {dirname, join} from 'node:path'
 const envFile = join(dirname(fileURLToPath(import.meta.url)), '..', '.env')
 const fileEnv = existsSync(envFile)
   ? Object.fromEntries(readFileSync(envFile, 'utf8').split('\n')
-    .map(line => line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*)\s*$/))
-    .filter(Boolean)
-    .map(([, key, value]) => [key, value]))
+      .map(line => line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*)\s*$/))
+      .filter(Boolean)
+      .map(([, key, value]) => [key, value]))
   : {}
 
 export const env = key => process.env[key] ?? fileEnv[key]
@@ -40,7 +40,7 @@ export async function api(method, path, body, {allow404 = false} = {}) {
   if (!token) await login()
   const response = await fetch(`${DIRECTUS_URL}${path}`, {
     method,
-    headers: {'Content-Type': 'application/json', Authorization: `Bearer ${token}`},
+    headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
     body: body === undefined ? undefined : JSON.stringify(body),
   })
   if (allow404 && (response.status === 404 || response.status === 403)) return null

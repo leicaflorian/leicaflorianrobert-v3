@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type {PageCaseStudy} from '~/types/content'
 
-defineProps<{ page: PageCaseStudy }>()
+defineProps<{page: PageCaseStudy}>()
 
 const {t} = useI18n()
 const sections = computed(() => [

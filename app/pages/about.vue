@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import type {Experience, PageAbout, Site, Technology} from '~/types/content'
+import type {Experience, PageAbout, Technology} from '~/types/content'
 
 const {isNative} = useEngine()
 const {t} = useI18n()
 
-const [site, page, experiences, technologies] = await Promise.all([
-  useSingleton<Site>('site'),
+const [page, experiences, technologies] = await Promise.all([
   useSingleton<PageAbout>('page_about'),
   useCollection<Experience>('experiences'),
   useCollection<Technology>('technologies'),

@@ -1,6 +1,6 @@
 <!-- The logo: "lfr" with the cursor, like a terminal command. -->
 <script setup lang="ts">
-withDefaults(defineProps<{ size?: 'md' | 'lg' }>(), {size: 'md'})
+withDefaults(defineProps<{size?: 'md' | 'lg'}>(), {size: 'md'})
 </script>
 
 <template>

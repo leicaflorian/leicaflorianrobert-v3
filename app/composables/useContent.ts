@@ -10,7 +10,7 @@ interface TranslationRow {
   [field: string]: unknown
 }
 
-type RawItem = Record<string, unknown> & { translations?: TranslationRow[] }
+type RawItem = Record<string, unknown> & {translations?: TranslationRow[]}
 
 export function useDirectus() {
   const {public: {directusUrl}} = useRuntimeConfig()

@@ -1,6 +1,6 @@
 <!-- The black-and-white photo in the grey frame of legacy mode. -->
 <script setup lang="ts">
-defineProps<{ caption?: string }>()
+defineProps<{caption?: string}>()
 </script>
 
 <template>

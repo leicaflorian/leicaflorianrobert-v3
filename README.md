@@ -11,7 +11,7 @@ Analyses and work plans live in the Obsidian vault, under `Projects/Leica Floria
 
 ## Running locally
 
-Requires Node 20.19 or newer and Docker.
+Requires Node 22 (see `.nvmrc`; ESLint doesn't run on Node 20) and Docker.
 
 ```bash
 npm install
@@ -38,6 +38,7 @@ The Directus admin panel is at http://localhost:8055, with the credentials from 
 | `npm run dev` | The site in development |
 | `npm run generate` | The static site in `.output/public` (Directus must be reachable: content is read at build time) |
 | `npm run typecheck` | Type checking |
+| `npm run lint` / `lint:fix` | ESLint (code and formatting); `lint:fix` fixes what it can |
 | `npm run directus:up` / `directus:down` | Starts / stops Directus in Docker |
 | `npm run directus:setup` | Creates collections, translations, public read permissions and flows. Safe to re-run: skips what already exists |
 | `npm run directus:seed` | Loads the design's content. Doesn't touch what's already filled in |

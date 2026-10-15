@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type {Site} from '~/types/content'
 
-defineProps<{ site: Site }>()
+defineProps<{site: Site}>()
 </script>
 
 <template>

@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import type {Project} from '~/types/content'
 
-const props = defineProps<{ project: Project }>()
+const props = defineProps<{project: Project}>()
 const linkOf = useProjectLink()
 const link = computed(() => linkOf(props.project))
 </script>

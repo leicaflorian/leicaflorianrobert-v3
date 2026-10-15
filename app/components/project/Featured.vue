@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import type {Project} from '~/types/content'
 
-const props = defineProps<{ project: Project }>()
+const props = defineProps<{project: Project}>()
 const subtitle = computed(() => props.project.subtitle || hostOf(props.project.url))
 </script>
 

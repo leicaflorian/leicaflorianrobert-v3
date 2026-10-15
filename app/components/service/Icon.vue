@@ -8,7 +8,7 @@ import devops from '~/assets/icons/icon-devops.svg?raw'
 import formazione from '~/assets/icons/icon-formazione.svg?raw'
 import consulenza from '~/assets/icons/icon-consulenza.svg?raw'
 
-defineProps<{ name: ServiceIcon }>()
+defineProps<{name: ServiceIcon}>()
 
 const ICONS: Record<ServiceIcon, string> = {web, mobile, design, devops, formazione, consulenza}
 </script>

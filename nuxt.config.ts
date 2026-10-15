@@ -3,14 +3,13 @@
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
-  devtools: {enabled: true},
   modules: [
+    '@nuxt/eslint',
     '@nuxtjs/i18n',
     '@nuxt/fonts',
     '@nuxt/image',
   ],
-  css: ['~/assets/css/main.css'],
+  devtools: {enabled: true},
   app: {
     head: {
       htmlAttrs: {lang: 'it'},
@@ -31,6 +30,7 @@ export default defineNuxtConfig({
       ],
     },
   },
+  css: ['~/assets/css/main.css'],
   runtimeConfig: {
     public: {
       siteUrl: 'https://leicaflorianrobert.dev',
@@ -38,17 +38,33 @@ export default defineNuxtConfig({
       recaptchaSiteKey: '',
     },
   },
+  compatibilityDate: '2025-07-15',
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      routes: ['/', '/en', '/ro'],
+    },
+  },
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
+  },
+  eslint: {
+    config: {
+      // formatting rules, matched to the existing code style
+      stylistic: {
+        indent: 2,
+        quotes: 'single',
+        semi: false,
+        braceStyle: '1tbs',
+      },
+    },
+  },
   fonts: {
     families: [
       {name: 'JetBrains Mono', provider: 'google', weights: [400, 500, 700, 800]},
     ],
-  },
-  image: {
-    provider: 'directus',
-    directus: {
-      baseURL: `${process.env.NUXT_PUBLIC_DIRECTUS_URL || 'http://localhost:8055'}/assets/`,
-    },
-    format: ['webp'],
   },
   i18n: {
     baseUrl: 'https://leicaflorianrobert.dev',
@@ -68,15 +84,11 @@ export default defineNuxtConfig({
       'contact': {it: '/contatti', en: '/contact', ro: '/contact'},
     },
   },
-  nitro: {
-    prerender: {
-      crawlLinks: true,
-      routes: ['/', '/en', '/ro'],
+  image: {
+    provider: 'directus',
+    directus: {
+      baseURL: `${process.env.NUXT_PUBLIC_DIRECTUS_URL || 'http://localhost:8055'}/assets/`,
     },
-  },
-  vite: {
-    plugins: [
-      tailwindcss(),
-    ],
+    format: ['webp'],
   },
 })

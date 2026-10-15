@@ -1,6 +1,6 @@
 <!-- "Ora sai qualcosa in più, scrivimi" (now you know more, write to me): the closing of About and Projects. -->
 <script setup lang="ts">
-defineProps<{ text: string }>()
+defineProps<{text: string}>()
 </script>
 
 <template>

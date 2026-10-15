@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import type {Project} from '~/types/content'
 
-defineProps<{ projects: Project[] }>()
+defineProps<{projects: Project[]}>()
 </script>
 
 <template>
