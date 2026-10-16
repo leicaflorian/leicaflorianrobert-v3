@@ -68,6 +68,8 @@ const PROJECTS = [
     note('Sviluppo e infrastruttura — case study', 'Development and infrastructure — case study', 'Dezvoltare și infrastructură — studiu de caz')),
   project('xpulire', 'https://www.xpulire.com/', {case_study: true}, name('xPulire'),
     note('Infrastruttura di rete — case study', 'Network infrastructure — case study', 'Infrastructură de rețea — studiu de caz')),
+  project('imanpack', 'https://www.imanpack.it/', {case_study: true}, name('Imanpack'),
+    note('Newsletter automatiche con Mailchimp — case study', 'Automated newsletters with Mailchimp — case study', 'Newslettere automate cu Mailchimp — studiu de caz')),
   project('v2', 'https://leicaflorianrobert.dev', {kind: 'personal'}, name('My website V2')),
   project('wab', 'https://webartisanbros.com/', {featured: true, mockup: 'laptop'}, name('Web Artisan Bros')),
   project('slides', 'https://chrome.google.com/webstore/detail/slidescom-downloader/bciknjamldhnbbckmgbchmkdcalngnco?hl=it', {kind: 'personal'}, name('Slides.com downloader'),
@@ -671,6 +673,75 @@ const CASE_STUDIES = {
             'Costuri previzibile pentru servere.',
             'Nicio dependență de firme externe: de la idee la dezvoltare și publicare, totul intern.',
             'Mai multe proiecte gestionate în paralel, tot mai complexe.',
+          ),
+        },
+      }),
+      NEXT_STEP,
+    ],
+  },
+  imanpack: {
+    year: 2024,
+    translations: {
+      it: {intro: 'Un sistema di newsletter in Laravel che collega il CMS proprietario in .NET di Imanpack a Mailchimp: i dati inseriti nel CMS diventano newsletter, create e programmate in automatico.', role: 'Sviluppo e integrazione', type: 'Automazione newsletter', stack: 'Laravel, .NET, Microsoft SQL Server, Mailchimp API'},
+      en: {intro: 'A Laravel newsletter system that connects Imanpack\'s proprietary .NET CMS to Mailchimp: the data entered in the CMS becomes newsletters, created and scheduled automatically.', role: 'Development and integration', type: 'Newsletter automation', stack: 'Laravel, .NET, Microsoft SQL Server, Mailchimp API'},
+      ro: {intro: 'Un sistem de newslettere în Laravel care leagă CMS-ul proprietar .NET al Imanpack de Mailchimp: datele introduse în CMS devin newslettere, create și programate automat.', role: 'Dezvoltare și integrare', type: 'Automatizare newsletter', stack: 'Laravel, .NET, Microsoft SQL Server, Mailchimp API'},
+    },
+    sections: [
+      section('block_text', {}, {
+        it: {
+          label: 'punto di partenza',
+          title: 'Due sistemi che non si parlavano',
+          text: paras(
+            'Imanpack gestisce i suoi contenuti con un **CMS proprietario** scritto in .NET, su database Microsoft. Le newsletter invece passano da **Mailchimp**.',
+            'L\'obiettivo: far nascere le newsletter direttamente dai dati inseriti nel CMS, senza ricopiarli a mano.',
+          ),
+        },
+        en: {
+          label: 'starting point',
+          title: 'Two systems that didn\'t talk',
+          text: paras(
+            'Imanpack manages its content with a **proprietary CMS** written in .NET, on a Microsoft database. Newsletters, instead, go through **Mailchimp**.',
+            'The goal: build the newsletters straight from the data entered in the CMS, without copying it over by hand.',
+          ),
+        },
+        ro: {
+          label: 'punct de plecare',
+          title: 'Două sisteme care nu comunicau',
+          text: paras(
+            'Imanpack își gestionează conținutul cu un **CMS proprietar** scris în .NET, pe o bază de date Microsoft. Newsletterele, în schimb, trec prin **Mailchimp**.',
+            'Obiectivul: newsletterele să pornească direct din datele introduse în CMS, fără a le copia de mână.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'come funziona',
+          title: 'Dal CMS alla casella di posta',
+          items: lines(
+            'Nel CMS si inseriscono i dati, che finiscono nel database Microsoft.',
+            'Un hook avvisa il sistema in Laravel a ogni nuovo inserimento.',
+            'Laravel legge i dati e crea la newsletter su Mailchimp tramite le sue API.',
+            'La newsletter viene pubblicata o programmata secondo le configurazioni impostate nel CMS.',
+          ),
+        },
+        en: {
+          label: 'how it works',
+          title: 'From the CMS to the inbox',
+          items: lines(
+            'Data is entered in the CMS and stored in the Microsoft database.',
+            'A hook notifies the Laravel system of every new entry.',
+            'Laravel reads the data and creates the newsletter on Mailchimp through its API.',
+            'The newsletter is published or scheduled according to the settings in the CMS.',
+          ),
+        },
+        ro: {
+          label: 'cum funcționează',
+          title: 'Din CMS în căsuța de e-mail',
+          items: lines(
+            'În CMS se introduc datele, care ajung în baza de date Microsoft.',
+            'Un hook anunță sistemul Laravel la fiecare înregistrare nouă.',
+            'Laravel citește datele și creează newsletterul în Mailchimp prin API-ul său.',
+            'Newsletterul este publicat sau programat după configurările din CMS.',
           ),
         },
       }),
