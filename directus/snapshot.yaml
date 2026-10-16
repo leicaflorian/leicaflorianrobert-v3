@@ -7149,6 +7149,87 @@ fields:
       validation: null
       validation_message: null
       width: full
+  - collection: experiences
+    field: end_year
+    type: integer
+    meta:
+      collection: experiences
+      conditions: null
+      display: null
+      display_options: null
+      field: end_year
+      group: null
+      hidden: false
+      interface: input
+      note: Anno di fine; vuoto se è lo stesso dell'inizio o se è in corso
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 7
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: end_year
+      table: experiences
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: experiences
+    field: current
+    type: boolean
+    meta:
+      collection: experiences
+      conditions: null
+      display: null
+      display_options: null
+      field: current
+      group: null
+      hidden: false
+      interface: boolean
+      note: 'In corso: si mostra «2026 – oggi»'
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 8
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: current
+      table: experiences
+      data_type: boolean
+      default_value: false
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: experiences_translations
     field: id
     type: integer
@@ -7338,6 +7419,48 @@ fields:
       data_type: text
       default_value: null
       max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: experiences_translations
+    field: company_label
+    type: string
+    meta:
+      collection: experiences_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: company_label
+      group: null
+      hidden: false
+      interface: input
+      note: >-
+        L'azienda in questa lingua, se va tradotta (es. «Libero
+        professionista»); se vuoto, il campo Azienda
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: company_label
+      table: experiences_translations
+      data_type: character varying
+      default_value: null
+      max_length: 255
       numeric_precision: null
       numeric_scale: null
       is_nullable: true

@@ -42,7 +42,7 @@ const slots = computed(() => {
             />
             {{ year }}
             <span class="pointer-events-none absolute bottom-full mb-3 whitespace-nowrap text-ink opacity-0 transition-opacity group-hover:opacity-100">
-              {{ inYear.map(e => e.company).join(' · ') }}
+              {{ inYear.map(companyOf).join(' · ') }}
             </span>
           </a>
           <span v-else class="mt-[3px] size-1.5 rounded-full bg-ghost"/>

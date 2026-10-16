@@ -11,10 +11,10 @@ const experiences = await useCollection<Experience>('experiences')
   <table class="w-full border-collapse text-base">
     <tbody>
       <tr v-for="exp in experiences" :key="exp.id">
-        <td class="w-[60px] border border-black p-1.5">{{ exp.year ?? '—' }}</td>
+        <td class="w-[110px] border border-black p-1.5">{{ periodOf(exp, $t('about.now')) }}</td>
         <td class="border border-black p-1.5">
-          <LegacyLink v-if="exp.link" :href="exp.link">{{ exp.company }}</LegacyLink>
-          <template v-else>{{ exp.company }}</template>
+          <LegacyLink v-if="exp.link" :href="exp.link">{{ companyOf(exp) }}</LegacyLink>
+          <template v-else>{{ companyOf(exp) }}</template>
         </td>
         <td class="border border-black p-1.5">
           {{ exp.role }}

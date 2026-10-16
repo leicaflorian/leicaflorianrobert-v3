@@ -141,10 +141,16 @@ const COLLECTIONS = [
     display: '{{company}}',
     fields: [
       integer('year', 'Anno di inizio; vuoto se non si mostra'),
+      integer('end_year', 'Anno di fine; vuoto se è lo stesso dell\'inizio o se è in corso'),
+      boolean('current', 'In corso: si mostra «2026 – oggi»'),
       string('company', 'Azienda', {width: 'half'}),
       string('link', 'Sito dell\'azienda, facoltativo'),
     ],
-    translations: [string('role', 'Ruolo'), text('description', 'Cosa facevo: una o due frasi')],
+    translations: [
+      string('company_label', 'L\'azienda in questa lingua, se va tradotta (es. «Libero professionista»); se vuoto, il campo Azienda'),
+      string('role', 'Ruolo'),
+      text('description', 'Cosa facevo: una o due frasi'),
+    ],
   },
   {
     collection: 'services',

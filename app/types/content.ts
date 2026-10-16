@@ -67,10 +67,16 @@ export interface CaseStudy extends Project {
 
 export interface Experience {
   id: number
+  /** The start year. */
   year: number | null
+  /** Empty when it ended the year it started, or is still going on (`current`). */
+  end_year: number | null
+  current: boolean
   company: string
   link: string | null
   // translated
+  /** The company in this language, when it is a description rather than a name ("Self-employed"). */
+  company_label: string | null
   role: string
   /** What I did there, in one or two sentences. */
   description: string | null
