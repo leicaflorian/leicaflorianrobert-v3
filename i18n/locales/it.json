@@ -116,7 +116,12 @@
   },
   "projects": {
     "caseStudy": "case study →",
-    "mobileApp": "App mobile"
+    "mobileApp": "App mobile",
+    "kind": {
+      "direct": "cliente",
+      "agency": "cliente · tramite agenzia",
+      "personal": "personale"
+    }
   },
   "contact": {
     "contacts": "// contatti",

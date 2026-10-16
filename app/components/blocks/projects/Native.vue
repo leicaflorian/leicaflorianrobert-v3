@@ -1,6 +1,7 @@
 <!--
   The projects: featured (with the mockup) and the Home ones ("home"), only the featured
-  ones ("featured"), or all the others as an archive ("archive").
+  ones ("featured"), or all the others as an archive ("archive"). `kind` narrows them to
+  client work or personal projects.
 -->
 <script setup lang="ts">
 import type {BlockProjects} from '~/types/content'
@@ -12,7 +13,8 @@ const props = defineProps<{
 }>()
 
 const pageLink = usePageLink()
-const projects = await usePublishedProjects()
+const published = await usePublishedProjects()
+const projects = computed(() => published.value.filter(p => isOfKind(p, props.block.kind)))
 const featured = computed(() => props.block.show === 'archive' ? [] : projects.value.filter(p => p.featured))
 const cards = computed(() => props.block.show === 'home'
   ? projects.value.filter(p => p.on_home && !p.featured)

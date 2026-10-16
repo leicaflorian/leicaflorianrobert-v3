@@ -116,7 +116,12 @@
   },
   "projects": {
     "caseStudy": "studiu de caz →",
-    "mobileApp": "Aplicație mobilă"
+    "mobileApp": "Aplicație mobilă",
+    "kind": {
+      "direct": "client",
+      "agency": "client · prin agenție",
+      "personal": "personal"
+    }
   },
   "contact": {
     "contacts": "// contact",

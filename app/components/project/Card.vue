@@ -27,14 +27,20 @@ withDefaults(defineProps<{
         <span class="text-accent">↗</span>
       </div>
       <p v-if="project.note" class="m-0 text-[13px] text-muted">{{ project.note }}</p>
-      <p class="m-0 mt-auto truncate pt-2 text-xs text-dim">
-        {{ project.case_study ? $t('projects.caseStudy') : hostOf(project.url) }}
-      </p>
+      <div class="mt-auto flex items-center justify-between gap-3 pt-2">
+        <p class="m-0 truncate text-xs text-dim">
+          {{ project.case_study ? $t('projects.caseStudy') : hostOf(project.url) }}
+        </p>
+        <ProjectBadge :kind="project.kind"/>
+      </div>
     </div>
 
-    <div v-else class="flex items-center justify-between px-7 py-[22px]">
+    <div v-else class="flex items-center justify-between gap-3 px-7 py-[22px]">
       <h3 class="m-0 text-[17px] font-bold">{{ project.name }}</h3>
-      <span class="text-accent">↗</span>
+      <div class="flex items-center gap-3">
+        <ProjectBadge :kind="project.kind"/>
+        <span class="text-accent">↗</span>
+      </div>
     </div>
   </ProjectLink>
 </template>
