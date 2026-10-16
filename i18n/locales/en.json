@@ -173,7 +173,7 @@
       "back": "<< Back to projects",
       "title": "{name} — case study",
       "facts": "Role: {role}. Year: {year}.",
-      "notice": "You are viewing this case study with the Legacy engine. To see the site as it was designed, enable native rendering with the button below."
+      "notice": "You are viewing this case study with the Legacy engine. To see it as it was designed, enable native rendering below."
     }
   },
   "error": {

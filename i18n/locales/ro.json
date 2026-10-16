@@ -173,7 +173,7 @@
       "back": "<< Înapoi la proiecte",
       "title": "{name} — studiu de caz",
       "facts": "Rol: {role}. An: {year}.",
-      "notice": "Vizualizați acest studiu de caz cu motorul Legacy. Pentru a vedea site-ul așa cum a fost proiectat, activați randarea nativă cu butonul de mai jos."
+      "notice": "Vezi acest studiu de caz cu motorul Legacy. Pentru a-l vedea așa cum a fost proiectat, activează randarea nativă mai jos."
     }
   },
   "error": {

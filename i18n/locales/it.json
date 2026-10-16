@@ -173,7 +173,7 @@
       "back": "<< Torna ai progetti",
       "title": "{name} — case study",
       "facts": "Ruolo: {role}. Anno: {year}.",
-      "notice": "State visualizzando questo case study con il motore Legacy. Per vedere il sito come è stato progettato, attivate il rendering nativo con il pulsante qui sotto."
+      "notice": "Stai vedendo questo case study con il motore Legacy. Per vederlo come è stato progettato, attiva il rendering nativo qui sotto."
     }
   },
   "error": {
