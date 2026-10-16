@@ -15,12 +15,15 @@ export function useYearInView(
   const update = () => {
     frame = 0
     const rows = toValue(list)?.children
-    const line = toValue(bar)?.getBoundingClientRect().bottom
-    if (!rows || line === undefined) return
+    const bottom = toValue(bar)?.getBoundingClientRect().bottom
+    if (!rows?.length || bottom === undefined) return
+    // A row reached from the timeline stops at its scroll margin, a little under the bar:
+    // read from there (plus slack for sub-pixel scroll), so the clicked year is the one lit.
+    const line = Math.max(bottom, parseFloat(getComputedStyle(rows[0]!).scrollMarginTop) || 0) + 8
     let current: number | null = null
-    // the last row whose top has passed the bar (with a little slack) is the one being read
+    // the last row whose top has reached the line is the one being read
     for (const row of rows) {
-      if (row.getBoundingClientRect().top > line + 24) break
+      if (row.getBoundingClientRect().top > line) break
       current = Number((row as HTMLElement).dataset.year) || current
     }
     year.value = current
