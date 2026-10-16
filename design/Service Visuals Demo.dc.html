@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+body { margin:0; background:#111113; }
+a { color:#FF5B14; } a:hover { color:#EDEBE6; }
+@keyframes cursorBlink { 0%,50%{opacity:1} 51%,100%{opacity:0} }
+@keyframes bar { 0%{width:8%} 70%,100%{width:86%} }
+</style>
+</helmet>
+<div style="font-family:'JetBrains Mono',monospace;color:#EDEBE6;min-height:100vh;padding:80px 24px;">
+  <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:48px;">
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <span style="font-size:13px;color:#FF5B14;">// esempio · visual in codice</span>
+      <h2 style="margin:0;font-size:clamp(28px,3.6vw,44px);font-weight:800;letter-spacing:-0.03em;line-height:1.05;">Cosa posso fare per te<span aria-hidden="true" style="display:inline-block;width:0.5em;height:0.09em;margin-left:0.1em;background:#FF5B14;animation:cursorBlink 1s step-start infinite;"></span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;">
+
+      <div style="display:flex;flex-direction:column;border:1px solid #26262B;border-radius:16px;background:#18181B;overflow:hidden;">
+        <div style="height:200px;flex:0 0 200px;background:#111113;background-image:radial-gradient(#26262B 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;">
+          <div style="width:100%;max-width:260px;border:1px solid #2C2C31;border-radius:10px;background:#18181B;overflow:hidden;">
+            <div style="display:flex;align-items:center;gap:6px;padding:8px 10px;border-bottom:1px solid #26262B;">
+              <span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span><span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span><span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span>
+              <span style="flex:1;margin-left:6px;padding:3px 8px;border-radius:5px;background:#111113;font-size:10px;color:#8F8C85;">lfr.dev/app/checkout</span>
+            </div>
+            <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
+              <div style="height:8px;width:60%;border-radius:3px;background:#2C2C31;"></div>
+              <div style="height:8px;width:85%;border-radius:3px;background:#222226;"></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+                <span style="font-size:11px;color:#BDBAB2;">€ 49,00 / mese</span>
+                <span style="padding:6px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;">Paga ✓</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:28px;display:flex;flex-direction:column;gap:12px;">
+          <span style="font-size:12px;color:#8F8C85;">01</span>
+          <h3 style="margin:0;font-size:19px;font-weight:700;">Web Developer</h3>
+          <p style="margin:0;font-size:14px;line-height:1.65;color:#BDBAB2;text-wrap:pretty;">Siti, web app e prodotti SaaS su misura — dall'idea al lancio, integrazioni e pagamenti compresi.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;border:1px solid #26262B;border-radius:16px;background:#18181B;overflow:hidden;">
+        <div style="height:200px;flex:0 0 200px;background:#111113;background-image:radial-gradient(#26262B 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;">
+          <div style="width:130px;height:176px;border:6px solid #2C2C31;border-bottom:0;border-radius:24px 24px 0 0;background:#18181B;padding:18px 10px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;">
+            <div style="align-self:center;width:36px;height:4px;border-radius:4px;background:#2C2C31;margin-bottom:6px;"></div>
+            <div style="padding:8px;border-radius:8px;background:#222226;border-left:0;display:flex;flex-direction:column;gap:4px;">
+              <span style="font-size:9px;color:#FF5B14;">push · ora</span>
+              <span style="font-size:10px;color:#EDEBE6;">Ordine spedito</span>
+            </div>
+            <div style="padding:8px;border-radius:8px;background:#1C1C20;display:flex;flex-direction:column;gap:5px;">
+              <div style="height:6px;width:70%;border-radius:3px;background:#2C2C31;"></div>
+              <div style="height:6px;width:45%;border-radius:3px;background:#26262B;"></div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:28px;display:flex;flex-direction:column;gap:12px;">
+          <span style="font-size:12px;color:#8F8C85;">02</span>
+          <h3 style="margin:0;font-size:19px;font-weight:700;">Mobile Developer</h3>
+          <p style="margin:0;font-size:14px;line-height:1.65;color:#BDBAB2;text-wrap:pretty;">App native o cross-platform che i tuoi utenti aprono davvero, non solo scaricano una volta e dimenticano.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;border:1px solid #26262B;border-radius:16px;background:#18181B;overflow:hidden;">
+        <div style="position:relative;height:200px;flex:0 0 200px;background:#111113;overflow:hidden;">
+          <div style="position:absolute;top:0;bottom:0;left:30%;border-left:1px dashed #3A2A22;"></div>
+          <div style="position:absolute;top:0;bottom:0;right:30%;border-left:1px dashed #3A2A22;"></div>
+          <div style="position:absolute;left:0;right:0;top:46%;border-top:1px dashed #3A2A22;"></div>
+          <div style="position:absolute;left:30%;right:30%;top:calc(46% - 22px);height:44px;border:1px solid #FF5B14;border-radius:8px;background:#1C1C20;display:flex;align-items:center;justify-content:center;font-size:11px;color:#EDEBE6;">Inizia ora →</div>
+          <span style="position:absolute;left:calc(30% - 3px);top:calc(46% - 25px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+          <span style="position:absolute;right:calc(30% - 4px);top:calc(46% - 25px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+          <span style="position:absolute;left:calc(30% - 3px);top:calc(46% + 19px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+          <span style="position:absolute;right:calc(30% - 4px);top:calc(46% + 19px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+          <span style="position:absolute;left:50%;transform:translateX(-50%);top:calc(46% + 34px);padding:3px 7px;border-radius:4px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;">240 × 44</span>
+        </div>
+        <div style="padding:28px;display:flex;flex-direction:column;gap:12px;">
+          <span style="font-size:12px;color:#8F8C85;">03</span>
+          <h3 style="margin:0;font-size:19px;font-weight:700;">UI / UX Designer</h3>
+          <p style="margin:0;font-size:14px;line-height:1.65;color:#BDBAB2;text-wrap:pretty;">Interfacce chiare che guidano l'utente dove deve arrivare — belle sì, ma soprattutto che funzionano.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;border:1px solid #26262B;border-radius:16px;background:#18181B;overflow:hidden;">
+        <div style="height:200px;flex:0 0 200px;background:#0C0C0E;padding:22px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:7px;font-size:12px;line-height:1.4;">
+          <span style="color:#8F8C85;">$ <span style="color:#EDEBE6;">git push origin main</span></span>
+          <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> build       38s</span>
+          <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> test        124 passed</span>
+          <span style="color:#BDBAB2;"><span style="color:#FF5B14;">→</span> deploy prod<span style="animation:cursorBlink 1s step-start infinite;color:#FF5B14;">_</span></span>
+          <div style="margin-top:auto;height:4px;border-radius:4px;background:#222226;overflow:hidden;"><div style="height:100%;width:86%;background:#FF5B14;animation:bar 3s ease-out infinite;"></div></div>
+        </div>
+        <div style="padding:28px;display:flex;flex-direction:column;gap:12px;">
+          <span style="font-size:12px;color:#8F8C85;">04</span>
+          <h3 style="margin:0;font-size:19px;font-weight:700;">DevOps &amp; Infrastruttura</h3>
+          <p style="margin:0;font-size:14px;line-height:1.65;color:#BDBAB2;text-wrap:pretty;">Server, CI/CD, performance e manutenzione continua — perché "funziona sul mio computer" non dovrebbe essere una frase che senti mai.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;border:1px solid #26262B;border-radius:16px;background:#18181B;overflow:hidden;">
+        <div style="position:relative;height:200px;flex:0 0 200px;background:#0C0C0E;padding:22px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:6px;font-size:12px;line-height:1.4;">
+          <div style="display:grid;grid-template-columns:40px 1fr;color:#8F8C85;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">1</span><span>// perché funziona?</span></div>
+          <div style="display:grid;grid-template-columns:40px 1fr;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">2</span><span><span style="color:#FF8A57;">const</span> total = items</span></div>
+          <div style="display:grid;grid-template-columns:40px 1fr;background:#1F1712;border-left:2px solid #FF5B14;"><span style="text-align:right;padding-right:12px;color:#FF5B14;">3</span><span>  .reduce((a, i) =&gt; a + i.price, 0)</span></div>
+          <div style="display:grid;grid-template-columns:40px 1fr;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">4</span><span style="color:#8F8C85;">  ;</span></div>
+          <div style="position:absolute;right:20px;bottom:20px;max-width:170px;padding:9px 11px;border-radius:8px;border:1px solid #2C2C31;background:#18181B;font-size:10px;line-height:1.5;color:#BDBAB2;"><span style="color:#FF5B14;">a</span> parte da 0 e accumula ogni prezzo</div>
+        </div>
+        <div style="padding:28px;display:flex;flex-direction:column;gap:12px;">
+          <span style="font-size:12px;color:#8F8C85;">05</span>
+          <h3 style="margin:0;font-size:19px;font-weight:700;">Formazione / Mentoring</h3>
+          <p style="margin:0;font-size:14px;line-height:1.65;color:#BDBAB2;text-wrap:pretty;">Corsi e mentoring per sviluppatori che vogliono crescere sul serio — non solo copiare codice, ma capirlo davvero.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;border:1px solid #26262B;border-radius:16px;background:#18181B;overflow:hidden;">
+        <div style="position:relative;height:200px;flex:0 0 200px;background:#0C0C0E;padding:22px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:2px;font-size:12px;line-height:1.7;">
+          <div style="padding:0 20px;color:#8F8C85;">src/api/orders.js</div>
+          <div style="padding:0 20px;background:#2A1414;color:#E58A8A;">- fetch(url).then(r =&gt; r.json())</div>
+          <div style="padding:0 20px;background:#122418;color:#7FD6A0;">+ await api.get(url, { retry: 3 })</div>
+          <div style="position:absolute;left:20px;right:20px;bottom:20px;display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:8px;border:1px solid #2C2C31;background:#18181B;">
+            <span style="flex:0 0 20px;height:20px;border-radius:20px;background:#FF5B14;color:#111113;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;">lfr</span>
+            <span style="font-size:11px;line-height:1.5;color:#BDBAB2;">Gestiamo anche il timeout, qui si blocca tutto.</span>
+          </div>
+        </div>
+        <div style="padding:28px;display:flex;flex-direction:column;gap:12px;">
+          <span style="font-size:12px;color:#8F8C85;">06</span>
+          <h3 style="margin:0;font-size:19px;font-weight:700;">Consulenza tecnica</h3>
+          <p style="margin:0;font-size:14px;line-height:1.65;color:#BDBAB2;text-wrap:pretty;">Code review, architettura, scelta dello stack — un parere esterno onesto, anche quando la risposta è "meglio riscriverlo".</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

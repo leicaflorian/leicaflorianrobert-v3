@@ -1,7 +1,7 @@
 <!-- Button or link: solid orange (primary) or outline only (secondary). -->
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
-  /** The route name (`index`, `about`…): the link points to the current language's version. */
+  /** A page key (`contact`, `projects`…): the link points to the current language's version. */
   to?: string
   href?: string
   type?: 'button' | 'submit'
@@ -10,14 +10,15 @@ const props = withDefaults(defineProps<{
   disabled?: boolean
 }>(), {variant: 'primary', type: 'button'})
 
-const NuxtLinkLocale = resolveComponent('NuxtLinkLocale')
-const tag = computed(() => props.to ? NuxtLinkLocale : props.href ? 'a' : 'button')
+const NuxtLink = resolveComponent('NuxtLink')
+const pageLink = usePageLink()
+const tag = computed(() => props.to ? NuxtLink : props.href ? 'a' : 'button')
 </script>
 
 <template>
   <component
     :is="tag"
-    :to="to"
+    :to="to ? pageLink(to) : undefined"
     :href="href"
     :type="to || href ? undefined : type"
     :disabled="disabled"

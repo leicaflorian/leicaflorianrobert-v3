@@ -5,28 +5,15 @@
 <script setup lang="ts">
 const {t} = useI18n()
 const route = useRoute()
-const routeBaseName = useRouteBaseName()
 const {toggle} = useEngine()
+const menu = useMenu()
+const path = useCurrentPath()
+const pageLink = usePageLink()
 
-const items = [
-  {name: 'index', label: 'nav.home'},
-  {name: 'about', label: 'nav.about'},
-  {name: 'projects', label: 'nav.projects'},
-  {name: 'contact', label: 'nav.contact'},
-] as const
-
-const PATHS: Record<string, string> = {
-  'index': 'path.home',
-  'about': 'path.about',
-  'projects': 'path.projects',
-  'projects-v3': 'path.caseStudy',
-  'contact': 'path.contact',
-}
-
-const baseName = computed(() => String(routeBaseName(route) ?? 'index'))
-/** The active menu item: the case study sits under "projects". */
-const active = computed(() => baseName.value.split('-')[0])
-const pathLabel = computed(() => t(PATHS[baseName.value] ?? 'path.home'))
+/** The menu label, like a relative path: `./chi-sono`, `./home`. */
+const labelOf = (slug: string) => `./${slug || 'home'}`
+/** The page path as a terminal prompt: `~/leica/progetti/v3`. */
+const pathLabel = computed(() => ['~/leica', path.value].filter(Boolean).join('/'))
 
 const menuOpen = ref(false)
 watch(() => route.fullPath, () => (menuOpen.value = false))
@@ -43,10 +30,10 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
   <header class="sticky top-0 z-40 border-b border-line bg-bg/80 backdrop-blur-md">
     <nav class="page flex flex-wrap items-center justify-between gap-4 py-3">
       <div class="flex items-center gap-3">
-        <NuxtLinkLocale to="index" class="flex items-center gap-3 text-ink hover:text-ink">
+        <NuxtLink :to="pageLink('home')" class="flex items-center gap-3 text-ink hover:text-ink">
           <SiteLogo/>
           <span class="text-[13px] text-subtle max-[1000px]:hidden">{{ pathLabel }}</span>
-        </NuxtLinkLocale>
+        </NuxtLink>
         <SiteLangSwitcher/>
       </div>
 
@@ -65,14 +52,14 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
 
       <div class="flex flex-wrap items-center gap-2 max-[760px]:hidden">
         <ul class="m-0 flex list-none items-center gap-1 whitespace-nowrap p-0 text-[13px] max-[560px]:flex-wrap">
-          <li v-for="item in items" :key="item.name">
-            <NuxtLinkLocale
-              :to="item.name"
+          <li v-for="item in menu" :key="item.key">
+            <NuxtLink
+              :to="item.href"
               class="block rounded-lg px-3 py-2"
-              :class="active === item.name ? 'bg-surface-raised text-accent hover:text-accent' : 'text-ink-soft hover:bg-surface hover:text-ink'"
+              :class="item.active ? 'bg-surface-raised text-accent hover:text-accent' : 'text-ink-soft hover:bg-surface hover:text-ink'"
             >
-              {{ t(item.label) }}
-            </NuxtLinkLocale>
+              {{ labelOf(item.slug) }}
+            </NuxtLink>
           </li>
         </ul>
         <button
@@ -89,15 +76,15 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
 
     <div v-if="menuOpen" class="page flex flex-col gap-5 border-t border-line pb-7 pt-4 min-[761px]:hidden">
       <ul class="m-0 flex list-none flex-col p-0">
-        <li v-for="item in items" :key="item.name">
-          <NuxtLinkLocale
-            :to="item.name"
+        <li v-for="item in menu" :key="item.key">
+          <NuxtLink
+            :to="item.href"
             class="flex min-h-14 items-center justify-between border-b border-line text-xl font-bold"
-            :class="active === item.name ? 'text-accent hover:text-accent' : 'text-ink hover:text-ink'"
+            :class="item.active ? 'text-accent hover:text-accent' : 'text-ink hover:text-ink'"
           >
-            {{ t(item.label) }}
-            <span v-if="active === item.name" class="text-[13px]">●</span>
-          </NuxtLinkLocale>
+            {{ labelOf(item.slug) }}
+            <span v-if="item.active" class="text-[13px]">●</span>
+          </NuxtLink>
         </li>
       </ul>
       <button

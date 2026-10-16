@@ -18,8 +18,9 @@ Node 22 (`.nvmrc`): ESLint crashes on Node 20. There are no tests. Verify UI cha
 Every page exists twice: **legacy** (a '90s HTML page, Times New Roman, blue links) and **native** (the dark terminal-style design).
 
 - `app/app.vue` renders `<NuxtLayout :name="mode">`, so the layout is `layouts/legacy.vue` or `layouts/native.vue`.
-- `pages/*.vue` only load data (`useSingleton` / `useCollection`), set SEO meta, and pick `<XxxNative>` or `<XxxLegacy>` with `isNative` from `useEngine()`. Keep the markup out of pages.
-- `components/<page>/Native.vue` and `components/<page>/Legacy.vue` take the same props. **When you change content or behaviour on one, update the other.**
+- Pages are built from blocks stored in Directus (see *Content*). `pages/[...slug].vue` is the only route; `components/blocks/Renderer.vue` renders each section with its native or legacy component. Keep the markup out of pages.
+- The server renders only legacy blocks, and Nuxt keeps in the payload only the data fetched there. A block that reads other content (`useCollection`...) must also be listed in `BLOCK_DATA` in `Renderer.vue`, or its native component fetches Directus from the browser.
+- `components/blocks/<type>/Native.vue` and `Legacy.vue` take the same `block` prop (native also gets `label`, already numbered). **When you change content or behaviour on one, update the other.**
 - The mode always starts as `legacy` on the server and on the first client render (identical, SEO-complete HTML). `plugins/engine.client.ts` then applies the URL or `localStorage` (`lfr-engine`) choice; the inline script in `nuxt.config.ts` hides legacy with `engine-native-pending` to avoid a flash. Don't read `localStorage` or `window` during setup.
 - `components/site/EngineBoot.vue` is the switch animation; timings are in `useEngine.ts`.
 
@@ -27,8 +28,9 @@ Components are auto-imported with the folder as prefix: `components/home/Hero.vu
 
 ## Content: Directus vs i18n
 
-- **Directus** holds everything editable without code. Read it only through `composables/useContent.ts`: `useSingleton<T>('page_home')`, `useCollection<T>('projects', filter)`. Both fetch all translations once and lift the current locale's fields to the top level, falling back to Italian for empty fields.
-- **`i18n/locales/{it,en,ro}.json`** holds design texts (menu, labels, buttons, section titles). Add every key to all three files.
+- **Directus** holds everything editable without code. Read it only through `composables/useContent.ts`: `useSingleton<T>('site')`, `useCollection<T>('projects', filter)`, `usePages()`, `useCaseStudy(slug)`. They fetch all translations once and lift the current locale's fields to the top level, falling back to Italian for empty fields.
+- **Pages and blocks**: `pages` (translated `slug`, `in_menu`, `children`) and `projects` have a many-to-any `sections` field; each block type is a collection (`block_*`) with its translations. A page with `children: 'projects'` serves the case studies at `/<its slug>/<project slug>`. README → *Pages and blocks* lists what a new block type needs.
+- **`i18n/locales/{it,en,ro}.json`** holds interface texts (buttons, form, boot lines, fixed legacy texts). Section titles and labels belong to the blocks. Add every key to all three files.
 - Types for Directus content are in `app/types/content.ts`; translated fields are marked `// translated`.
 - Directus text formatting: `**word**` highlights a word (`highlight()` for native via `v-html`, `plain()` for legacy), blank lines separate paragraphs (`paragraphs()`), one item per line for lists (`lines()`). All in `app/utils/text.ts`. Never `v-html` a Directus string without `highlight()`, which escapes it.
 - Images are Directus file ids (`FileId`), rendered via `@nuxt/image` with the `directus` provider (see `components/ui/MediaImage.vue`).
@@ -48,8 +50,8 @@ Setup and seed skip what already exists: they add new things but don't alter exi
 
 ## Routing and i18n
 
-- Locales: `it` (default, no prefix), `en` (`/en`), `ro` (`/ro`), with translated paths set in `nuxt.config.ts` → `i18n.pages`. A new page needs an entry there.
-- Always link with route names via `localePath('about')` / `$localePath(...)` or `<LegacyLink :to="name">`, never with hardcoded paths.
+- Locales: `it` (default, no prefix), `en` (`/en`), `ro` (`/ro`). Page paths are the translated `slug`s in Directus; a new page is a new item in `pages`, no code.
+- Link to pages by key: `usePageLink()('contact')`, `<UiButton to="contact">`, `<LegacyLink to="contact">`; projects with `useProjectLink()`. Never hardcode paths or use route names.
 - Prerendering crawls links from `/`, `/en`, `/ro`: a page that nothing links to won't be generated unless added to `nitro.prerender.routes`.
 
 ## Styling

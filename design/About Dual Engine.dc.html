@@ -12,6 +12,8 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
 <script src="./image-slot.js"></script>
 <style>
+@keyframes galIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
+@keyframes pulseQ { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
 @keyframes cursorBlink { 0%,50%{opacity:1} 51%,100%{opacity:0} }
 @keyframes pulseDot { 0%{box-shadow:0 0 0 0 rgba(255,91,20,.6)} 70%{box-shadow:0 0 0 8px rgba(255,91,20,0)} 100%{box-shadow:0 0 0 0 rgba(255,91,20,0)} }
 @keyframes bootOverlay { 0%{opacity:0} 12%{opacity:1} 80%{opacity:1} 100%{opacity:0} }
@@ -50,7 +52,10 @@ a:hover { color:#FF8A52; }
       <h2 style="margin:0 0 12px;font-size:26px;">Su di me</h2>
       <div id="l-table" style="display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:start;font-size:17px;line-height:1.5;">
         <div style="border:2px solid #000;padding:5px;background:#EEEEEE;">
-          <img src="assets/me-transparent.webp" alt="Leica Florian Robert" style="width:100%;display:block;filter:grayscale(1) contrast(1.2);"/>
+          <div style="background:#FFFFFF;border:1px inset #808080;padding:4px;">
+            <x-import component-from-global-scope="ascii-portrait" from="./ascii-portrait.js" src="assets/me-transparent.webp" variant="legacy" cols="64" hint-size="100%,220px" role="img" aria-label="Leica Florian Robert"></x-import>
+          </div>
+          <p style="margin:6px 0 0;font-size:13px;text-align:center;font-family:'Courier New',Courier,monospace;">leica.txt (64 col.)</p>
         </div>
         <div>
           <sc-for list="{{ bio }}" as="para" hint-placeholder-count="5"><p style="margin:0 0 12px;">{{ para }}</p></sc-for>
@@ -130,8 +135,17 @@ a:hover { color:#FF8A52; }
           </div>
         </div>
         <div style="position:relative;">
-          <div style="position:absolute;inset:12% 6% 0 6%;border-radius:999px;background:#FF5B14;filter:blur(100px);opacity:0.22;"></div>
-          <image-slot id="ab-portrait" shape="rounded" radius="20" placeholder="Foto personale (ritratto)" style="min-width:0;position:relative;width:100%;aspect-ratio:4/5;display:block;"></image-slot>
+          <div style="position:absolute;inset:20% 10% 10% 10%;border-radius:999px;background:#FF5B14;filter:blur(110px);opacity:0.14;"></div>
+          <div style="position:relative;border:1px solid #26262B;border-radius:16px;background:rgba(12,12,14,0.92);overflow:hidden;">
+            <div style="display:flex;align-items:center;gap:6px;padding:12px 16px;border-bottom:1px solid #222226;background:#18181B;font-size:12px;color:#8F8C85;">
+              <span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span>
+              <span style="margin-left:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><span style="color:#5BD48A;">$</span> cat leica.webp | ascii --cols 84</span>
+            </div>
+            <div style="padding:20px 16px 0;cursor:crosshair;">
+              <x-import component-from-global-scope="ascii-portrait" from="./ascii-portrait.js" src="assets/me-transparent-dark.webp" cols="84" hint-size="100%,420px"></x-import>
+            </div>
+            <div style="display:flex;justify-content:space-between;gap:12px;padding:12px 16px;border-top:1px solid #222226;font-size:11px;color:#5A5852;"><span>leica.webp · 1600×2008</span><span>passa il mouse ↗</span></div>
+          </div>
         </div>
       </div>
     </section>
@@ -147,9 +161,73 @@ a:hover { color:#FF8A52; }
         </div>
       </div>
       <div id="ab-gallery" style="max-width:1120px;margin:0 auto;padding:0 24px 240px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr);gap:24px;">
-        <image-slot id="ab-gal-1" shape="rounded" radius="16" placeholder="Al lavoro" style="min-width:0;width:100%;height:340px;display:block;"></image-slot>
-        <image-slot id="ab-gal-2" shape="rounded" radius="16" placeholder="In aula / mentoring" style="min-width:0;width:100%;height:340px;display:block;"></image-slot>
-        <image-slot id="ab-gal-3" shape="rounded" radius="16" placeholder="Il setup" style="min-width:0;width:100%;height:340px;display:block;"></image-slot>
+      <div style="min-width:0;height:340px;box-sizing:border-box;border:1px solid #26262B;border-radius:16px;background:#0C0C0E;overflow:hidden;display:flex;flex-direction:column;font-size:12px;">
+        <div style="display:flex;border-bottom:1px solid #222226;background:#18181B;color:#8F8C85;font-size:11px;">
+          <sc-for list="{{ edTabs }}" as="tb" hint-placeholder-count="2">
+            <button type="button" onClick="{{ tb.open }}" style="padding:7px 14px 9px;border:0;border-right:1px solid #222226;border-top:2px solid {{ tb.top }};background:{{ tb.bg }};color:{{ tb.color }};font-family:inherit;font-size:11px;cursor:pointer;" style-hover="color:#EDEBE6;">{{ tb.name }}</button>
+          </sc-for>
+        </div>
+        <div style="flex:1;display:grid;grid-template-columns:minmax(0,92px) minmax(0,1fr);min-height:0;">
+          <div style="border-right:1px solid #222226;padding:10px 8px;display:flex;flex-direction:column;gap:4px;color:#8F8C85;font-size:10px;overflow:hidden;white-space:nowrap;">
+            <span>▾ src</span>
+            <sc-for list="{{ edTree }}" as="tr" hint-placeholder-count="5">
+              <span style="padding-left:{{ tr.pad }};color:{{ tr.color }};">{{ tr.label }}</span>
+            </sc-for>
+          </div>
+          <div style="padding:10px 0;display:flex;flex-direction:column;gap:1px;line-height:1.55;font-size:11px;min-width:0;overflow:hidden;">
+            <sc-for list="{{ code }}" as="l" hint-placeholder-count="6">
+              <div style="display:grid;grid-template-columns:26px 1fr;"><span style="text-align:right;padding-right:8px;color:#3A3A40;">{{ l.n }}</span><span style="white-space:pre;color:{{ l.color }};">{{ l.text }}</span></div>
+            </sc-for>
+            <div style="display:grid;grid-template-columns:26px 1fr;background:#1A1714;"><span style="text-align:right;padding-right:8px;color:#FF5B14;">{{ typingN }}</span><span style="white-space:pre;color:#EDEBE6;">{{ typed }}<span style="color:#FF5B14;animation:cursorBlink 1s step-start infinite;">▍</span></span></div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 12px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;"><span>⎇ main · 3 modificati</span><span>{{ edLang }} · UTF-8</span></div>
+      </div>
+
+      <div style="min-width:0;height:340px;box-sizing:border-box;border:1px solid #26262B;border-radius:16px;background:#18181B;overflow:hidden;padding:20px;box-sizing:border-box;display:flex;flex-direction:column;gap:12px;">
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:#8F8C85;"><span>lezione 04 / 12</span><span style="color:#FF5B14;">● live</span></div>
+        <span style="font-size:18px;font-weight:800;letter-spacing:-0.02em;">async / await</span>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:11px;">
+          <div style="height:90px;box-sizing:border-box;padding:8px 10px;border:1px solid #2C2C31;border-radius:8px;display:flex;flex-direction:column;gap:3px;overflow:hidden;"><span style="color:#8F8C85;">call stack</span>
+            <div style="display:flex;flex-direction:column-reverse;gap:3px;">
+              <sc-for list="{{ evStack }}" as="it" hint-placeholder-count="1">
+                <span style="padding:1px 6px;border-radius:4px;background:{{ it.bg }};color:{{ it.color }};animation:galIn .25s ease-out both;">{{ it.label }}</span>
+              </sc-for>
+            </div>
+          </div>
+          <div style="height:90px;box-sizing:border-box;padding:8px 10px;border:1px dashed #2C2C31;border-radius:8px;display:flex;flex-direction:column;gap:3px;overflow:hidden;"><span style="color:#8F8C85;">microtask queue</span>
+            <sc-for list="{{ evQueue }}" as="it" hint-placeholder-count="0">
+              <span style="padding:1px 6px;border-radius:4px;border:1px dashed #FF5B14;color:#FF8A57;animation:galIn .25s ease-out both;">{{ it.label }}</span>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:{{ evLoopColor }};transition:color .2s;"><span style="flex:1;height:1px;background:{{ evLoopLine }};"></span><span style="white-space:nowrap;">{{ evCaption }}</span><span style="flex:1;height:1px;background:{{ evLoopLine }};"></span></div>
+        <div style="position:relative;margin-top:auto;display:flex;flex-direction:column;gap:6px;">
+          <div aria-hidden="true" style="position:absolute;left:0;top:0;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:10px 10px 10px 2px;border:1px dashed #2C2C31;font-size:11px;color:#8F8C85;opacity:{{ evL.o }};transition:opacity .3s;"><span style="color:#FF5B14;animation:cursorBlink 1s step-start infinite;">●</span>caricamento messaggi…</div>
+          <div style="align-self:flex-start;max-width:85%;padding:7px 10px;border-radius:10px 10px 10px 2px;background:#222226;font-size:11px;color:#BDBAB2;opacity:{{ evQ.o }};transform:{{ evQ.t }};transition:opacity .3s,transform .3s;">ma quindi await blocca tutto?</div>
+          <div style="align-self:flex-end;max-width:85%;padding:7px 10px;border-radius:10px 10px 2px 10px;background:#FF5B14;color:#111113;font-size:11px;font-weight:700;opacity:{{ evA.o }};transform:{{ evA.t }};transition:opacity .3s,transform .3s;">no, solo la funzione. vediamolo.</div>
+        </div>
+      </div>
+
+      <div style="min-width:0;height:340px;box-sizing:border-box;border:1px solid #26262B;border-radius:16px;background:{{ nf.bg }};transition:background .3s;overflow:hidden;padding:22px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px;font-size:11px;line-height:1.55;">
+        <span style="color:{{ nf.dim }};"><span style="color:{{ nf.prompt }};">$</span> neofetch</span>
+        <div style="display:flex;flex-wrap:wrap;gap:12px 18px;align-items:flex-start;">
+          <pre style="margin:0;font-family:inherit;font-size:10px;line-height:1.15;color:{{ nf.accent }};">{{ logoArt }}</pre>
+          <div style="flex:1 1 160px;display:flex;flex-direction:column;gap:1px;min-width:0;">
+            <span style="color:{{ nf.text }};"><span style="color:{{ nf.accent }};">leica</span>@<span style="color:{{ nf.accent }};">studio</span></span>
+            <span style="color:{{ nf.rule }};">-------------</span>
+            <sc-for list="{{ sysinfo }}" as="r" hint-placeholder-count="7">
+              <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><span style="color:{{ nf.key }};">{{ r.k }}</span><span style="color:{{ nf.dim }};">: </span><span style="color:{{ nf.text }};">{{ r.v }}</span></span>
+            </sc-for>
+          </div>
+        </div>
+        <div style="margin-top:auto;display:flex;align-items:center;gap:4px;">
+          <sc-for list="{{ nfSwatches }}" as="w" hint-placeholder-count="7">
+            <button type="button" onClick="{{ w.pick }}" title="{{ w.name }}" aria-label="tema {{ w.name }}" aria-pressed="{{ w.sel }}" style="width:24px;height:14px;padding:0;border:1px solid {{ w.border }};background:{{ w.color }};cursor:pointer;transform:{{ w.lift }};transition:transform .15s;" style-hover="transform:translateY(-2px);"></button>
+          </sc-for>
+          <span style="margin-left:auto;font-size:10px;color:{{ nf.dim }};">{{ nf.label }}</span>
+        </div>
+      </div>
       </div>
     </section>
 
@@ -246,7 +324,9 @@ class Component extends DCLogic {
   toggleLangMenu = () => this.setState(s => ({ langOpen: !s.langOpen }));
   onDocClick = (e) => { if (this.state.langOpen && !e.target.closest('[data-lang-menu]')) this.setState({ langOpen: false }); };
   onKey = (e) => { if (e.key === 'Escape') this.setState({ langOpen: false }); };
-  componentDidMount() { document.addEventListener('click', this.onDocClick); document.addEventListener('keydown', this.onKey); }
+  galTargets = { vue: '  await pay(cart.total)', ts: '  return res.json()' };
+  openTab = (id) => this.setState({ edTab: id, typedLen: 0 });
+  componentDidMount() { document.addEventListener('click', this.onDocClick); document.addEventListener('keydown', this.onKey); this.evIv = setInterval(() => this.setState(s => ({ evStep: ((s.evStep || 0) + 1) % 11 })), 1400); this.galIv = setInterval(() => this.setState(s => ({ typedLen: (s.typedLen || 0) >= this.galTargets[this.state.edTab || 'vue'].length + 14 ? 0 : (s.typedLen || 0) + 1 })), 110); }
 
   toggleMode = () => {
     if (this.state.booting) return;
@@ -260,7 +340,7 @@ class Component extends DCLogic {
     this.t2 = setTimeout(() => this.setState({ booting: false }), 1100);
   };
 
-  componentWillUnmount() { clearTimeout(this.t1); clearTimeout(this.t2); document.removeEventListener('click', this.onDocClick); document.removeEventListener('keydown', this.onKey); }
+  componentWillUnmount() { clearTimeout(this.t1); clearTimeout(this.t2); document.removeEventListener('click', this.onDocClick); document.removeEventListener('keydown', this.onKey); clearInterval(this.galIv); clearInterval(this.evIv); }
 
   renderVals() {
     const lang = this.state.lang;
@@ -271,6 +351,53 @@ class Component extends DCLogic {
     };
     const t = T[lang] || T.it;
     const langs = [['it','italiano'],['en','english'],['es','español']].map(([code, name]) => ({ code, name, mark: code === lang ? '>' : '', color: code === lang ? '#EDEBE6' : '#BDBAB2', select: () => this.setLang(code) }));
+    const edTab = this.state.edTab || 'vue';
+    const EDK = '#FF8A57', EDT = '#EDEBE6', EDD = '#8F8C85';
+    const CODE = {
+      vue: [['\u003cscript setup\u003e', EDK], ['const cart = useCart()', EDT], ['', EDT], ['async function checkout() {', EDK], ['  loading.value = true', EDT], ['  // TODO: retry se fallisce', EDD]],
+      ts: [['export async function pay(', EDK], ['  amount: number', EDT], ['): Promise\u003cOrder\u003e {', EDK], ["  const res = await fetch('/api/pay',", EDT], ["    { method: 'POST', body: amount })", EDT], ["  if (!res.ok) throw new Error('KO')", EDD]],
+    };
+    const code = CODE[edTab].map(([text, color], i) => ({ n: i + 1, text, color }));
+    const edTabs = [['vue', 'Checkout.vue'], ['ts', 'api.ts']].map(([id, name]) => { const on = id === edTab; return { name, open: () => this.openTab(id), top: on ? '#FF5B14' : 'transparent', bg: on ? '#0C0C0E' : 'transparent', color: on ? '#EDEBE6' : '#8F8C85' }; });
+    const edTree = (edTab === 'ts'
+      ? [['▾ api', '10px', '#8F8C85'], ['api.ts', '20px', '#FF5B14'], ['▸ pages', '10px', '#8F8C85'], ['▸ stores', '10px', '#8F8C85']]
+      : [['▸ api', '10px', '#8F8C85'], ['▾ pages', '10px', '#8F8C85'], ['Checkout.vue', '20px', '#FF5B14'], ['Home.vue', '20px', '#8F8C85'], ['▸ stores', '10px', '#8F8C85']]).map(([label, pad, color]) => ({ label, pad, color }));
+    const NF = [
+      { id: 'default', name: 'default', color: '#111113', bg: '#0C0C0E', text: '#BDBAB2', dim: '#5A5852', accent: '#FF5B14', key: '#FF8A57', prompt: '#5BD48A', rule: '#3A3A40' },
+      { id: 'graphite', name: 'graphite', color: '#2C2C31', bg: '#2C2C31', text: '#EDEBE6', dim: '#8F8C85', accent: '#FF8A57', key: '#FFB08A', prompt: '#5BD48A', rule: '#4A4A50' },
+      { id: 'ash', name: 'ash', color: '#8F8C85', bg: '#8F8C85', text: '#111113', dim: '#3A3A40', accent: '#111113', key: '#2C1A10', prompt: '#111113', rule: '#5A5852' },
+      { id: 'paper', name: 'paper', color: '#EDEBE6', bg: '#EDEBE6', text: '#2C2C31', dim: '#8F8C85', accent: '#E04A0A', key: '#B33A06', prompt: '#2E9E5B', rule: '#C9C6BE' },
+      { id: 'lfr', name: 'lfr', color: '#FF5B14', bg: '#FF5B14', text: '#111113', dim: '#5C2A14', accent: '#111113', key: '#111113', prompt: '#111113', rule: '#A33F12' },
+      { id: 'matrix', name: 'matrix', color: '#5BD48A', bg: '#07110B', text: '#9FE6BA', dim: '#2F6B47', accent: '#5BD48A', key: '#7FE0A4', prompt: '#5BD48A', rule: '#1E3A29' },
+      { id: 'amber', name: 'amber', color: '#E8B04A', bg: '#120D05', text: '#F0CB85', dim: '#7A5B22', accent: '#E8B04A', key: '#F2C46E', prompt: '#E8B04A', rule: '#3D2E12' },
+    ];
+    const nfId = this.state.nfTheme || 'default';
+    const nfT = NF.find(t => t.id === nfId) || NF[0];
+    const nfSwatches = NF.map(t => ({ name: t.name, color: t.color, sel: t.id === nfId, border: t.id === nfId ? nfT.text : 'rgba(128,128,128,0.35)', lift: t.id === nfId ? 'translateY(-3px)' : 'none', pick: () => this.setState({ nfTheme: t.id }) }));
+    const EV = [
+      { stack: ['main()'], queue: [], cap: 'main() parte' },
+      { stack: ['main()', 'fetchMessages()'], queue: [], cap: 'main() chiama fetchMessages()' },
+      { stack: ['main()', 'fetchMessages()', 'fetch(url)'], queue: [], cap: 'fetch() avvia la richiesta' },
+      { stack: ['main()'], queue: [], cap: 'await: fetchMessages si sospende', l: 1 },
+      { stack: ['main()', 'renderChat()'], queue: [], cap: 'main() continua: mostra il loader', l: 1 },
+      { stack: [], queue: [], cap: 'main() finisce · stack vuoto', l: 1 },
+      { stack: [], queue: ['fetchMessages ↩'], cap: 'risposta arrivata → microtask', l: 1 },
+      { stack: ['fetchMessages ↩'], queue: [], cap: 'event loop: riprende dopo await', l: 1, loop: 1 },
+      { stack: ['fetchMessages ↩', 'renderChat(msgs)'], queue: [], cap: 'renderChat(msgs)', q: 1 },
+      { stack: [], queue: [], cap: 'fatto ✓ · nessun blocco', q: 1, a: 1 },
+      { stack: [], queue: [], cap: 'fatto ✓ · nessun blocco', q: 1, a: 1 },
+    ];
+    const ev = EV[this.state.evStep || 0];
+    const evStack = ev.stack.map((label, i) => { const top = i === ev.stack.length - 1; return { label, bg: top ? 'rgba(255,91,20,0.14)' : 'transparent', color: top ? '#FF5B14' : '#EDEBE6' }; });
+    const show = (on) => ({ o: on ? 1 : 0, t: on ? 'none' : 'translateY(6px)' });
+    const galExtra = {
+      evStack, evQueue: ev.queue.map(label => ({ label })), evCaption: ev.cap,
+      evLoopColor: ev.loop ? '#FF5B14' : '#8F8C85', evLoopLine: ev.loop ? '#FF5B14' : '#2C2C31', evQ: show(ev.q), evA: show(ev.a), evL: show(ev.l),
+      nf: { ...nfT, label: 'theme: ' + nfT.name }, nfSwatches,
+      code, edTabs, edTree, edLang: edTab === 'ts' ? 'TypeScript' : 'Vue', typingN: code.length + 1, typed: this.galTargets[edTab].slice(0, Math.min(this.state.typedLen || 0, this.galTargets[edTab].length)),
+      logoArt: ' _  __      \n| |/ _|_ __ \n| | |_| \'__|\n| |  _| |   \n|_|_| |_|   ',
+      sysinfo: [['OS', 'macOS 15'], ['Editor', 'PhpStorm'], ['Shell', 'zsh'], ['Terminal', 'Warp'], ['Font', 'JetBrains Mono'], ['Theme', nfT.name], ['Caffè', '3 / giorno']].map(([k, v]) => ({ k, v })),
+    };
     const langExtra = { lang, t, langs, langOpen: !!this.state.langOpen, toggleLangMenu: this.toggleLangMenu };
     const intro = "Sono Leica Florian Robert, sviluppatore Web Full Stack, UI e UX Designer, sviluppatore Mobile, insegnante tecnologie web, grande appassionato d'informatica e di tecnologia.";
     const rest = [
@@ -297,6 +424,7 @@ class Component extends DCLogic {
     ).map((text, i) => ({ text, delay: `${i * 0.12}s` }));
     return {
       ...langExtra,
+      ...galExtra,
       isLegacy: this.state.mode === 'legacy',
       isNative: this.state.mode === 'native',
       booting: this.state.booting,

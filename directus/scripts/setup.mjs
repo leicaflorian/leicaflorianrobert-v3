@@ -27,6 +27,22 @@ const choice = (field, note, choices, defaultValue) => ({
   schema: {default_value: defaultValue},
 })
 const image = (field, note) => ({field, type: 'uuid', meta: {interface: 'file-image', note, special: ['file'], width: 'half'}, schema: {}})
+const label = note => string('label', note ?? 'Etichetta piccola sopra il titolo, numerata in automatico: «servizi» → «01 / servizi»')
+const title = note => string('title', note ?? 'Titolo')
+
+/**
+ * A block type: one collection per type, with its translations. Blocks are hidden from the menu:
+ * they're edited from the page (or project) they belong to, in its `sections` field.
+ */
+const block = (collection, {icon, note, fields = [], translations}) => ({
+  collection, icon, note, hidden: true, sortable: false,
+  display: '{{translations.title}}',
+  fields: [
+    choice('engines', 'In quale modalità si vede', [['both', 'Entrambe'], ['native', 'Solo native'], ['legacy', 'Solo legacy']], 'both'),
+    ...fields,
+  ],
+  translations,
+})
 
 // --- collections -------------------------------------------------------------------------
 // `fields`: the collection's fields; `translations`: the translated fields, in `<name>_translations`.
@@ -59,81 +75,20 @@ const COLLECTIONS = [
     ],
   },
   {
-    collection: 'page_home',
-    singleton: true,
-    icon: 'home',
-    note: 'I testi della Home.',
-    fields: [image('contact_image', 'Accanto al form «Parliamone»')],
-    translations: [
-      string('hero_title', 'Titolo, parte bianca'),
-      string('hero_title_accent', 'Titolo, parte arancione'),
-      text('hero_text', 'Sotto il titolo'),
-      text('services_text', 'Sotto «Cosa posso fare per te?»'),
-      text('contact_text', 'Sotto «Parliamone»'),
-      text('legacy_text', 'In modalità legacy, sotto «Benvenuto nel mio ipertesto»'),
-    ],
-  },
-  {
-    collection: 'page_about',
-    singleton: true,
-    icon: 'person',
-    note: 'I testi di Chi sono.',
+    collection: 'pages',
+    icon: 'web',
+    note: 'Le pagine del sito: percorso, menu e sezioni, che si compongono con i blocchi.',
+    display: '{{translations.title}}',
     fields: [
-      image('portrait', 'Ritratto nella hero'),
-      image('gallery_1', 'Galleria: al lavoro'),
-      image('gallery_2', 'Galleria: in aula / mentoring'),
-      image('gallery_3', 'Galleria: il setup'),
+      string('key', 'Nome per il codice, da non cambiare: home, about, projects, contact', {width: 'half', required: true}),
+      boolean('in_menu', 'Nel menu', true),
+      choice('children', 'Le pagine di dettaglio sotto questa: /progetti/<slug> apre il case study', [['none', 'Nessuna'], ['projects', 'Case study dei progetti']], 'none'),
     ],
     translations: [
-      text('intro', 'La presentazione sotto «Ciao, benvenuto/a»'),
-      text('story', 'La storia: paragrafi separati da una riga vuota'),
-      text('experiences_text', 'Sotto «Ecco alcune esperienze»'),
-      text('cta_text', 'Nel banner finale «Ora sai qualcosa in più, scrivimi»'),
-    ],
-  },
-  {
-    collection: 'page_projects',
-    singleton: true,
-    icon: 'grid_view',
-    note: 'I testi di Progetti.',
-    fields: [],
-    translations: [
-      text('intro', 'L\'introduzione: paragrafi separati da una riga vuota'),
-      text('cta_text', 'Nel banner finale'),
-    ],
-  },
-  {
-    collection: 'page_contact',
-    singleton: true,
-    icon: 'mail',
-    note: 'I testi di Contatti.',
-    fields: [image('contact_image', 'Accanto al form')],
-    translations: [text('intro', 'Accanto al titolo «Contatti»')],
-  },
-  {
-    collection: 'page_case_study',
-    singleton: true,
-    icon: 'auto_stories',
-    note: 'Il case study della V3. Nei testi, **parola** la evidenzia.',
-    fields: [
-      integer('year', 'Anno'),
-      image('cover', 'Cover: la Home native'),
-      image('shot_legacy', 'Screenshot legacy'),
-      image('shot_native', 'Screenshot native'),
-      image('shot_about', 'Screenshot di Chi sono'),
-      image('shot_mobile', 'Screenshot mobile'),
-    ],
-    translations: [
-      string('title', 'Titolo'),
-      text('intro', 'Sotto il titolo'),
-      string('role', 'Ruolo'),
-      string('type', 'Tipo'),
-      string('pages', 'Pagine'),
-      text('start_text', '01 / punto di partenza'),
-      text('concept_text', '02 / concept'),
-      text('visual_text', '03 / sistema visivo'),
-      text('logo_text', 'Accanto al logo'),
-      text('details', '04 / dettagli: un punto per riga'),
+      string('slug', 'Percorso, senza / iniziale: «chi-sono». Vuoto per la Home'),
+      string('title', 'Titolo: menu legacy e scheda del browser'),
+      string('seo_title', 'Titolo nella scheda del browser, se diverso dal titolo'),
+      text('description', 'Descrizione per i motori di ricerca'),
     ],
   },
   {
@@ -149,13 +104,19 @@ const COLLECTIONS = [
       boolean('featured', 'In evidenza, con il mockup'),
       choice('mockup', 'La sagoma intorno allo screenshot, se in evidenza', [['laptop', 'Portatile'], ['phone', 'Telefono'], ['none', 'Nessuna']], 'laptop'),
       boolean('on_home', 'Anche in Home, tra le card piccole'),
-      boolean('case_study', 'Ha la sua pagina sul sito (oggi solo la V3)'),
+      boolean('case_study', 'Ha la sua pagina sul sito: i campi «Case study» e le sezioni qui sotto'),
       image('image', 'Screenshot (WebP; 16:10 per i siti, 9:19,5 per le app)'),
+      integer('year', 'Case study: anno'),
+      image('cover', 'Case study: immagine grande sotto il titolo; se vuota, lo screenshot'),
     ],
     translations: [
       string('name', 'Nome'),
       string('note', 'Una riga sotto il nome, facoltativa'),
       string('subtitle', 'Sotto il nome nelle card in evidenza; se vuoto, il dominio'),
+      text('intro', 'Case study: sotto il titolo'),
+      string('role', 'Case study: ruolo', {width: 'half'}),
+      string('type', 'Case study: tipo di progetto', {width: 'half'}),
+      string('stack', 'Case study: tecnologie, facoltativo'),
     ],
   },
   {
@@ -210,10 +171,133 @@ const COLLECTIONS = [
   },
 ]
 
+// --- blocks ------------------------------------------------------------------------------
+// The sections of pages and case studies. In texts, **word** highlights a word.
+
+const BLOCKS = [
+  block('block_hero_home', {
+    icon: 'waving_hand',
+    note: 'La hero della Home, con la foto e lo snippet di codice.',
+    translations: [
+      string('title', 'Titolo, parte bianca'),
+      string('title_accent', 'Titolo, parte arancione'),
+      text('text', 'Sotto il titolo'),
+      text('legacy_text', 'In modalità legacy, sotto «Benvenuto nel mio ipertesto»'),
+    ],
+  }),
+  block('block_page_header', {
+    icon: 'title',
+    note: 'La testata di una pagina: etichetta, titolo grande e introduzione.',
+    fields: [
+      choice('variant', 'Gli elementi in più', [['plain', 'Nessuno'], ['about', 'Ritratto e numeri (Chi sono)'], ['projects', 'Numero di progetti (Progetti)'], ['contact', 'Disponibilità ed email (Contatti)']], 'plain'),
+      image('image', 'Il ritratto, nella variante Chi sono'),
+    ],
+    translations: [
+      label('Etichetta sopra il titolo: «// su di me». {n} diventa il numero di progetti'),
+      title(),
+      text('intro', 'Introduzione: paragrafi separati da una riga vuota'),
+    ],
+  }),
+  block('block_text', {
+    icon: 'notes',
+    note: 'Titolo a sinistra, testo a destra.',
+    translations: [label(), title(), text('text', 'Paragrafi separati da una riga vuota')],
+  }),
+  block('block_gallery', {
+    icon: 'photo_library',
+    note: 'Immagini. Con un titolo stanno sotto il testo, accanto al titolo; senza, a tutta larghezza.',
+    translations: [
+      label('Etichetta piccola, facoltativa'),
+      title('Titolo, facoltativo'),
+      text('text', 'Testo sopra le immagini, facoltativo'),
+      text('captions', 'Le didascalie, una per riga, nell\'ordine delle immagini'),
+    ],
+  }),
+  block('block_list', {
+    icon: 'format_list_bulleted',
+    note: 'Un elenco, accanto al titolo.',
+    translations: [label(), title(), text('items', 'Un punto per riga')],
+  }),
+  block('block_palette', {
+    icon: 'palette',
+    note: 'I colori e il logo di un progetto.',
+    fields: [
+      text('colors', 'Un colore per riga, in esadecimale: #FF5B14'),
+      image('logo', 'Logo, facoltativo'),
+      boolean('site_logo', 'Al posto del logo, quello animato di questo sito'),
+    ],
+    translations: [
+      label(), title(),
+      text('text', 'Testo sopra i colori'),
+      text('color_names', 'I nomi dei colori, uno per riga, nell\'ordine dei colori'),
+      text('logo_text', 'Accanto al logo'),
+    ],
+  }),
+  block('block_cta', {
+    icon: 'campaign',
+    note: 'L\'invito a scrivere, con il bottone Contattami.',
+    fields: [choice('variant', 'Aspetto', [['banner', 'Banner centrato'], ['split', 'Titolo a sinistra, bottoni a destra (con Tutti i progetti)']], 'banner')],
+    translations: [
+      label('Etichetta piccola, solo nella variante a due colonne'),
+      title(),
+      string('title_accent', 'Fine del titolo, in arancione, facoltativa'),
+      text('text', 'Testo sotto il titolo, facoltativo'),
+    ],
+  }),
+  block('block_contact_form', {
+    icon: 'contact_mail',
+    note: 'Il form di contatto, con un\'immagine accanto.',
+    fields: [image('image', 'Accanto al form')],
+    translations: [label(), title(), text('text', 'Sopra il form, facoltativo')],
+  }),
+  block('block_services', {
+    icon: 'design_services',
+    note: 'Le card dei servizi (dalla collection Servizi).',
+    translations: [label(), title(), text('text', 'Sotto il titolo')],
+  }),
+  block('block_projects', {
+    icon: 'rocket_launch',
+    note: 'I progetti (dalla collection Progetti).',
+    fields: [
+      choice('show', 'Quali progetti', [['home', 'In evidenza e in Home'], ['featured', 'Solo in evidenza'], ['archive', 'Tutti tranne quelli in evidenza']], 'home'),
+      boolean('all_link', 'Link «Tutti i progetti» accanto al titolo'),
+    ],
+    translations: [label(), title('Titolo, facoltativo')],
+  }),
+  block('block_experiences', {
+    icon: 'work_history',
+    note: 'La timeline delle esperienze (dalla collection Esperienze).',
+    translations: [label(), title(), text('text', 'Accanto al titolo')],
+  }),
+  block('block_stack', {
+    icon: 'code',
+    note: 'Le tecnologie (dalla collection Tecnologie).',
+    translations: [label(), title()],
+  }),
+  block('block_contact_info', {
+    icon: 'contact_page',
+    note: 'Contatti, social e dati aziendali (dai dati del sito).',
+    translations: [label(), title()],
+  }),
+]
+
+/** The collections that can have sections. */
+const WITH_SECTIONS = ['pages', 'projects']
+
+/** The junction between a gallery block and its images. */
+const GALLERY_FILES = 'block_gallery_files'
+
+/** Collections from earlier schemas, removed by setup. */
+const OBSOLETE = ['page_home', 'page_about', 'page_projects', 'page_contact', 'page_case_study']
+
 /** The collections whose changes must trigger a site rebuild. */
-const CONTENT_COLLECTIONS = COLLECTIONS
-  .filter(c => c.collection !== 'messages')
-  .flatMap(c => c.translations.length ? [c.collection, `${c.collection}_translations`] : [c.collection])
+const CONTENT_COLLECTIONS = [
+  ...[...COLLECTIONS, ...BLOCKS]
+    .filter(c => c.collection !== 'messages')
+    .flatMap(c => c.translations.length ? [c.collection, `${c.collection}_translations`] : [c.collection]),
+  ...WITH_SECTIONS.map(c => `${c}_sections`),
+  GALLERY_FILES,
+]
 
 // --- creation ----------------------------------------------------------------------------
 
@@ -242,7 +326,7 @@ async function createLanguages() {
 }
 
 async function createCollection(def) {
-  if (await exists(def.collection)) return
+  if (await exists(def.collection)) return addMissingFields(def)
   const sortable = !def.singleton && def.sortable !== false
 
   await api('POST', '/collections', {
@@ -250,6 +334,7 @@ async function createCollection(def) {
     meta: {
       icon: def.icon,
       note: def.note,
+      hidden: Boolean(def.hidden),
       singleton: Boolean(def.singleton),
       sort_field: sortable ? 'sort' : null,
       display_template: def.display ?? null,
@@ -261,15 +346,37 @@ async function createCollection(def) {
     fields: [id(), ...(sortable ? [sort()] : []), ...def.fields],
   })
 
-  for (const field of def.fields.filter(f => f.meta?.special?.includes('file'))) {
+  await createFileRelations(def.collection, def.fields)
+  if (def.translations.length) await createTranslations(def)
+  console.log(`+ ${def.collection}`)
+}
+
+async function createFileRelations(collection, fields) {
+  for (const field of fields.filter(f => f.meta?.special?.includes('file'))) {
     await api('POST', '/relations', {
-      collection: def.collection, field: field.field, related_collection: 'directus_files',
+      collection, field: field.field, related_collection: 'directus_files',
       schema: {on_delete: 'SET NULL'},
     })
   }
+}
 
-  if (def.translations.length) await createTranslations(def)
-  console.log(`+ ${def.collection}`)
+async function fieldNames(collection) {
+  return new Set((await api('GET', `/fields/${collection}`)).map(f => f.field))
+}
+
+/** Adds the fields defined here but not yet in Directus. Existing fields are left as they are. */
+async function addMissingFields(def) {
+  const targets = [[def.collection, def.fields]]
+  if (def.translations.length) targets.push([`${def.collection}_translations`, def.translations])
+
+  for (const [collection, fields] of targets) {
+    const present = await fieldNames(collection)
+    const missing = fields.filter(f => !present.has(f.field))
+    if (!missing.length) continue
+    for (const field of missing) await api('POST', `/fields/${collection}`, field)
+    await createFileRelations(collection, missing)
+    console.log(`+ ${collection}: ${missing.map(f => f.field).join(', ')}`)
+  }
 }
 
 async function createTranslations(def) {
@@ -310,6 +417,95 @@ async function createTranslations(def) {
   })
 }
 
+/**
+ * The `sections` field: an ordered list of blocks of any type (many-to-any),
+ * through the `<collection>_sections` junction.
+ */
+async function createSections(parent) {
+  const junction = `${parent}_sections`
+  const parentKey = `${parent}_id`
+  const allowed = BLOCKS.map(b => b.collection)
+
+  if ((await fieldNames(parent)).has('sections')) {
+    // new block types become available in the existing field
+    const relation = await api('GET', `/relations/${junction}/item`)
+    const missing = allowed.filter(c => !relation.meta.one_allowed_collections?.includes(c))
+    if (missing.length) {
+      await api('PATCH', `/relations/${junction}/item`, {meta: {one_allowed_collections: allowed}})
+      console.log(`~ ${parent}.sections: + ${missing.join(', ')}`)
+    }
+    return
+  }
+
+  await api('POST', '/collections', {
+    collection: junction,
+    meta: {hidden: true, icon: 'import_export'},
+    schema: {},
+    fields: [
+      id(),
+      {field: parentKey, type: 'integer', meta: {hidden: true}, schema: {}},
+      {field: 'item', type: 'string', meta: {hidden: true}, schema: {}},
+      {field: 'collection', type: 'string', meta: {hidden: true}, schema: {}},
+      sort(),
+    ],
+  })
+  await api('POST', `/fields/${parent}`, {
+    field: 'sections', type: 'alias',
+    meta: {special: ['m2a'], interface: 'list-m2a', note: 'Le sezioni della pagina, nell\'ordine'},
+  })
+  await api('POST', '/relations', {
+    collection: junction, field: 'item', related_collection: null,
+    meta: {one_allowed_collections: allowed, one_collection_field: 'collection', junction_field: parentKey},
+  })
+  await api('POST', '/relations', {
+    collection: junction, field: parentKey, related_collection: parent,
+    meta: {one_field: 'sections', junction_field: 'item', sort_field: 'sort'},
+    schema: {on_delete: 'CASCADE'},
+  })
+  console.log(`+ ${parent}.sections`)
+}
+
+/** The gallery blocks' `images` field: many files, in order. */
+async function createGalleryImages() {
+  if ((await fieldNames('block_gallery')).has('images')) return
+
+  await api('POST', '/collections', {
+    collection: GALLERY_FILES,
+    meta: {hidden: true, icon: 'import_export'},
+    schema: {},
+    fields: [
+      id(),
+      {field: 'block_gallery_id', type: 'integer', meta: {hidden: true}, schema: {}},
+      {field: 'directus_files_id', type: 'uuid', meta: {hidden: true}, schema: {}},
+      sort(),
+    ],
+  })
+  await api('POST', '/fields/block_gallery', {
+    field: 'images', type: 'alias',
+    meta: {special: ['files'], interface: 'files', note: 'Le immagini, nell\'ordine'},
+  })
+  await api('POST', '/relations', {
+    collection: GALLERY_FILES, field: 'directus_files_id', related_collection: 'directus_files',
+    meta: {junction_field: 'block_gallery_id'},
+    schema: {on_delete: 'CASCADE'},
+  })
+  await api('POST', '/relations', {
+    collection: GALLERY_FILES, field: 'block_gallery_id', related_collection: 'block_gallery',
+    meta: {one_field: 'images', junction_field: 'directus_files_id', sort_field: 'sort'},
+    schema: {on_delete: 'CASCADE'},
+  })
+  console.log('+ block_gallery.images')
+}
+
+/** Removes the collections of earlier schemas, with their translations. */
+async function removeObsolete() {
+  for (const collection of OBSOLETE.flatMap(c => [`${c}_translations`, c])) {
+    if (!await exists(collection)) continue
+    await api('DELETE', `/collections/${collection}`)
+    console.log(`- ${collection}`)
+  }
+}
+
 /** The site reads without login: the public policy can read content and files, not messages. */
 async function grantPublicRead() {
   const [access] = await api('GET', '/access?filter[role][_null]=true&filter[user][_null]=true&fields=policy')
@@ -335,7 +531,15 @@ async function grantPublicRead() {
 
 async function createFlow({name, description, icon, options, operations}) {
   const [existing] = await api('GET', `/flows?filter[name][_eq]=${encodeURIComponent(name)}`)
-  if (existing) return
+  if (existing) {
+    // new collections must trigger the flow too
+    const missing = options.collections.filter(c => !existing.options?.collections?.includes(c))
+    if (missing.length) {
+      await api('PATCH', `/flows/${existing.id}`, {options: {...existing.options, collections: options.collections}})
+      console.log(`~ flow «${name}»: + ${missing.join(', ')}`)
+    }
+    return
+  }
 
   const flow = await api('POST', '/flows', {
     name, description, icon, status: 'active', trigger: 'event', accountability: 'all', options,
@@ -399,7 +603,10 @@ async function createFlows() {
 
 await waitForDirectus()
 await createLanguages()
-for (const def of COLLECTIONS) await createCollection(def)
+await removeObsolete()
+for (const def of [...COLLECTIONS, ...BLOCKS]) await createCollection(def)
+for (const parent of WITH_SECTIONS) await createSections(parent)
+await createGalleryImages()
 await grantPublicRead()
 await createFlows()
 console.log('Schema ready.')

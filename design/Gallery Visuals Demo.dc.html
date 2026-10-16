@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+body { margin:0; background:#111113; }
+a { color:#FF5B14; } a:hover { color:#EDEBE6; }
+@keyframes cursorBlink { 0%,50%{opacity:1} 51%,100%{opacity:0} }
+@keyframes pulseQ { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+</style>
+</helmet>
+<div style="font-family:'JetBrains Mono',monospace;color:#EDEBE6;min-height:100vh;padding:80px 24px 120px;">
+  <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:72px;">
+
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div style="display:flex;align-items:center;gap:12px;"><span style="padding:4px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:12px;font-weight:800;">A</span><span style="font-size:13px;color:#8F8C85;">editor · lavagna · neofetch</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px;">
+
+        <div style="height:340px;border:1px solid #26262B;border-radius:16px;background:#0C0C0E;overflow:hidden;display:flex;flex-direction:column;font-size:12px;">
+          <div style="display:flex;border-bottom:1px solid #222226;background:#18181B;color:#8F8C85;font-size:11px;">
+            <span style="padding:9px 14px;background:#0C0C0E;color:#EDEBE6;border-right:1px solid #222226;border-top:2px solid #FF5B14;">Checkout.vue</span>
+            <span style="padding:9px 14px;border-right:1px solid #222226;">api.ts</span>
+          </div>
+          <div style="flex:1;display:grid;grid-template-columns:minmax(0,92px) minmax(0,1fr);min-height:0;">
+            <div style="border-right:1px solid #222226;padding:10px 8px;display:flex;flex-direction:column;gap:4px;color:#8F8C85;font-size:10px;overflow:hidden;white-space:nowrap;">
+              <span>▾ src</span><span style="padding-left:10px;">▸ api</span><span style="padding-left:10px;">▾ pages</span><span style="padding-left:20px;color:#FF5B14;">Checkout.vue</span><span style="padding-left:20px;">Home.vue</span><span style="padding-left:10px;">▸ stores</span>
+            </div>
+            <div style="padding:10px 0;display:flex;flex-direction:column;gap:1px;line-height:1.55;font-size:11px;min-width:0;overflow:hidden;">
+              <sc-for list="{{ code }}" as="l" hint-placeholder-count="6">
+                <div style="display:grid;grid-template-columns:26px 1fr;"><span style="text-align:right;padding-right:8px;color:#3A3A40;">{{ l.n }}</span><span style="white-space:pre;color:{{ l.color }};">{{ l.text }}</span></div>
+              </sc-for>
+              <div style="display:grid;grid-template-columns:26px 1fr;background:#1A1714;"><span style="text-align:right;padding-right:8px;color:#FF5B14;">{{ typingN }}</span><span style="white-space:pre;color:#EDEBE6;">{{ typed }}<span style="color:#FF5B14;animation:cursorBlink 1s step-start infinite;">▍</span></span></div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:6px 12px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;"><span>⎇ main · 3 modificati</span><span>Vue · UTF-8</span></div>
+        </div>
+
+        <div style="height:340px;border:1px solid #26262B;border-radius:16px;background:#18181B;overflow:hidden;padding:20px;box-sizing:border-box;display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:#8F8C85;"><span>lezione 04 / 12</span><span style="color:#FF5B14;">● live</span></div>
+          <span style="font-size:18px;font-weight:800;letter-spacing:-0.02em;">async / await</span>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:11px;">
+            <div style="padding:8px 10px;border:1px solid #2C2C31;border-radius:8px;display:flex;flex-direction:column;gap:2px;"><span style="color:#8F8C85;">call stack</span><span>main()</span><span style="color:#FF5B14;">fetchUser()</span></div>
+            <div style="padding:8px 10px;border:1px dashed #2C2C31;border-radius:8px;display:flex;flex-direction:column;gap:2px;"><span style="color:#8F8C85;">task queue</span><span>then(cb)</span><span style="color:#5A5852;">…</span></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#8F8C85;"><span style="flex:1;height:1px;background:#2C2C31;"></span><span>event loop ↻</span><span style="flex:1;height:1px;background:#2C2C31;"></span></div>
+          <div style="margin-top:auto;display:flex;flex-direction:column;gap:6px;">
+            <div style="align-self:flex-start;max-width:85%;padding:7px 10px;border-radius:10px 10px 10px 2px;background:#222226;font-size:11px;color:#BDBAB2;animation:pulseQ 3s ease-in-out infinite;">ma quindi await blocca tutto?</div>
+            <div style="align-self:flex-end;max-width:85%;padding:7px 10px;border-radius:10px 10px 2px 10px;background:#FF5B14;color:#111113;font-size:11px;font-weight:700;">no, solo la funzione. vediamolo.</div>
+          </div>
+        </div>
+
+        <div style="height:340px;border:1px solid #26262B;border-radius:16px;background:#0C0C0E;overflow:hidden;padding:22px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px;font-size:11px;line-height:1.55;">
+          <span style="color:#8F8C85;"><span style="color:#5BD48A;">$</span> neofetch</span>
+          <div style="display:flex;flex-wrap:wrap;gap:12px 18px;align-items:flex-start;">
+            <pre style="margin:0;font-family:inherit;font-size:10px;line-height:1.15;color:#FF5B14;">{{ logoArt }}</pre>
+            <div style="flex:1 1 160px;display:flex;flex-direction:column;gap:1px;min-width:0;">
+              <span><span style="color:#FF5B14;">leica</span>@<span style="color:#FF5B14;">studio</span></span>
+              <span style="color:#3A3A40;">-------------</span>
+              <sc-for list="{{ sysinfo }}" as="r" hint-placeholder-count="7">
+                <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><span style="color:#FF8A57;">{{ r.k }}</span><span style="color:#5A5852;">: </span><span style="color:#BDBAB2;">{{ r.v }}</span></span>
+              </sc-for>
+            </div>
+          </div>
+          <div style="margin-top:auto;display:flex;gap:4px;">
+            <span style="width:22px;height:12px;background:#111113;border:1px solid #2C2C31;"></span><span style="width:22px;height:12px;background:#2C2C31;"></span><span style="width:22px;height:12px;background:#8F8C85;"></span><span style="width:22px;height:12px;background:#EDEBE6;"></span><span style="width:22px;height:12px;background:#FF5B14;"></span><span style="width:22px;height:12px;background:#5BD48A;"></span><span style="width:22px;height:12px;background:#E8B04A;"></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div style="display:flex;align-items:center;gap:12px;"><span style="padding:4px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:12px;font-weight:800;">B</span><span style="font-size:13px;color:#8F8C85;">contributi · quiz · setup</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px;">
+
+        <div style="height:340px;border:1px solid #26262B;border-radius:16px;background:#18181B;overflow:hidden;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:18px;">
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            <span style="font-size:11px;color:#8F8C85;">$ git log --since="6 months" | wc -l</span>
+            <span style="font-size:30px;font-weight:800;letter-spacing:-0.03em;">642 <span style="font-size:13px;font-weight:500;color:#8F8C85;">commit</span></span>
+          </div>
+          <div style="flex:1;display:grid;grid-template-columns:repeat(26,1fr);grid-template-rows:repeat(7,1fr);grid-auto-flow:column;gap:3px;min-height:0;">
+            <sc-for list="{{ heat }}" as="h" hint-placeholder-count="182">
+              <span style="border-radius:2px;background:{{ h.c }};"></span>
+            </sc-for>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px;color:#8F8C85;"><span>ultimi 6 mesi</span><span style="display:flex;align-items:center;gap:3px;">meno <span style="width:9px;height:9px;border-radius:2px;background:#222226;"></span><span style="width:9px;height:9px;border-radius:2px;background:#5C2A14;"></span><span style="width:9px;height:9px;border-radius:2px;background:#A33F12;"></span><span style="width:9px;height:9px;border-radius:2px;background:#FF5B14;"></span> più</span></div>
+        </div>
+
+        <div style="height:340px;border:1px solid #26262B;border-radius:16px;background:#0C0C0E;overflow:hidden;padding:22px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px;font-size:12px;line-height:1.6;">
+          <span style="color:#8F8C85;"><span style="color:#5BD48A;">$</span> quiz --topic js --q 3/10</span>
+          <span style="color:#EDEBE6;">Cosa restituisce <span style="color:#FF8A57;">typeof null</span>?</span>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <sc-for list="{{ quiz }}" as="q" hint-placeholder-count="4">
+              <button type="button" onClick="{{ q.pick }}" style="display:flex;gap:10px;align-items:center;min-height:36px;padding:0 12px;border-radius:8px;border:1px solid {{ q.border }};background:{{ q.bg }};color:{{ q.color }};font-family:inherit;font-size:12px;text-align:left;cursor:pointer;" style-hover="border-color:#FF5B14;"><span style="color:#5A5852;">{{ q.key }}</span><span style="flex:1;">{{ q.label }}</span><span>{{ q.mark }}</span></button>
+            </sc-for>
+          </div>
+          <span style="margin-top:auto;font-size:11px;color:{{ quizNoteColor }};">{{ quizNote }}</span>
+        </div>
+
+        <div style="height:340px;border:1px solid #26262B;border-radius:16px;background:#0C0C0E;overflow:hidden;padding:22px;box-sizing:border-box;display:flex;flex-direction:column;gap:12px;font-size:12px;line-height:1.7;">
+          <span style="color:#8F8C85;"><span style="color:#5BD48A;">$</span> tree ~/setup -L 2</span>
+          <div style="display:flex;flex-direction:column;">
+            <sc-for list="{{ tree }}" as="t" hint-placeholder-count="10">
+              <span style="white-space:pre;overflow:hidden;text-overflow:ellipsis;"><span style="color:#3A3A40;">{{ t.pre }}</span><span style="color:{{ t.color }};">{{ t.name }}</span><span style="color:#5A5852;">{{ t.note }}</span></span>
+            </sc-for>
+          </div>
+          <span style="margin-top:auto;font-size:11px;color:#8F8C85;">3 directories, 7 files</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { typedLen: 0, pick: null };
+  target = '  await pay(cart.total)';
+  componentDidMount() {
+    this.iv = setInterval(() => this.setState(s => ({ typedLen: s.typedLen >= this.target.length + 14 ? 0 : s.typedLen + 1 })), 110);
+  }
+  componentWillUnmount() { clearInterval(this.iv); }
+  getHeat() {
+    if (this.heat) return this.heat;
+    let seed = 7; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+    this.heat = Array.from({ length: 182 }, (_, i) => { const r = rnd() * ((i % 7) >= 5 ? 0.5 : 1); return { c: r < 0.25 ? '#222226' : r < 0.5 ? '#5C2A14' : r < 0.8 ? '#A33F12' : '#FF5B14' }; });
+    return this.heat;
+  }
+  renderVals() {
+    const K = '#FF8A57', T = '#EDEBE6', D = '#8F8C85';
+    const code = [['\u003cscript setup\u003e', K], ['const cart = useCart()', T], ['', T], ['async function checkout() {', K], ['  loading.value = true', T], ['  // TODO: retry se fallisce', D]].map(([text, color], i) => ({ n: i + 1, text, color }));
+    const correct = 'b', p = this.state.pick;
+    const quiz = [['a', '"null"'], ['b', '"object"'], ['c', '"undefined"'], ['d', 'TypeError']].map(([key, label]) => {
+      const sel = p === key, show = p !== null, ok = key === correct;
+      return { key, label, pick: () => this.setState({ pick: key }),
+        border: show && ok ? '#5BD48A' : sel ? '#E58A8A' : '#2C2C31',
+        bg: show && ok ? 'rgba(91,212,138,0.08)' : sel ? 'rgba(229,138,138,0.08)' : 'transparent',
+        color: show && ok ? '#5BD48A' : sel ? '#E58A8A' : '#BDBAB2', mark: show && ok ? '✓' : sel ? '✗' : '' };
+    });
+    return {
+      code, typingN: code.length + 1, typed: this.target.slice(0, Math.min(this.state.typedLen, this.target.length)),
+      logoArt: ' _  __      \n| |/ _|_ __ \n| | |_| \'__|\n| |  _| |   \n|_|_| |_|   ',
+      sysinfo: [['OS', 'macOS 15'], ['Editor', 'PhpStorm'], ['Shell', 'zsh'], ['Terminal', 'Warp'], ['Font', 'JetBrains Mono'], ['Theme', 'dark, sempre'], ['Caffè', '3 / giorno']].map(([k, v]) => ({ k, v })),
+      heat: this.getHeat(),
+      quiz, quizNote: p === null ? '// scegli una risposta' : p === correct ? '✓ esatto: è un bug storico di JS' : '✗ no: è "object", un bug storico di JS',
+      quizNoteColor: p === null ? '#5A5852' : p === correct ? '#5BD48A' : '#E58A8A',
+      tree: [
+        { pre: '', name: '~/setup', color: '#FF5B14', note: '' },
+        { pre: '├── ', name: 'desk/', color: T, note: '' },
+        { pre: '│   ├── ', name: 'monitor-27.4k', color: '#BDBAB2', note: '' },
+        { pre: '│   ├── ', name: 'tastiera.mech', color: '#BDBAB2', note: '  # 75%' },
+        { pre: '│   └── ', name: 'macbook.pro', color: '#BDBAB2', note: '' },
+        { pre: '├── ', name: 'audio/', color: T, note: '' },
+        { pre: '│   └── ', name: 'cuffie.anc', color: '#BDBAB2', note: '  # focus mode' },
+        { pre: '└── ', name: 'dotfiles/', color: T, note: '' },
+        { pre: '    ├── ', name: '.zshrc', color: '#BDBAB2', note: '' },
+        { pre: '    └── ', name: '.vimrc', color: '#BDBAB2', note: '' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

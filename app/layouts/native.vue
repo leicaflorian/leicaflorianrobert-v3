@@ -2,7 +2,8 @@
 <script setup lang="ts">
 import type {Site} from '~/types/content'
 
-const site = await useSingleton<Site>('site')
+// the pages are loaded here so the header can build the menu without waiting
+const [site] = await Promise.all([useSingleton<Site>('site'), usePages()])
 </script>
 
 <template>

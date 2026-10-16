@@ -32,16 +32,27 @@ export interface Project {
   id: number
   slug: string
   url: string
-  /** The project has its own page on the site (currently only V3). */
+  /** The project has its own page on the site, under the page with `children: 'projects'`. */
   case_study: boolean
   featured: boolean
   on_home: boolean
   mockup: Mockup
   image: FileId
+  year: number | null
+  cover: FileId
   // translated
   name: string
   note: string | null
   subtitle: string | null
+  intro: string | null
+  role: string | null
+  type: string | null
+  stack: string | null
+}
+
+/** A project with its case study sections. */
+export interface CaseStudy extends Project {
+  sections: Section[]
 }
 
 export interface Experience {
@@ -69,59 +80,161 @@ export interface Technology {
   name: string
 }
 
-export interface PageHome {
-  contact_image: FileId
+// --- pages and blocks ----------------------------------------------------------------
+
+/** What a page shows under its own path: today the case studies of the projects. */
+export type PageChildren = 'none' | 'projects'
+
+export interface Page {
+  id: number
+  /** The page's name in the code (`home`, `about`…), stable across languages. */
+  key: string
+  in_menu: boolean
+  children: PageChildren
+  sections: Section[]
   // translated
-  hero_title: string
-  hero_title_accent: string
-  hero_text: string
-  services_text: string
-  contact_text: string
+  /** The path without the leading slash; empty for the home page. */
+  slug: string
+  title: string
+  seo_title: string | null
+  description: string | null
+}
+
+/** In which mode a block is shown. */
+export type Engines = 'both' | 'native' | 'legacy'
+
+interface BlockBase {
+  id: number
+  engines: Engines
+}
+
+export interface BlockHeroHome extends BlockBase {
+  // translated
+  title: string
+  title_accent: string
+  text: string
   legacy_text: string
 }
 
-export interface PageAbout {
-  portrait: FileId
-  gallery_1: FileId
-  gallery_2: FileId
-  gallery_3: FileId
+export interface BlockPageHeader extends BlockBase {
+  variant: 'plain' | 'about' | 'projects' | 'contact'
+  image: FileId
   // translated
-  intro: string
-  /** Paragraphs separated by a blank line. */
-  story: string
-  experiences_text: string
-  cta_text: string
-}
-
-export interface PageProjects {
-  // translated
-  intro: string
-  cta_text: string
-}
-
-export interface PageContact {
-  contact_image: FileId
-  // translated
-  intro: string
-}
-
-export interface PageCaseStudy {
-  year: number
-  cover: FileId
-  shot_legacy: FileId
-  shot_native: FileId
-  shot_about: FileId
-  shot_mobile: FileId
-  // translated
+  /** `{n}` becomes the number of projects. */
+  label: string | null
   title: string
-  intro: string
-  role: string
-  type: string
-  pages: string
-  start_text: string
-  concept_text: string
-  visual_text: string
-  logo_text: string
-  /** One item per line. */
-  details: string
+  intro: string | null
 }
+
+export interface BlockText extends BlockBase {
+  // translated
+  label: string | null
+  title: string
+  text: string
+}
+
+export interface BlockGallery extends BlockBase {
+  images: FileId[]
+  // translated
+  label: string | null
+  title: string | null
+  text: string | null
+  /** One per line, in the order of the images. */
+  captions: string | null
+}
+
+export interface BlockList extends BlockBase {
+  // translated
+  label: string | null
+  title: string
+  /** One item per line. */
+  items: string
+}
+
+export interface BlockPalette extends BlockBase {
+  /** One hex color per line. */
+  colors: string
+  logo: FileId
+  /** Show this site's animated logo instead of `logo`. */
+  site_logo: boolean
+  // translated
+  label: string | null
+  title: string
+  text: string | null
+  /** One per line, in the order of the colors. */
+  color_names: string | null
+  logo_text: string | null
+}
+
+export interface BlockCta extends BlockBase {
+  variant: 'banner' | 'split'
+  // translated
+  label: string | null
+  title: string
+  title_accent: string | null
+  text: string | null
+}
+
+export interface BlockContactForm extends BlockBase {
+  image: FileId
+  // translated
+  label: string | null
+  title: string
+  text: string | null
+}
+
+export interface BlockServices extends BlockBase {
+  // translated
+  label: string | null
+  title: string
+  text: string | null
+}
+
+export interface BlockProjects extends BlockBase {
+  show: 'home' | 'featured' | 'archive'
+  all_link: boolean
+  // translated
+  label: string | null
+  title: string | null
+}
+
+export interface BlockExperiences extends BlockBase {
+  // translated
+  label: string | null
+  title: string
+  text: string | null
+}
+
+export interface BlockStack extends BlockBase {
+  // translated
+  label: string | null
+  title: string
+}
+
+export interface BlockContactInfo extends BlockBase {
+  // translated
+  label: string | null
+  title: string | null
+}
+
+/** Each block collection and the shape of its items. */
+export interface Blocks {
+  block_hero_home: BlockHeroHome
+  block_page_header: BlockPageHeader
+  block_text: BlockText
+  block_gallery: BlockGallery
+  block_list: BlockList
+  block_palette: BlockPalette
+  block_cta: BlockCta
+  block_contact_form: BlockContactForm
+  block_services: BlockServices
+  block_projects: BlockProjects
+  block_experiences: BlockExperiences
+  block_stack: BlockStack
+  block_contact_info: BlockContactInfo
+}
+
+export type BlockCollection = keyof Blocks
+
+/** A section of a page or case study: a block of any type, in order. */
+export type Section = {[C in BlockCollection]: {id: number, collection: C, item: Blocks[C]}}[BlockCollection]

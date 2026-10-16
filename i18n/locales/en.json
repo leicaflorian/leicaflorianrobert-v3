@@ -1,24 +1,7 @@
 {
   "nav": {
-    "home": "./home",
-    "about": "./about",
-    "projects": "./projects",
-    "contact": "./contact",
     "menu": "menu",
     "close": "close"
-  },
-  "path": {
-    "home": "~/leica",
-    "about": "~/leica/about",
-    "projects": "~/leica/projects",
-    "contact": "~/leica/contact",
-    "caseStudy": "~/leica/projects/v3"
-  },
-  "legacyNav": {
-    "home": "Home",
-    "about": "About me",
-    "projects": "Projects",
-    "contact": "Contact"
   },
   "engine": {
     "gpu": "GPU",
@@ -38,10 +21,6 @@
     "contactMe": "Contact me →",
     "allProjects": "All projects",
     "imagePlaceholder": "Image coming soon"
-  },
-  "cta": {
-    "title": "Now you know a bit more,",
-    "accent": "drop me a line"
   },
   "footer": {
     "contacts": "// contact",
@@ -68,7 +47,6 @@
     "error": "I couldn't send your message. Please try again, or email me directly.",
     "recaptcha": "This site is protected by reCAPTCHA. The Google Privacy Policy and Terms of Service apply.",
     "legacy": {
-      "title": "Contact form",
       "name": "Name:",
       "email": "Email:",
       "message": "Message:",
@@ -79,77 +57,24 @@
   "home": {
     "comment": "// {name} — {role}",
     "seeProjects": "See my work",
-    "services": {
-      "label": "01 / services",
-      "title": "What can I do for you?"
-    },
-    "projects": {
-      "label": "02 / projects",
-      "title": "Selected work",
-      "all": "All projects →"
-    },
-    "contact": {
-      "label": "03 / contact",
-      "title": "Let's talk"
-    },
     "legacy": {
       "title": "Welcome to my hypertext",
-      "figure": "Fig. 1 — The author",
-      "services": "Services",
-      "projects": "Projects",
-      "write": "Write to me:"
+      "figure": "Fig. 1 — The author"
     }
   },
   "about": {
-    "comment": "// about me",
-    "title": "Hi, welcome",
     "years": "years of experience",
     "tech": "technologies in the stack",
     "portrait": "Portrait",
-    "story": {
-      "label": "01 / story",
-      "title": "From self-taught to teacher"
-    },
-    "gallery": ["At work", "Teaching / mentoring", "The setup"],
-    "experiences": {
-      "label": "02 / experience",
-      "title": "Some of my experience"
-    },
-    "stack": {
-      "label": "03 / stack",
-      "title": "Technologies and languages"
-    },
     "legacy": {
-      "title": "About me",
-      "years": "Years of experience:",
-      "experiences": "Experience",
-      "tech": "Technologies and languages"
+      "years": "Years of experience:"
     }
   },
   "projects": {
-    "count": "// {n} projects",
-    "title": "Projects",
-    "featured": "01 / featured",
-    "archive": {
-      "label": "02 / archive",
-      "title": "All projects"
-    },
     "caseStudy": "case study →",
-    "mobileApp": "Mobile app",
-    "legacy": {
-      "list": "Project list"
-    }
+    "mobileApp": "Mobile app"
   },
   "contact": {
-    "title": "Contact",
-    "write": {
-      "label": "01 / write to me",
-      "title": "Let's talk"
-    },
-    "where": {
-      "label": "02 / details",
-      "title": "Where to find me"
-    },
     "contacts": "// contact",
     "social": "// social",
     "company": "// company details",
@@ -169,40 +94,7 @@
       "role": "role",
       "year": "year",
       "type": "type",
-      "pages": "pages"
-    },
-    "start": {
-      "label": "01 / starting point",
-      "title": "Clear, but quiet"
-    },
-    "concept": {
-      "label": "02 / concept",
-      "title": "The Dual Engine"
-    },
-    "visual": {
-      "label": "03 / visual system",
-      "title": "Few elements, lots of contrast",
-      "swatches": {
-        "bg": "background",
-        "surface": "surface",
-        "text": "text",
-        "accent": "accent"
-      }
-    },
-    "details": {
-      "label": "04 / details",
-      "title": "Motion and room to breathe"
-    },
-    "next": {
-      "comment": "// next step",
-      "title": "Got a similar project in mind?"
-    },
-    "shots": {
-      "cover": "Home, native version",
-      "legacy": "legacy",
-      "native": "native",
-      "about": "About me",
-      "mobile": "Mobile version"
+      "stack": "stack"
     },
     "legacy": {
       "back": "<< Back to projects",

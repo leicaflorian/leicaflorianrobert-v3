@@ -38,6 +38,11 @@ export default defineNuxtConfig({
       recaptchaSiteKey: '',
     },
   },
+  experimental: {
+    // Switching engine unmounts every block: keep their content (small, static) instead of
+    // fetching it again from Directus in the browser.
+    purgeCachedData: false,
+  },
   compatibilityDate: '2025-07-15',
   nitro: {
     prerender: {
@@ -76,13 +81,6 @@ export default defineNuxtConfig({
       {code: 'en', language: 'en-US', name: 'english', file: 'en.json'},
       {code: 'ro', language: 'ro-RO', name: 'română', file: 'ro.json'},
     ],
-    customRoutes: 'config',
-    pages: {
-      'about': {it: '/chi-sono', en: '/about', ro: '/despre-mine'},
-      'projects': {it: '/progetti', en: '/projects', ro: '/proiecte'},
-      'projects-v3': {it: '/progetti/v3', en: '/projects/v3', ro: '/proiecte/v3'},
-      'contact': {it: '/contatti', en: '/contact', ro: '/contact'},
-    },
   },
   image: {
     provider: 'directus',

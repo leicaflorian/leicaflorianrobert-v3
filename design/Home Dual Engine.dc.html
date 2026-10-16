@@ -12,6 +12,8 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
 <script src="./image-slot.js"></script>
 <style>
+@keyframes bar { 0%{width:8%} 70%,100%{width:86%} }
+@keyframes cfgLineIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
 @keyframes cursorBlink { 0%,50%{opacity:1} 51%,100%{opacity:0} }
 @keyframes pulseDot { 0%{box-shadow:0 0 0 0 rgba(255,91,20,.6)} 70%{box-shadow:0 0 0 8px rgba(255,91,20,0)} 100%{box-shadow:0 0 0 0 rgba(255,91,20,0)} }
 @keyframes bootOverlay { 0%{opacity:0} 12%{opacity:1} 80%{opacity:1} 100%{opacity:0} }
@@ -33,7 +35,7 @@ a:hover { color:#FF8A52; }
 @media (max-width: 560px) { #n-nav { flex-wrap:wrap !important; } }
 @media (max-width: 860px) {
   #n-hero, #n-contact, #n-feat, #l-table { grid-template-columns:minmax(0,1fr) !important; }
-  #n-contact image-slot { aspect-ratio:16/9 !important; }
+  #n-cfg { position:static !important; }
   #n-snippet { left:0 !important; }
   #n-hero > div:first-child { padding-bottom:0 !important; }
   #n-photo-col { min-height:0 !important; }
@@ -171,7 +173,81 @@ a:hover { color:#FF8A52; }
         <div id="n-services" style="margin-top:56px;display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
           <sc-for list="{{ services }}" as="svc" hint-placeholder-count="6">
             <div style="display:flex;flex-direction:column;border:1px solid #26262B;border-radius:16px;background:#18181B;overflow:hidden;transition:transform .5s cubic-bezier(.34,1.56,.64,1),border-color .2s;" style-hover="border-color:#FF5B14;transform:translateY(-6px);">
-              <image-slot id="a-svc-{{ svc.key }}" shape="rect" placeholder="Immagine — {{ svc.title }}" style="min-width:0;width:100%;height:200px;flex:0 0 200px;display:block;overflow:hidden;"></image-slot>
+              <sc-if value="{{ svc.isWeb }}" hint-placeholder-val="{{ false }}">
+      <div style="height:200px;flex:0 0 200px;background:#111113;background-image:radial-gradient(#26262B 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;">
+        <div style="width:100%;max-width:260px;border:1px solid #2C2C31;border-radius:10px;background:#18181B;overflow:hidden;">
+          <div style="display:flex;align-items:center;gap:6px;padding:8px 10px;border-bottom:1px solid #26262B;">
+            <span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span><span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span><span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span>
+            <span style="flex:1;margin-left:6px;padding:3px 8px;border-radius:5px;background:#111113;font-size:10px;color:#8F8C85;">lfr.dev/app/checkout</span>
+          </div>
+          <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
+            <div style="height:8px;width:60%;border-radius:3px;background:#2C2C31;"></div>
+            <div style="height:8px;width:85%;border-radius:3px;background:#222226;"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+              <span style="font-size:11px;color:#BDBAB2;">€ 49,00 / mese</span>
+              <span style="padding:6px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;">Paga ✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ svc.isMobile }}" hint-placeholder-val="{{ false }}">
+      <div style="height:200px;flex:0 0 200px;background:#111113;background-image:radial-gradient(#26262B 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;">
+        <div style="width:130px;height:176px;border:6px solid #2C2C31;border-bottom:0;border-radius:24px 24px 0 0;background:#18181B;padding:18px 10px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;">
+          <div style="align-self:center;width:36px;height:4px;border-radius:4px;background:#2C2C31;margin-bottom:6px;"></div>
+          <div style="padding:8px;border-radius:8px;background:#222226;border-left:0;display:flex;flex-direction:column;gap:4px;">
+            <span style="font-size:9px;color:#FF5B14;">push · ora</span>
+            <span style="font-size:10px;color:#EDEBE6;">Ordine spedito</span>
+          </div>
+          <div style="padding:8px;border-radius:8px;background:#1C1C20;display:flex;flex-direction:column;gap:5px;">
+            <div style="height:6px;width:70%;border-radius:3px;background:#2C2C31;"></div>
+            <div style="height:6px;width:45%;border-radius:3px;background:#26262B;"></div>
+          </div>
+        </div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ svc.isDesign }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:200px;flex:0 0 200px;background:#111113;overflow:hidden;">
+        <div style="position:absolute;top:0;bottom:0;left:30%;border-left:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;top:0;bottom:0;right:30%;border-left:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;left:0;right:0;top:46%;border-top:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;left:30%;right:30%;top:calc(46% - 22px);height:44px;border:1px solid #FF5B14;border-radius:8px;background:#1C1C20;display:flex;align-items:center;justify-content:center;font-size:11px;color:#EDEBE6;">Inizia ora →</div>
+        <span style="position:absolute;left:calc(30% - 3px);top:calc(46% - 25px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;right:calc(30% - 4px);top:calc(46% - 25px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;left:calc(30% - 3px);top:calc(46% + 19px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;right:calc(30% - 4px);top:calc(46% + 19px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;left:50%;transform:translateX(-50%);top:calc(46% + 34px);padding:3px 7px;border-radius:4px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;">240 × 44</span>
+      </div>
+              </sc-if>
+              <sc-if value="{{ svc.isDevops }}" hint-placeholder-val="{{ false }}">
+      <div style="height:200px;flex:0 0 200px;background:#0C0C0E;padding:22px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:7px;font-size:12px;line-height:1.4;">
+        <span style="color:#8F8C85;">$ <span style="color:#EDEBE6;">git push origin main</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> build       38s</span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> test        124 passed</span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">→</span> deploy prod<span style="animation:cursorBlink 1s step-start infinite;color:#FF5B14;">_</span></span>
+        <div style="margin-top:auto;height:4px;border-radius:4px;background:#222226;overflow:hidden;"><div style="height:100%;width:86%;background:#FF5B14;animation:bar 3s ease-out infinite;"></div></div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ svc.isFormazione }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:200px;flex:0 0 200px;background:#0C0C0E;padding:22px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:6px;font-size:12px;line-height:1.4;">
+        <div style="display:grid;grid-template-columns:40px 1fr;color:#8F8C85;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">1</span><span>// perché funziona?</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">2</span><span><span style="color:#FF8A57;">const</span> total = items</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;background:#1F1712;border-left:2px solid #FF5B14;"><span style="text-align:right;padding-right:12px;color:#FF5B14;">3</span><span>  .reduce((a, i) =&gt; a + i.price, 0)</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">4</span><span style="color:#8F8C85;">  ;</span></div>
+        <div style="position:absolute;right:20px;bottom:20px;max-width:170px;padding:9px 11px;border-radius:8px;border:1px solid #2C2C31;background:#18181B;font-size:10px;line-height:1.5;color:#BDBAB2;"><span style="color:#FF5B14;">a</span> parte da 0 e accumula ogni prezzo</div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ svc.isConsulenza }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:200px;flex:0 0 200px;background:#0C0C0E;padding:22px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:2px;font-size:12px;line-height:1.7;">
+        <div style="padding:0 20px;color:#8F8C85;">src/api/orders.js</div>
+        <div style="padding:0 20px;background:#2A1414;color:#E58A8A;">- fetch(url).then(r =&gt; r.json())</div>
+        <div style="padding:0 20px;background:#122418;color:#7FD6A0;">+ await api.get(url, { retry: 3 })</div>
+        <div style="position:absolute;left:20px;right:20px;bottom:20px;display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:8px;border:1px solid #2C2C31;background:#18181B;">
+          <span style="flex:0 0 20px;height:20px;border-radius:20px;background:#FF5B14;color:#111113;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;">lfr</span>
+          <span style="font-size:11px;line-height:1.5;color:#BDBAB2;">Gestiamo anche il timeout, qui si blocca tutto.</span>
+        </div>
+      </div>
+              </sc-if>
               <div style="padding:28px;display:flex;flex-direction:column;gap:12px;">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
                   <div style="width:40px;height:40px;padding:9px;box-sizing:border-box;border-radius:10px;background:rgba(255,91,20,0.12);color:#FF5B14;" dangerouslySetInnerHTML="{{ svc.iconHtml }}"></div>
@@ -241,25 +317,37 @@ a:hover { color:#FF8A52; }
     </section>
 
     <section style="border-top:1px solid #222226;background:#161618;">
-      <div id="n-contact" style="max-width:1120px;margin:0 auto;padding:240px 24px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);gap:72px;align-items:center;">
+      <div id="n-contact" style="max-width:1120px;margin:0 auto;padding:240px 24px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);gap:72px;align-items:start;">
         <div>
           <p style="margin:0 0 16px;font-size:13px;color:#FF5B14;">03 / contatti</p>
           <h2 style="margin:0 0 16px;font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-0.03em;">Parliamone<span aria-hidden="true" style="display:inline-block;width:0.5em;height:0.09em;margin-left:0.1em;background:#FF5B14;vertical-align:baseline;animation:cursorBlink 1s step-start infinite;"></span></h2>
           <p style="margin:0;color:#A3A09A;max-width:520px;line-height:1.8;font-size:15px;">Sito, app, consulenza o solo un parere tecnico — scrivimi e vediamo insieme come darti una mano, senza giri di parole.</p>
           <form style="margin-top:44px;display:flex;flex-direction:column;gap:20px;" onSubmit="{{ handleSubmit }}">
+            <div style="display:flex;flex-direction:column;gap:24px;padding-bottom:28px;margin-bottom:8px;border-bottom:1px solid #26262B;">
+              <sc-for list="{{ cfgGroups }}" as="g" hint-placeholder-count="3">
+                <div style="display:flex;flex-direction:column;gap:10px;">
+                  <span style="font-size:12px;color:#8F8C85;">{{ g.label }}</span>
+                  <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                    <sc-for list="{{ g.opts }}" as="o" hint-placeholder-count="4">
+                      <button type="button" onClick="{{ o.toggle }}" aria-pressed="{{ o.sel }}" style="min-height:40px;padding:0 14px;border-radius:999px;border:1px solid {{ o.border }};background:{{ o.bg }};color:{{ o.color }};font-family:inherit;font-size:13px;cursor:pointer;transition:all .15s;" style-hover="border-color:#FF5B14;">{{ o.label }}</button>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;">
               <label style="display:flex;flex-direction:column;gap:8px;font-size:12px;color:#8F8C85;">nome
-                <input type="text" name="nome" placeholder="Il tuo nome" style="border-radius:10px;border:1px solid #2C2C31;background:#111113;padding:14px;font-size:14px;color:#EDEBE6;font-family:inherit;outline:none;" style-focus="border-color:#FF5B14;box-shadow:0 0 0 3px rgba(255,91,20,0.2);"/>
+                <input type="text" name="nome" value="{{ cf.nome }}" onChange="{{ onCf.nome }}" placeholder="Il tuo nome" style="border-radius:10px;border:1px solid #2C2C31;background:#111113;padding:14px;font-size:14px;color:#EDEBE6;font-family:inherit;outline:none;" style-focus="border-color:#FF5B14;box-shadow:0 0 0 3px rgba(255,91,20,0.2);"/>
               </label>
               <label style="display:flex;flex-direction:column;gap:8px;font-size:12px;color:#8F8C85;">cognome
-                <input type="text" name="cognome" placeholder="Il tuo cognome" style="border-radius:10px;border:1px solid #2C2C31;background:#111113;padding:14px;font-size:14px;color:#EDEBE6;font-family:inherit;outline:none;" style-focus="border-color:#FF5B14;box-shadow:0 0 0 3px rgba(255,91,20,0.2);"/>
+                <input type="text" name="cognome" value="{{ cf.cognome }}" onChange="{{ onCf.cognome }}" placeholder="Il tuo cognome" style="border-radius:10px;border:1px solid #2C2C31;background:#111113;padding:14px;font-size:14px;color:#EDEBE6;font-family:inherit;outline:none;" style-focus="border-color:#FF5B14;box-shadow:0 0 0 3px rgba(255,91,20,0.2);"/>
               </label>
             </div>
             <label style="display:flex;flex-direction:column;gap:8px;font-size:12px;color:#8F8C85;">email
-              <input type="email" name="email" placeholder="nome@esempio.it" style="border-radius:10px;border:1px solid #2C2C31;background:#111113;padding:14px;font-size:14px;color:#EDEBE6;font-family:inherit;outline:none;" style-focus="border-color:#FF5B14;box-shadow:0 0 0 3px rgba(255,91,20,0.2);"/>
+              <input type="email" name="email" value="{{ cf.email }}" onChange="{{ onCf.email }}" placeholder="nome@esempio.it" style="border-radius:10px;border:1px solid #2C2C31;background:#111113;padding:14px;font-size:14px;color:#EDEBE6;font-family:inherit;outline:none;" style-focus="border-color:#FF5B14;box-shadow:0 0 0 3px rgba(255,91,20,0.2);"/>
             </label>
             <label style="display:flex;flex-direction:column;gap:8px;font-size:12px;color:#8F8C85;">messaggio
-              <textarea name="messaggio" rows="5" placeholder="Raccontami del tuo progetto..." style="resize:vertical;border-radius:10px;border:1px solid #2C2C31;background:#111113;padding:14px;font-size:14px;color:#EDEBE6;font-family:inherit;outline:none;" style-focus="border-color:#FF5B14;box-shadow:0 0 0 3px rgba(255,91,20,0.2);"></textarea>
+              <textarea name="messaggio" rows="5" value="{{ cf.messaggio }}" onChange="{{ onCf.messaggio }}" placeholder="Raccontami del tuo progetto..." style="resize:vertical;border-radius:10px;border:1px solid #2C2C31;background:#111113;padding:14px;font-size:14px;color:#EDEBE6;font-family:inherit;outline:none;" style-focus="border-color:#FF5B14;box-shadow:0 0 0 3px rgba(255,91,20,0.2);"></textarea>
             </label>
             <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:8px;">
               <button type="submit" style="border:none;cursor:pointer;border-radius:10px;padding:15px 24px;font-size:14px;font-weight:700;background:#FF5B14;color:#111113;font-family:inherit;transition:transform .45s cubic-bezier(.34,1.56,.64,1);" style-hover="background:#FF7434;transform:scale(1.03);">Invia messaggio →</button>
@@ -267,7 +355,18 @@ a:hover { color:#FF8A52; }
             </div>
           </form>
         </div>
-        <image-slot id="a-contact-image" shape="rounded" radius="16" placeholder="Foto o illustrazione di contatto" style="min-width:0;width:100%;aspect-ratio:4/5;"></image-slot>
+        <div id="n-cfg" style="min-width:0;position:sticky;top:96px;border:1px solid #26262B;border-radius:16px;background:#0C0C0E;overflow:hidden;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid #222226;background:#18181B;font-size:12px;color:#8F8C85;">
+            <span style="display:flex;align-items:center;gap:6px;"><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="margin-left:8px;">progetto.json</span></span>
+            <span style="color:{{ cfgReadyColor }};">{{ cfgReady }}</span>
+          </div>
+          <div style="padding:24px 16px 24px 0;min-height:320px;box-sizing:border-box;display:flex;flex-direction:column;font-size:13px;line-height:1.8;">
+            <sc-for list="{{ cfgJson }}" as="j" hint-placeholder-count="6">
+              <div style="display:grid;grid-template-columns:44px minmax(0,1fr);animation:cfgLineIn .25s ease-out both;"><span style="text-align:right;padding-right:16px;color:#3A3A40;">{{ j.n }}</span><span style="padding-left:{{ j.indent }};white-space:pre-wrap;word-break:break-word;"><span style="color:#FF8A57;">{{ j.key }}</span><span style="color:{{ j.valColor }};">{{ j.val }}</span><span style="color:#5A5852;">{{ j.tail }}</span></span></div>
+            </sc-for>
+          </div>
+          <div style="padding:14px 16px;border-top:1px solid #222226;font-size:11px;line-height:1.6;color:#77746D;">// viene allegato al messaggio, così parto già con il contesto giusto</div>
+        </div>
       </div>
     </section>
   </main>
@@ -364,6 +463,40 @@ class Component extends DCLogic {
     };
     const t = T[lang] || T.it;
     const langs = [['it','italiano'],['en','english'],['es','español']].map(([code, name]) => ({ code, name, mark: code === lang ? '>' : '', color: code === lang ? '#EDEBE6' : '#BDBAB2', select: () => this.setLang(code) }));
+    const cfg = this.state.cfg || { tipo: [], budget: null, tempi: null };
+    const CG = [
+      { id: 'tipo', label: 'tipo di progetto · anche più di uno', multi: true, opts: ['sito', 'web app', 'app mobile', 'e-commerce', 'consulenza', 'formazione'] },
+      { id: 'budget', label: 'budget indicativo', opts: ['< 3k €', '3–10k €', '10–25k €', '25k+ €', 'da capire'] },
+      { id: 'tempi', label: 'tempistiche', opts: ['urgente', '1–3 mesi', '3–6 mesi', 'flessibile'] },
+    ];
+    const pick = (gid, val, multi) => this.setState(s => {
+      const c = s.cfg || { tipo: [], budget: null, tempi: null };
+      if (multi) return { cfg: { ...c, [gid]: c[gid].includes(val) ? c[gid].filter(x => x !== val) : [...c[gid], val] } };
+      return { cfg: { ...c, [gid]: c[gid] === val ? null : val } };
+    });
+    const cfgGroups = CG.map(g => ({ label: g.label, opts: g.opts.map(o => { const sel = g.multi ? cfg[g.id].includes(o) : cfg[g.id] === o; return { label: o, sel, toggle: () => pick(g.id, o, g.multi), bg: sel ? '#FF5B14' : 'transparent', color: sel ? '#111113' : '#BDBAB2', border: sel ? '#FF5B14' : '#2C2C31' }; }) }));
+    const Q = (x) => '"' + x + '"';
+    const cf = { nome: '', cognome: '', email: '', messaggio: '', ...(this.state.cf || {}) };
+    const onCf = {}; ['nome', 'cognome', 'email', 'messaggio'].forEach(k => { onCf[k] = (e) => { const v = e.target.value; this.setState(st => ({ cf: { ...(st.cf || {}), [k]: v } })); }; });
+    const msg = cf.messaggio.replace(/\s+/g, ' ').trim();
+    const str = (v) => v ? Q(v.replace(/"/g, '\\"')) : 'null';
+    const row = (key, val, indent, tail) => ({ key, val, valColor: val === 'null' ? '#5A5852' : '#EDEBE6', tail, indent });
+    const punct = (val, indent, tail) => ({ key: '', val, valColor: '#8F8C85', tail: tail || '', indent });
+    const cfgRows = [
+      punct('{', '0'),
+      row('"nome": ', str(cf.nome.trim()), '20px', ','),
+      row('"cognome": ', str(cf.cognome.trim()), '20px', ','),
+      row('"email": ', str(cf.email.trim()), '20px', ','),
+      row('"messaggio": ', str(msg.length > 120 ? msg.slice(0, 120) + '…' : msg), '20px', ','),
+      { key: '"progetto": ', val: '{', valColor: '#8F8C85', tail: '', indent: '20px' },
+      row('"tipo": ', cfg.tipo.length ? '[' + cfg.tipo.map(Q).join(', ') + ']' : 'null', '40px', ','),
+      row('"budget": ', cfg.budget ? Q(cfg.budget) : 'null', '40px', ','),
+      row('"tempi": ', cfg.tempi ? Q(cfg.tempi) : 'null', '40px', ''),
+      punct('}', '20px'),
+      punct('}', '0'),
+    ];
+    const cfgFilled = [cf.nome.trim(), cf.cognome.trim(), cf.email.trim(), msg, cfg.tipo.length, cfg.budget, cfg.tempi].filter(Boolean).length;
+    const cfgExtra = { cfgGroups, cfgJson: cfgRows.map((r, i) => ({ ...r, n: i + 1 })), cfgReady: cfgFilled === 7 ? '✓ valido' : cfgFilled + '/7', cfgReadyColor: cfgFilled === 7 ? '#5BD48A' : '#8F8C85', cf, onCf };
     const langExtra = { lang, t, langs, langOpen: !!this.state.langOpen, toggleLangMenu: this.toggleLangMenu, menuOpen: !!this.state.menuOpen, toggleMenu: this.toggleMenu, menuLabel: this.state.menuOpen ? t.close : t.menu };
     const icons = {
       web: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="3"><rect x="10" y="14" width="22" height="18"/><path d="M30 8V40"/></svg>',
@@ -381,7 +514,7 @@ class Component extends DCLogic {
       { key: 'formazione', title: 'Formazione / Mentoring', text: 'Corsi e mentoring per sviluppatori che vogliono crescere sul serio — non solo copiare codice, ma capirlo davvero.' },
       { key: 'consulenza', title: 'Consulenza tecnica', text: 'Code review, architettura, scelta dello stack — un parere esterno onesto, anche quando la risposta è "meglio riscriverlo".' },
     ];
-    const services = data.map((d, i) => ({ key: d.key, title: d.title, text: d.text, num: String(i + 1).padStart(2, '0'), iconHtml: { __html: icons[d.key] } }));
+    const services = data.map((d, i) => ({ key: d.key, title: d.title, text: d.text, num: String(i + 1).padStart(2, '0'), iconHtml: { __html: icons[d.key] }, isWeb: d.key === 'web', isMobile: d.key === 'mobile', isDesign: d.key === 'design', isDevops: d.key === 'devops', isFormazione: d.key === 'formazione', isConsulenza: d.key === 'consulenza' }));
     const toNative = this.state.mode === 'legacy';
     const bootLines = (toNative
       ? ['detach DOM tree', 'init wgpu device', 'compile shaders', 'render @120fps']
@@ -389,6 +522,7 @@ class Component extends DCLogic {
     ).map((text, i) => ({ text, delay: `${i * 0.12}s` }));
     return {
       ...langExtra,
+      ...cfgExtra,
       isLegacy: this.state.mode === 'legacy',
       isNative: this.state.mode === 'native',
       booting: this.state.booting,

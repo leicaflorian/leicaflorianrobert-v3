@@ -1,24 +1,7 @@
 {
   "nav": {
-    "home": "./acasa",
-    "about": "./despre-mine",
-    "projects": "./proiecte",
-    "contact": "./contact",
     "menu": "meniu",
     "close": "închide"
-  },
-  "path": {
-    "home": "~/leica",
-    "about": "~/leica/despre-mine",
-    "projects": "~/leica/proiecte",
-    "contact": "~/leica/contact",
-    "caseStudy": "~/leica/proiecte/v3"
-  },
-  "legacyNav": {
-    "home": "Acasă",
-    "about": "Despre mine",
-    "projects": "Proiecte",
-    "contact": "Contact"
   },
   "engine": {
     "gpu": "GPU",
@@ -38,10 +21,6 @@
     "contactMe": "Contactează-mă →",
     "allProjects": "Toate proiectele",
     "imagePlaceholder": "Imagine în curând"
-  },
-  "cta": {
-    "title": "Acum știi ceva mai mult,",
-    "accent": "scrie-mi"
   },
   "footer": {
     "contacts": "// contact",
@@ -68,7 +47,6 @@
     "error": "Nu am reușit să trimit mesajul. Încearcă din nou sau scrie-mi pe email.",
     "recaptcha": "Acest site este protejat de reCAPTCHA. Se aplică Politica de confidențialitate și Termenii de utilizare Google.",
     "legacy": {
-      "title": "Formular de contact",
       "name": "Nume:",
       "email": "Email:",
       "message": "Mesaj:",
@@ -79,77 +57,24 @@
   "home": {
     "comment": "// {name} — {role}",
     "seeProjects": "Vezi proiectele",
-    "services": {
-      "label": "01 / servicii",
-      "title": "Ce pot face pentru tine?"
-    },
-    "projects": {
-      "label": "02 / proiecte",
-      "title": "Lucrări selectate",
-      "all": "Toate proiectele →"
-    },
-    "contact": {
-      "label": "03 / contact",
-      "title": "Hai să vorbim"
-    },
     "legacy": {
       "title": "Bine ai venit în hipertextul meu",
-      "figure": "Fig. 1 — Autorul",
-      "services": "Servicii",
-      "projects": "Proiecte",
-      "write": "Scrie-mi:"
+      "figure": "Fig. 1 — Autorul"
     }
   },
   "about": {
-    "comment": "// despre mine",
-    "title": "Salut, bine ai venit",
     "years": "ani de experiență",
     "tech": "tehnologii în stack",
     "portrait": "Portret",
-    "story": {
-      "label": "01 / poveste",
-      "title": "De la autodidact la formator"
-    },
-    "gallery": ["La lucru", "La curs / mentorat", "Setup-ul"],
-    "experiences": {
-      "label": "02 / experiență",
-      "title": "Câteva dintre experiențele mele"
-    },
-    "stack": {
-      "label": "03 / stack",
-      "title": "Tehnologii și limbaje"
-    },
     "legacy": {
-      "title": "Despre mine",
-      "years": "Ani de experiență:",
-      "experiences": "Experiență",
-      "tech": "Tehnologii și limbaje"
+      "years": "Ani de experiență:"
     }
   },
   "projects": {
-    "count": "// {n} proiecte",
-    "title": "Proiecte",
-    "featured": "01 / în evidență",
-    "archive": {
-      "label": "02 / arhivă",
-      "title": "Lista proiectelor"
-    },
     "caseStudy": "studiu de caz →",
-    "mobileApp": "Aplicație mobilă",
-    "legacy": {
-      "list": "Lista proiectelor"
-    }
+    "mobileApp": "Aplicație mobilă"
   },
   "contact": {
-    "title": "Contact",
-    "write": {
-      "label": "01 / scrie-mi",
-      "title": "Hai să vorbim"
-    },
-    "where": {
-      "label": "02 / date de contact",
-      "title": "Unde mă găsești"
-    },
     "contacts": "// contact",
     "social": "// social",
     "company": "// date firmă",
@@ -169,40 +94,7 @@
       "role": "rol",
       "year": "an",
       "type": "tip",
-      "pages": "pagini"
-    },
-    "start": {
-      "label": "01 / punct de plecare",
-      "title": "Clar, dar tăcut"
-    },
-    "concept": {
-      "label": "02 / concept",
-      "title": "Motorul Dual"
-    },
-    "visual": {
-      "label": "03 / sistem vizual",
-      "title": "Puține elemente, mult contrast",
-      "swatches": {
-        "bg": "fundal",
-        "surface": "suprafață",
-        "text": "text",
-        "accent": "accent"
-      }
-    },
-    "details": {
-      "label": "04 / detalii",
-      "title": "Mișcare și spațiu"
-    },
-    "next": {
-      "comment": "// pasul următor",
-      "title": "Ai un proiect asemănător în minte?"
-    },
-    "shots": {
-      "cover": "Acasă, versiunea nativă",
-      "legacy": "legacy",
-      "native": "native",
-      "about": "Despre mine",
-      "mobile": "Versiunea mobilă"
+      "stack": "stack"
     },
     "legacy": {
       "back": "<< Înapoi la proiecte",

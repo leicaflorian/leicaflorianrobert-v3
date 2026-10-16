@@ -5,19 +5,9 @@
 <script setup lang="ts">
 import type {Site} from '~/types/content'
 
-const site = await useSingleton<Site>('site')
-const route = useRoute()
-const routeBaseName = useRouteBaseName()
+const [site] = await Promise.all([useSingleton<Site>('site'), usePages()])
 const {toggle} = useEngine()
-
-const items = [
-  {name: 'index', label: 'legacyNav.home'},
-  {name: 'about', label: 'legacyNav.about'},
-  {name: 'projects', label: 'legacyNav.projects'},
-  {name: 'contact', label: 'legacyNav.contact'},
-] as const
-
-const current = computed(() => String(routeBaseName(route) ?? 'index').split('-')[0])
+const menu = useMenu()
 </script>
 
 <template>
@@ -26,8 +16,8 @@ const current = computed(() => String(routeBaseName(route) ?? 'index').split('-'
       <h1 class="m-0 mb-1.5 text-[34px] font-bold">{{ site.name }}</h1>
       <p class="m-0 mb-3.5">{{ $t('engine.profession', {profession: site.profession}) }}</p>
       <nav class="flex flex-wrap gap-4">
-        <LegacyLink v-for="item in items" :key="item.name" :to="item.name" :current="current === item.name">
-          {{ $t(item.label) }}
+        <LegacyLink v-for="item in menu" :key="item.key" :to="item.key" :current="item.active">
+          {{ item.title }}
         </LegacyLink>
       </nav>
       <hr class="mb-6 mt-[18px] border-0 border-t-2 border-black">
