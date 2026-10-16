@@ -137,7 +137,7 @@ const experience = (company, year, link, role, description = null) => {
 }
 
 const EXPERIENCES = [
-  experience('Mediamotion s.r.l.', 2008, null, 'Full Stack Developer', {
+  experience('Mediamotion s.r.l.', 2009, null, 'Full Stack Developer', {
     it: 'Siti con Adobe Flex, HTML e CSS sul frontend, Ruby on Rails e PHP sul backend, su database MySQL. Ne curavo anche grafica, SEO e il server locale che li ospitava.',
     en: 'Websites with Adobe Flex, HTML and CSS on the frontend, Ruby on Rails and PHP on the backend, on MySQL databases. I also took care of their design, SEO and the local server hosting them.',
     ro: 'Site-uri cu Adobe Flex, HTML și CSS pe frontend, Ruby on Rails și PHP pe backend, pe baze de date MySQL. Mă ocupam și de grafică, SEO și de serverul local care le găzduia.',
@@ -231,7 +231,7 @@ const TECHNOLOGIES = [
     'Laravel', 'Directus', 'MySQL / SQL Server / MongoDB', 'Git / CI/CD', 'Docker'].map(tech('daily')),
   ...['Bootstrap', 'jQuery', 'Ionic', 'Webpack / Vite', 'Express / AdonisJS / Nest.js', 'Statamic', 'GraphQL',
     'DigitalOcean', 'Laravel Forge / Cleavr'].map(tech('production')),
-  ...['Go', 'NativeScript', 'React', 'Python'].map(tech('explored')),
+  ...['Go', 'NativeScript', 'React', 'Python', 'Rust', 'C#'].map(tech('explored')),
 ]
 
 // --- pages -------------------------------------------------------------------------------
