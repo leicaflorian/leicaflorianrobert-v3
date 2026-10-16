@@ -62,7 +62,7 @@ const project = (slug, url, extra, ...translations) => ({
 })
 
 const PROJECTS = [
-  project('v3', 'https://leicaflorianrobert.dev', {kind: 'personal', case_study: true}, name('My website V3'),
+  project('v3', 'https://leicaflorianrobert.dev', {kind: 'personal', branch: 'main', case_study: true}, name('My website V3'),
     note('Versione attuale del sito', 'Current version of this site', 'Versiunea actuală a site-ului')),
   project('tfp', 'https://thefullproject.it/', {case_study: true, on_home: true}, name('The Full Project'),
     note('Sviluppo e infrastruttura', 'Development and infrastructure', 'Dezvoltare și infrastructură')),
@@ -72,7 +72,7 @@ const PROJECTS = [
     note('Newsletter automatiche con Mailchimp', 'Automated newsletters with Mailchimp', 'Newslettere automate cu Mailchimp')),
   project('steelfuture', 'https://steelfuture.com/', {case_study: true}, name('Steel Future'),
     note('Gestionale aziendale', 'Business management software', 'Software de gestiune')),
-  project('v2', 'https://leicaflorianrobert.dev', {kind: 'personal'}, name('My website V2')),
+  project('v2', 'https://leicaflorianrobert.dev', {kind: 'personal', branch: 'main'}, name('My website V2')),
   project('wab', 'https://webartisanbros.com/', {featured: true, mockup: 'laptop'}, name('Web Artisan Bros')),
   project('slides', 'https://chromewebstore.google.com/detail/slidescom-companion/bciknjamldhnbbckmgbchmkdcalngnco', {kind: 'personal', case_study: true}, name('Slides.com Companion'),
     note('Estensione Chrome ed Edge', 'Chrome and Edge extension', 'Extensie Chrome și Edge')),
@@ -90,7 +90,7 @@ const PROJECTS = [
   project('enigma', 'https://leicaflorian.github.io/enigma_machine', {kind: 'personal'}, name('Enigma'),
     note('Macchina Enigma', 'Enigma machine', 'Mașina Enigma')),
   project('fold', 'https://leicaflorian.github.io/fold_my_paper', {kind: 'personal'}, name('Fold my paper')),
-  project('v1', 'https://v1.leicaflorianrobert.dev', {kind: 'personal'}, name('My website V1')),
+  project('v1', 'https://v1.leicaflorianrobert.dev', {kind: 'personal', branch: 'main'}, name('My website V1')),
   // the client is never named: no name, no link
   project('fintech', '', {case_study: true},
     {it: {name: 'Piattaforma per investimenti'}, en: {name: 'Investment platform'}, ro: {name: 'Platformă de investiții'}},
