@@ -20,23 +20,25 @@ const slots = computed(() => {
 </script>
 
 <template>
-  <nav :aria-label="$t('about.timeline')" class="relative">
-    <div class="absolute inset-x-0 top-[5px] h-px bg-line-control"/>
-    <ol class="relative m-0 flex list-none p-0">
-      <li v-for="{year, experiences: inYear} in slots" :key="year" class="flex flex-1 justify-center">
-        <a
-          v-if="inYear.length"
-          :href="`#exp-${inYear.at(-1)!.id}`"
-          class="group relative flex flex-col items-center gap-3 text-xs text-muted hover:text-accent"
-        >
-          <span class="spring size-3 rounded-full border-2 border-ink bg-bg group-hover:scale-150 group-hover:border-accent"/>
-          {{ year }}
-          <span class="pointer-events-none absolute bottom-full mb-3 whitespace-nowrap text-ink opacity-0 transition-opacity group-hover:opacity-100">
-            {{ inYear.map(e => e.company).join(' · ') }}
-          </span>
-        </a>
-        <span v-else class="mt-1 size-1 rounded-full bg-line-control"/>
-      </li>
-    </ol>
+  <nav :aria-label="$t('about.timeline')">
+    <div class="relative">
+      <div class="absolute inset-x-0 top-[5px] h-px bg-line-control"/>
+      <ol class="relative m-0 flex list-none p-0">
+        <li v-for="{year, experiences: inYear} in slots" :key="year" class="flex flex-1 justify-center">
+          <a
+            v-if="inYear.length"
+            :href="`#exp-${inYear.at(-1)!.id}`"
+            class="group relative flex flex-col items-center gap-3 text-xs text-muted hover:text-accent"
+          >
+            <span class="spring size-3 rounded-full border-2 border-ink bg-bg group-hover:scale-150 group-hover:border-accent"/>
+            {{ year }}
+            <span class="pointer-events-none absolute bottom-full mb-3 whitespace-nowrap text-ink opacity-0 transition-opacity group-hover:opacity-100">
+              {{ inYear.map(e => e.company).join(' · ') }}
+            </span>
+          </a>
+          <span v-else class="mt-[3px] size-1.5 rounded-full bg-ghost"/>
+        </li>
+      </ol>
+    </div>
   </nav>
 </template>

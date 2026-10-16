@@ -22,7 +22,8 @@ const timeline = computed(() => [...experiences.value].reverse())
         </div>
         <p v-if="block.text" class="m-0 self-end text-[15px] leading-[1.8] text-muted">{{ block.text }}</p>
       </div>
-      <ExperienceTimeline :experiences="experiences" class="mb-14 max-[860px]:hidden"/>
+      <!-- sticky under the site header while the list scrolls by -->
+      <ExperienceTimeline :experiences="experiences" class="sticky top-16 z-30 mb-6 bg-bg/90 pt-10 pb-6 backdrop-blur-md max-[860px]:hidden"/>
       <div class="border-t border-line-card">
         <component
           :is="exp.link ? 'a' : 'div'"
@@ -32,7 +33,7 @@ const timeline = computed(() => [...experiences.value].reverse())
           :href="exp.link ?? undefined"
           :target="exp.link ? '_blank' : undefined"
           :rel="exp.link ? 'noopener' : undefined"
-          class="grid scroll-mt-32 grid-cols-[100px_1fr_1fr_32px] items-center gap-6 border-b border-line-card px-4 py-[26px] text-ink transition-[background-color,padding] duration-[450ms] ease-spring hover:bg-surface hover:pl-7 hover:text-ink max-[860px]:grid-cols-[64px_1fr]"
+          class="grid scroll-mt-48 grid-cols-[100px_1fr_1fr_32px] items-center gap-6 border-b border-line-card px-4 py-[26px] text-ink transition-[background-color,padding] duration-[450ms] ease-spring hover:bg-surface hover:pl-7 hover:text-ink max-[860px]:scroll-mt-24 max-[860px]:grid-cols-[64px_1fr]"
         >
           <span class="text-[13px] text-accent">{{ exp.year ?? '—' }}</span>
           <span class="text-[17px] font-bold">{{ exp.company }}</span>
