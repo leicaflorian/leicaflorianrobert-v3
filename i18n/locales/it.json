@@ -106,6 +106,7 @@
     }
   },
   "about": {
+    "timeline": "Gli anni delle esperienze",
     "stack": {
       "daily": "Ogni giorno",
       "production": "In produzione",

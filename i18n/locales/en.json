@@ -106,6 +106,7 @@
     }
   },
   "about": {
+    "timeline": "The years of my experience",
     "stack": {
       "daily": "Every day",
       "production": "In production",

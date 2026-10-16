@@ -106,6 +106,7 @@
     }
   },
   "about": {
+    "timeline": "Anii experiențelor",
     "stack": {
       "daily": "Zilnic",
       "production": "În producție",
