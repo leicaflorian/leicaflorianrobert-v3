@@ -61,8 +61,11 @@
         "types": {
           "site": "sito",
           "web-app": "web app",
-          "mobile-app": "app mobile",
           "ecommerce": "e-commerce",
+          "mobile-app": "app mobile",
+          "ui-ux": "UI / UX",
+          "devops": "DevOps",
+          "ai": "AI",
           "consulting": "consulenza",
           "training": "formazione"
         },

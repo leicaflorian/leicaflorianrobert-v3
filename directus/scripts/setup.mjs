@@ -177,7 +177,7 @@ const COLLECTIONS = [
       string('email'),
       text('message', null),
       // the project brief: keys from app/utils/brief.ts, checked by the /contact endpoint
-      choices('project_types', 'Tipo di progetto', [['site', 'Sito'], ['web-app', 'Web app'], ['mobile-app', 'App mobile'], ['ecommerce', 'E-commerce'], ['consulting', 'Consulenza'], ['training', 'Formazione']]),
+      choices('project_types', 'Tipo di progetto', [['site', 'Sito'], ['web-app', 'Web app'], ['ecommerce', 'E-commerce'], ['mobile-app', 'App mobile'], ['ui-ux', 'UI / UX'], ['devops', 'DevOps'], ['ai', 'AI'], ['consulting', 'Consulenza'], ['training', 'Formazione']]),
       choice('budget', 'Budget indicativo', [['lt-3k', '< 3k €'], ['3-10k', '3–10k €'], ['10-25k', '10–25k €'], ['25k-plus', '25k+ €'], ['tbd', 'Da capire']]),
       choice('timeline', 'Tempistiche', [['urgent', 'Urgente'], ['1-3m', '1–3 mesi'], ['3-6m', '3–6 mesi'], ['flexible', 'Flessibile']]),
       boolean('read', 'Letto'),

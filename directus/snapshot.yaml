@@ -7719,10 +7719,16 @@ fields:
             value: site
           - text: Web app
             value: web-app
-          - text: App mobile
-            value: mobile-app
           - text: E-commerce
             value: ecommerce
+          - text: App mobile
+            value: mobile-app
+          - text: UI / UX
+            value: ui-ux
+          - text: DevOps
+            value: devops
+          - text: AI
+            value: ai
           - text: Consulenza
             value: consulting
           - text: Formazione

@@ -61,8 +61,11 @@
         "types": {
           "site": "site",
           "web-app": "aplicație web",
-          "mobile-app": "aplicație mobilă",
           "ecommerce": "e-commerce",
+          "mobile-app": "aplicație mobilă",
+          "ui-ux": "UI / UX",
+          "devops": "DevOps",
+          "ai": "AI",
           "consulting": "consultanță",
           "training": "formare"
         },

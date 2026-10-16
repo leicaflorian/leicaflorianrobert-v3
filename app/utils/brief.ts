@@ -4,7 +4,7 @@
  * keep `directus/extensions/contact-endpoint/dist/index.js` in sync.
  */
 export const BRIEF_OPTIONS = {
-  types: ['site', 'web-app', 'mobile-app', 'ecommerce', 'consulting', 'training'],
+  types: ['site', 'web-app', 'ecommerce', 'mobile-app', 'ui-ux', 'devops', 'ai', 'consulting', 'training'],
   budget: ['lt-3k', '3-10k', '10-25k', '25k-plus', 'tbd'],
   timeline: ['urgent', '1-3m', '3-6m', 'flexible'],
 } as const
