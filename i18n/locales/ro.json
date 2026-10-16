@@ -119,7 +119,7 @@
     "mobileApp": "Aplicație mobilă",
     "kind": {
       "direct": "client",
-      "agency": "client · prin agenție",
+      "agency": "prin agenție",
       "personal": "personal"
     }
   },

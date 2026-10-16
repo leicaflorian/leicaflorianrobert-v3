@@ -119,7 +119,7 @@
     "mobileApp": "App mobile",
     "kind": {
       "direct": "cliente",
-      "agency": "cliente · tramite agenzia",
+      "agency": "tramite agenzia",
       "personal": "personale"
     }
   },

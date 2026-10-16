@@ -119,7 +119,7 @@
     "mobileApp": "Mobile app",
     "kind": {
       "direct": "client",
-      "agency": "client · via agency",
+      "agency": "via agency",
       "personal": "personal"
     }
   },
