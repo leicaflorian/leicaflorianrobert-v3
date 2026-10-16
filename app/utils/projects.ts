@@ -14,10 +14,13 @@ export function branchOf(project: Project): ProjectBranch {
 
 /**
  * The projects in the graph: the versions of the site and the work told in full or shown on
- * the home page. All of them would make it too long to read.
+ * the home page (all of them would make it too long to read). Newest first, as `git log`;
+ * those without a year at the end, in the Directus order.
  */
 export function graphProjects(projects: Project[]): Project[] {
-  return projects.filter(p => p.branch === 'main' || p.case_study || p.featured || p.on_home)
+  return projects
+    .filter(p => p.branch === 'main' || p.case_study || p.featured || p.on_home)
+    .sort((a, b) => (b.year ?? -Infinity) - (a.year ?? -Infinity))
 }
 
 /** A short commit-like hash of a slug (FNV-1a): stable, so a project always has the same one. */

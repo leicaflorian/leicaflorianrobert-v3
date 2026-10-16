@@ -9046,7 +9046,7 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: 'Case study: anno'
+      note: 'Anno: nei case study e per l''ordine del grafo nella pagina Progetti'
       options: null
       readonly: false
       required: false
