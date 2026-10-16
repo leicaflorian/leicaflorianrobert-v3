@@ -1,6 +1,7 @@
 <!--
   The native-mode header: logo with the page path, language, menu and GPU button.
-  Below 760px, menu and GPU move into a panel opened by the "menu" button.
+  Below 760px, menu and GPU move into a panel opened by the "menu" button,
+  laid over the page rather than pushing it down.
 -->
 <script setup lang="ts">
 const {t} = useI18n()
@@ -74,27 +75,40 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
       </div>
     </nav>
 
-    <div v-if="menuOpen" class="page flex flex-col gap-5 border-t border-line pb-7 pt-4 min-[761px]:hidden">
-      <ul class="m-0 flex list-none flex-col p-0">
-        <li v-for="item in menu" :key="item.key">
-          <NuxtLink
-            :to="item.href"
-            class="flex min-h-14 items-center justify-between border-b border-line text-xl font-bold"
-            :class="item.active ? 'text-accent hover:text-accent' : 'text-ink hover:text-ink'"
-          >
-            {{ labelOf(item.slug) }}
-            <span v-if="item.active" class="text-[13px]">●</span>
-          </NuxtLink>
-        </li>
-      </ul>
-      <button
-        type="button"
-        class="flex min-h-12 cursor-pointer items-center justify-between rounded-[10px] border border-line-control bg-surface px-4 text-[13px] text-ink-soft"
-        @click="toggle"
+    <!-- an overlay under the bar, so opening it doesn't push the page down -->
+    <Transition
+      enter-active-class="transition-[opacity,translate] duration-200 ease-out"
+      leave-active-class="transition-[opacity,translate] duration-150 ease-in"
+      enter-from-class="opacity-0 motion-safe:-translate-y-2"
+      leave-to-class="opacity-0 motion-safe:-translate-y-2"
+    >
+      <div
+        v-if="menuOpen"
+        class="absolute inset-x-0 top-full border-y border-line bg-bg shadow-[0_24px_48px_rgb(0_0_0/0.5)] min-[761px]:hidden"
       >
-        <span>{{ t('engine.mobileSwitch') }}</span>
-        <UiPulseDot/>
-      </button>
-    </div>
+        <div class="page flex flex-col gap-5 pb-7 pt-4">
+          <ul class="m-0 flex list-none flex-col p-0">
+            <li v-for="item in menu" :key="item.key">
+              <NuxtLink
+                :to="item.href"
+                class="flex min-h-14 items-center justify-between border-b border-line text-xl font-bold"
+                :class="item.active ? 'text-accent hover:text-accent' : 'text-ink hover:text-ink'"
+              >
+                {{ labelOf(item.slug) }}
+                <span v-if="item.active" class="text-[13px]">●</span>
+              </NuxtLink>
+            </li>
+          </ul>
+          <button
+            type="button"
+            class="flex min-h-12 cursor-pointer items-center justify-between rounded-[10px] border border-line-control bg-surface px-4 text-[13px] text-ink-soft"
+            @click="toggle"
+          >
+            <span>{{ t('engine.mobileSwitch') }}</span>
+            <UiPulseDot/>
+          </button>
+        </div>
+      </div>
+    </Transition>
   </header>
 </template>
