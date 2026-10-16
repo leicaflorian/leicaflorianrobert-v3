@@ -437,9 +437,9 @@ const PAGES = [
     }),
     sections: [
       section('block_page_header', {variant: 'contact'}, {
-        it: {title: 'Contatti', intro: 'Raccontami cosa hai in mente, anche se è solo un\'idea abbozzata. Ti rispondo entro 1–2 giorni lavorativi, con domande concrete o una prima proposta. Nessun impegno.'},
-        en: {title: 'Contact', intro: 'Tell me what you have in mind, even if it\'s just a rough idea. I\'ll reply within 1–2 working days, with concrete questions or a first proposal. No commitment.'},
-        ro: {title: 'Contact', intro: 'Povestește-mi ce ai în minte, chiar dacă e doar o idee schițată. Îți răspund în 1–2 zile lucrătoare, cu întrebări concrete sau o primă propunere. Fără niciun angajament.'},
+        it: {title: 'Contatti', intro: 'Raccontami cosa hai in mente, anche se è solo un\'idea abbozzata. Nessun impegno.'},
+        en: {title: 'Contact', intro: 'Tell me what you have in mind, even if it\'s just a rough idea. No commitment.'},
+        ro: {title: 'Contact', intro: 'Povestește-mi ce ai în minte, chiar dacă e doar o idee schițată. Fără niciun angajament.'},
       }),
       section('block_contact_info', {engines: 'legacy'}, same({})),
       section('block_contact_form', {}, {
