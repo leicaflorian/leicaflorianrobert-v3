@@ -124,8 +124,8 @@
     "graph": {
       "branches": {
         "main": "main",
-        "client": "clienti",
-        "lab": "lab"
+        "client": "prod",
+        "lab": "dev"
       },
       "hint": "clicca un commit ↗"
     },

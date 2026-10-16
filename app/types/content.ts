@@ -29,7 +29,7 @@ export interface Site {
 export type Mockup = 'laptop' | 'phone' | 'none'
 /** Who the project was for: a client of mine, a client of an agency I worked for (never named), or myself. */
 export type ProjectKind = 'direct' | 'agency' | 'personal'
-/** The branch of a project in the Projects graph: main holds the versions of this site. */
+/** The branch of a project in the Projects graph: main holds the versions of this site, client is shown as prod, lab as dev. */
 export type ProjectBranch = 'main' | 'client' | 'lab'
 
 export interface Project {

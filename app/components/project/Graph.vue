@@ -1,5 +1,6 @@
 <!--
-  The projects as `git log --graph`: one lane per branch (main, clients, lab), a commit per
+  The projects as `git log --graph`: one lane per branch (main, prod for clients, dev for
+  personal projects), a commit per
   project with its hash, HEAD on the newest version of the site. Hovering a commit tells it
   in the status line; clicking opens it.
 -->

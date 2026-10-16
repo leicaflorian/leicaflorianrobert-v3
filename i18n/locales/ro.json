@@ -124,8 +124,8 @@
     "graph": {
       "branches": {
         "main": "main",
-        "client": "clienți",
-        "lab": "lab"
+        "client": "prod",
+        "lab": "dev"
       },
       "hint": "apasă pe un commit ↗"
     },

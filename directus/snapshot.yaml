@@ -9202,14 +9202,14 @@ fields:
       interface: select-dropdown
       note: >-
         Il ramo nel grafo della pagina Progetti: main per le versioni del sito;
-        se vuoto, clienti o lab secondo il tipo
+        se vuoto, prod (clienti) o dev (personali) secondo il tipo
       options:
         choices:
           - text: main
             value: main
-          - text: clienti
+          - text: prod (clienti)
             value: client
-          - text: lab
+          - text: dev (personali)
             value: lab
       readonly: false
       required: false
