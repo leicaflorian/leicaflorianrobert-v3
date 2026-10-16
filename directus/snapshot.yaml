@@ -13,14 +13,14 @@ collections:
       collection: block_contact_form
       color: null
       display_template: '{{translations.title}}'
-      group: null
+      group: blocks
       hidden: true
       icon: contact_mail
       item_duplication_fields: null
       note: Il form di contatto, con un'immagine accanto.
       preview_url: null
       singleton: false
-      sort: null
+      sort: 9
       sort_field: null
       status: active
       translations: null
@@ -39,14 +39,14 @@ collections:
       collection: block_contact_form_translations
       color: null
       display_template: null
-      group: null
+      group: block_contact_form
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       status: active
       translations: null
@@ -65,14 +65,14 @@ collections:
       collection: block_contact_info
       color: null
       display_template: '{{translations.title}}'
-      group: null
+      group: blocks
       hidden: true
       icon: contact_page
       item_duplication_fields: null
       note: Contatti, social e dati aziendali (dai dati del sito).
       preview_url: null
       singleton: false
-      sort: null
+      sort: 14
       sort_field: null
       status: active
       translations: null
@@ -91,14 +91,14 @@ collections:
       collection: block_contact_info_translations
       color: null
       display_template: null
-      group: null
+      group: block_contact_info
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       status: active
       translations: null
@@ -117,14 +117,14 @@ collections:
       collection: block_cta
       color: null
       display_template: '{{translations.title}}'
-      group: null
+      group: blocks
       hidden: true
       icon: campaign
       item_duplication_fields: null
       note: L'invito a scrivere, con il bottone Contattami.
       preview_url: null
       singleton: false
-      sort: null
+      sort: 8
       sort_field: null
       status: active
       translations: null
@@ -143,14 +143,14 @@ collections:
       collection: block_cta_translations
       color: null
       display_template: null
-      group: null
+      group: block_cta
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       status: active
       translations: null
@@ -169,14 +169,14 @@ collections:
       collection: block_experiences
       color: null
       display_template: '{{translations.title}}'
-      group: null
+      group: blocks
       hidden: true
       icon: work_history
       item_duplication_fields: null
       note: La timeline delle esperienze (dalla collection Esperienze).
       preview_url: null
       singleton: false
-      sort: null
+      sort: 12
       sort_field: null
       status: active
       translations: null
@@ -195,14 +195,14 @@ collections:
       collection: block_experiences_translations
       color: null
       display_template: null
-      group: null
+      group: block_experiences
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       status: active
       translations: null
@@ -221,7 +221,7 @@ collections:
       collection: block_gallery
       color: null
       display_template: '{{translations.title}}'
-      group: null
+      group: blocks
       hidden: true
       icon: photo_library
       item_duplication_fields: null
@@ -230,7 +230,7 @@ collections:
         testo; senza, a tutta larghezza.
       preview_url: null
       singleton: false
-      sort: null
+      sort: 4
       sort_field: null
       status: active
       translations: null
@@ -249,14 +249,14 @@ collections:
       collection: block_gallery_files
       color: null
       display_template: null
-      group: null
+      group: block_gallery
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 2
       sort_field: null
       status: active
       translations: null
@@ -275,14 +275,14 @@ collections:
       collection: block_gallery_translations
       color: null
       display_template: null
-      group: null
+      group: block_gallery
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       status: active
       translations: null
@@ -301,14 +301,14 @@ collections:
       collection: block_hero_home
       color: null
       display_template: '{{translations.title}}'
-      group: null
+      group: blocks
       hidden: true
       icon: waving_hand
       item_duplication_fields: null
       note: La hero della Home, con la foto e lo snippet di codice.
       preview_url: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       status: active
       translations: null
@@ -327,14 +327,14 @@ collections:
       collection: block_hero_home_translations
       color: null
       display_template: null
-      group: null
+      group: block_hero_home
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       status: active
       translations: null
@@ -353,14 +353,14 @@ collections:
       collection: block_list
       color: null
       display_template: '{{translations.title}}'
-      group: null
+      group: blocks
       hidden: true
       icon: format_list_bulleted
       item_duplication_fields: null
       note: Un elenco, accanto al titolo.
       preview_url: null
       singleton: false
-      sort: null
+      sort: 6
       sort_field: null
       status: active
       translations: null
@@ -379,14 +379,14 @@ collections:
       collection: block_list_translations
       color: null
       display_template: null
-      group: null
+      group: block_list
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       status: active
       translations: null
@@ -405,14 +405,14 @@ collections:
       collection: block_page_header
       color: null
       display_template: '{{translations.title}}'
-      group: null
+      group: blocks
       hidden: true
       icon: title
       item_duplication_fields: null
       note: 'La testata di una pagina: etichetta, titolo grande e introduzione.'
       preview_url: null
       singleton: false
-      sort: null
+      sort: 2
       sort_field: null
       status: active
       translations: null
@@ -431,14 +431,14 @@ collections:
       collection: block_page_header_translations
       color: null
       display_template: null
-      group: null
+      group: block_page_header
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       status: active
       translations: null
@@ -457,14 +457,14 @@ collections:
       collection: block_palette
       color: null
       display_template: '{{translations.title}}'
-      group: null
+      group: blocks
       hidden: true
       icon: palette
       item_duplication_fields: null
       note: I colori e il logo di un progetto.
       preview_url: null
       singleton: false
-      sort: null
+      sort: 7
       sort_field: null
       status: active
       translations: null
@@ -483,14 +483,14 @@ collections:
       collection: block_palette_translations
       color: null
       display_template: null
-      group: null
+      group: block_palette
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       status: active
       translations: null
@@ -509,14 +509,14 @@ collections:
       collection: block_projects
       color: null
       display_template: '{{translations.title}}'
-      group: null
+      group: blocks
       hidden: true
       icon: rocket_launch
       item_duplication_fields: null
       note: I progetti (dalla collection Progetti).
       preview_url: null
       singleton: false
-      sort: null
+      sort: 11
       sort_field: null
       status: active
       translations: null
@@ -535,14 +535,14 @@ collections:
       collection: block_projects_translations
       color: null
       display_template: null
-      group: null
+      group: block_projects
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       status: active
       translations: null
@@ -561,14 +561,14 @@ collections:
       collection: block_services
       color: null
       display_template: '{{translations.title}}'
-      group: null
+      group: blocks
       hidden: true
       icon: design_services
       item_duplication_fields: null
       note: Le card dei servizi (dalla collection Servizi).
       preview_url: null
       singleton: false
-      sort: null
+      sort: 10
       sort_field: null
       status: active
       translations: null
@@ -587,14 +587,14 @@ collections:
       collection: block_services_translations
       color: null
       display_template: null
-      group: null
+      group: block_services
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       status: active
       translations: null
@@ -613,14 +613,14 @@ collections:
       collection: block_stack
       color: null
       display_template: '{{translations.title}}'
-      group: null
+      group: blocks
       hidden: true
       icon: code
       item_duplication_fields: null
       note: Le tecnologie (dalla collection Tecnologie).
       preview_url: null
       singleton: false
-      sort: null
+      sort: 13
       sort_field: null
       status: active
       translations: null
@@ -639,14 +639,14 @@ collections:
       collection: block_stack_translations
       color: null
       display_template: null
-      group: null
+      group: block_stack
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       status: active
       translations: null
@@ -665,14 +665,14 @@ collections:
       collection: block_text
       color: null
       display_template: '{{translations.title}}'
-      group: null
+      group: blocks
       hidden: true
       icon: notes
       item_duplication_fields: null
       note: 'Case study: una sezione di testo. Nei testi, **parola** la evidenzia.'
       preview_url: null
       singleton: false
-      sort: null
+      sort: 3
       sort_field: null
       status: active
       translations: null
@@ -691,14 +691,14 @@ collections:
       collection: block_text_translations
       color: null
       display_template: null
-      group: null
+      group: block_text
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       status: active
       translations: null
@@ -706,6 +706,84 @@ collections:
       versioning: false
     schema:
       name: block_text_translations
+  - collection: block_widgets
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      autosave_revision_interval: null
+      collapse: open
+      collection: block_widgets
+      color: null
+      display_template: '{{translations.title}}'
+      group: blocks
+      hidden: true
+      icon: animation
+      item_duplication_fields: null
+      note: >-
+        Widget animati, solo in modalità native: un editor che scrive codice,
+        una lezione su async/await e un neofetch con i temi.
+      preview_url: null
+      singleton: false
+      sort: 5
+      sort_field: null
+      status: active
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: block_widgets
+  - collection: block_widgets_translations
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      autosave_revision_interval: null
+      collapse: open
+      collection: block_widgets_translations
+      color: null
+      display_template: null
+      group: block_widgets
+      hidden: true
+      icon: import_export
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: 1
+      sort_field: null
+      status: active
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: block_widgets_translations
+  - collection: blocks
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      autosave_revision_interval: null
+      collapse: closed
+      collection: blocks
+      color: null
+      display_template: null
+      group: null
+      hidden: true
+      icon: view_agenda
+      item_duplication_fields: null
+      note: I tipi di blocco con cui si compongono pagine e progetti.
+      preview_url: null
+      singleton: false
+      sort: 3
+      sort_field: null
+      status: active
+      translations: null
+      unarchive_value: null
+      versioning: false
   - collection: experiences
     meta:
       accountability: all
@@ -717,14 +795,14 @@ collections:
       collection: experiences
       color: null
       display_template: '{{company}}'
-      group: null
+      group: portfolio
       hidden: false
       icon: work_history
       item_duplication_fields: null
       note: Le esperienze di Chi sono, dalla più vecchia alla più recente.
       preview_url: null
       singleton: false
-      sort: null
+      sort: 2
       sort_field: sort
       status: active
       translations: null
@@ -743,14 +821,14 @@ collections:
       collection: experiences_translations
       color: null
       display_template: null
-      group: null
+      group: experiences
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       status: active
       translations: null
@@ -769,14 +847,14 @@ collections:
       collection: languages
       color: null
       display_template: '{{name}}'
-      group: null
+      group: website
       hidden: false
       icon: translate
       item_duplication_fields: null
       note: Le lingue del sito
       preview_url: null
       singleton: false
-      sort: null
+      sort: 3
       sort_field: null
       status: active
       translations: null
@@ -802,7 +880,7 @@ collections:
       note: I messaggi arrivati dal form di contatto. Li scrive l'endpoint /contact.
       preview_url: null
       singleton: false
-      sort: null
+      sort: 4
       sort_field: null
       status: active
       translations: null
@@ -821,7 +899,7 @@ collections:
       collection: pages
       color: null
       display_template: '{{translations.title}}'
-      group: null
+      group: website
       hidden: false
       icon: web
       item_duplication_fields: null
@@ -830,7 +908,7 @@ collections:
         blocchi.
       preview_url: null
       singleton: false
-      sort: null
+      sort: 2
       sort_field: sort
       status: active
       translations: null
@@ -849,14 +927,14 @@ collections:
       collection: pages_sections
       color: null
       display_template: null
-      group: null
+      group: pages
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 2
       sort_field: null
       status: active
       translations: null
@@ -875,14 +953,14 @@ collections:
       collection: pages_translations
       color: null
       display_template: null
-      group: null
+      group: pages
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       status: active
       translations: null
@@ -890,6 +968,30 @@ collections:
       versioning: false
     schema:
       name: pages_translations
+  - collection: portfolio
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      autosave_revision_interval: null
+      collapse: closed
+      collection: portfolio
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: work
+      item_duplication_fields: null
+      note: Progetti, esperienze, servizi e tecnologie, mostrati dai blocchi.
+      preview_url: null
+      singleton: false
+      sort: 2
+      sort_field: null
+      status: active
+      translations: null
+      unarchive_value: null
+      versioning: false
   - collection: projects
     meta:
       accountability: all
@@ -901,14 +1003,14 @@ collections:
       collection: projects
       color: null
       display_template: '{{slug}}'
-      group: null
+      group: portfolio
       hidden: false
       icon: rocket_launch
       item_duplication_fields: null
       note: 'I progetti: in evidenza (Home e Progetti), in Home, nell''archivio.'
       preview_url: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: sort
       status: active
       translations: null
@@ -927,14 +1029,14 @@ collections:
       collection: projects_sections
       color: null
       display_template: null
-      group: null
+      group: projects
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 2
       sort_field: null
       status: active
       translations: null
@@ -953,14 +1055,14 @@ collections:
       collection: projects_translations
       color: null
       display_template: null
-      group: null
+      group: projects
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       status: active
       translations: null
@@ -979,14 +1081,14 @@ collections:
       collection: services
       color: null
       display_template: null
-      group: null
+      group: portfolio
       hidden: false
       icon: design_services
       item_duplication_fields: null
       note: I servizi della Home.
       preview_url: null
       singleton: false
-      sort: null
+      sort: 3
       sort_field: sort
       status: active
       translations: null
@@ -1005,14 +1107,14 @@ collections:
       collection: services_translations
       color: null
       display_template: null
-      group: null
+      group: services
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       status: active
       translations: null
@@ -1031,14 +1133,14 @@ collections:
       collection: site
       color: null
       display_template: null
-      group: null
+      group: website
       hidden: false
       icon: badge
       item_duplication_fields: null
       note: 'I dati della persona e dell''attività: header, footer, Contatti.'
       preview_url: null
       singleton: true
-      sort: null
+      sort: 1
       sort_field: null
       status: active
       translations: null
@@ -1057,14 +1159,14 @@ collections:
       collection: site_translations
       color: null
       display_template: null
-      group: null
+      group: site
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       status: active
       translations: null
@@ -1083,14 +1185,14 @@ collections:
       collection: technologies
       color: null
       display_template: '{{name}}'
-      group: null
+      group: portfolio
       hidden: false
       icon: code
       item_duplication_fields: null
       note: Lo stack di Chi sono.
       preview_url: null
       singleton: false
-      sort: null
+      sort: 4
       sort_field: sort
       status: active
       translations: null
@@ -1098,6 +1200,30 @@ collections:
       versioning: false
     schema:
       name: technologies
+  - collection: website
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      autosave_revision_interval: null
+      collapse: closed
+      collection: website
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: language
+      item_duplication_fields: null
+      note: 'Il sito: impostazioni, pagine e lingue.'
+      preview_url: null
+      singleton: false
+      sort: 1
+      sort_field: null
+      status: active
+      translations: null
+      unarchive_value: null
+      versioning: false
 fields:
   - collection: block_contact_form
     field: id
@@ -1186,47 +1312,6 @@ fields:
       has_auto_increment: false
       foreign_key_table: null
       foreign_key_column: null
-  - collection: block_contact_form
-    field: image
-    type: uuid
-    meta:
-      collection: block_contact_form
-      conditions: null
-      display: null
-      display_options: null
-      field: image
-      group: null
-      hidden: false
-      interface: file-image
-      note: Accanto al form
-      options: null
-      readonly: false
-      required: false
-      searchable: true
-      sort: 3
-      special:
-        - file
-      translations: null
-      validation: null
-      validation_message: null
-      width: half
-    schema:
-      name: image
-      table: block_contact_form
-      data_type: uuid
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_indexed: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: directus_files
-      foreign_key_column: id
   - collection: block_contact_form
     field: translations
     type: alias
@@ -4072,47 +4157,6 @@ fields:
       foreign_key_table: null
       foreign_key_column: null
   - collection: block_page_header
-    field: image
-    type: uuid
-    meta:
-      collection: block_page_header
-      conditions: null
-      display: null
-      display_options: null
-      field: image
-      group: null
-      hidden: false
-      interface: file-image
-      note: Il ritratto, nella variante Chi sono
-      options: null
-      readonly: false
-      required: false
-      searchable: true
-      sort: 4
-      special:
-        - file
-      translations: null
-      validation: null
-      validation_message: null
-      width: half
-    schema:
-      name: image
-      table: block_page_header
-      data_type: uuid
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_indexed: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: directus_files
-      foreign_key_column: id
-  - collection: block_page_header
     field: translations
     type: alias
     meta:
@@ -6371,6 +6415,368 @@ fields:
       has_auto_increment: false
       foreign_key_table: null
       foreign_key_column: null
+  - collection: block_widgets
+    field: id
+    type: integer
+    meta:
+      collection: block_widgets
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: block_widgets
+      data_type: integer
+      default_value: nextval('block_widgets_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: block_widgets
+    field: engines
+    type: string
+    meta:
+      collection: block_widgets
+      conditions: null
+      display: labels
+      display_options: null
+      field: engines
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: In quale modalità si vede
+      options:
+        choices:
+          - text: Entrambe
+            value: both
+          - text: Solo native
+            value: native
+          - text: Solo legacy
+            value: legacy
+      readonly: false
+      required: false
+      searchable: true
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: engines
+      table: block_widgets
+      data_type: character varying
+      default_value: both
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: block_widgets
+    field: widgets
+    type: csv
+    meta:
+      collection: block_widgets
+      conditions: null
+      display: labels
+      display_options: null
+      field: widgets
+      group: null
+      hidden: false
+      interface: select-multiple-checkbox
+      note: Quali mostrare
+      options:
+        choices:
+          - text: Editor
+            value: editor
+          - text: Lezione
+            value: lesson
+          - text: Neofetch
+            value: neofetch
+      readonly: false
+      required: false
+      searchable: true
+      sort: 3
+      special:
+        - cast-csv
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: widgets
+      table: block_widgets
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: block_widgets
+    field: translations
+    type: alias
+    meta:
+      collection: block_widgets
+      conditions: null
+      display: null
+      display_options: null
+      field: translations
+      group: null
+      hidden: false
+      interface: translations
+      note: null
+      options:
+        defaultLanguage: it
+        defaultOpenSplitView: true
+        languageField: name
+      readonly: false
+      required: false
+      searchable: true
+      sort: 4
+      special:
+        - translations
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: block_widgets_translations
+    field: id
+    type: integer
+    meta:
+      collection: block_widgets_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: block_widgets_translations
+      data_type: integer
+      default_value: nextval('block_widgets_translations_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: block_widgets_translations
+    field: block_widgets_id
+    type: integer
+    meta:
+      collection: block_widgets_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: block_widgets_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: block_widgets_id
+      table: block_widgets_translations
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: block_widgets
+      foreign_key_column: id
+  - collection: block_widgets_translations
+    field: languages_code
+    type: string
+    meta:
+      collection: block_widgets_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: languages_code
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: languages_code
+      table: block_widgets_translations
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: languages
+      foreign_key_column: code
+  - collection: block_widgets_translations
+    field: label
+    type: string
+    meta:
+      collection: block_widgets_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: label
+      group: null
+      hidden: false
+      interface: input
+      note: Etichetta piccola, facoltativa
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: label
+      table: block_widgets_translations
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: block_widgets_translations
+    field: title
+    type: string
+    meta:
+      collection: block_widgets_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: title
+      group: null
+      hidden: false
+      interface: input
+      note: Titolo, facoltativo
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: title
+      table: block_widgets_translations
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: experiences
     field: id
     type: integer
@@ -7194,6 +7600,160 @@ fields:
       data_type: boolean
       default_value: false
       max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: messages
+    field: project_types
+    type: csv
+    meta:
+      collection: messages
+      conditions: null
+      display: labels
+      display_options: null
+      field: project_types
+      group: null
+      hidden: false
+      interface: select-multiple-checkbox
+      note: Tipo di progetto
+      options:
+        choices:
+          - text: Sito
+            value: site
+          - text: Web app
+            value: web-app
+          - text: App mobile
+            value: mobile-app
+          - text: E-commerce
+            value: ecommerce
+          - text: Consulenza
+            value: consulting
+          - text: Formazione
+            value: training
+      readonly: false
+      required: false
+      searchable: true
+      sort: 9
+      special:
+        - cast-csv
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: project_types
+      table: messages
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: messages
+    field: budget
+    type: string
+    meta:
+      collection: messages
+      conditions: null
+      display: labels
+      display_options: null
+      field: budget
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: Budget indicativo
+      options:
+        choices:
+          - text: < 3k €
+            value: lt-3k
+          - text: 3–10k €
+            value: 3-10k
+          - text: 10–25k €
+            value: 10-25k
+          - text: 25k+ €
+            value: 25k-plus
+          - text: Da capire
+            value: tbd
+      readonly: false
+      required: false
+      searchable: true
+      sort: 10
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: budget
+      table: messages
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: messages
+    field: timeline
+    type: string
+    meta:
+      collection: messages
+      conditions: null
+      display: labels
+      display_options: null
+      field: timeline
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: Tempistiche
+      options:
+        choices:
+          - text: Urgente
+            value: urgent
+          - text: 1–3 mesi
+            value: 1-3m
+          - text: 3–6 mesi
+            value: 3-6m
+          - text: Flessibile
+            value: flexible
+      readonly: false
+      required: false
+      searchable: true
+      sort: 11
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: timeline
+      table: messages
+      data_type: character varying
+      default_value: null
+      max_length: 255
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
@@ -10489,27 +11049,6 @@ systemFields:
     schema:
       is_indexed: true
 relations:
-  - collection: block_contact_form
-    field: image
-    related_collection: directus_files
-    meta:
-      junction_field: null
-      many_collection: block_contact_form
-      many_field: image
-      one_allowed_collections: null
-      one_collection: directus_files
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: null
-      sort_field: null
-    schema:
-      table: block_contact_form
-      column: image
-      foreign_key_table: directus_files
-      foreign_key_column: id
-      constraint_name: block_contact_form_image_foreign
-      on_update: NO ACTION
-      on_delete: SET NULL
   - collection: block_contact_form_translations
     field: block_contact_form_id
     related_collection: block_contact_form
@@ -10846,27 +11385,6 @@ relations:
       constraint_name: block_list_translations_languages_code_foreign
       on_update: NO ACTION
       on_delete: SET NULL
-  - collection: block_page_header
-    field: image
-    related_collection: directus_files
-    meta:
-      junction_field: null
-      many_collection: block_page_header
-      many_field: image
-      one_allowed_collections: null
-      one_collection: directus_files
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: null
-      sort_field: null
-    schema:
-      table: block_page_header
-      column: image
-      foreign_key_table: directus_files
-      foreign_key_column: id
-      constraint_name: block_page_header_image_foreign
-      on_update: NO ACTION
-      on_delete: SET NULL
   - collection: block_page_header_translations
     field: block_page_header_id
     related_collection: block_page_header
@@ -11140,6 +11658,48 @@ relations:
       constraint_name: block_text_translations_languages_code_foreign
       on_update: NO ACTION
       on_delete: SET NULL
+  - collection: block_widgets_translations
+    field: block_widgets_id
+    related_collection: block_widgets
+    meta:
+      junction_field: languages_code
+      many_collection: block_widgets_translations
+      many_field: block_widgets_id
+      one_allowed_collections: null
+      one_collection: block_widgets
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: translations
+      sort_field: null
+    schema:
+      table: block_widgets_translations
+      column: block_widgets_id
+      foreign_key_table: block_widgets
+      foreign_key_column: id
+      constraint_name: block_widgets_translations_block_widgets_id_foreign
+      on_update: NO ACTION
+      on_delete: CASCADE
+  - collection: block_widgets_translations
+    field: languages_code
+    related_collection: languages
+    meta:
+      junction_field: block_widgets_id
+      many_collection: block_widgets_translations
+      many_field: languages_code
+      one_allowed_collections: null
+      one_collection: languages
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: block_widgets_translations
+      column: languages_code
+      foreign_key_table: languages
+      foreign_key_column: code
+      constraint_name: block_widgets_translations_languages_code_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
   - collection: experiences_translations
     field: experiences_id
     related_collection: experiences
@@ -11194,6 +11754,7 @@ relations:
         - block_page_header
         - block_text
         - block_gallery
+        - block_widgets
         - block_list
         - block_palette
         - block_cta
@@ -11325,6 +11886,7 @@ relations:
         - block_page_header
         - block_text
         - block_gallery
+        - block_widgets
         - block_list
         - block_palette
         - block_cta
