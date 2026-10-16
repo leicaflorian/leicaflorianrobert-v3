@@ -77,14 +77,17 @@ const PROJECTS = [
   project('slides', 'https://chrome.google.com/webstore/detail/slidescom-downloader/bciknjamldhnbbckmgbchmkdcalngnco?hl=it', {kind: 'personal'}, name('Slides.com downloader'),
     note('Estensione Chrome', 'Chrome extension', 'Extensie Chrome')),
   project('tvit', 'https://tvit.leicaflorianrobert.dev/channels', {kind: 'personal', on_home: true}, name('TvIt')),
-  project('biologica', 'https://biologicadisinfestazioni.it', {on_home: true}, name('Biologica Disinfestazioni')),
+  // the site is no longer the one I built: the link goes to its code
+  project('biologica', 'https://github.com/leicaflorian/biologioca_disinfestazioni', {}, name('Biologica Disinfestazioni'),
+    note('Sito web — il codice su GitHub', 'Website — the code on GitHub', 'Site web — codul pe GitHub')),
   project('enigma', 'https://leicaflorian.github.io/enigma_machine', {kind: 'personal'}, name('Enigma'),
     note('Macchina Enigma', 'Enigma machine', 'Mașina Enigma')),
   project('fold', 'https://leicaflorian.github.io/fold_my_paper', {kind: 'personal'}, name('Fold my paper')),
-  project('gca', 'https://globalgroup.consulting/club/', {featured: true, mockup: 'phone'}, name('Global Club App'),
-    {it: {subtitle: 'App mobile'}, en: {subtitle: 'Mobile app'}, ro: {subtitle: 'Aplicație mobilă'}}),
   project('v1', 'https://v1.leicaflorianrobert.dev', {kind: 'personal'}, name('My website V1')),
-  project('ggc', 'https://private.globalgroup.consulting/', {}, name('Global Group Consulting')),
+  // the client is never named: no name, no link
+  project('fintech', '', {case_study: true},
+    {it: {name: 'Piattaforma per investimenti'}, en: {name: 'Investment platform'}, ro: {name: 'Platformă de investiții'}},
+    note('Web app, app mobile e microservizi — case study', 'Web apps, mobile app and microservices — case study', 'Aplicații web, aplicație mobilă și microservicii — studiu de caz')),
   project('fib', 'https://leicaflorian.github.io/fibonacci_counter/', {kind: 'personal'}, name('Fibonacci Counter')),
   // client work done through an agency, which is never named
   project('agrigento', 'https://agrigento2025.org', {kind: 'agency'}, name('Agrigento 2025')),
@@ -877,6 +880,133 @@ const CASE_STUDIES = {
             'Un software mai simplu de folosit.',
             'Activitate îmbunătățită, cu problemele legacy rezolvate.',
             'Fiecare modificare urmărită și publicată cu un push.',
+          ),
+        },
+      }),
+      NEXT_STEP,
+    ],
+  },
+  fintech: {
+    year: 2020,
+    translations: {
+      it: {intro: 'Per una società di investimenti finanziari ho costruito tutta l\'infrastruttura informatica: due web app gestionali, un\'app mobile e i servizi che le tengono insieme, dall\'idea alla pubblicazione.', role: 'Ideazione, design, sviluppo e infrastruttura', type: 'Piattaforma web e mobile', stack: 'Node.js, AdonisJS, Nuxt, Vue, Ionic'},
+      en: {intro: 'For a financial investment company I built the whole IT infrastructure: two management web apps, a mobile app and the services that hold them together, from idea to launch.', role: 'Concept, design, development and infrastructure', type: 'Web and mobile platform', stack: 'Node.js, AdonisJS, Nuxt, Vue, Ionic'},
+      ro: {intro: 'Pentru o firmă de investiții financiare am construit întreaga infrastructură IT: două aplicații web de gestiune, o aplicație mobilă și serviciile care le țin împreună, de la idee la lansare.', role: 'Concepție, design, dezvoltare și infrastructură', type: 'Platformă web și mobilă', stack: 'Node.js, AdonisJS, Nuxt, Vue, Ionic'},
+    },
+    sections: [
+      section('block_text', {}, {
+        it: {
+          label: 'punto di partenza',
+          title: 'Clienti su fogli Excel',
+          text: paras(
+            'All\'inizio la società gestiva i suoi clienti con dei **fogli Excel**.',
+            'Mi ha commissionato tutta la sua presenza online: applicazioni, grafica, sviluppo e infrastruttura.',
+          ),
+        },
+        en: {
+          label: 'starting point',
+          title: 'Customers in Excel sheets',
+          text: paras(
+            'At first the company managed its customers with **Excel sheets**.',
+            'It commissioned me to build its whole online presence: applications, design, development and infrastructure.',
+          ),
+        },
+        ro: {
+          label: 'punct de plecare',
+          title: 'Clienți în foi Excel',
+          text: paras(
+            'La început firma își gestiona clienții în **foi Excel**.',
+            'Mi-a încredințat întreaga sa prezență online: aplicații, grafică, dezvoltare și infrastructură.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'cosa ho fatto',
+          title: 'Dall\'idea alla pubblicazione',
+          items: lines(
+            'Ideazione delle applicazioni, insieme all\'azienda.',
+            'La grafica.',
+            'Due web app gestionali, con Nuxt e Vue sul frontend e Node.js e AdonisJS sul backend.',
+            'Un\'app mobile con Ionic.',
+            'La pubblicazione di tutto.',
+          ),
+        },
+        en: {
+          label: 'what I did',
+          title: 'From idea to launch',
+          items: lines(
+            'Designing the applications, together with the company.',
+            'The visual design.',
+            'Two management web apps, with Nuxt and Vue on the frontend and Node.js and AdonisJS on the backend.',
+            'A mobile app with Ionic.',
+            'Launching all of it.',
+          ),
+        },
+        ro: {
+          label: 'ce am făcut',
+          title: 'De la idee la lansare',
+          items: lines(
+            'Conceperea aplicațiilor, împreună cu firma.',
+            'Grafica.',
+            'Două aplicații web de gestiune, cu Nuxt și Vue pe frontend și Node.js și AdonisJS pe backend.',
+            'O aplicație mobilă cu Ionic.',
+            'Publicarea tuturor.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'infrastruttura',
+          title: 'Servizi che lavorano insieme',
+          items: lines(
+            'I server necessari alle applicazioni, gestiti da me.',
+            'Microservizi collegati tra loro: centro notifiche, gestione delle code, identità e accessi, file.',
+          ),
+        },
+        en: {
+          label: 'infrastructure',
+          title: 'Services working together',
+          items: lines(
+            'The servers the applications need, managed by me.',
+            'Connected microservices: notification centre, queue management, identity and access, files.',
+          ),
+        },
+        ro: {
+          label: 'infrastructură',
+          title: 'Servicii care lucrează împreună',
+          items: lines(
+            'Serverele necesare aplicațiilor, gestionate de mine.',
+            'Microservicii conectate între ele: centru de notificări, gestionarea cozilor, identitate și acces, fișiere.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'risultati',
+          title: 'Come una banca online',
+          items: lines(
+            'Ogni cliente con il suo profilo e la sua area privata.',
+            'Clienti autonomi nelle operazioni, come in un home banking.',
+            'Acquisti direttamente dall\'app mobile.',
+          ),
+        },
+        en: {
+          label: 'results',
+          title: 'Like an online bank',
+          items: lines(
+            'Every customer with their own profile and private area.',
+            'Customers operating on their own, as in online banking.',
+            'Purchases straight from the mobile app.',
+          ),
+        },
+        ro: {
+          label: 'rezultate',
+          title: 'Ca o bancă online',
+          items: lines(
+            'Fiecare client cu profilul și zona sa privată.',
+            'Clienți autonomi în operațiuni, ca într-un internet banking.',
+            'Cumpărături direct din aplicația mobilă.',
           ),
         },
       }),
