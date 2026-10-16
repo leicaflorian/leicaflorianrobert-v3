@@ -83,6 +83,10 @@ const PROJECTS = [
     note('Sito web — il codice su GitHub', 'Website — the code on GitHub', 'Site web — codul pe GitHub')),
   project('nosponsor', 'https://github.com/leicaflorian/no-sponsor', {kind: 'personal', case_study: true}, name('NoSponsor'),
     note('Estensione Chrome, in sviluppo', 'Chrome extension, in development', 'Extensie Chrome, în dezvoltare')),
+  project('booleancli', 'https://www.npmjs.com/package/boolean-cli', {kind: 'personal', case_study: true}, name('Boolean CLI'),
+    note('CLI per docenti e tutor, su npm', 'CLI for teachers and tutors, on npm', 'CLI pentru profesori și tutori, pe npm')),
+  project('pimpmycrud', 'https://packagist.org/packages/leicaflorian/pimp_my_crud', {kind: 'personal'}, name('Pimp My CRUD'),
+    note('Pacchetto Laravel che genera i CRUD', 'Laravel package that generates CRUDs', 'Pachet Laravel care generează CRUD-uri')),
   project('enigma', 'https://leicaflorian.github.io/enigma_machine', {kind: 'personal'}, name('Enigma'),
     note('Macchina Enigma', 'Enigma machine', 'Mașina Enigma')),
   project('fold', 'https://leicaflorian.github.io/fold_my_paper', {kind: 'personal'}, name('Fold my paper')),
@@ -1082,6 +1086,32 @@ const CASE_STUDIES = {
           ),
         },
       }),
+      section('block_list', {}, {
+        it: {
+          label: 'risultati',
+          title: 'Usata anche da altri',
+          items: lines(
+            '65 stelle e 4 fork su GitHub: il mio repository più seguito.',
+            'Lista e guida TV si aggiornano da sole, senza interventi a mano.',
+          ),
+        },
+        en: {
+          label: 'results',
+          title: 'Used by others too',
+          items: lines(
+            '65 stars and 4 forks on GitHub: my most followed repository.',
+            'The list and the TV guide update themselves, with no manual work.',
+          ),
+        },
+        ro: {
+          label: 'rezultate',
+          title: 'Folosită și de alții',
+          items: lines(
+            '65 de stele și 4 fork-uri pe GitHub: cel mai urmărit repository al meu.',
+            'Lista și ghidul TV se actualizează singure, fără intervenții manuale.',
+          ),
+        },
+      }),
       NEXT_STEP,
     ],
   },
@@ -1220,6 +1250,101 @@ const CASE_STUDIES = {
             'Un MutationObserver acoperă scroll-ul infinit și conținutul încărcat ulterior.',
             'Fiecare element găsit poartă regula care l-a identificat, pentru a înțelege imediat rezultatele fals pozitive.',
             'Un contor pe pictogramă pentru fiecare filă și un popup pentru a alege modul și a-l activa site cu site.',
+          ),
+        },
+      }),
+      NEXT_STEP,
+    ],
+  },
+  booleancli: {
+    year: 2022,
+    translations: {
+      it: {intro: 'Una riga di comando per i docenti e i tutor di Boolean, che automatizza i lavori ripetitivi di ogni giorno: dalle registrazioni delle lezioni ai nuovi progetti, fino ai repository GitHub. Pubblicata su npm.', role: 'Ideazione e sviluppo', type: 'Strumento a riga di comando', stack: 'TypeScript, Node.js, npm, GitHub CLI'},
+      en: {intro: 'A command line for Boolean\'s teachers and tutors that automates everyday repetitive work: from lesson recordings to new projects and GitHub repositories. Published on npm.', role: 'Concept and development', type: 'Command-line tool', stack: 'TypeScript, Node.js, npm, GitHub CLI'},
+      ro: {intro: 'O linie de comandă pentru profesorii și tutorii Boolean, care automatizează munca repetitivă de zi cu zi: de la înregistrările lecțiilor la proiecte noi și repository-uri GitHub. Publicată pe npm.', role: 'Concepție și dezvoltare', type: 'Instrument în linia de comandă', stack: 'TypeScript, Node.js, npm, GitHub CLI'},
+    },
+    sections: [
+      section('block_text', {}, {
+        it: {
+          label: 'idea',
+          title: 'Meno lavoro ripetitivo',
+          text: paras(
+            'Da Main Teacher a Boolean, gli stessi compiti tornavano ogni giorno: rinominare e caricare le registrazioni Zoom delle lezioni, preparare i file di partenza dei progetti, creare i repository.',
+            '**Boolean CLI** riduce ognuno di questi lavori a un comando, per me e per gli altri docenti e tutor.',
+          ),
+        },
+        en: {
+          label: 'idea',
+          title: 'Less repetitive work',
+          text: paras(
+            'As Main Teacher at Boolean, the same tasks came back every day: renaming and uploading the Zoom recordings of the lessons, preparing the starter files of projects, creating repositories.',
+            '**Boolean CLI** turns each of these jobs into one command, for me and for the other teachers and tutors.',
+          ),
+        },
+        ro: {
+          label: 'idee',
+          title: 'Mai puțină muncă repetitivă',
+          text: paras(
+            'Ca Main Teacher la Boolean, aceleași sarcini reveneau în fiecare zi: redenumirea și încărcarea înregistrărilor Zoom ale lecțiilor, pregătirea fișierelor de pornire ale proiectelor, crearea repository-urilor.',
+            '**Boolean CLI** reduce fiecare dintre aceste munci la o singură comandă, pentru mine și pentru ceilalți profesori și tutori.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'comandi',
+          title: 'Un comando per ogni lavoro',
+          items: lines(
+            'video-rename: rinomina le registrazioni Zoom secondo le convenzioni di Boolean e le carica nella cartella di Google Drive. Si può anche annullare.',
+            'scaffold: crea i file di partenza di un progetto (HTML, PHP, CSS, JS, immagini, README), con librerie come Bootstrap, Font Awesome, Axios o Vue 3 incluse via CDN.',
+            'repo: crea i repository GitHub.',
+            'config: salva le impostazioni predefinite di ogni comando.',
+          ),
+        },
+        en: {
+          label: 'commands',
+          title: 'One command for each job',
+          items: lines(
+            'video-rename: renames Zoom recordings following Boolean\'s conventions and uploads them to the Google Drive folder. It can also be undone.',
+            'scaffold: creates a project\'s starter files (HTML, PHP, CSS, JS, images, README), with libraries like Bootstrap, Font Awesome, Axios or Vue 3 included via CDN.',
+            'repo: creates GitHub repositories.',
+            'config: stores the default settings of each command.',
+          ),
+        },
+        ro: {
+          label: 'comenzi',
+          title: 'O comandă pentru fiecare muncă',
+          items: lines(
+            'video-rename: redenumește înregistrările Zoom după convențiile Boolean și le încarcă în folderul Google Drive. Se poate și anula.',
+            'scaffold: creează fișierele de pornire ale unui proiect (HTML, PHP, CSS, JS, imagini, README), cu biblioteci precum Bootstrap, Font Awesome, Axios sau Vue 3 incluse prin CDN.',
+            'repo: creează repository-urile GitHub.',
+            'config: salvează setările implicite ale fiecărei comenzi.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'risultati',
+          title: 'Un comando per installarla',
+          items: lines(
+            'Pubblicata su npm: si installa con npm install -g boolean-cli.',
+            'Circa 600 download nell\'ultimo anno.',
+          ),
+        },
+        en: {
+          label: 'results',
+          title: 'One command to install it',
+          items: lines(
+            'Published on npm: install it with npm install -g boolean-cli.',
+            'About 600 downloads in the last year.',
+          ),
+        },
+        ro: {
+          label: 'rezultate',
+          title: 'O comandă pentru instalare',
+          items: lines(
+            'Publicată pe npm: se instalează cu npm install -g boolean-cli.',
+            'Aproximativ 600 de descărcări în ultimul an.',
           ),
         },
       }),
