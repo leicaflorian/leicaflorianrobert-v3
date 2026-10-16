@@ -152,9 +152,16 @@
   "contact": {
     "map": {
       "online": "online",
+      "offline": "offline",
+      "reply": {
+        "morning": "I'll reply this morning",
+        "tomorrow": "I'll reply tomorrow",
+        "monday": "I'll reply on Monday"
+      },
       "zone": "timezone",
       "radius": "range",
       "remote": "remote ∞",
+      "languages": "languages",
       "label": "Map of northern Italy with my location: {place}"
     },
     "contacts": "// contact",

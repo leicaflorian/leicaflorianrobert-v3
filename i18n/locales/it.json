@@ -152,9 +152,16 @@
   "contact": {
     "map": {
       "online": "online",
+      "offline": "offline",
+      "reply": {
+        "morning": "rispondo in mattinata",
+        "tomorrow": "rispondo domani",
+        "monday": "rispondo lunedì"
+      },
       "zone": "fuso",
       "radius": "raggio",
       "remote": "remoto ∞",
+      "languages": "lingue",
       "label": "Mappa del Nord Italia con la mia posizione: {place}"
     },
     "contacts": "// contatti",

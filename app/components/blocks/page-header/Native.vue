@@ -18,6 +18,7 @@ const label = computed(() => props.block.label?.replace('{n}', String(projects?.
 /** The Contact map's pin, as the status line shows it. */
 const coordinates = `${mapPin.lat.toFixed(2)}°N ${mapPin.lon.toFixed(2)}°E`
 const place = computed(() => `${site.value.city} (${site.value.province})`)
+const workStatus = props.block.variant === 'contact' ? useWorkStatus() : null
 </script>
 
 <template>
@@ -89,23 +90,29 @@ const place = computed(() => `${site.value.city} (${site.value.province})`)
             <span v-for="i in 3" :key="i" class="size-[9px] shrink-0 rounded-full bg-gutter"/>
             <span class="ml-2 truncate"><span class="text-code-ok">$</span> whereis leica</span>
           </span>
-          <span class="shrink-0 text-accent">● {{ $t('contact.map.online') }}</span>
+          <span v-if="workStatus === 'online'" class="shrink-0 text-accent">● {{ $t('contact.map.online') }}</span>
+          <span v-else-if="workStatus" class="shrink-0 truncate text-subtle">○ {{ $t('contact.map.offline') }} · {{ $t(`contact.map.reply.${workStatus}`) }}</span>
         </div>
         <div class="px-4 py-5">
           <UiAsciiMap :label="$t('contact.map.label', {place})"/>
         </div>
-        <div class="grid grid-cols-3 border-t border-line text-[11px]">
-          <div class="flex flex-col gap-0.5 border-r border-line px-4 py-3">
+        <!-- the gap shows the line colour behind: borders between cells in any number of columns -->
+        <div class="grid grid-cols-4 gap-px border-t border-line bg-line text-[11px] max-[860px]:grid-cols-2">
+          <div class="flex flex-col gap-0.5 bg-bg-deep px-4 py-3">
             <span class="text-ghost">{{ place }}</span>
             <span class="text-ink">{{ coordinates }}</span>
           </div>
-          <div class="flex flex-col gap-0.5 border-r border-line px-4 py-3">
+          <div class="flex flex-col gap-0.5 bg-bg-deep px-4 py-3">
             <span class="text-ghost">{{ $t('contact.map.zone') }}</span>
             <span class="text-ink">Europe/Rome</span>
           </div>
-          <div class="flex flex-col gap-0.5 px-4 py-3">
+          <div class="flex flex-col gap-0.5 bg-bg-deep px-4 py-3">
             <span class="text-ghost">{{ $t('contact.map.radius') }}</span>
             <span class="text-ink">{{ $t('contact.map.remote') }}</span>
+          </div>
+          <div class="flex flex-col gap-0.5 bg-bg-deep px-4 py-3">
+            <span class="text-ghost">{{ $t('contact.map.languages') }}</span>
+            <span class="text-ink">it · en · ro</span>
           </div>
         </div>
       </div>
