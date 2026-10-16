@@ -57,27 +57,27 @@ const merge = (...parts) => tr(parts.reduce((acc, part) => {
 }, {}))
 
 const project = (slug, url, extra, ...translations) => ({
-  status: 'published', slug, url, featured: false, on_home: false, case_study: false, mockup: 'none', ...extra,
+  status: 'published', slug, url, kind: 'direct', featured: false, on_home: false, case_study: false, mockup: 'none', ...extra,
   translations: merge(...translations),
 })
 
 const PROJECTS = [
-  project('v3', 'https://leicaflorianrobert.dev', {case_study: true}, name('My website V3'),
+  project('v3', 'https://leicaflorianrobert.dev', {kind: 'personal', case_study: true}, name('My website V3'),
     note('Versione attuale del sito — case study', 'Current version of this site — case study', 'Versiunea actuală a site-ului — studiu de caz')),
-  project('v2', 'https://leicaflorianrobert.dev', {}, name('My website V2')),
+  project('v2', 'https://leicaflorianrobert.dev', {kind: 'personal'}, name('My website V2')),
   project('wab', 'https://webartisanbros.com/', {featured: true, mockup: 'laptop'}, name('Web Artisan Bros')),
-  project('slides', 'https://chrome.google.com/webstore/detail/slidescom-downloader/bciknjamldhnbbckmgbchmkdcalngnco?hl=it', {}, name('Slides.com downloader'),
+  project('slides', 'https://chrome.google.com/webstore/detail/slidescom-downloader/bciknjamldhnbbckmgbchmkdcalngnco?hl=it', {kind: 'personal'}, name('Slides.com downloader'),
     note('Estensione Chrome', 'Chrome extension', 'Extensie Chrome')),
-  project('tvit', 'https://tvit.leicaflorianrobert.dev/channels', {on_home: true}, name('TvIt')),
+  project('tvit', 'https://tvit.leicaflorianrobert.dev/channels', {kind: 'personal', on_home: true}, name('TvIt')),
   project('biologica', 'https://biologicadisinfestazioni.it', {on_home: true}, name('Biologica Disinfestazioni')),
-  project('enigma', 'https://leicaflorian.github.io/enigma_machine', {}, name('Enigma'),
+  project('enigma', 'https://leicaflorian.github.io/enigma_machine', {kind: 'personal'}, name('Enigma'),
     note('Macchina Enigma', 'Enigma machine', 'Mașina Enigma')),
-  project('fold', 'https://leicaflorian.github.io/fold_my_paper', {}, name('Fold my paper')),
+  project('fold', 'https://leicaflorian.github.io/fold_my_paper', {kind: 'personal'}, name('Fold my paper')),
   project('gca', 'https://globalgroup.consulting/club/', {featured: true, mockup: 'phone'}, name('Global Club App'),
     {it: {subtitle: 'App mobile'}, en: {subtitle: 'Mobile app'}, ro: {subtitle: 'Aplicație mobilă'}}),
-  project('v1', 'https://v1.leicaflorianrobert.dev', {}, name('My website V1')),
+  project('v1', 'https://v1.leicaflorianrobert.dev', {kind: 'personal'}, name('My website V1')),
   project('ggc', 'https://private.globalgroup.consulting/', {}, name('Global Group Consulting')),
-  project('fib', 'https://leicaflorian.github.io/fibonacci_counter/', {}, name('Fibonacci Counter')),
+  project('fib', 'https://leicaflorian.github.io/fibonacci_counter/', {kind: 'personal'}, name('Fibonacci Counter')),
 ]
 
 const experience = (company, year, link, it, en = it, ro = it) => ({
@@ -293,10 +293,15 @@ const PAGES = [
         en: {label: 'featured'},
         ro: {label: 'în evidență'},
       }),
-      section('block_projects', {show: 'archive'}, {
-        it: {label: 'archivio', title: 'Elenco progetti'},
-        en: {label: 'archive', title: 'All projects'},
-        ro: {label: 'arhivă', title: 'Lista proiectelor'},
+      section('block_projects', {show: 'archive', kind: 'client'}, {
+        it: {label: 'clienti', title: 'Lavori per i clienti'},
+        en: {label: 'clients', title: 'Client work'},
+        ro: {label: 'clienți', title: 'Lucrări pentru clienți'},
+      }),
+      section('block_projects', {show: 'archive', kind: 'personal'}, {
+        it: {label: 'lab', title: 'Progetti personali'},
+        en: {label: 'lab', title: 'Personal projects'},
+        ro: {label: 'lab', title: 'Proiecte personale'},
       }),
       section('block_cta', {variant: 'banner', engines: 'native'}, {
         it: {title: 'Ora sai qualcosa in più,', title_accent: 'scrivimi', text: 'Sia che tu stia cercando di creare un sito web aziendale, un e-commerce, un blog o qualsiasi altra soluzione web, sono qui per aiutarti. Contattami oggi stesso per scoprire come possiamo collaborare e creare un sito web straordinario insieme!'},
