@@ -1,6 +1,6 @@
 // Loads the design's content (directus/../design) into Directus: Italian texts,
 // plus a first draft in English and Romanian, to be reviewed in the admin panel.
-// Doesn't touch collections and singletons that already have content.
+// Doesn't touch singletons and items that already have content: it only adds what's missing.
 //
 //   node directus/scripts/seed.mjs
 
@@ -548,11 +548,18 @@ async function sorted(sections) {
   return out
 }
 
-async function seedCollection(collection, items) {
-  const existing = await api('GET', `/items/${collection}?limit=1&fields=id`)
-  if (existing.length) return console.log(`= ${collection} (already filled in)`)
-  await api('POST', `/items/${collection}`, items.map((item, i) => ({sort: i + 1, ...item})))
-  console.log(`+ ${collection}: ${items.length}`)
+/**
+ * Creates the items whose `key` field isn't in the collection yet, so that items added
+ * here later reach a Directus already filled in. New ones go after the existing ones.
+ */
+async function seedCollection(collection, items, key) {
+  const existing = await api('GET', `/items/${collection}?limit=-1&fields=${key},sort`)
+  const known = new Set(existing.map(item => item[key]))
+  const missing = items.filter(item => !known.has(item[key]))
+  if (!missing.length) return console.log(`= ${collection} (already filled in)`)
+  const last = Math.max(0, ...existing.map(item => item.sort ?? 0))
+  await api('POST', `/items/${collection}`, missing.map((item, i) => ({sort: last + i + 1, ...item})))
+  console.log(`+ ${collection}: ${missing.map(item => item[key]).join(', ')}`)
 }
 
 /**
@@ -605,11 +612,11 @@ await waitForDirectus()
 for (const [collection, data] of Object.entries(SINGLETONS)) await seedSingleton(collection, data)
 const pages = []
 for (const page of PAGES) pages.push({...page, sections: await sorted(page.sections)})
-await seedCollection('pages', pages)
-await seedCollection('projects', PROJECTS)
+await seedCollection('pages', pages, 'key')
+await seedCollection('projects', PROJECTS, 'slug')
 await seedCaseStudies()
 await seedGalleryFiles()
-await seedCollection('experiences', EXPERIENCES)
-await seedCollection('services', SERVICES)
-await seedCollection('technologies', TECHNOLOGIES)
+await seedCollection('experiences', EXPERIENCES, 'company')
+await seedCollection('services', SERVICES, 'icon')
+await seedCollection('technologies', TECHNOLOGIES, 'name')
 console.log('Content loaded.')
