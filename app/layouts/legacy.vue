@@ -11,7 +11,7 @@ const menu = useMenu()
 </script>
 
 <template>
-  <div data-engine="legacy" class="min-h-screen bg-white font-legacy text-[17px] leading-normal text-black">
+  <div data-engine="legacy" class="min-h-screen bg-white scheme-light font-legacy text-[17px] leading-normal text-black">
     <div class="mx-auto max-w-[880px] px-6 pb-12 pt-8">
       <h1 class="m-0 mb-1.5 text-[34px] font-bold">{{ site.name }}</h1>
       <p class="m-0 mb-3.5">{{ $t('engine.profession', {profession: site.profession}) }}</p>
