@@ -156,7 +156,7 @@ const EXPERIENCES = [
     en: 'Desktop management applications in Visual Basic, Adobe Flex (AIR) and as Chrome apps and extensions, plus PHP and MySQL websites integrated with Google APIs: Drive, Maps and Sign-In.',
     ro: 'Aplicații desktop de gestiune în Visual Basic, Adobe Flex (AIR) și ca aplicații și extensii Chrome, plus site-uri în PHP și MySQL integrate cu API-urile Google: Drive, Maps și Sign-In.',
   }, {it: 'Organizzazione no-profit', en: 'Non-profit organisation', ro: 'Organizație non-profit'}),
-  experience('Self-employed', 2017, null, 'Full Stack Developer, Web Designer, Mobile Developer', {
+  experience('Self-employed', [2017, 'now'], null, 'Full Stack Developer, Web Designer, Mobile Developer', {
     it: 'Siti e applicazioni per clienti diretti: interfacce responsive, app ibride con Cordova e poi Ionic, siti WordPress e Joomla con temi e moduli su misura.',
     en: 'Websites and applications for direct clients: responsive interfaces, hybrid apps with Cordova and then Ionic, WordPress and Joomla sites with custom themes and modules.',
     ro: 'Site-uri și aplicații pentru clienți direcți: interfețe responsive, aplicații hibride cu Cordova și apoi Ionic, site-uri WordPress și Joomla cu teme și module pe măsură.',
