@@ -24,8 +24,8 @@ const slots = computed(() => {
     <p v-for="(paragraph, i) in paragraphs(block.text)" :key="i" class="m-0" v-html="highlight(paragraph)"/>
     <div class="mt-3 grid grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-5">
       <div v-for="(slot, i) in slots" :key="i" class="flex flex-col gap-2.5">
-        <div class="aspect-4/3 overflow-hidden rounded-xl">
-          <UiMediaImage :id="slot.image" :alt="plain(slot.caption)" :width="800"/>
+        <div class="aspect-4/3 overflow-hidden rounded-xl border border-line-card">
+          <UiMediaImage :id="slot.image" :alt="plain(slot.caption)" :width="800" class="object-left-top"/>
         </div>
         <span class="text-xs text-subtle" v-html="highlight(slot.caption, 'text-accent')"/>
       </div>

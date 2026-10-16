@@ -4,7 +4,8 @@
 //
 //   node directus/scripts/seed.mjs
 
-import {api, waitForDirectus} from './api.mjs'
+import {readFile} from 'node:fs/promises'
+import {api, authToken, DIRECTUS_URL, waitForDirectus} from './api.mjs'
 
 /** From `{it: {...}, en: {...}}` to Directus translation rows. */
 const tr = byLocale => Object.entries(byLocale).map(([languages_code, fields]) => ({languages_code, ...fields}))
@@ -137,6 +138,8 @@ const section = (collection, fields, byLocale) => ({collection, item: {...fields
 const same = fields => ({it: fields, en: fields, ro: fields})
 const lines = (...items) => items.join('\n')
 const paras = (...items) => items.join('\n\n')
+/** A gallery's images, from directus/seed-files: uploaded when the gallery is created. */
+const files = (...names) => ({seedFiles: names})
 
 const PAGES = [
   {
@@ -375,7 +378,7 @@ const CASE_STUDIES = {
           ),
         },
       }),
-      section('block_gallery', {}, {
+      section('block_gallery', {images: files('cs-v3-legacy.png', 'cs-v3-native.png')}, {
         it: {
           label: 'concept',
           title: 'Il Motore Duale',
@@ -481,8 +484,40 @@ async function seedSingleton(collection, data) {
   console.log(`+ ${collection}`)
 }
 
-/** Sections in the given order. */
-const sorted = sections => sections.map((section, i) => ({...section, sort: i + 1}))
+/** Uploads a file from directus/seed-files, or returns the one already uploaded with that name. */
+async function upload(name) {
+  const [existing] = await api('GET', `/files?filter[filename_download][_eq]=${encodeURIComponent(name)}&fields=id`)
+  if (existing) return existing.id
+
+  const form = new FormData()
+  form.append('title', name.replace(/\.\w+$/, ''))
+  form.append('file', new Blob([await readFile(new URL(`../seed-files/${name}`, import.meta.url))]), name)
+  const response = await fetch(`${DIRECTUS_URL}/files`, {
+    method: 'POST',
+    headers: {Authorization: `Bearer ${await authToken()}`},
+    body: form,
+  })
+  if (!response.ok) throw new Error(`Upload of ${name} failed: ${await response.text()}`)
+  console.log(`+ file ${name}`)
+  return (await response.json()).data.id
+}
+
+/** The gallery images of `files(...)`, uploaded, as rows of the gallery's junction. */
+async function galleryImages(images) {
+  if (!images?.seedFiles) return images
+  const ids = []
+  for (const name of images.seedFiles) ids.push(await upload(name))
+  return ids.map((id, i) => ({directus_files_id: id, sort: i + 1}))
+}
+
+/** Sections in the given order, with their files uploaded. */
+async function sorted(sections) {
+  const out = []
+  for (const [i, {item, ...section}] of sections.entries()) {
+    out.push({...section, sort: i + 1, item: {...item, ...(item.images ? {images: await galleryImages(item.images)} : {})}})
+  }
+  return out
+}
 
 async function seedCollection(collection, items) {
   const existing = await api('GET', `/items/${collection}?limit=1&fields=id`)
@@ -512,17 +547,39 @@ async function seedCaseStudies() {
       ...fields,
       case_study: true,
       translations: {create: rows.filter(r => !r.id), update: rows.filter(r => r.id), delete: []},
-      sections: sorted(sections),
+      sections: await sorted(sections),
     })
     console.log(`+ case study ${slug}`)
   }
 }
 
+/**
+ * Case studies created before their gallery had images (`files(...)`): uploads the images
+ * into those galleries that are still empty. Galleries are matched by position.
+ */
+async function seedGalleryFiles() {
+  for (const [slug, {sections}] of Object.entries(CASE_STUDIES)) {
+    const fields = 'sections.sort,sections.collection,sections.item:block_gallery.id,sections.item:block_gallery.images.id'
+    const [project] = await api('GET', `/items/projects?filter[slug][_eq]=${slug}&fields=${fields}`)
+    if (!project) continue
+    const current = [...project.sections].sort((a, b) => a.sort - b.sort)
+    for (const [i, {collection, item}] of sections.entries()) {
+      const existing = current[i]
+      if (!item.images?.seedFiles || existing?.collection !== collection || existing.item?.images?.length) continue
+      await api('PATCH', `/items/block_gallery/${existing.item.id}`, {images: await galleryImages(item.images)})
+      console.log(`+ case study ${slug}: images of section ${i + 1}`)
+    }
+  }
+}
+
 await waitForDirectus()
 for (const [collection, data] of Object.entries(SINGLETONS)) await seedSingleton(collection, data)
-await seedCollection('pages', PAGES.map(page => ({...page, sections: sorted(page.sections)})))
+const pages = []
+for (const page of PAGES) pages.push({...page, sections: await sorted(page.sections)})
+await seedCollection('pages', pages)
 await seedCollection('projects', PROJECTS)
 await seedCaseStudies()
+await seedGalleryFiles()
 await seedCollection('experiences', EXPERIENCES)
 await seedCollection('services', SERVICES)
 await seedCollection('technologies', TECHNOLOGIES)
