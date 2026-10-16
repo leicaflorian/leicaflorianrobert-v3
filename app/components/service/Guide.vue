@@ -79,10 +79,10 @@ function restart() {
   input.value = ''
 }
 
-/** Carries the chosen services over to the contact form below, as project types. */
+/** Sets the contact form's project types to the chosen services: they replace earlier requests'. */
 function toForm(event: MouseEvent) {
   if (!selected.value.length) return event.preventDefault()
-  draft.value.project_types = [...new Set([...draft.value.project_types, ...selected.value.map(i => SERVICE_BRIEF[i])])]
+  draft.value.project_types = [...new Set(selected.value.map(i => SERVICE_BRIEF[i]))]
 }
 
 /** The results as a terminal list: ↑ ↓ move the cursor, Space ticks, Enter goes on to the form. */
