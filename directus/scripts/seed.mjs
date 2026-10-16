@@ -73,7 +73,8 @@ const PROJECTS = [
   project('steelfuture', 'https://steelfuture.com/', {case_study: true}, name('Steel Future'),
     note('Gestionale aziendale', 'Business management software', 'Software de gestiune')),
   project('v2', 'https://leicaflorianrobert.dev', {kind: 'personal', branch: 'main', year: 2023}, name('My website V2')),
-  project('wab', 'https://webartisanbros.com/', {featured: true, mockup: 'laptop', year: 2023}, name('Web Artisan Bros')),
+  // no longer operating, and its site is gone: no link, not featured
+  project('wab', '', {year: 2023}, name('Web Artisan Bros')),
   project('slides', 'https://chromewebstore.google.com/detail/slidescom-companion/bciknjamldhnbbckmgbchmkdcalngnco', {kind: 'personal', case_study: true}, name('Slides.com Companion'),
     note('Estensione Chrome ed Edge', 'Chrome and Edge extension', 'Extensie Chrome și Edge')),
   project('tvit', 'https://tvit.leicaflorianrobert.dev/channels', {kind: 'personal', on_home: true, case_study: true}, name('TvIt'),
@@ -172,7 +173,7 @@ const EXPERIENCES = [
     en: 'Lead teacher of the Full Stack course: lessons from HTML to Laravel, React and Node.js, one-to-one mentoring and assessment of the projects of dozens of students.',
     ro: 'Profesor principal al cursului Full Stack: lecții de la HTML la Laravel, React și Node.js, mentorat individual și evaluarea proiectelor a zeci de studenți.',
   }),
-  experience('Web Artisan Bros', 2023, 'https://webartisanbros.com', 'Co-Founder & Full Stack Developer', {
+  experience('Web Artisan Bros', 2023, null, 'Co-Founder & Full Stack Developer', {
     it: 'Ho co-fondato una software house di prodotti digitali su misura: scelta dello stack, sviluppo frontend e backend, intero ciclo dei progetti e rapporto diretto con i clienti.',
     en: 'I co-founded a software house building custom digital products: choosing the stack, frontend and backend development, the whole project lifecycle and direct contact with clients.',
     ro: 'Am co-fondat o software house de produse digitale pe măsură: alegerea stack-ului, dezvoltare frontend și backend, întregul ciclu al proiectelor și relația directă cu clienții.',
@@ -318,7 +319,7 @@ const PAGES = [
           steps: lines('l\'inizio', 'la crescita', 'insegnare', 'oggi'),
           text: paras(
             'Ho cominciato a programmare da autodidatta, a 20 anni, nel 2009, con un\'applicazione in Visual Basic per l\'Ordine degli Ingegneri della Provincia di Potenza, sviluppata per Tecnobit. Nessun corso, solo qualche dritta da un amico: per il resto documentazione, tentativi ed errori. Volevo capire come funziona il web e, prima o poi, farne parte.',
-            'Un tassello alla volta, quella curiosità è diventata un mestiere. Mi sono messo alla prova su progetti sempre più grandi, dai primi siti fino a Web Artisan Bros, la software house che ho co-fondato: backend in Laravel, interfacce in Vue e Nuxt, app mobile. Ho sbagliato spesso, e ogni errore mi ha insegnato qualcosa che un manuale non spiega.',
+            'Un tassello alla volta, quella curiosità è diventata un mestiere. Mi sono messo alla prova su progetti sempre più grandi, fino a co-fondare una software house e a guidare, da CTO, la parte tecnica di una web agency: backend in Laravel, interfacce in Vue e Nuxt, app mobile. Ho sbagliato spesso, e ogni errore mi ha insegnato qualcosa che un manuale non spiega.',
             'Ho imparato da solo, e per questo so quanto conta avere qualcuno che ti spiega le cose bene. Per quasi tre anni, dal 2021 al 2024, ho formato programmatori Full Stack con Boolean Careers, insegnando loro quello che serve per lavorare davvero. Spiegare mi ha costretto a capire ogni cosa fino in fondo, e mi ha reso uno sviluppatore migliore.',
             'Oggi lavoro come sviluppatore e continuo a guardare dove sta andando la tecnologia. Soprattutto l\'AI, che sta cambiando il modo di lavorare in molti settori. Per me è uno strumento come gli altri, e come ogni buon strumento semplifica molte cose: la uso ogni giorno come un collega instancabile, che scrive e verifica codice sotto la mia direzione. Questo sito ne è la prova, e lo racconto nel suo case study.',
           ),
@@ -329,7 +330,7 @@ const PAGES = [
           steps: lines('the start', 'growing', 'teaching', 'today'),
           text: paras(
             'I started programming self-taught at 20, in 2009, with a Visual Basic application for the Order of Engineers of the Province of Potenza, built for Tecnobit. No courses, just a few tips from a friend: the rest was documentation, trial and error. I wanted to understand how the web works and, sooner or later, be part of it.',
-            'Piece by piece, that curiosity became a trade. I tested myself on bigger and bigger projects, from my first websites to Web Artisan Bros, the software house I co-founded: Laravel backends, Vue and Nuxt interfaces, mobile apps. I often got things wrong, and every mistake taught me something no manual explains.',
+            'Piece by piece, that curiosity became a trade. I tested myself on bigger and bigger projects, up to co-founding a software house and leading, as CTO, the technical side of a web agency: Laravel backends, Vue and Nuxt interfaces, mobile apps. I often got things wrong, and every mistake taught me something no manual explains.',
             'I learned on my own, and that\'s why I know how much it matters to have someone who explains things well. For almost three years, from 2021 to 2024, I trained Full Stack developers at Boolean Careers, teaching them what they need to really do the job. Explaining forced me to understand everything all the way down, and made me a better developer.',
             'Today I work as a developer and keep watching where technology is going. Above all AI, which is changing how people work in many fields. To me it\'s a tool like any other, and like every good tool it makes many things simpler: I use it every day like a tireless colleague that writes and checks code under my direction. This site is the proof, and I tell the story in its case study.',
           ),
@@ -340,7 +341,7 @@ const PAGES = [
           steps: lines('începutul', 'creșterea', 'predarea', 'azi'),
           text: paras(
             'Am început să programez ca autodidact la 20 de ani, în 2009, cu o aplicație în Visual Basic pentru Ordinul Inginerilor din Provincia Potenza, dezvoltată pentru Tecnobit. Niciun curs, doar câteva sfaturi de la un prieten: în rest, documentație, încercări și greșeli. Voiam să înțeleg cum funcționează web-ul și, mai devreme sau mai târziu, să fac parte din el.',
-            'Pas cu pas, acea curiozitate a devenit o meserie. M-am pus la încercare pe proiecte tot mai mari, de la primele site-uri până la Web Artisan Bros, software house-ul pe care l-am co-fondat: backend în Laravel, interfețe în Vue și Nuxt, aplicații mobile. Am greșit des, iar fiecare greșeală m-a învățat ceva ce niciun manual nu explică.',
+            'Pas cu pas, acea curiozitate a devenit o meserie. M-am pus la încercare pe proiecte tot mai mari, până la a co-fonda o software house și a conduce, ca CTO, partea tehnică a unei agenții web: backend în Laravel, interfețe în Vue și Nuxt, aplicații mobile. Am greșit des, iar fiecare greșeală m-a învățat ceva ce niciun manual nu explică.',
             'Am învățat singur și de aceea știu cât contează să ai pe cineva care îți explică bine lucrurile. Timp de aproape trei ani, din 2021 până în 2024, am format programatori Full Stack la Boolean Careers, învățându-i ce le trebuie ca să lucreze cu adevărat. Să explic m-a obligat să înțeleg totul până la capăt și m-a făcut un dezvoltator mai bun.',
             'Astăzi lucrez ca dezvoltator și continui să urmăresc încotro merge tehnologia. Mai ales AI-ul, care schimbă felul în care se lucrează în multe domenii. Pentru mine e un instrument ca oricare altul și, ca orice instrument bun, simplifică multe lucruri: îl folosesc zilnic ca pe un coleg neobosit, care scrie și verifică cod sub îndrumarea mea. Acest site este dovada, iar povestea o spun în studiul lui de caz.',
           ),
