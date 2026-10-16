@@ -12,7 +12,7 @@ import {
   BlocksListLegacy, BlocksListNative, BlocksPageHeaderLegacy, BlocksPageHeaderNative,
   BlocksPaletteLegacy, BlocksPaletteNative, BlocksProjectsLegacy, BlocksProjectsNative,
   BlocksServicesLegacy, BlocksServicesNative, BlocksStackLegacy, BlocksStackNative,
-  BlocksTextLegacy, BlocksTextNative,
+  BlocksTextLegacy, BlocksTextNative, BlocksWidgetsLegacy, BlocksWidgetsNative,
 } from '#components'
 
 const props = defineProps<{sections: Section[]}>()
@@ -24,6 +24,7 @@ const COMPONENTS: Record<BlockCollection, {native: Component, legacy: Component}
   block_page_header: {native: BlocksPageHeaderNative, legacy: BlocksPageHeaderLegacy},
   block_text: {native: BlocksTextNative, legacy: BlocksTextLegacy},
   block_gallery: {native: BlocksGalleryNative, legacy: BlocksGalleryLegacy},
+  block_widgets: {native: BlocksWidgetsNative, legacy: BlocksWidgetsLegacy},
   block_list: {native: BlocksListNative, legacy: BlocksListLegacy},
   block_palette: {native: BlocksPaletteNative, legacy: BlocksPaletteLegacy},
   block_cta: {native: BlocksCtaNative, legacy: BlocksCtaLegacy},

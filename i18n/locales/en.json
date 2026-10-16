@@ -162,5 +162,35 @@
       "explain": "starts at 0 and adds up every price",
       "review": "Let's handle the timeout too, this is where everything hangs."
     }
+  },
+  "widgets": {
+    "editor": {
+      "changes": "3 modified",
+      "todo": "// TODO: retry if it fails"
+    },
+    "lesson": {
+      "lesson": "lesson",
+      "live": "● live",
+      "loading": "loading messages…",
+      "question": "so await blocks everything?",
+      "answer": "no, just the function. let's see.",
+      "steps": [
+        "main() starts",
+        "main() calls fetchMessages()",
+        "fetch() sends the request",
+        "await: fetchMessages pauses",
+        "main() goes on: shows the loader",
+        "main() ends · empty stack",
+        "response in → microtask",
+        "event loop: resumes after await",
+        "renderChat(msgs)",
+        "done ✓ · nothing blocked"
+      ]
+    },
+    "neofetch": {
+      "coffee": "Coffee",
+      "perDay": "3 / day",
+      "theme": "theme {name}"
+    }
   }
 }

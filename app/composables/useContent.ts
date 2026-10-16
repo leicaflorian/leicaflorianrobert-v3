@@ -15,7 +15,7 @@ export type RawItem = Record<string, unknown> & {translations?: TranslationRow[]
 
 /** The block collections, as in `directus/scripts/setup.mjs`. */
 export const BLOCK_COLLECTIONS: BlockCollection[] = [
-  'block_hero_home', 'block_page_header', 'block_text', 'block_gallery', 'block_list', 'block_palette',
+  'block_hero_home', 'block_page_header', 'block_text', 'block_gallery', 'block_widgets', 'block_list', 'block_palette',
   'block_cta', 'block_contact_form', 'block_services', 'block_projects', 'block_experiences', 'block_stack',
   'block_contact_info',
 ]

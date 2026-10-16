@@ -162,5 +162,35 @@
       "explain": "pornește de la 0 și adună fiecare preț",
       "review": "Să tratăm și timeout-ul, aici se blochează tot."
     }
+  },
+  "widgets": {
+    "editor": {
+      "changes": "3 modificate",
+      "todo": "// TODO: reîncearcă dacă eșuează"
+    },
+    "lesson": {
+      "lesson": "lecția",
+      "live": "● live",
+      "loading": "se încarcă mesajele…",
+      "question": "deci await blochează tot?",
+      "answer": "nu, doar funcția. hai să vedem.",
+      "steps": [
+        "main() pornește",
+        "main() apelează fetchMessages()",
+        "fetch() trimite cererea",
+        "await: fetchMessages se suspendă",
+        "main() continuă: arată loaderul",
+        "main() se termină · stivă goală",
+        "a sosit răspunsul → microtask",
+        "event loop: reia după await",
+        "renderChat(msgs)",
+        "gata ✓ · nimic blocat"
+      ]
+    },
+    "neofetch": {
+      "coffee": "Cafea",
+      "perDay": "3 / zi",
+      "theme": "tema {name}"
+    }
   }
 }

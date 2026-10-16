@@ -142,6 +142,15 @@ export interface BlockGallery extends BlockBase {
   captions: string | null
 }
 
+export type Widget = 'editor' | 'lesson' | 'neofetch'
+
+export interface BlockWidgets extends BlockBase {
+  widgets: Widget[] | null
+  // translated
+  label: string | null
+  title: string | null
+}
+
 export interface BlockList extends BlockBase {
   // translated
   label: string | null
@@ -221,6 +230,7 @@ export interface Blocks {
   block_page_header: BlockPageHeader
   block_text: BlockText
   block_gallery: BlockGallery
+  block_widgets: BlockWidgets
   block_list: BlockList
   block_palette: BlockPalette
   block_cta: BlockCta

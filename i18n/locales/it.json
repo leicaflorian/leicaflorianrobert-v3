@@ -162,5 +162,35 @@
       "explain": "parte da 0 e accumula ogni prezzo",
       "review": "Gestiamo anche il timeout, qui si blocca tutto."
     }
+  },
+  "widgets": {
+    "editor": {
+      "changes": "3 modificati",
+      "todo": "// TODO: retry se fallisce"
+    },
+    "lesson": {
+      "lesson": "lezione",
+      "live": "● live",
+      "loading": "caricamento messaggi…",
+      "question": "ma quindi await blocca tutto?",
+      "answer": "no, solo la funzione. vediamolo.",
+      "steps": [
+        "main() parte",
+        "main() chiama fetchMessages()",
+        "fetch() avvia la richiesta",
+        "await: fetchMessages si sospende",
+        "main() continua: mostra il loader",
+        "main() finisce · stack vuoto",
+        "risposta arrivata → microtask",
+        "event loop: riprende dopo await",
+        "renderChat(msgs)",
+        "fatto ✓ · nessun blocco"
+      ]
+    },
+    "neofetch": {
+      "coffee": "Caffè",
+      "perDay": "3 / giorno",
+      "theme": "tema {name}"
+    }
   }
 }

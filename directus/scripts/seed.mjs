@@ -231,11 +231,7 @@ const PAGES = [
           ),
         },
       }),
-      section('block_gallery', {engines: 'native'}, {
-        it: {captions: lines('Al lavoro', 'In aula / mentoring', 'Il setup')},
-        en: {captions: lines('At work', 'Teaching / mentoring', 'The setup')},
-        ro: {captions: lines('La lucru', 'La curs / mentorat', 'Setup-ul')},
-      }),
+      section('block_widgets', {engines: 'native', widgets: ['editor', 'lesson', 'neofetch']}, same({})),
       section('block_experiences', {}, {
         it: {label: 'esperienze', title: 'Ecco alcune esperienze', text: 'Queste sono alcune delle esperienze più significative che ho avuto nel corso della mia carriera. Ci sono stati molti altri progetti e collaborazioni, e tutte queste esperienze mi hanno permesso di crescere professionalmente, ma sicuramente queste sono le più importanti.'},
         en: {label: 'experience', title: 'Some of my experience', text: 'These are some of the most significant experiences of my career. There have been many other projects and collaborations, and all of them helped me grow professionally, but these are certainly the most important.'},

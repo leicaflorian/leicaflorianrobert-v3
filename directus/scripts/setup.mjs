@@ -222,6 +222,12 @@ const BLOCKS = [
       text('captions', 'Le didascalie, una per riga, nell\'ordine delle immagini'),
     ],
   }),
+  block('block_widgets', {
+    icon: 'animation',
+    note: 'Widget animati, solo in modalità native: un editor che scrive codice, una lezione su async/await e un neofetch con i temi.',
+    fields: [choices('widgets', 'Quali mostrare', [['editor', 'Editor'], ['lesson', 'Lezione'], ['neofetch', 'Neofetch']])],
+    translations: [label('Etichetta piccola, facoltativa'), title('Titolo, facoltativo')],
+  }),
   block('block_list', {
     icon: 'format_list_bulleted',
     note: 'Un elenco, accanto al titolo.',
