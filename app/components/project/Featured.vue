@@ -36,7 +36,7 @@ const subtitle = computed(() => props.project.subtitle || hostOf(props.project.u
       </div>
       <div class="flex items-center gap-3">
         <ProjectBadge :kind="project.kind"/>
-        <span class="text-xl text-accent">↗</span>
+        <ProjectArrow :project="project" class="text-xl"/>
       </div>
     </div>
   </ProjectLink>

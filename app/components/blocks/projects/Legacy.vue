@@ -16,7 +16,9 @@ const linkOf = useProjectLink()
   <BlocksLegacyHeading>{{ block.title ?? block.label }}</BlocksLegacyHeading>
   <component :is="block.show === 'archive' ? 'ol' : 'ul'" class="m-0 pl-[26px]" :class="block.show === 'archive' ? 'list-decimal' : 'list-disc'">
     <li v-for="project in shown" :key="project.id" class="mb-1">
-      <LegacyLink :href="linkOf(project).href">{{ project.name }}</LegacyLink>
+      <LegacyLink :href="linkOf(project).href">{{ project.name }}</LegacyLink>{{ ' ' }}
+      <b v-if="project.case_study">[{{ $t('projects.caseStudy') }}]</b>
+      <template v-else>[{{ $t('projects.external') }}]</template>
       ({{ $t(`projects.kind.${project.kind}`) }})
       <template v-if="project.note"> — <i>{{ project.note }}</i></template>
     </li>

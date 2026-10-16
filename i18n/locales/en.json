@@ -115,7 +115,8 @@
     "hover": "hover over it ↗"
   },
   "projects": {
-    "caseStudy": "case study →",
+    "caseStudy": "case study",
+    "external": "external link",
     "mobileApp": "Mobile app",
     "kind": {
       "direct": "client",

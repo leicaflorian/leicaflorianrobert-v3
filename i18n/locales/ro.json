@@ -115,7 +115,8 @@
     "hover": "treci cu mouse-ul ↗"
   },
   "projects": {
-    "caseStudy": "studiu de caz →",
+    "caseStudy": "studiu de caz",
+    "external": "link extern",
     "mobileApp": "Aplicație mobilă",
     "kind": {
       "direct": "client",
