@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+body { margin:0; background:#0B0B0D; }
+a { color:#FF5B14; text-decoration:none; } a:hover { color:#EDEBE6; }
+@keyframes cursorBlink { 0%,50%{opacity:1} 51%,100%{opacity:0} }
+@keyframes stIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+</style>
+</helmet>
+<section style="font-family:'JetBrains Mono',monospace;color:#EDEBE6;padding:64px;display:flex;flex-direction:column;gap:32px;">
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <span style="font-size:13px;color:#FF5B14;">turno 1 · storia in Chi sono, 3 formati</span>
+    <span style="font-size:13px;color:#8F8C85;max-width:760px;line-height:1.7;">Aziende, ruoli e anni dalla tua sezione Esperienze. Versioni e righe del changelog sono proposte mie, da rivedere. Tecnobit non ha un anno: l'ho messa come punto di partenza.</span>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start;">
+
+    <div id="1a" style="flex:none;width:1200px;display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;align-items:center;gap:12px;"><span style="padding:4px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:12px;font-weight:800;">1a</span><span style="font-size:13px;color:#8F8C85;">timeline + widget · scorri la colonna di sinistra</span></div>
+      <div style="background:#111113;border:1px solid #222226;border-radius:20px;padding:80px 40px;">
+        <p style="margin:0 0 16px;font-size:13px;color:#FF5B14;">01 / storia</p>
+        <h2 style="margin:0 0 48px;font-size:44px;font-weight:800;letter-spacing:-0.03em;">Da autodidatta a formatore<span aria-hidden="true" style="display:inline-block;width:0.5em;height:0.09em;margin-left:0.1em;background:#FF5B14;animation:cursorBlink 1s step-start infinite;"></span></h2>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start;">
+          <div ref="{{ tlRef }}" onScroll="{{ tlScroll }}" style="position:relative;height:620px;overflow-y:auto;padding-right:12px;">
+            <sc-for list="{{ tl }}" as="e" hint-placeholder-count="8">
+              <div data-tl="1" onMouseEnter="{{ e.pick }}" style="position:relative;display:grid;grid-template-columns:72px minmax(0,1fr);gap:20px;padding:0 0 56px;">
+                <div style="position:relative;display:flex;flex-direction:column;align-items:flex-end;padding-right:22px;">
+                  <span style="font-size:13px;font-weight:700;color:{{ e.yearColor }};transition:color .2s;">{{ e.yearLabel }}</span>
+                  <span style="position:absolute;right:-6px;top:4px;width:11px;height:11px;border-radius:11px;background:{{ e.dot }};box-shadow:{{ e.glow }};transition:all .2s;"></span>
+                  <span style="position:absolute;right:-1px;top:20px;bottom:-56px;width:1px;background:#26262B;"></span>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:8px;opacity:{{ e.op }};transition:opacity .25s;">
+                  <span style="align-self:flex-start;padding:2px 8px;border-radius:5px;background:#1C1C20;font-size:11px;color:#FF8A57;">v{{ e.ver }}</span>
+                  <span style="font-size:18px;font-weight:700;">{{ e.company }}</span>
+                  <span style="font-size:13px;color:#8F8C85;">{{ e.role }}</span>
+                  <div style="display:flex;flex-direction:column;gap:4px;margin-top:6px;font-size:13px;line-height:1.6;">
+                    <sc-for list="{{ e.lines }}" as="l" hint-placeholder-count="2"><span style="color:#BDBAB2;"><span style="color:{{ l.c }};">{{ l.s }}</span> {{ l.t }}</span></sc-for>
+                  </div>
+                </div>
+              </div>
+            </sc-for>
+            <div style="height:320px;"></div>
+          </div>
+          <div style="border:1px solid #26262B;border-radius:16px;background:#0C0C0E;overflow:hidden;">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid #222226;background:#18181B;font-size:12px;color:#8F8C85;">
+              <span style="display:flex;align-items:center;gap:6px;"><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="margin-left:8px;">{{ w.title }}</span></span>
+              <span style="color:#FF5B14;">{{ w.yearLabel }}</span>
+            </div>
+            <div style="height:400px;box-sizing:border-box;padding:24px 0;display:flex;flex-direction:column;font-size:13px;line-height:1.75;">
+              <sc-for list="{{ w.rows }}" as="r" hint-placeholder-count="8">
+                <div style="display:grid;grid-template-columns:44px minmax(0,1fr);animation:stIn .25s ease-out both;animation-delay:{{ r.d }};"><span style="text-align:right;padding-right:16px;color:#3A3A40;">{{ r.n }}</span><span style="white-space:pre;overflow:hidden;text-overflow:ellipsis;padding-right:16px;color:{{ r.c }};">{{ r.t }}</span></div>
+              </sc-for>
+              <div style="display:grid;grid-template-columns:44px minmax(0,1fr);"><span></span><span style="color:#FF5B14;animation:cursorBlink 1s step-start infinite;">▍</span></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:6px 14px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;"><span>{{ w.company }}</span><span>v{{ w.ver }}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="1b" style="flex:none;width:1200px;display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;align-items:center;gap:12px;"><span style="padding:4px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:12px;font-weight:800;">1b</span><span style="font-size:13px;color:#8F8C85;">git log della carriera · clicca un commit</span></div>
+      <div style="background:#111113;border:1px solid #222226;border-radius:20px;padding:80px 40px;">
+        <p style="margin:0 0 16px;font-size:13px;color:#FF5B14;">01 / storia</p>
+        <h2 style="margin:0 0 48px;font-size:44px;font-weight:800;letter-spacing:-0.03em;">Da autodidatta a formatore<span aria-hidden="true" style="display:inline-block;width:0.5em;height:0.09em;margin-left:0.1em;background:#FF5B14;animation:cursorBlink 1s step-start infinite;"></span></h2>
+        <div style="border:1px solid #26262B;border-radius:16px;background:#0C0C0E;overflow:hidden;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid #222226;background:#18181B;font-size:12px;color:#8F8C85;">
+            <span><span style="color:#5BD48A;">$</span> git log --graph carriera</span>
+            <span style="display:flex;gap:14px;font-size:11px;"><span style="color:#FF5B14;">● dipendente</span><span style="color:#E8B04A;">● freelance</span><span style="color:#5BD48A;">● formazione</span></span>
+          </div>
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);">
+            <div style="padding:16px 0;border-right:1px solid #222226;font-size:13px;">
+              <sc-for list="{{ graph }}" as="g" hint-placeholder-count="8">
+                <button type="button" onClick="{{ g.pick }}" style="width:100%;display:grid;grid-template-columns:18px 18px 18px minmax(0,1fr);align-items:stretch;min-height:44px;padding:0 20px;border:0;background:{{ g.bg }};font-family:inherit;font-size:13px;text-align:left;cursor:pointer;color:#BDBAB2;" style-hover="background:#141416;">
+                  <sc-for list="{{ g.lanes }}" as="ln" hint-placeholder-count="3">
+                    <span style="position:relative;display:flex;align-items:center;justify-content:center;">
+                      <span style="position:absolute;left:50%;top:{{ ln.top }};bottom:{{ ln.bottom }};width:2px;margin-left:-1px;background:{{ ln.line }};"></span>
+                      <span style="position:relative;width:{{ ln.size }};height:{{ ln.size }};border-radius:99px;background:{{ ln.dot }};box-shadow:{{ ln.glow }};"></span>
+                    </span>
+                  </sc-for>
+                  <span style="display:flex;align-items:center;gap:10px;min-width:0;padding-left:10px;">
+                    <span style="flex:none;color:#E8B04A;">{{ g.hash }}</span>
+                    <sc-if value="{{ g.head }}" hint-placeholder-val="{{ false }}"><span style="flex:none;padding:0 6px;border-radius:4px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;">HEAD</span></sc-if>
+                    <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:{{ g.color }};">{{ g.company }}</span>
+                    <span style="flex:none;margin-left:auto;font-size:11px;color:#5A5852;">{{ g.yearLabel }}</span>
+                  </span>
+                </button>
+              </sc-for>
+            </div>
+            <div style="padding:28px 32px;display:flex;flex-direction:column;gap:4px;font-size:13px;line-height:1.75;min-width:0;">
+              <span style="color:#E8B04A;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">commit {{ d.hashLong }}</span>
+              <span style="color:#8F8C85;">Author: Leica Florian Robert</span>
+              <span style="color:#8F8C85;">Date:   {{ d.yearLabel }} · branch {{ d.branch }}</span>
+              <span style="margin:16px 0 4px;padding-left:24px;font-size:17px;font-weight:700;color:#EDEBE6;">{{ d.company }}</span>
+              <span style="padding-left:24px;color:#BDBAB2;">{{ d.role }}</span>
+              <div style="margin-top:20px;border:1px solid #222226;border-radius:10px;overflow:hidden;">
+                <div style="padding:8px 14px;border-bottom:1px solid #222226;background:#141416;font-size:11px;color:#8F8C85;">skills.md</div>
+                <sc-for list="{{ d.diff }}" as="l" hint-placeholder-count="3">
+                  <div style="padding:4px 14px;background:{{ l.bg }};color:{{ l.fg }};animation:stIn .25s ease-out both;">{{ l.s }} {{ l.t }}</div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="1c" style="flex:none;width:1200px;display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;align-items:center;gap:12px;"><span style="padding:4px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:12px;font-weight:800;">1c</span><span style="font-size:13px;color:#8F8C85;">CHANGELOG.md · versioni della carriera</span></div>
+      <div style="background:#111113;border:1px solid #222226;border-radius:20px;padding:80px 40px;">
+        <div style="display:grid;grid-template-columns:minmax(0,0.38fr) minmax(0,0.62fr);gap:56px;align-items:start;">
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <p style="margin:0;font-size:13px;color:#FF5B14;">01 / storia</p>
+            <h2 style="margin:0;font-size:44px;font-weight:800;letter-spacing:-0.03em;line-height:1.05;">Da autodidatta a formatore<span aria-hidden="true" style="display:inline-block;width:0.5em;height:0.09em;margin-left:0.1em;background:#FF5B14;animation:cursorBlink 1s step-start infinite;"></span></h2>
+            <p style="margin:0;font-size:15px;line-height:1.8;color:#A3A09A;">Ho iniziato a programmare da autodidatta. Giorno dopo giorno, tassello dopo tassello.</p>
+            <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;color:#8F8C85;">
+              <span><span style="color:#5BD48A;">+</span> aggiunto</span><span><span style="color:#E8B04A;">~</span> migliorato</span><span><span style="color:#E58A8A;">−</span> rimosso</span>
+            </div>
+          </div>
+          <div style="border:1px solid #26262B;border-radius:16px;background:#0C0C0E;overflow:hidden;">
+            <div style="display:flex;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #222226;background:#18181B;font-size:12px;color:#8F8C85;"><span>CHANGELOG.md</span><span>{{ clCount }} release</span></div>
+            <div style="height:620px;overflow-y:auto;padding:28px 32px;display:flex;flex-direction:column;gap:8px;">
+              <span style="font-size:24px;font-weight:800;letter-spacing:-0.02em;"># Changelog</span>
+              <span style="margin-bottom:12px;font-size:12px;color:#5A5852;">Tutte le modifiche rilevanti a questa carriera.</span>
+              <sc-for list="{{ cl }}" as="r" hint-placeholder-count="8">
+                <div style="display:flex;flex-direction:column;gap:8px;padding:20px 0;border-top:1px solid #1C1C20;">
+                  <button type="button" onClick="{{ r.toggle }}" style="display:flex;align-items:baseline;gap:12px;padding:0;border:0;background:transparent;font-family:inherit;text-align:left;cursor:pointer;color:#EDEBE6;">
+                    <span style="font-size:15px;font-weight:800;">## [{{ r.ver }}]</span>
+                    <span style="font-size:13px;color:#8F8C85;">{{ r.yearLabel }} · {{ r.company }}</span>
+                    <sc-if value="{{ r.latest }}" hint-placeholder-val="{{ false }}"><span style="padding:0 6px;border-radius:4px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;">latest</span></sc-if>
+                    <span style="margin-left:auto;font-size:12px;color:#5A5852;">{{ r.sign }}</span>
+                  </button>
+                  <sc-if value="{{ r.open }}" hint-placeholder-val="{{ true }}">
+                    <div style="display:flex;flex-direction:column;gap:4px;padding-left:4px;font-size:13px;line-height:1.7;animation:stIn .2s ease-out both;">
+                      <span style="margin-bottom:4px;color:#BDBAB2;">{{ r.role }}</span>
+                      <sc-for list="{{ r.lines }}" as="l" hint-placeholder-count="2"><span style="color:#BDBAB2;"><span style="color:{{ l.c }};">{{ l.s }}</span> {{ l.t }}</span></sc-for>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { tl: 'wab', g: 'wab', cl: { wab: true, boolean: true } };
+  tlRef = React.createRef();
+  tlScroll = () => {
+    const el = this.tlRef.current; if (!el) return;
+    const items = [...el.querySelectorAll('[data-tl]')];
+    let idx = 0; items.forEach((it, i) => { if (it.offsetTop - 140 <= el.scrollTop) idx = i; });
+    const key = this.data()[idx].key;
+    if (key !== this.state.tl) this.setState({ tl: key });
+  };
+  data() {
+    if (this._d) return this._d;
+    const K = '#FF8A57', T = '#EDEBE6', D = '#8F8C85', G = '#5BD48A', O = '#FF5B14';
+    const lt = '\u003c', gt = '\u003e';
+    this._d = [
+      { key: 'wab', year: 2023, ver: '3.0.0', br: 'freelance', company: 'Web Artisan Bros', role: 'Co-founder & CTO',
+        add: ['una società tutta mia, con soci', 'decisioni di prodotto, non solo di codice'], imp: ['architettura e scelta dello stack'], rem: [],
+        w: { title: 'git log · webartisanbros', rows: [['$ git log --oneline', D], ['', T], ['a91f3c0 (HEAD) primo cliente firmato', T], ['77be210 setup infrastruttura', T], ['3c0e9d4 logo e brand', T], ['0f12ab7 initial commit', T], ['', T], ['$ git shortlog -sn', D], ['  leica  ●●●●●●●●●', O]] } },
+      { key: 'boolean', year: 2021, ver: '2.5.0', br: 'formazione', company: 'Boolean Careers', role: 'Main Teacher nel corso di Full-Stack Web Development',
+        add: ['insegnare: trasmettere quello che ho imparato'], imp: ['spiegare semplice cose complesse'], rem: ['"si è sempre fatto così"'],
+        w: { title: 'lezioni · full-stack', rows: [['lezione 01  HTML & CSS        ✓', G], ['lezione 02  JavaScript        ✓', G], ['lezione 03  DOM & eventi      ✓', G], ['lezione 04  async / await     ●', O], ['lezione 05  Vue.js', D], ['lezione 06  PHP & Laravel', D], ['lezione 07  database', D], ['', T], [gt + ' domande?', T]] } },
+      { key: 'develon', year: 2020, ver: '2.2.0', br: 'dipendente', company: 'Develon s.r.l.', role: 'Senior Full Stack Developer',
+        add: ['backend, API e container'], imp: ['progetti grandi, team grandi'], rem: [],
+        w: { title: 'docker-compose.yml', rows: [['services:', K], ['  app:', T], ['    build: .', T], ['    ports: ["80:80"]', T], ['  api:', T], ['    image: node:lts', T], ['  db:', T], ['    image: mysql:8', T]] } },
+      { key: 'zucchetti', year: 2018, ver: '2.1.0', br: 'dipendente', company: 'Zucchetti Software Giuridico s.r.l.', role: 'Senior Front-End Developer',
+        add: ['Vue.js e i framework moderni'], imp: ['front-end di software complessi'], rem: ['jQuery dappertutto'],
+        w: { title: 'Pratica.vue', rows: [[lt + 'template' + gt, K], ['  ' + lt + 'PraticaForm', T], ['    v-model="pratica"', T], ['    @save="salva" /' + gt, T], [lt + '/template' + gt, K], ['', T], [lt + 'scr' + 'ipt setup' + gt, K], ['const pratica = ref({})', T]] } },
+      { key: 'self', year: 2017, ver: '2.0.0', br: 'freelance', company: 'Self-employed', role: 'Full Stack Developer, Web Designer, Mobile Developer',
+        add: ["clienti miei, progetti dall'inizio alla fine", 'app mobile'], imp: [], rem: ['il capo'],
+        w: { title: 'zsh · ~/lavoro', rows: [['$ mkdir freelance && cd freelance', T], ['$ git init primo-cliente', T], ['Initialized empty Git repository', D], ['', T], ['$ fattura --n 001', T], ['✓ fattura 001 emessa', G], ['', T], ['$ echo "si parte"', T], ['si parte', O]] } },
+      { key: 'noprofit', year: 2010, ver: '1.1.0', br: 'dipendente', company: 'Organizzazione no-profit', role: 'Desktop & Web Developer',
+        add: ['applicazioni desktop oltre al web'], imp: ['lavorare con utenti reali'], rem: [],
+        w: { title: 'ftp · upload', rows: [['$ ftp sito-associazione.org', T], ['Connected.', D], ['ftp' + gt + ' put index.html', T], ['226 Transfer complete', G], ['ftp' + gt + ' put style.css', T], ['226 Transfer complete', G], ['ftp' + gt + ' bye', T]] } },
+      { key: 'mediamotion', year: 2009, ver: '1.0.0', br: 'dipendente', company: 'Mediamotion s.r.l.', role: 'Junior Full Stack Developer',
+        add: ['il primo lavoro da sviluppatore'], imp: [], rem: ['"sono solo un autodidatta"'],
+        w: { title: 'main.js', rows: [['$(document).ready(function () {', K], ['  $(".menu").click(function () {', T], ['    $(this).toggleClass("open");', T], ['  });', T], ['});', K], ['', T], ['// funziona su IE6? sì.', D]] } },
+      { key: 'tecnobit', year: null, ver: '0.1.0', br: 'dipendente', company: 'Tecnobit s.r.l.', role: 'Sviluppo software gestionale',
+        add: ['database e logica di business'], imp: [], rem: [],
+        w: { title: 'gestionale.sql', rows: [['SELECT nome, totale', K], ['FROM fatture', K], ['WHERE pagata = 0', T], ['ORDER BY totale DESC;', T], ['', T], ['-- il primo gestionale', D]] } },
+    ];
+    return this._d;
+  }
+  lines(e) { return [...e.add.map(t => ({ s: '+', c: '#5BD48A', t })), ...e.imp.map(t => ({ s: '~', c: '#E8B04A', t })), ...e.rem.map(t => ({ s: '−', c: '#E58A8A', t }))]; }
+  renderVals() {
+    const data = this.data().map(e => ({ ...e, yearLabel: e.year ? String(e.year) : 'inizio' }));
+    const tlKey = this.state.tl;
+    const tl = data.map(e => { const on = e.key === tlKey; return { ...e, lines: this.lines(e), pick: () => this.setState({ tl: e.key }), yearColor: on ? '#FF5B14' : '#5A5852', dot: on ? '#FF5B14' : '#2C2C31', glow: on ? '0 0 0 5px rgba(255,91,20,0.18)' : 'none', op: on ? 1 : 0.45 }; });
+    const we = data.find(e => e.key === tlKey);
+    const w = { title: we.w.title, yearLabel: we.yearLabel, company: we.company, ver: we.ver, rows: we.w.rows.map(([t, c], i) => ({ t, c, n: i + 1, d: (i * 0.05) + 's' })) };
+    const hashOf = (k, n) => { let s = ''; let h = 2166136261; for (let r = 0; s.length < n; r++) { for (const ch of k + r) h = Math.imul(h ^ ch.charCodeAt(0), 16777619); s += (h >>> 0).toString(16).padStart(8, '0'); } return s.slice(0, n); };
+    const BR = ['dipendente', 'freelance', 'formazione'], BC = { dipendente: '#FF5B14', freelance: '#E8B04A', formazione: '#5BD48A' };
+    const lastIdx = {}; data.forEach((e, i) => { lastIdx[e.br] = i; });
+    const graph = data.map((e, i) => {
+      const lanes = BR.map(b => { const alive = i <= lastIdx[b], here = b === e.br, c = BC[b]; return { line: alive ? c + (here ? '' : '55') : 'transparent', top: i === 0 ? '50%' : '0', bottom: i === lastIdx[b] ? '50%' : '0', dot: here ? c : 'transparent', size: here ? (i === 0 ? '12px' : '10px') : '0', glow: here && e.key === this.state.g ? '0 0 0 4px ' + c + '33' : 'none' }; });
+      const on = e.key === this.state.g;
+      return { ...e, lanes, hash: hashOf(e.key, 7), head: i === 0, bg: on ? '#18181B' : 'transparent', color: on ? '#EDEBE6' : '#BDBAB2', pick: () => this.setState({ g: e.key }) };
+    });
+    const ge = data.find(e => e.key === this.state.g);
+    const d = { ...ge, branch: ge.br, hashLong: hashOf(ge.key, 40), diff: this.lines(ge).map(l => ({ ...l, bg: l.s === '+' ? 'rgba(91,212,138,0.08)' : l.s === '~' ? 'rgba(232,176,74,0.08)' : 'rgba(229,138,138,0.08)', fg: l.c })) };
+    const cl = data.map((e, i) => { const open = !!this.state.cl[e.key]; return { ...e, latest: i === 0, open, sign: open ? '−' : '+', lines: this.lines(e), toggle: () => this.setState(s => ({ cl: { ...s.cl, [e.key]: !s.cl[e.key] } })) }; });
+    return { tlRef: this.tlRef, tlScroll: this.tlScroll, tl, w, graph, d, cl, clCount: data.length };
+  }
+}
+</script>
+</body>
+</html>

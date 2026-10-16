@@ -28,8 +28,9 @@ a:hover { color:#FF8A52; }
 @media (max-width: 860px) {
   #ab-hero, #ab-bio, #ab-head, #l-table { grid-template-columns:minmax(0,1fr) !important; }
   #ab-bio-label { position:static !important; }
-  #ab-gallery { grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important; }
-  #ab-gallery > *:first-child { grid-column:span 2; }
+  #ab-stage { height:auto !important; display:flex; flex-direction:column; gap:16px; }
+  #ab-stage > * { position:relative !important; inset:auto !important; opacity:1 !important; transform:none !important; pointer-events:auto !important; }
+  #ab-steps { display:none !important; }
   .exp-row { grid-template-columns:64px 1fr !important; }
   .exp-role { grid-column:2; }
 }
@@ -151,16 +152,49 @@ a:hover { color:#FF8A52; }
     </section>
 
     <section style="border-top:1px solid #222226;">
-      <div id="ab-bio" style="max-width:1120px;margin:0 auto;padding:240px 24px;display:grid;grid-template-columns:minmax(0,0.35fr) minmax(0,0.65fr);gap:72px;align-items:start;">
-        <div id="ab-bio-label" style="position:sticky;top:96px;">
+      <div id="ab-bio" style="max-width:1120px;margin:0 auto;padding:240px 24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:72px;align-items:start;">
+        <div id="ab-bio-label" style="position:sticky;top:96px;display:flex;flex-direction:column;gap:40px;">
           <p style="margin:0 0 16px;font-size:13px;color:#FF5B14;">01 / storia</p>
           <h2 style="margin:0;font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-0.03em;line-height:1.05;">Da autodidatta a formatore<span aria-hidden="true" style="display:inline-block;width:0.5em;height:0.09em;margin-left:0.1em;background:#FF5B14;vertical-align:baseline;animation:cursorBlink 1s step-start infinite;"></span></h2>
+          <div id="ab-stage" style="position:relative;height:340px;">
+          <div style="position:absolute;inset:0;opacity:{{ st.o0 }};transform:{{ st.t0 }};pointer-events:{{ st.p0 }};transition:opacity .45s ease,transform .45s ease;">
+      <div style="min-width:0;height:340px;box-sizing:border-box;border:1px solid #26262B;border-radius:16px;background:{{ nf.bg }};transition:background .3s;overflow:hidden;padding:22px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px;font-size:11px;line-height:1.55;">
+        <span style="color:{{ nf.dim }};"><span style="color:{{ nf.prompt }};">$</span> neofetch</span>
+        <div style="display:flex;flex-wrap:wrap;gap:12px 18px;align-items:flex-start;">
+          <pre style="margin:0;font-family:inherit;font-size:10px;line-height:1.15;color:{{ nf.accent }};">{{ logoArt }}</pre>
+          <div style="flex:1 1 160px;display:flex;flex-direction:column;gap:1px;min-width:0;">
+            <span style="color:{{ nf.text }};"><span style="color:{{ nf.accent }};">leica</span>@<span style="color:{{ nf.accent }};">studio</span></span>
+            <span style="color:{{ nf.rule }};">-------------</span>
+            <sc-for list="{{ sysinfo }}" as="r" hint-placeholder-count="7">
+              <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><span style="color:{{ nf.key }};">{{ r.k }}</span><span style="color:{{ nf.dim }};">: </span><span style="color:{{ nf.text }};">{{ r.v }}</span></span>
+            </sc-for>
+          </div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:24px;font-size:16px;line-height:1.85;color:#BDBAB2;">
-          <sc-for list="{{ bioNative }}" as="para" hint-placeholder-count="4"><p style="margin:0;">{{ para }}</p></sc-for>
+        <div style="margin-top:auto;display:flex;align-items:center;gap:4px;">
+          <sc-for list="{{ nfSwatches }}" as="w" hint-placeholder-count="7">
+            <button type="button" onClick="{{ w.pick }}" title="{{ w.name }}" aria-label="tema {{ w.name }}" aria-pressed="{{ w.sel }}" style="width:24px;height:14px;padding:0;border:1px solid {{ w.border }};background:{{ w.color }};cursor:pointer;transform:{{ w.lift }};transition:transform .15s;" style-hover="transform:translateY(-2px);"></button>
+          </sc-for>
+          <span style="margin-left:auto;font-size:10px;color:{{ nf.dim }};">{{ nf.label }}</span>
         </div>
       </div>
-      <div id="ab-gallery" style="max-width:1120px;margin:0 auto;padding:0 24px 240px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr);gap:24px;">
+          </div>
+          <div style="position:absolute;inset:0;opacity:{{ st.o1 }};transform:{{ st.t1 }};pointer-events:{{ st.p1 }};transition:opacity .45s ease,transform .45s ease;">
+      <div style="min-width:0;height:340px;box-sizing:border-box;border:1px solid #26262B;border-radius:16px;background:#0C0C0E;overflow:hidden;display:flex;flex-direction:column;font-size:12px;line-height:1.7;">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid #222226;background:#18181B;font-size:12px;color:#8F8C85;"><span style="display:flex;align-items:center;gap:6px;"><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="margin-left:8px;">zsh · come funziona il web</span></span><span style="color:#FF5B14;">HTTP/2</span></div>
+        <div style="padding:18px 20px 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;font-size:10px;text-align:center;">
+          <sc-for list="{{ webHops }}" as="h" hint-placeholder-count="4">
+            <span style="padding:8px 4px;border-radius:6px;border:1px solid {{ h.border }};background:{{ h.bg }};color:{{ h.color }};transition:all .3s;">{{ h.label }}</span>
+          </sc-for>
+        </div>
+        <div style="padding:16px 20px;display:flex;flex-direction:column;gap:1px;">
+          <span style="color:#8F8C85;"><span style="color:#5BD48A;">$</span> <span style="color:#EDEBE6;">curl -I https://leicaflorianrobert.dev</span></span>
+          <sc-for list="{{ webLines }}" as="l" hint-placeholder-count="6">
+            <span style="color:{{ l.c }};opacity:{{ l.o }};transition:opacity .3s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ l.t }}</span>
+          </sc-for>
+        </div>
+      </div>
+          </div>
+          <div style="position:absolute;inset:0;opacity:{{ st.o2 }};transform:{{ st.t2 }};pointer-events:{{ st.p2 }};transition:opacity .45s ease,transform .45s ease;">
       <div style="min-width:0;height:340px;box-sizing:border-box;border:1px solid #26262B;border-radius:16px;background:#0C0C0E;overflow:hidden;display:flex;flex-direction:column;font-size:12px;">
         <div style="display:flex;border-bottom:1px solid #222226;background:#18181B;color:#8F8C85;font-size:11px;">
           <sc-for list="{{ edTabs }}" as="tb" hint-placeholder-count="2">
@@ -183,7 +217,8 @@ a:hover { color:#FF8A52; }
         </div>
         <div style="display:flex;justify-content:space-between;padding:6px 12px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;"><span>⎇ main · 3 modificati</span><span>{{ edLang }} · UTF-8</span></div>
       </div>
-
+          </div>
+          <div style="position:absolute;inset:0;opacity:{{ st.o3 }};transform:{{ st.t3 }};pointer-events:{{ st.p3 }};transition:opacity .45s ease,transform .45s ease;">
       <div style="min-width:0;height:340px;box-sizing:border-box;border:1px solid #26262B;border-radius:16px;background:#18181B;overflow:hidden;padding:20px;box-sizing:border-box;display:flex;flex-direction:column;gap:12px;">
         <div style="display:flex;justify-content:space-between;font-size:11px;color:#8F8C85;"><span>lezione 04 / 12</span><span style="color:#FF5B14;">● live</span></div>
         <span style="font-size:18px;font-weight:800;letter-spacing:-0.02em;">async / await</span>
@@ -208,26 +243,32 @@ a:hover { color:#FF8A52; }
           <div style="align-self:flex-end;max-width:85%;padding:7px 10px;border-radius:10px 10px 2px 10px;background:#FF5B14;color:#111113;font-size:11px;font-weight:700;opacity:{{ evA.o }};transform:{{ evA.t }};transition:opacity .3s,transform .3s;">no, solo la funzione. vediamolo.</div>
         </div>
       </div>
-
-      <div style="min-width:0;height:340px;box-sizing:border-box;border:1px solid #26262B;border-radius:16px;background:{{ nf.bg }};transition:background .3s;overflow:hidden;padding:22px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px;font-size:11px;line-height:1.55;">
-        <span style="color:{{ nf.dim }};"><span style="color:{{ nf.prompt }};">$</span> neofetch</span>
-        <div style="display:flex;flex-wrap:wrap;gap:12px 18px;align-items:flex-start;">
-          <pre style="margin:0;font-family:inherit;font-size:10px;line-height:1.15;color:{{ nf.accent }};">{{ logoArt }}</pre>
-          <div style="flex:1 1 160px;display:flex;flex-direction:column;gap:1px;min-width:0;">
-            <span style="color:{{ nf.text }};"><span style="color:{{ nf.accent }};">leica</span>@<span style="color:{{ nf.accent }};">studio</span></span>
-            <span style="color:{{ nf.rule }};">-------------</span>
-            <sc-for list="{{ sysinfo }}" as="r" hint-placeholder-count="7">
-              <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><span style="color:{{ nf.key }};">{{ r.k }}</span><span style="color:{{ nf.dim }};">: </span><span style="color:{{ nf.text }};">{{ r.v }}</span></span>
+          </div>
+          <div style="position:absolute;inset:0;opacity:{{ st.o4 }};transform:{{ st.t4 }};pointer-events:{{ st.p4 }};transition:opacity .45s ease,transform .45s ease;">
+      <div style="min-width:0;height:340px;box-sizing:border-box;border:1px solid #26262B;border-radius:16px;background:#0C0C0E;overflow:hidden;display:flex;flex-direction:column;font-size:12px;line-height:1.7;">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid #222226;background:#18181B;font-size:12px;color:#8F8C85;"><span style="display:flex;align-items:center;gap:6px;"><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="margin-left:8px;">lfr agent</span></span><span style="color:#FF5B14;">● in sessione</span></div>
+        <div style="flex:1;padding:18px 20px;display:flex;flex-direction:column;gap:6px;">
+          <span style="color:#EDEBE6;"><span style="color:#8F8C85;">›</span> scrivi i test per checkout() e verifica i casi limite</span>
+          <sc-for list="{{ aiLines }}" as="l" hint-placeholder-count="5">
+            <span style="display:flex;gap:10px;opacity:{{ l.o }};transform:{{ l.t2 }};transition:opacity .3s,transform .3s;"><span style="flex:none;color:{{ l.mc }};">{{ l.m }}</span><span style="color:{{ l.c }};">{{ l.t }}</span></span>
+          </sc-for>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid #222226;font-size:11px;color:#8F8C85;"><span>tu decidi · l'AI esegue · tu verifichi</span><a href="Case Study V3.dc.html" style="color:#FF5B14;">./case-study →</a></div>
+      </div>
+          </div>
+          </div>
+          <div id="ab-steps" style="display:flex;align-items:center;gap:6px;">
+            <sc-for list="{{ storySteps }}" as="d" hint-placeholder-count="5">
+              <button type="button" onClick="{{ d.go }}" aria-label="{{ d.label }}" style="width:{{ d.w }};height:4px;padding:0;border:0;border-radius:4px;background:{{ d.bg }};cursor:pointer;transition:all .3s;"></button>
             </sc-for>
+            <span style="margin-left:10px;font-size:12px;color:#8F8C85;">{{ storyLabel }}</span>
           </div>
         </div>
-        <div style="margin-top:auto;display:flex;align-items:center;gap:4px;">
-          <sc-for list="{{ nfSwatches }}" as="w" hint-placeholder-count="7">
-            <button type="button" onClick="{{ w.pick }}" title="{{ w.name }}" aria-label="tema {{ w.name }}" aria-pressed="{{ w.sel }}" style="width:24px;height:14px;padding:0;border:1px solid {{ w.border }};background:{{ w.color }};cursor:pointer;transform:{{ w.lift }};transition:transform .15s;" style-hover="transform:translateY(-2px);"></button>
+        <div style="display:flex;flex-direction:column;font-size:16px;line-height:1.85;">
+          <sc-for list="{{ storyParas }}" as="p" hint-placeholder-count="5">
+            <p data-story="1" style="margin:0;padding:{{ p.pad }};border-left:2px solid {{ p.edge }};color:{{ p.color }};transition:color .35s,border-color .35s;">{{ p.text }}</p>
           </sc-for>
-          <span style="margin-left:auto;font-size:10px;color:{{ nf.dim }};">{{ nf.label }}</span>
         </div>
-      </div>
       </div>
     </section>
 
@@ -326,7 +367,14 @@ class Component extends DCLogic {
   onKey = (e) => { if (e.key === 'Escape') this.setState({ langOpen: false }); };
   galTargets = { vue: '  await pay(cart.total)', ts: '  return res.json()' };
   openTab = (id) => this.setState({ edTab: id, typedLen: 0 });
-  componentDidMount() { document.addEventListener('click', this.onDocClick); document.addEventListener('keydown', this.onKey); this.evIv = setInterval(() => this.setState(s => ({ evStep: ((s.evStep || 0) + 1) % 11 })), 1400); this.galIv = setInterval(() => this.setState(s => ({ typedLen: (s.typedLen || 0) >= this.galTargets[this.state.edTab || 'vue'].length + 14 ? 0 : (s.typedLen || 0) + 1 })), 110); }
+  onStory = () => {
+    const els = document.querySelectorAll('[data-story]'); if (!els.length) return;
+    const line = window.innerHeight * 0.45; let idx = 0;
+    els.forEach((el, i) => { if (el.getBoundingClientRect().top < line) idx = i; });
+    if (idx !== (this.state.story || 0)) this.setState({ story: idx });
+  };
+  goStory = (i) => { const el = document.querySelectorAll('[data-story]')[i]; if (!el) return; const sc = document.scrollingElement || document.documentElement; sc.scrollTo({ top: el.getBoundingClientRect().top + sc.scrollTop - window.innerHeight * 0.3, behavior: 'smooth' }); };
+  componentDidMount() { document.addEventListener('scroll', this.onStory, true); window.addEventListener('resize', this.onStory); document.addEventListener('click', this.onDocClick); document.addEventListener('keydown', this.onKey); this.evIv = setInterval(() => this.setState(s => ({ evStep: ((s.evStep || 0) + 1) % 11 })), 1400); this.galIv = setInterval(() => this.setState(s => ({ typedLen: (s.typedLen || 0) >= this.galTargets[this.state.edTab || 'vue'].length + 14 ? 0 : (s.typedLen || 0) + 1 })), 110); }
 
   toggleMode = () => {
     if (this.state.booting) return;
@@ -340,7 +388,7 @@ class Component extends DCLogic {
     this.t2 = setTimeout(() => this.setState({ booting: false }), 1100);
   };
 
-  componentWillUnmount() { clearTimeout(this.t1); clearTimeout(this.t2); document.removeEventListener('click', this.onDocClick); document.removeEventListener('keydown', this.onKey); clearInterval(this.galIv); clearInterval(this.evIv); }
+  componentWillUnmount() { document.removeEventListener('scroll', this.onStory, true); window.removeEventListener('resize', this.onStory); clearTimeout(this.t1); clearTimeout(this.t2); document.removeEventListener('click', this.onDocClick); document.removeEventListener('keydown', this.onKey); clearInterval(this.galIv); clearInterval(this.evIv); }
 
   renderVals() {
     const lang = this.state.lang;
@@ -390,7 +438,28 @@ class Component extends DCLogic {
     const ev = EV[this.state.evStep || 0];
     const evStack = ev.stack.map((label, i) => { const top = i === ev.stack.length - 1; return { label, bg: top ? 'rgba(255,91,20,0.14)' : 'transparent', color: top ? '#FF5B14' : '#EDEBE6' }; });
     const show = (on) => ({ o: on ? 1 : 0, t: on ? 'none' : 'translateY(6px)' });
+    const intro = "Sono Leica Florian Robert, sviluppatore Web Full Stack, UI e UX Designer, sviluppatore Mobile, insegnante tecnologie web, grande appassionato d'informatica e di tecnologia.";
+    const rest = [
+      "Adoro questi settori in quanto offrono opportunità uniche e (a volte) semplificano di molto la vita o comunque la migliorano e questa mia passione cerco di trasmetterla anche ad altri.",
+      "Dall'inizio della mia carriera professionale questa passione mi ha spinto a voler imparare il più possibile come funziona il web, come funziona l'informatica e come posso a mia volta farne parte anche io.",
+      "Ho iniziato a programmare da autodidatta. Giorno dopo giorno, tassello dopo tassello, ho imparato cose nuove, mi sono costantemente messo alla prova, allargando i miei limiti, a volte anche fallendo, ma tutto questo mi ha fatto crescere professionalmente e acquisire le capacità necessarie per rendere questa passione un lavoro.",
+      "Attualmente ho la splendida opportunità di trasmettere anche ad altri la mia passione, la mia esperienza e le conoscenze acquisite, formando programmatori Full Stack ed insegnando loro tutto il necessario per poter contribuire attivamente al mondo della programmazione! Oltre ad insegnare, continuo a lavorare come sviluppatore e mi diletto nello sperimentare nuove tecnologie e continuare ad imparare cose nuove.",
+    ];
+    const AI_P = "Oggi l'AI fa parte del mio modo di lavorare: la uso ogni giorno come un collega instancabile, che scrive e verifica codice sotto la mia direzione. Questo sito ne è la prova, e lo racconto nel suo case study.";
+    const paras = [...rest, AI_P];
+    const story = Math.min(this.state.story || 0, paras.length - 1);
+    const SL = ['chi sono', 'il web', 'autodidatta', 'insegnare', 'AI'];
+    const st = {}; for (let i = 0; i < 5; i++) { const on = i === story; st['o' + i] = on ? 1 : 0; st['t' + i] = on ? 'none' : (i < story ? 'translateY(-12px)' : 'translateY(12px)'); st['p' + i] = on ? 'auto' : 'none'; }
+    const storyParas = paras.map((text, i) => { const on = i === story; return { text, color: on ? '#EDEBE6' : '#5A5852', edge: on ? '#FF5B14' : '#222226', pad: i === paras.length - 1 ? '48px 0 30vh 28px' : '48px 0 48px 28px' }; });
+    const storySteps = SL.map((label, i) => ({ label, go: () => this.goStory(i), w: i === story ? '28px' : '10px', bg: i === story ? '#FF5B14' : '#2C2C31' }));
+    const es = this.state.evStep || 0;
+    const hop = es % 4;
+    const webHops = ['browser', 'DNS', 'server', '200 OK'].map((label, i) => ({ label, border: i === hop ? '#FF5B14' : '#26262B', bg: i === hop ? 'rgba(255,91,20,0.12)' : 'transparent', color: i <= hop ? '#EDEBE6' : '#5A5852' }));
+    const webLines = [['HTTP/2 200', '#5BD48A'], ['content-type: text/html; charset=utf-8', '#BDBAB2'], ['cache-control: max-age=3600', '#BDBAB2'], ['content-encoding: br', '#BDBAB2'], ['x-powered-by: curiosità', '#FF8A57'], ['', '#BDBAB2']].map(([t, c], i) => ({ t, c, o: hop === 3 || i === 0 && hop >= 2 ? 1 : 0.15 }));
+    const aiStep = es % 7;
+    const aiLines = [['⎿', '#3A3A40', 'leggo Checkout.vue e api.ts', '#8F8C85'], ['⎿', '#3A3A40', 'scrivo checkout.spec.ts · 12 test', '#8F8C85'], ['⎿', '#3A3A40', 'npm test → 12 passati ✓', '#5BD48A'], ['●', '#FF5B14', 'Fatto. Ho coperto anche carrello vuoto e pagamento rifiutato.', '#EDEBE6'], ['✓', '#5BD48A', 'revisione: leica · approvato', '#5BD48A']].map(([m, mc, t, c], i) => ({ m, mc, t, c, o: i < aiStep ? 1 : 0, t2: i < aiStep ? 'none' : 'translateY(4px)' }));
     const galExtra = {
+      st, storyParas, storySteps, storyLabel: String(story + 1).padStart(2, '0') + ' / 05 · ' + SL[story], webHops, webLines, aiLines,
       evStack, evQueue: ev.queue.map(label => ({ label })), evCaption: ev.cap,
       evLoopColor: ev.loop ? '#FF5B14' : '#8F8C85', evLoopLine: ev.loop ? '#FF5B14' : '#2C2C31', evQ: show(ev.q), evA: show(ev.a), evL: show(ev.l),
       nf: { ...nfT, label: 'theme: ' + nfT.name }, nfSwatches,
@@ -399,13 +468,6 @@ class Component extends DCLogic {
       sysinfo: [['OS', 'macOS 15'], ['Editor', 'PhpStorm'], ['Shell', 'zsh'], ['Terminal', 'Warp'], ['Font', 'JetBrains Mono'], ['Theme', nfT.name], ['Caffè', '3 / giorno']].map(([k, v]) => ({ k, v })),
     };
     const langExtra = { lang, t, langs, langOpen: !!this.state.langOpen, toggleLangMenu: this.toggleLangMenu };
-    const intro = "Sono Leica Florian Robert, sviluppatore Web Full Stack, UI e UX Designer, sviluppatore Mobile, insegnante tecnologie web, grande appassionato d'informatica e di tecnologia.";
-    const rest = [
-      "Adoro questi settori in quanto offrono opportunità uniche e (a volte) semplificano di molto la vita o comunque la migliorano e questa mia passione cerco di trasmetterla anche ad altri.",
-      "Dall'inizio della mia carriera professionale questa passione mi ha spinto a voler imparare il più possibile come funziona il web, come funziona l'informatica e come posso a mia volta farne parte anche io.",
-      "Ho iniziato a programmare da autodidatta. Giorno dopo giorno, tassello dopo tassello, ho imparato cose nuove, mi sono costantemente messo alla prova, allargando i miei limiti, a volte anche fallendo, ma tutto questo mi ha fatto crescere professionalmente e acquisire le capacità necessarie per rendere questa passione un lavoro.",
-      "Attualmente ho la splendida opportunità di trasmettere anche ad altri la mia passione, la mia esperienza e le conoscenze acquisite, formando programmatori Full Stack ed insegnando loro tutto il necessario per poter contribuire attivamente al mondo della programmazione! Oltre ad insegnare, continuo a lavorare come sviluppatore e mi diletto nello sperimentare nuove tecnologie e continuare ad imparare cose nuove.",
-    ];
     const experience = [
       { company: 'Tecnobit s.r.l.', link: 'https://www.tecnobit.it/', role: 'Sviluppo software gestionale', year: null },
       { company: 'Mediamotion s.r.l.', link: null, role: 'Junior Full Stack Developer', year: 2009 },
