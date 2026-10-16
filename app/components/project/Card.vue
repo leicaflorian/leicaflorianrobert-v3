@@ -1,6 +1,6 @@
 <!--
   A project in the grid: "archive" with note and domain (Projects page),
-  "compact" with the name only (Home).
+  "compact" with name and note, the result in one line (Home).
 -->
 <script setup lang="ts">
 import type {Project} from '~/types/content'
@@ -35,12 +35,15 @@ withDefaults(defineProps<{
       </div>
     </div>
 
-    <div v-else class="flex items-center justify-between gap-3 px-7 py-[22px]">
-      <h3 class="m-0 text-[17px] font-bold">{{ project.name }}</h3>
-      <div class="flex items-center gap-3">
-        <ProjectBadge :kind="project.kind"/>
-        <ProjectArrow :project="project"/>
+    <div v-else class="flex flex-col gap-2 px-7 py-[22px]">
+      <div class="flex items-center justify-between gap-3">
+        <h3 class="m-0 text-[17px] font-bold">{{ project.name }}</h3>
+        <div class="flex shrink-0 items-center gap-3">
+          <ProjectBadge :kind="project.kind"/>
+          <ProjectArrow :project="project"/>
+        </div>
       </div>
+      <p v-if="project.note" class="m-0 text-[13px] leading-normal text-muted">{{ project.note }}</p>
     </div>
   </ProjectLink>
 </template>

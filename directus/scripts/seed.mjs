@@ -71,10 +71,11 @@ const PROJECTS = [
   project('imanpack', 'https://www.imanpack.it/', {case_study: true, on_home: true}, name('Imanpack'),
     note('Dal CMS a Mailchimp in automatico, newsletter bilingui senza lavoro a mano', 'From the CMS to Mailchimp automatically: bilingual newsletters with no manual work', 'Din CMS în Mailchimp automat: newslettere bilingve fără muncă manuală')),
   project('steelfuture', 'https://steelfuture.com/', {case_study: true}, name('Steel Future'),
-    note('Gestionale aziendale', 'Business management software', 'Software de gestiune')),
+    note('Gestionale PHP 5 portato su Git, con deploy automatico a ogni push', 'PHP 5 management software brought under Git, with automatic deploys on every push', 'Software de gestiune PHP 5 adus în Git, cu deploy automat la fiecare push')),
   project('v2', 'https://leicaflorianrobert.dev', {kind: 'personal', branch: 'main', year: 2023}, name('My website V2')),
   // co-founded, so mine rather than a client's; no longer operating, and its site is gone: no link, not featured
-  project('wab', '', {kind: 'personal', year: 2023}, name('Web Artisan Bros')),
+  project('wab', '', {kind: 'personal', year: 2023}, name('Web Artisan Bros'),
+    note('Software house co-fondata nel 2023', 'Software house I co-founded in 2023', 'Software house co-fondată în 2023')),
   project('slides', 'https://chromewebstore.google.com/detail/slidescom-companion/bciknjamldhnbbckmgbchmkdcalngnco', {kind: 'personal', case_study: true}, name('Slides.com Companion'),
     note('Estensione Chrome ed Edge', 'Chrome and Edge extension', 'Extensie Chrome și Edge')),
   project('tvit', 'https://tvit.leicaflorianrobert.dev/channels', {kind: 'personal', on_home: true, case_study: true}, name('TvIt'),
@@ -95,7 +96,7 @@ const PROJECTS = [
   // the client is never named: no name, no link
   project('fintech', '', {case_study: true},
     {it: {name: 'Piattaforma per investimenti'}, en: {name: 'Investment platform'}, ro: {name: 'Platformă de investiții'}},
-    note('Web app, app mobile e microservizi', 'Web apps, mobile app and microservices', 'Aplicații web, aplicație mobilă și microservicii')),
+    note('Due web app, un\'app mobile e un\'area clienti come in una banca online', 'Two web apps, a mobile app and a client area like online banking', 'Două aplicații web, o aplicație mobilă și o zonă pentru clienți ca într-un internet banking')),
   project('fib', 'https://leicaflorian.github.io/fibonacci_counter/', {kind: 'personal'}, name('Fibonacci Counter')),
   // client work done through an agency, which is never named
   project('agrigento', 'https://agrigento2025.org', {kind: 'agency', category: 'initiative'}, name('Agrigento 2025')),
