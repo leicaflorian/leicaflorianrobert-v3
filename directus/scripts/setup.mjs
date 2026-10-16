@@ -199,8 +199,7 @@ const BLOCKS = [
     icon: 'title',
     note: 'La testata di una pagina: etichetta, titolo grande e introduzione.',
     fields: [
-      choice('variant', 'Gli elementi in più', [['plain', 'Nessuno'], ['about', 'Ritratto e numeri (Chi sono)'], ['projects', 'Numero di progetti (Progetti)'], ['contact', 'Disponibilità ed email (Contatti)']], 'plain'),
-      image('image', 'Il ritratto, nella variante Chi sono'),
+      choice('variant', 'Gli elementi in più', [['plain', 'Nessuno'], ['about', 'Ritratto ASCII e numeri (Chi sono)'], ['projects', 'Numero di progetti (Progetti)'], ['contact', 'Disponibilità ed email (Contatti)']], 'plain'),
     ],
     translations: [
       label('Etichetta sopra il titolo: «// su di me». {n} diventa il numero di progetti'),
@@ -298,6 +297,9 @@ const GALLERY_FILES = 'block_gallery_files'
 
 /** Collections from earlier schemas, removed by setup. */
 const OBSOLETE = ['page_home', 'page_about', 'page_projects', 'page_contact', 'page_case_study']
+
+/** Fields from earlier schemas, removed by setup: `[collection, field]`. */
+const OBSOLETE_FIELDS = [['block_page_header', 'image'], ['block_contact_form', 'image']]
 
 /**
  * The folders of the Data Model and of the content menu, in order. Collections left out stay at
@@ -549,12 +551,17 @@ async function groupCollections() {
   }
 }
 
-/** Removes the collections of earlier schemas, with their translations. */
+/** Removes the collections (with their translations) and fields of earlier schemas. */
 async function removeObsolete() {
   for (const collection of OBSOLETE.flatMap(c => [`${c}_translations`, c])) {
     if (!await exists(collection)) continue
     await api('DELETE', `/collections/${collection}`)
     console.log(`- ${collection}`)
+  }
+  for (const [collection, field] of OBSOLETE_FIELDS) {
+    if (!await exists(collection) || !(await fieldNames(collection)).has(field)) continue
+    await api('DELETE', `/fields/${collection}/${field}`)
+    console.log(`- ${collection}.${field}`)
   }
 }
 

@@ -108,10 +108,11 @@
   "about": {
     "years": "ani de experiență",
     "tech": "tehnologii în stack",
-    "portrait": "Portret",
     "legacy": {
-      "years": "Ani de experiență:"
-    }
+      "years": "Ani de experiență:",
+      "ascii": "leica.txt (64 col.)"
+    },
+    "hover": "treci cu mouse-ul ↗"
   },
   "projects": {
     "caseStudy": "studiu de caz →",

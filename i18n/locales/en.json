@@ -108,10 +108,11 @@
   "about": {
     "years": "years of experience",
     "tech": "technologies in the stack",
-    "portrait": "Portrait",
     "legacy": {
-      "years": "Years of experience:"
-    }
+      "years": "Years of experience:",
+      "ascii": "leica.txt (64 cols)"
+    },
+    "hover": "hover over it ↗"
   },
   "projects": {
     "caseStudy": "case study →",

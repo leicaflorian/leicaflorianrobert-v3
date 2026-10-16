@@ -118,7 +118,6 @@ export interface BlockHeroHome extends BlockBase {
 
 export interface BlockPageHeader extends BlockBase {
   variant: 'plain' | 'about' | 'projects' | 'contact'
-  image: FileId
   // translated
   /** `{n}` becomes the number of projects. */
   label: string | null
@@ -176,7 +175,6 @@ export interface BlockCta extends BlockBase {
 }
 
 export interface BlockContactForm extends BlockBase {
-  image: FileId
   // translated
   label: string | null
   title: string

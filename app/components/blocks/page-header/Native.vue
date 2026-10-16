@@ -1,5 +1,5 @@
 <!--
-  The top of a page: label, large title and intro. The variants add the portrait and
+  The top of a page: label, large title and intro. The variants add the ASCII portrait and
   the numbers (About), the number of projects (Projects), availability and email (Contact).
 -->
 <script setup lang="ts">
@@ -33,9 +33,19 @@ const label = computed(() => props.block.label?.replace('{n}', String(projects?.
         </div>
       </div>
       <div class="relative">
-        <div class="absolute inset-[12%_6%_0_6%] rounded-full bg-accent opacity-[0.22] blur-[100px]"/>
-        <div class="relative aspect-4/5 overflow-hidden rounded-[20px]">
-          <UiMediaImage :id="block.image" :alt="$t('about.portrait')" :width="900"/>
+        <div class="absolute inset-[20%_10%_10%_10%] rounded-full bg-accent opacity-[0.14] blur-[110px]"/>
+        <div class="relative overflow-hidden rounded-2xl border border-line-card bg-bg-deep/92">
+          <div class="flex items-center gap-1.5 border-b border-line bg-surface px-4 py-3 text-xs text-subtle">
+            <span v-for="i in 3" :key="i" class="size-[9px] shrink-0 rounded-full bg-gutter"/>
+            <span class="ml-2 truncate"><span class="text-code-ok">$</span> cat leica.webp | ascii --cols 84</span>
+          </div>
+          <div class="cursor-crosshair px-4 pt-5">
+            <UiAsciiPortrait src="/imgs/me-transparent-dark.webp" :label="site.name"/>
+          </div>
+          <div class="flex justify-between gap-3 border-t border-line px-4 py-3 text-[11px] text-ghost">
+            <span>leica.webp · 1600×2008</span>
+            <span>{{ $t('about.hover') }}</span>
+          </div>
         </div>
       </div>
     </div>
