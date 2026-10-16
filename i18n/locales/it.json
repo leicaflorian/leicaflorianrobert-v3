@@ -139,6 +139,13 @@
     }
   },
   "contact": {
+    "map": {
+      "online": "online",
+      "zone": "fuso",
+      "radius": "raggio",
+      "remote": "remoto ∞",
+      "label": "Mappa del Nord Italia con la mia posizione: {place}"
+    },
     "contacts": "// contatti",
     "social": "// social",
     "company": "// dati aziendali",

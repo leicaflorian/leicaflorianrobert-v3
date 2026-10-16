@@ -139,6 +139,13 @@
     }
   },
   "contact": {
+    "map": {
+      "online": "online",
+      "zone": "timezone",
+      "radius": "range",
+      "remote": "remote ∞",
+      "label": "Map of northern Italy with my location: {place}"
+    },
     "contacts": "// contact",
     "social": "// social",
     "company": "// company details",

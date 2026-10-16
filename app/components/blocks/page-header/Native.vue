@@ -1,10 +1,11 @@
 <!--
   The top of a page: label, large title and intro. The variants add the ASCII portrait and
-  the numbers (About), the number of projects and their git graph (Projects), availability
-  and email (Contact).
+  the numbers (About), the number of projects and their git graph (Projects), availability,
+  email and the ASCII map (Contact).
 -->
 <script setup lang="ts">
 import type {BlockPageHeader, Site} from '~/types/content'
+import {pin as mapPin} from '~/assets/ascii-map.json'
 
 const props = defineProps<{block: BlockPageHeader}>()
 
@@ -13,6 +14,10 @@ const stats = props.block.variant === 'about' ? await useAboutStats() : null
 const projects = props.block.variant === 'projects' ? await usePublishedProjects() : null
 
 const label = computed(() => props.block.label?.replace('{n}', String(projects?.value.length ?? 0)))
+
+/** The Contact map's pin, as the status line shows it. */
+const coordinates = `${mapPin.lat.toFixed(2)}°N ${mapPin.lon.toFixed(2)}°E`
+const place = computed(() => `${site.value.city} (${site.value.province})`)
 </script>
 
 <template>
@@ -65,22 +70,58 @@ const label = computed(() => props.block.label?.replace('{n}', String(projects?.
     </div>
   </section>
 
+  <section v-else-if="block.variant === 'contact'">
+    <div class="page grid grid-cols-2 items-center gap-18 pb-30 pt-28 max-[860px]:grid-cols-1">
+      <div>
+        <UiAvailableBadge v-if="site.available"/>
+        <UiPageTitle class="mt-8">{{ block.title }}</UiPageTitle>
+        <div class="mt-8 flex flex-col gap-4 text-[15px] leading-[1.8] text-muted">
+          <p v-for="(paragraph, i) in paragraphs(block.intro)" :key="i" class="m-0">{{ paragraph }}</p>
+        </div>
+        <a
+          :href="`mailto:${site.email}`"
+          class="mt-5 inline-block break-all border-b-2 border-accent pb-1.5 text-[clamp(16px,2vw,22px)] font-bold text-ink hover:text-accent"
+        >{{ site.email }} ↗</a>
+      </div>
+      <div class="min-w-0 overflow-hidden rounded-2xl border border-line-card bg-bg-deep">
+        <div class="flex items-center justify-between gap-3 border-b border-line bg-surface px-4 py-3 text-xs text-subtle">
+          <span class="flex min-w-0 items-center gap-1.5">
+            <span v-for="i in 3" :key="i" class="size-[9px] shrink-0 rounded-full bg-gutter"/>
+            <span class="ml-2 truncate"><span class="text-code-ok">$</span> whereis leica</span>
+          </span>
+          <span class="shrink-0 text-accent">● {{ $t('contact.map.online') }}</span>
+        </div>
+        <div class="px-4 py-5">
+          <UiAsciiMap :label="$t('contact.map.label', {place})"/>
+        </div>
+        <div class="grid grid-cols-3 border-t border-line text-[11px]">
+          <div class="flex flex-col gap-0.5 border-r border-line px-4 py-3">
+            <span class="text-ghost">{{ place }}</span>
+            <span class="text-ink">{{ coordinates }}</span>
+          </div>
+          <div class="flex flex-col gap-0.5 border-r border-line px-4 py-3">
+            <span class="text-ghost">{{ $t('contact.map.zone') }}</span>
+            <span class="text-ink">Europe/Rome</span>
+          </div>
+          <div class="flex flex-col gap-0.5 px-4 py-3">
+            <span class="text-ghost">{{ $t('contact.map.radius') }}</span>
+            <span class="text-ink">{{ $t('contact.map.remote') }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section v-else>
     <div class="page grid grid-cols-2 items-end gap-18 pb-30 pt-28 max-[860px]:grid-cols-1">
       <div>
-        <UiAvailableBadge v-if="block.variant === 'contact' && site.available"/>
         <UiSectionLabel v-if="label">{{ label }}</UiSectionLabel>
-        <UiPageTitle :class="block.variant === 'contact' && 'mt-8'">{{ block.title }}</UiPageTitle>
+        <UiPageTitle>{{ block.title }}</UiPageTitle>
       </div>
       <div>
         <div class="flex flex-col gap-4 text-[15px] leading-[1.8] text-muted">
           <p v-for="(paragraph, i) in paragraphs(block.intro)" :key="i" class="m-0">{{ paragraph }}</p>
         </div>
-        <a
-          v-if="block.variant === 'contact'"
-          :href="`mailto:${site.email}`"
-          class="mt-5 inline-block break-all border-b-2 border-accent pb-1.5 text-[clamp(16px,2vw,22px)] font-bold text-ink hover:text-accent"
-        >{{ site.email }} ↗</a>
       </div>
     </div>
   </section>

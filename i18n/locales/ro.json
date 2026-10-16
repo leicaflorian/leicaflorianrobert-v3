@@ -139,6 +139,13 @@
     }
   },
   "contact": {
+    "map": {
+      "online": "online",
+      "zone": "fus orar",
+      "radius": "rază",
+      "remote": "la distanță ∞",
+      "label": "Harta nordului Italiei cu locul meu: {place}"
+    },
     "contacts": "// contact",
     "social": "// social",
     "company": "// date firmă",

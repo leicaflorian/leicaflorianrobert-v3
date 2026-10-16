@@ -83,6 +83,13 @@
     }
 }
 
+/* Colours read by the Contact map's canvas, not by classes: `static` keeps them in the CSS. */
+@theme static {
+    --color-map-near: #2E2E33;        /* neighbouring countries */
+    --color-map-sea: #1F1F23;
+    --color-map-wave: #7A2E0C;        /* the wave over the sea */
+}
+
 /* Used with animate-[...] by the boot overlay: outside @theme so Tailwind always emits them. */
 @keyframes boot-overlay {
     0% { opacity: 0 }
