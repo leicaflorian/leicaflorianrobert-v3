@@ -5185,6 +5185,55 @@ fields:
       validation: null
       validation_message: null
       width: full
+  - collection: block_projects
+    field: kind
+    type: string
+    meta:
+      collection: block_projects
+      conditions: null
+      display: labels
+      display_options: null
+      field: kind
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: >-
+        Di che tipo: tutti, solo per clienti (diretti e tramite agenzia) o solo
+        personali
+      options:
+        choices:
+          - text: Tutti
+            value: all
+          - text: Per clienti
+            value: client
+          - text: Personali
+            value: personal
+      readonly: false
+      required: false
+      searchable: true
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: kind
+      table: block_projects
+      data_type: character varying
+      default_value: all
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: block_projects_translations
     field: id
     type: integer
@@ -9050,6 +9099,55 @@ fields:
       validation: null
       validation_message: null
       width: full
+  - collection: projects
+    field: kind
+    type: string
+    meta:
+      collection: projects
+      conditions: null
+      display: labels
+      display_options: null
+      field: kind
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: >-
+        Per chi: un mio cliente, un cliente di un'agenzia (non si nomina) o un
+        progetto mio
+      options:
+        choices:
+          - text: Cliente diretto
+            value: direct
+          - text: Cliente tramite agenzia
+            value: agency
+          - text: Personale
+            value: personal
+      readonly: false
+      required: false
+      searchable: true
+      sort: 15
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: kind
+      table: projects
+      data_type: character varying
+      default_value: direct
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: projects_sections
     field: id
     type: integer

@@ -27,6 +27,8 @@ export interface Site {
 }
 
 export type Mockup = 'laptop' | 'phone' | 'none'
+/** Who the project was for: a client of mine, a client of an agency I worked for (never named), or myself. */
+export type ProjectKind = 'direct' | 'agency' | 'personal'
 
 export interface Project {
   id: number
@@ -34,6 +36,7 @@ export interface Project {
   url: string
   /** The project has its own page on the site, under the page with `children: 'projects'`. */
   case_study: boolean
+  kind: ProjectKind
   featured: boolean
   on_home: boolean
   mockup: Mockup
@@ -199,6 +202,8 @@ export interface BlockServices extends BlockBase {
 
 export interface BlockProjects extends BlockBase {
   show: 'home' | 'featured' | 'archive'
+  /** Which projects: `client` covers both `direct` and `agency`. */
+  kind: 'all' | 'client' | 'personal'
   all_link: boolean
   // translated
   label: string | null

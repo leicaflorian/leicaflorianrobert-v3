@@ -107,6 +107,7 @@ const COLLECTIONS = [
       choice('status', 'Le bozze non si vedono sul sito', [['published', 'Pubblicato'], ['draft', 'Bozza']], 'published'),
       string('slug', 'Nome breve, senza spazi', {width: 'half', required: true}),
       string('url', 'Il sito del progetto'),
+      choice('kind', 'Per chi: un mio cliente, un cliente di un\'agenzia (non si nomina) o un progetto mio', [['direct', 'Cliente diretto'], ['agency', 'Cliente tramite agenzia'], ['personal', 'Personale']], 'direct'),
       boolean('featured', 'In evidenza, con il mockup'),
       choice('mockup', 'La sagoma intorno allo screenshot, se in evidenza', [['laptop', 'Portatile'], ['phone', 'Telefono'], ['none', 'Nessuna']], 'laptop'),
       boolean('on_home', 'Anche in Home, tra le card piccole'),
@@ -274,6 +275,7 @@ const BLOCKS = [
     note: 'I progetti (dalla collection Progetti).',
     fields: [
       choice('show', 'Quali progetti', [['home', 'In evidenza e in Home'], ['featured', 'Solo in evidenza'], ['archive', 'Tutti tranne quelli in evidenza']], 'home'),
+      choice('kind', 'Di che tipo: tutti, solo per clienti (diretti e tramite agenzia) o solo personali', [['all', 'Tutti'], ['client', 'Per clienti'], ['personal', 'Personali']], 'all'),
       boolean('all_link', 'Link «Tutti i progetti» accanto al titolo'),
     ],
     translations: [label(), title('Titolo, facoltativo')],
