@@ -1,8 +1,13 @@
+import type {BriefBudget, BriefTimeline, BriefType} from '~/utils/brief'
+
 export interface ContactMessage {
   name: string
-  surname?: string
+  surname: string
   email: string
   message: string
+  project_types: BriefType[]
+  budget: BriefBudget | null
+  timeline: BriefTimeline | null
 }
 
 type Status = 'idle' | 'sending' | 'sent' | 'error'
@@ -16,6 +21,18 @@ declare global {
   }
 }
 
+const empty = (): ContactMessage => ({
+  name: '', surname: '', email: '', message: '', project_types: [], budget: null, timeline: null,
+})
+
+/**
+ * What the visitor is writing in the contact form. Shared state: the native `project.json`
+ * panel shows it as it's typed, and switching engine keeps it.
+ */
+export function useContactDraft() {
+  return useState<ContactMessage>('contact-draft', empty)
+}
+
 /**
  * Sends the contact form to the Directus `/contact` endpoint (the `contact-endpoint`
  * extension), with the reCAPTCHA v3 token if the key is configured.
@@ -23,10 +40,11 @@ declare global {
 export function useContactForm() {
   const {public: {directusUrl, recaptchaSiteKey}} = useRuntimeConfig()
   const {locale} = useI18n()
+  const draft = useContactDraft()
   const status = ref<Status>('idle')
 
   if (recaptchaSiteKey) {
-    useHead({script: [{src: `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`, async: true, defer: true}]})
+    useHead({script: [{key: 'recaptcha', src: `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`, async: true, defer: true}]})
   }
 
   async function recaptchaToken(): Promise<string | undefined> {
@@ -36,26 +54,26 @@ export function useContactForm() {
     return grecaptcha.execute(recaptchaSiteKey, {action: 'contact'})
   }
 
-  async function send(message: ContactMessage) {
+  /** Sends the draft; clears it if sending succeeds. */
+  async function submit() {
     status.value = 'sending'
     try {
       await $fetch(`${directusUrl}/contact`, {
         method: 'POST',
-        body: {...message, locale: locale.value, token: await recaptchaToken()},
+        body: {...draft.value, locale: locale.value, token: await recaptchaToken()},
       })
       status.value = 'sent'
+      draft.value = empty()
     } catch {
       status.value = 'error'
     }
   }
 
-  /** Reads the fields of a <form> and sends it; clears the form if sending succeeds. */
-  async function submit(event: Event) {
-    const form = event.target as HTMLFormElement
-    const data = Object.fromEntries(new FormData(form)) as unknown as ContactMessage
-    await send(data)
-    if (status.value === 'sent') form.reset()
+  /** Clears the form (the legacy "Reset" button). */
+  function reset() {
+    draft.value = empty()
+    status.value = 'idle'
   }
 
-  return {status, send, submit}
+  return {draft, status, submit, reset}
 }

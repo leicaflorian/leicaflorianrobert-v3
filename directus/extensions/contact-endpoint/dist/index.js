@@ -1,7 +1,9 @@
 // The site's contact form endpoint: POST /contact.
 // Written directly in JavaScript, with no build step: it's a single file with no dependencies.
 //
-// Body: { name, surname?, email, message, locale?, token? }
+// Body: { name, surname?, email, message, project_types?, budget?, timeline?, locale?, token? }
+// - project_types, budget and timeline are the project brief: keys from app/utils/brief.ts,
+//   anything else is dropped.
 // - If RECAPTCHA_SECRET is set, `token` (reCAPTCHA v3) is required and the score
 //   must be at least RECAPTCHA_MIN_SCORE (0.5 if not set).
 // - The message is saved to `messages` with server permissions: the public can
@@ -9,6 +11,22 @@
 
 const LIMITS = {name: 100, surname: 100, email: 200, message: 5000, locale: 5}
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+// The brief's options, as in app/utils/brief.ts.
+const BRIEF = {
+  types: ['site', 'web-app', 'mobile-app', 'ecommerce', 'consulting', 'training'],
+  budget: ['lt-3k', '3-10k', '10-25k', '25k-plus', 'tbd'],
+  timeline: ['urgent', '1-3m', '3-6m', 'flexible'],
+}
+
+function cleanBrief(body) {
+  const types = Array.isArray(body?.project_types) ? body.project_types : []
+  return {
+    project_types: [...new Set(types.filter(type => BRIEF.types.includes(type)))],
+    budget: BRIEF.budget.includes(body?.budget) ? body.budget : null,
+    timeline: BRIEF.timeline.includes(body?.timeline) ? body.timeline : null,
+  }
+}
 
 function clean(body) {
   const out = {}
@@ -53,7 +71,7 @@ export default {
 
       try {
         const items = new services.ItemsService('messages', {schema: await getSchema(), accountability: null})
-        await items.createOne({...message, locale: message.locale || null, surname: message.surname || null})
+        await items.createOne({...message, ...cleanBrief(req.body), locale: message.locale || null, surname: message.surname || null})
         return res.status(204).end()
       } catch (error) {
         logger.error(error, 'contact-endpoint: failed to save the message')

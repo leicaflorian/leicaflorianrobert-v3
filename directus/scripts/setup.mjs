@@ -26,6 +26,12 @@ const choice = (field, note, choices, defaultValue) => ({
   meta: {interface: 'select-dropdown', note, width: 'half', options: {choices: choices.map(([value, label]) => ({value, text: label}))}, display: 'labels'},
   schema: {default_value: defaultValue},
 })
+/** Several choices from a fixed list, saved as comma-separated keys. */
+const choices = (field, note, options) => ({
+  field, type: 'csv',
+  meta: {interface: 'select-multiple-checkbox', note, special: ['cast-csv'], options: {choices: options.map(([value, label]) => ({value, text: label}))}, display: 'labels'},
+  schema: {},
+})
 const image = (field, note) => ({field, type: 'uuid', meta: {interface: 'file-image', note, special: ['file'], width: 'half'}, schema: {}})
 const label = note => string('label', note ?? 'Etichetta piccola sopra il titolo, numerata in automatico: «servizi» → «01 / servizi»')
 const title = note => string('title', note ?? 'Titolo')
@@ -165,6 +171,10 @@ const COLLECTIONS = [
       string('surname', null, {width: 'half'}),
       string('email'),
       text('message', null),
+      // the project brief: keys from app/utils/brief.ts, checked by the /contact endpoint
+      choices('project_types', 'Tipo di progetto', [['site', 'Sito'], ['web-app', 'Web app'], ['mobile-app', 'App mobile'], ['ecommerce', 'E-commerce'], ['consulting', 'Consulenza'], ['training', 'Formazione']]),
+      choice('budget', 'Budget indicativo', [['lt-3k', '< 3k €'], ['3-10k', '3–10k €'], ['10-25k', '10–25k €'], ['25k-plus', '25k+ €'], ['tbd', 'Da capire']]),
+      choice('timeline', 'Tempistiche', [['urgent', 'Urgente'], ['1-3m', '1–3 mesi'], ['3-6m', '3–6 mesi'], ['flexible', 'Flessibile']]),
       boolean('read', 'Letto'),
     ],
     translations: [],
@@ -246,8 +256,7 @@ const BLOCKS = [
   }),
   block('block_contact_form', {
     icon: 'contact_mail',
-    note: 'Il form di contatto, con un\'immagine accanto.',
-    fields: [image('image', 'Accanto al form')],
+    note: 'Il form di contatto, con le domande sul progetto e, in native, il riepilogo accanto.',
     translations: [label(), title(), text('text', 'Sopra il form, facoltativo')],
   }),
   block('block_services', {
@@ -581,6 +590,14 @@ async function createFlow({name, description, icon, options, operations}) {
       await api('PATCH', `/flows/${existing.id}`, {options: {...existing.options, collections: options.collections}})
       console.log(`~ flow «${name}»: + ${missing.join(', ')}`)
     }
+    // and the operations get the options defined here (e.g. new fields in the email)
+    const current = await api('GET', `/operations?filter[flow][_eq]=${existing.id}&fields=id,key,options`)
+    for (const op of operations) {
+      const found = current.find(o => o.key === op.key)
+      if (!found || JSON.stringify(found.options) === JSON.stringify(op.options)) continue
+      await api('PATCH', `/operations/${found.id}`, {options: op.options})
+      console.log(`~ flow «${name}»: ${op.key}`)
+    }
     return
   }
 
@@ -635,6 +652,9 @@ async function createFlows() {
             '**Cognome:** {{$trigger.payload.surname}}',
             '**Email:** {{$trigger.payload.email}}',
             '**Lingua:** {{$trigger.payload.locale}}',
+            '**Tipo di progetto:** {{$trigger.payload.project_types}}',
+            '**Budget:** {{$trigger.payload.budget}}',
+            '**Tempi:** {{$trigger.payload.timeline}}',
             '',
             '{{$trigger.payload.message}}',
           ].join('\n'),
