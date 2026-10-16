@@ -259,28 +259,28 @@ const PAGES = [
     key: 'home',
     in_menu: true,
     translations: tr({
-      it: {slug: '', title: 'Home', seo_title: 'Dall\'idea al server: siti, app e SaaS che arrivano online e ci restano', description: 'Sviluppatore Web & Mobile a Schio (Vicenza): siti, app e interfacce che funzionano davvero. 17 anni tra web, mobile e UI/UX.'},
-      en: {slug: '', title: 'Home', seo_title: 'From idea to server: websites, apps and SaaS that go live and stay live', description: 'Web & Mobile Developer in Schio (Vicenza, Italy): websites, apps and interfaces that actually work. 17 years across web, mobile and UI/UX.'},
-      ro: {slug: '', title: 'Acasă', seo_title: 'De la idee la server: site-uri, aplicații și SaaS care ajung online și rămân acolo', description: 'Dezvoltator Web & Mobile în Schio (Vicenza, Italia): site-uri, aplicații și interfețe care chiar funcționează. 17 ani între web, mobile și UI/UX.'},
+      it: {slug: '', title: 'Home', seo_title: 'Dall\'idea al server: siti, app e SaaS che arrivano online e ci restano', description: 'Sviluppatore Web & Mobile a Schio (Vicenza): siti, app e SaaS che arrivano online e ci restano. 17 anni tra sviluppo, design e infrastruttura.'},
+      en: {slug: '', title: 'Home', seo_title: 'From idea to server: websites, apps and SaaS that go live and stay live', description: 'Web & Mobile Developer in Schio (Vicenza, Italy): websites, apps and SaaS that go live and stay live. 17 years across development, design and infrastructure.'},
+      ro: {slug: '', title: 'Acasă', seo_title: 'De la idee la server: site-uri, aplicații și SaaS care ajung online și rămân acolo', description: 'Dezvoltator Web & Mobile în Schio (Vicenza, Italia): site-uri, aplicații și SaaS care ajung online și rămân acolo. 17 ani între dezvoltare, design și infrastructură.'},
     }),
     sections: [
       section('block_hero_home', {}, {
         it: {
           title: 'Dall\'idea',
           title_accent: 'al server',
-          text: 'Siti, app e interfacce che funzionano davvero. 17 anni tra web, mobile e UI/UX.',
+          text: 'Siti, app e SaaS che arrivano online e ci restano. 17 anni tra sviluppo, design e infrastruttura.',
           legacy_text: 'Da 17 anni trasformo idee in siti, app e interfacce che funzionano davvero. Questa pagina è servita dal vecchio DOM: testo, link blu e tabelle.',
         },
         en: {
           title: 'From idea',
           title_accent: 'to server',
-          text: 'Websites, apps and interfaces that actually work. 17 years across web, mobile and UI/UX.',
+          text: 'Websites, apps and SaaS that go live and stay live. 17 years across development, design and infrastructure.',
           legacy_text: 'For 17 years I have been turning ideas into websites, apps and interfaces that actually work. This page is served by the old DOM: text, blue links and tables.',
         },
         ro: {
           title: 'De la idee',
           title_accent: 'la server',
-          text: 'Site-uri, aplicații și interfețe care chiar funcționează. 17 ani între web, mobile și UI/UX.',
+          text: 'Site-uri, aplicații și SaaS care ajung online și rămân acolo. 17 ani între dezvoltare, design și infrastructură.',
           legacy_text: 'De 17 ani transform idei în site-uri, aplicații și interfețe care chiar funcționează. Această pagină este servită de vechiul DOM: text, linkuri albastre și tabele.',
         },
       }),
