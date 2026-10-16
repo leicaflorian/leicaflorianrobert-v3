@@ -193,6 +193,39 @@
       "why": "// why does it work?",
       "explain": "starts at 0 and adds up every price",
       "review": "Let's handle the timeout too, this is where everything hangs."
+    },
+    "guide": {
+      "name": "lfr guide",
+      "restart": "start over",
+      "hello": "Hi! Tell me about your project in one sentence and I'll tell you which services fit.",
+      "label": "Describe your project",
+      "placeholder": "e.g. an online shop with payments",
+      "send": "send ↵",
+      "searching": "looking for keywords in the request…",
+      "found": "{n} service matches | {n} services match",
+      "none": "no keyword recognised",
+      "answer": "Here's what I suggest:",
+      "fallback": "I didn't recognise any keyword: I'd start here, then we'll talk.",
+      "continue": "continue in the form ↵",
+      "selected": "{n} selected · you'll find it in the form | {n} selected · you'll find them in the form",
+      "pickOne": "select at least one service",
+      "services": "services",
+      "interested": "I'm interested in: {title}",
+      "suggestions": {
+        "a": "an e-commerce site with payments",
+        "b": "a booking app",
+        "c": "automate email and CRM with AI",
+        "d": "an opinion on my code"
+      },
+      "why": {
+        "web": "site / web app",
+        "mobile": "app",
+        "design": "interface",
+        "devops": "online and stable",
+        "ai": "automation",
+        "formazione": "learning",
+        "consulenza": "technical opinion"
+      }
     }
   },
   "widgets": {

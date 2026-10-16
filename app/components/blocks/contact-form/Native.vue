@@ -10,7 +10,7 @@ defineProps<{
 </script>
 
 <template>
-  <section class="border-t border-line bg-bg-alt">
+  <section id="contact-form" class="scroll-mt-16 border-t border-line bg-bg-alt">
     <div class="page section-y grid grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] items-start gap-18 max-[860px]:grid-cols-1">
       <div>
         <UiSectionLabel v-if="label">{{ label }}</UiSectionLabel>

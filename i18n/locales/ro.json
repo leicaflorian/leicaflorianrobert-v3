@@ -193,6 +193,39 @@
       "why": "// de ce funcționează?",
       "explain": "pornește de la 0 și adună fiecare preț",
       "review": "Să tratăm și timeout-ul, aici se blochează tot."
+    },
+    "guide": {
+      "name": "lfr guide",
+      "restart": "ia-o de la capăt",
+      "hello": "Salut! Descrie-mi proiectul într-o propoziție și îți spun ce servicii ți se potrivesc.",
+      "label": "Descrie-ți proiectul",
+      "placeholder": "ex. un magazin online cu plăți",
+      "send": "trimite ↵",
+      "searching": "caut cuvinte cheie în cerere…",
+      "found": "{n} serviciu se potrivește | {n} servicii se potrivesc",
+      "none": "niciun cuvânt cheie recunoscut",
+      "answer": "Iată ce îți recomand:",
+      "fallback": "Nu am recunoscut cuvinte cheie: aș începe de aici, apoi vorbim.",
+      "continue": "continuă în formular ↵",
+      "selected": "{n} selectat · îl regăsești în formular | {n} selectate · le regăsești în formular",
+      "pickOne": "selectează cel puțin un serviciu",
+      "services": "servicii",
+      "interested": "Mă interesează: {title}",
+      "suggestions": {
+        "a": "un magazin online cu plăți",
+        "b": "o aplicație de rezervări",
+        "c": "automatizarea email și CRM cu AI",
+        "d": "o părere despre codul meu"
+      },
+      "why": {
+        "web": "site / aplicație web",
+        "mobile": "aplicație",
+        "design": "interfață",
+        "devops": "online și stabil",
+        "ai": "automatizare",
+        "formazione": "învățare",
+        "consulenza": "părere tehnică"
+      }
     }
   },
   "widgets": {
