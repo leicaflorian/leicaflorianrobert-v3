@@ -1181,7 +1181,7 @@ const CASE_STUDIES = {
           label: 'come funziona',
           title: 'Dal sito dell\'emittente al player',
           items: lines(
-            'Reverse engineering dei player delle emittenti, per risalire ai flussi video.',
+            'Lo studio dei player delle emittenti, per capire da dove arrivano i flussi video pubblici.',
             'Una lista M3U, e una in JSON, generata in automatico: un link per canale.',
             'La guida TV (EPG) raccolta dalle pagine dei palinsesti e aggiornata ogni notte.',
             'Si guarda dal browser, sulla pagina dei canali, o con qualsiasi player IPTV non proprietario, come VLC.',
@@ -1191,7 +1191,7 @@ const CASE_STUDIES = {
           label: 'how it works',
           title: 'From the broadcaster\'s site to the player',
           items: lines(
-            'Reverse engineering the broadcasters\' players to trace the video streams.',
+            'Studying the broadcasters\' players to find where the public video streams come from.',
             'An M3U list, and a JSON one, generated automatically: one link per channel.',
             'The TV guide (EPG) scraped from the schedule pages and updated every night.',
             'Watch it in the browser, on the channels page, or with any non-proprietary IPTV player, like VLC.',
@@ -1201,7 +1201,7 @@ const CASE_STUDIES = {
           label: 'cum funcționează',
           title: 'De pe site-ul televiziunii în player',
           items: lines(
-            'Reverse engineering pe playerele televiziunilor, pentru a ajunge la fluxurile video.',
+            'Studiul playerelor televiziunilor, pentru a afla de unde vin fluxurile video publice.',
             'O listă M3U, și una în JSON, generată automat: un link pentru fiecare canal.',
             'Ghidul TV (EPG) colectat din paginile cu programe și actualizat în fiecare noapte.',
             'Se urmărește din browser, pe pagina canalelor, sau cu orice player IPTV non-proprietar, precum VLC.',
