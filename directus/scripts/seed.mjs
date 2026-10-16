@@ -379,24 +379,21 @@ const PAGES = [
           label: '// {n} progetti',
           title: 'Progetti',
           intro: paras(
-            'Come disse qualcuno (non ricordo chi), "L\'unico limite è la tua immaginazione" e questo è vero anche per i progetti che puoi realizzare con me. Non c\'è nulla (quasi) che non possa essere fatto, se hai la voglia e ti rivolgi alla persona giusta. Oggi lavoro anche con l\'AI: mi fa andare più veloce, mentre decisioni, architettura e qualità restano mie.',
-            'Qui di seguito troverai una lista di alcuni dei progetti che ho realizzato in passato, ma non esitare a contattarmi per qualsiasi altra cosa tu possa desiderare.',
+            'Siti, piattaforme, app, infrastrutture: qui sotto una parte di quello che ho costruito, per clienti e per me. Oggi lavoro anche con l\'AI, che mi fa andare più veloce, mentre decisioni, architettura e qualità restano mie. Hai qualcosa di diverso in mente? Scrivimi.',
           ),
         },
         en: {
           label: '// {n} projects',
           title: 'Projects',
           intro: paras(
-            'As someone once said (I can\'t remember who), "The only limit is your imagination" — and that\'s true for the projects you can build with me too. There\'s (almost) nothing that can\'t be done, if you have the will and turn to the right person. And today I work with AI too: it makes me faster, while the decisions, the architecture and the quality stay mine.',
-            'Below you\'ll find a list of some of the projects I\'ve built in the past, but don\'t hesitate to contact me for anything else you might have in mind.',
+            'Websites, platforms, apps, infrastructure: below is part of what I\'ve built, for clients and for myself. Today I also work with AI, which makes me faster, while the decisions, the architecture and the quality stay mine. Have something different in mind? Write to me.',
           ),
         },
         ro: {
           label: '// {n} proiecte',
           title: 'Proiecte',
           intro: paras(
-            'Cum a spus cineva (nu-mi amintesc cine), „Singura limită este imaginația ta", iar asta e valabil și pentru proiectele pe care le poți realiza cu mine. Nu există (aproape) nimic care să nu poată fi făcut, dacă ai voință și te adresezi persoanei potrivite. Iar astăzi lucrez și cu AI: mă face mai rapid, în timp ce deciziile, arhitectura și calitatea rămân ale mele.',
-            'Mai jos găsești o listă cu câteva dintre proiectele pe care le-am realizat în trecut, dar nu ezita să mă contactezi pentru orice altceva ți-ai dori.',
+            'Site-uri, platforme, aplicații, infrastructuri: mai jos e o parte din ce am construit, pentru clienți și pentru mine. Astăzi lucrez și cu AI, care mă face mai rapid, în timp ce deciziile, arhitectura și calitatea rămân ale mele. Ai altceva în minte? Scrie-mi.',
           ),
         },
       }),
