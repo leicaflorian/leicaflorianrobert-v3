@@ -137,6 +137,7 @@ const EXPERIENCES = [
   experience('Web Artisan Bros', 2023, 'https://webartisanbros.com', 'Co-founder & CTO'),
   experience('The Full Project', 2024, 'https://thefullproject.it/', 'Full Stack Developer & IT Manager'),
   experience('xPulire', 2025, 'https://www.xpulire.com/', 'IT & Network Infrastructure'),
+  experience('Deepser s.r.l.', 2026, null, 'Backend Developer'),
 ]
 
 const service = (icon, it, en, ro) => ({icon, translations: tr({it, en, ro})})
