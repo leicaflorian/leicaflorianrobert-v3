@@ -214,6 +214,8 @@ export interface BlockContactForm extends BlockBase {
   label: string | null
   title: string
   text: string | null
+  /** What happens after sending, one step per line. */
+  steps: string | null
 }
 
 export interface BlockServices extends BlockBase {

@@ -872,7 +872,7 @@ collections:
       collapse: open
       collection: messages
       color: null
-      display_template: '{{name}} {{surname}} — {{email}}'
+      display_template: '{{name}} — {{email}}'
       group: null
       hidden: false
       icon: inbox
@@ -1566,6 +1566,46 @@ fields:
       width: full
     schema:
       name: text
+      table: block_contact_form_translations
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: block_contact_form_translations
+    field: steps
+    type: text
+    meta:
+      collection: block_contact_form_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: steps
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: 'Cosa succede dopo l''invio, facoltativo: un passo per riga'
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 7
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: steps
       table: block_contact_form_translations
       data_type: text
       default_value: null

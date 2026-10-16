@@ -16,6 +16,12 @@ defineProps<{
         <UiSectionLabel v-if="label">{{ label }}</UiSectionLabel>
         <UiSectionTitle class="mb-4">{{ block.title }}</UiSectionTitle>
         <p v-if="block.text" class="m-0 max-w-[520px] text-[15px] leading-[1.8] text-muted">{{ block.text }}</p>
+        <ol v-if="block.steps" class="m-0 mt-6 flex max-w-[520px] list-none flex-col gap-3 p-0 text-[15px] leading-[1.7] text-muted">
+          <li v-for="(step, i) in lines(block.steps)" :key="i" class="flex gap-4">
+            <span class="shrink-0 text-[13px] leading-[1.95] text-accent">{{ String(i + 1).padStart(2, '0') }}</span>
+            <span>{{ step }}</span>
+          </li>
+        </ol>
         <ContactForm class="mt-11"/>
       </div>
       <ContactBrief/>

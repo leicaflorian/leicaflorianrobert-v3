@@ -437,15 +437,15 @@ const PAGES = [
     }),
     sections: [
       section('block_page_header', {variant: 'contact'}, {
-        it: {title: 'Contatti', intro: 'Sito, app, consulenza o solo un parere tecnico — scrivimi e vediamo insieme come darti una mano, senza giri di parole.'},
-        en: {title: 'Contact', intro: 'A website, an app, consulting or just a technical opinion — write to me and let\'s figure out together how I can help, no beating around the bush.'},
-        ro: {title: 'Contact', intro: 'Site, aplicație, consultanță sau doar o părere tehnică — scrie-mi și vedem împreună cum te pot ajuta, fără ocolișuri.'},
+        it: {title: 'Contatti', intro: 'Raccontami cosa hai in mente, anche se è solo un\'idea abbozzata. Ti rispondo entro 1–2 giorni lavorativi, con domande concrete o una prima proposta. Nessun impegno.'},
+        en: {title: 'Contact', intro: 'Tell me what you have in mind, even if it\'s just a rough idea. I\'ll reply within 1–2 working days, with concrete questions or a first proposal. No commitment.'},
+        ro: {title: 'Contact', intro: 'Povestește-mi ce ai în minte, chiar dacă e doar o idee schițată. Îți răspund în 1–2 zile lucrătoare, cu întrebări concrete sau o primă propunere. Fără niciun angajament.'},
       }),
       section('block_contact_info', {engines: 'legacy'}, same({})),
       section('block_contact_form', {}, {
-        it: {label: 'scrivimi', title: 'Parliamone'},
-        en: {label: 'write to me', title: 'Let\'s talk'},
-        ro: {label: 'scrie-mi', title: 'Hai să vorbim'},
+        it: {label: 'scrivimi', title: 'Come funziona', steps: lines('Mi scrivi (anche due righe vanno bene)', 'Ti rispondo e, se serve, ci sentiamo in una call di 30 minuti', 'Ti mando una proposta chiara: tempi, costi, cosa è incluso')},
+        en: {label: 'write to me', title: 'How it works', steps: lines('You write to me (two lines are enough)', 'I reply and, if needed, we have a 30-minute call', 'I send you a clear proposal: timing, costs, what\'s included')},
+        ro: {label: 'scrie-mi', title: 'Cum funcționează', steps: lines('Îmi scrii (sunt de ajuns două rânduri)', 'Îți răspund și, dacă e nevoie, vorbim într-un call de 30 de minute', 'Îți trimit o propunere clară: termene, costuri, ce este inclus')},
       }),
       section('block_contact_info', {engines: 'native'}, {
         it: {label: 'recapiti', title: 'Dove trovarmi'},
