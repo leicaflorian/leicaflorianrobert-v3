@@ -43,6 +43,8 @@
     --color-code-number: #7CC4FA;
     --color-code-keyword: #FF8A57;
     --color-code-ok: #5BD48A;
+    --color-branch-client: #E8B04A;   /* the Projects graph: main is the accent */
+    --color-branch-lab: #5BD48A;
     --color-code-line: #1F1712;       /* highlighted line */
     --color-diff-del: #E58A8A;
     --color-diff-del-bg: #2A1414;

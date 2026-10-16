@@ -1,6 +1,7 @@
 <!--
   The top of a page: label, large title and intro. The variants add the ASCII portrait and
-  the numbers (About), the number of projects (Projects), availability and email (Contact).
+  the numbers (About), the number of projects and their git graph (Projects), availability
+  and email (Contact).
 -->
 <script setup lang="ts">
 import type {BlockPageHeader, Site} from '~/types/content'
@@ -48,6 +49,19 @@ const label = computed(() => props.block.label?.replace('{n}', String(projects?.
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section v-else-if="block.variant === 'projects' && projects">
+    <div class="page grid grid-cols-2 items-center gap-18 pb-30 pt-28 max-[860px]:grid-cols-1">
+      <div>
+        <UiSectionLabel v-if="label">{{ label }}</UiSectionLabel>
+        <UiPageTitle>{{ block.title }}</UiPageTitle>
+        <div class="mt-8 flex flex-col gap-4 text-[15px] leading-[1.8] text-muted">
+          <p v-for="(paragraph, i) in paragraphs(block.intro)" :key="i" class="m-0">{{ paragraph }}</p>
+        </div>
+      </div>
+      <ProjectGraph :projects="projects"/>
     </div>
   </section>
 

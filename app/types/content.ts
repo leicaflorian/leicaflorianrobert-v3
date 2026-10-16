@@ -29,6 +29,8 @@ export interface Site {
 export type Mockup = 'laptop' | 'phone' | 'none'
 /** Who the project was for: a client of mine, a client of an agency I worked for (never named), or myself. */
 export type ProjectKind = 'direct' | 'agency' | 'personal'
+/** The branch of a project in the Projects graph: main holds the versions of this site. */
+export type ProjectBranch = 'main' | 'client' | 'lab'
 
 export interface Project {
   id: number
@@ -37,6 +39,8 @@ export interface Project {
   /** The project has its own page on the site, under the page with `children: 'projects'`. */
   case_study: boolean
   kind: ProjectKind
+  /** Empty: client or lab, from the kind. */
+  branch: ProjectBranch | null
   featured: boolean
   on_home: boolean
   mockup: Mockup

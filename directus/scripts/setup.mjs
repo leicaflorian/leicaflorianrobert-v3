@@ -112,6 +112,7 @@ const COLLECTIONS = [
       choice('mockup', 'La sagoma intorno allo screenshot, se in evidenza', [['laptop', 'Portatile'], ['phone', 'Telefono'], ['none', 'Nessuna']], 'laptop'),
       boolean('on_home', 'Anche in Home, tra le card piccole'),
       boolean('case_study', 'Ha la sua pagina sul sito: i campi «Case study» e le sezioni qui sotto'),
+      choice('branch', 'Il ramo nel grafo della pagina Progetti: main per le versioni del sito; se vuoto, clienti o lab secondo il tipo', [['main', 'main'], ['client', 'clienti'], ['lab', 'lab']], null),
       image('image', 'Screenshot (WebP; 16:10 per i siti, 9:19,5 per le app)'),
       integer('year', 'Case study: anno'),
       image('cover', 'Case study: immagine grande sotto il titolo; se vuota, lo screenshot'),

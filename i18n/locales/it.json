@@ -121,6 +121,14 @@
     "hover": "passa il mouse ↗"
   },
   "projects": {
+    "graph": {
+      "branches": {
+        "main": "main",
+        "client": "clienti",
+        "lab": "lab"
+      },
+      "hint": "clicca un commit ↗"
+    },
     "caseStudy": "case study",
     "external": "link esterno",
     "mobileApp": "App mobile",

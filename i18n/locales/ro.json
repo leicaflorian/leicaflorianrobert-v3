@@ -121,6 +121,14 @@
     "hover": "treci cu mouse-ul ↗"
   },
   "projects": {
+    "graph": {
+      "branches": {
+        "main": "main",
+        "client": "clienți",
+        "lab": "lab"
+      },
+      "hint": "apasă pe un commit ↗"
+    },
     "caseStudy": "studiu de caz",
     "external": "link extern",
     "mobileApp": "Aplicație mobilă",
