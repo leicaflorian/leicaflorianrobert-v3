@@ -1,6 +1,7 @@
 <!-- The "bare" contact form of legacy mode: same fields and brief, with checkboxes and drop-downs. -->
 <script setup lang="ts">
 const {draft, status, submit, reset} = useContactForm()
+const pageLink = usePageLink()
 
 const control = 'border border-black px-1 font-legacy text-base'
 </script>
@@ -32,6 +33,11 @@ const control = 'border border-black px-1 font-legacy text-base'
       <input type="submit" :value="$t('form.legacy.submit')" :disabled="status === 'sending'" class="cursor-pointer border border-black bg-legacy-face px-2">
       <input type="reset" :value="$t('form.legacy.reset')" class="cursor-pointer border border-black bg-legacy-face px-2">
     </div>
+    <p class="m-0 text-sm">
+      <i18n-t keypath="form.privacy" scope="global">
+        <template #link><LegacyLink :href="pageLink('privacy')">{{ $t('form.privacyLink') }}</LegacyLink></template>
+      </i18n-t>
+    </p>
     <p v-if="status === 'sent'" class="m-0"><b>{{ $t('form.sent') }}</b></p>
     <p v-else-if="status === 'error'" class="m-0 text-[red]"><b>{{ $t('form.error') }}</b></p>
   </form>

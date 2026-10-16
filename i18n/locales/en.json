@@ -45,6 +45,8 @@
     "sent": "Got it! I'll reply within 1–2 working days.",
     "error": "I couldn't send your message. Please try again, or email me directly.",
     "recaptcha": "This site is protected by reCAPTCHA. The Google Privacy Policy and Terms of Service apply.",
+    "privacy": "By sending the form you accept the {link}.",
+    "privacyLink": "privacy policy",
     "legacy": {
       "name": "Name:",
       "email": "Email:",

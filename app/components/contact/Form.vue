@@ -4,6 +4,7 @@ import type {ContactMessage} from '~/composables/useContactForm'
 import type {BriefType} from '~/utils/brief'
 
 const {draft, status, submit} = useContactForm()
+const pageLink = usePageLink()
 
 const field = 'rounded-[10px] border border-line-control bg-bg p-3.5 font-mono text-sm text-ink outline-none placeholder:text-dim focus:border-accent focus:shadow-[0_0_0_3px_rgb(255_91_20/0.2)]'
 const label = 'flex flex-col gap-2 text-xs text-subtle'
@@ -62,7 +63,12 @@ const groups = computed(() => [
       <UiButton type="submit" :disabled="status === 'sending'">
         {{ status === 'sending' ? $t('form.sending') : $t('form.submit') }}
       </UiButton>
-      <span class="min-w-[220px] flex-1 text-[11px] leading-[1.6] text-faint">{{ $t('form.recaptcha') }}</span>
+      <span class="min-w-[220px] flex-1 text-[11px] leading-[1.6] text-faint">
+        <i18n-t keypath="form.privacy" scope="global">
+          <template #link><NuxtLink :to="pageLink('privacy')" class="text-subtle underline hover:text-accent">{{ $t('form.privacyLink') }}</NuxtLink></template>
+        </i18n-t>
+        {{ $t('form.recaptcha') }}
+      </span>
     </div>
 
     <p v-if="status === 'sent'" role="status" class="m-0 text-sm text-code-string">{{ $t('form.sent') }}</p>

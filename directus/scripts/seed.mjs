@@ -454,6 +454,57 @@ const PAGES = [
       }),
     ],
   },
+  {
+    key: 'privacy',
+    in_menu: false,
+    translations: tr({
+      it: {slug: 'privacy', title: 'Privacy', description: 'Come tratto i dati che mi lasci quando mi scrivi dal modulo di contatto di questo sito.'},
+      en: {slug: 'privacy', title: 'Privacy', description: 'How I handle the data you leave me when you write to me through this site\'s contact form.'},
+      ro: {slug: 'confidentialitate', title: 'Confidențialitate', description: 'Cum folosesc datele pe care mi le lași când îmi scrii prin formularul de contact al acestui site.'},
+    }),
+    sections: [
+      section('block_page_header', {}, {
+        it: {title: 'Informativa privacy', intro: 'Come tratto i dati che mi lasci quando mi scrivi dal modulo di contatto di questo sito.'},
+        en: {title: 'Privacy policy', intro: 'How I handle the data you leave me when you write to me through this site\'s contact form.'},
+        ro: {title: 'Politica de confidențialitate', intro: 'Cum folosesc datele pe care mi le lași când îmi scrii prin formularul de contact al acestui site.'},
+      }),
+      section('block_text', {}, {
+        it: {title: 'Titolare del trattamento', text: 'Il titolare è **Leica Florian Robert**, ditta individuale con sede a Schio (VI), P. IVA 04329800249. Per qualsiasi domanda sui tuoi dati scrivimi a info@leicaflorianrobert.dev.'},
+        en: {title: 'Data controller', text: 'The controller is **Leica Florian Robert**, a sole proprietorship based in Schio (VI), Italy, VAT no. 04329800249. For any question about your data, write to me at info@leicaflorianrobert.dev.'},
+        ro: {title: 'Operatorul de date', text: 'Operatorul este **Leica Florian Robert**, întreprindere individuală cu sediul în Schio (VI), Italia, cod TVA 04329800249. Pentru orice întrebare despre datele tale, scrie-mi la info@leicaflorianrobert.dev.'},
+      }),
+      section('block_text', {}, {
+        it: {title: 'Quali dati raccolgo', text: paras('Dal modulo di contatto: nome, indirizzo email e messaggio e, se li scegli, tipo di progetto, budget e tempistiche, oltre alla lingua della pagina da cui scrivi.', 'Non ti chiedo dati particolari (sulla salute, giudiziari e simili): ti chiedo di non inserirli nel messaggio.')},
+        en: {title: 'What data I collect', text: paras('From the contact form: name, email address and message and, if you pick them, project type, budget and timing, plus the language of the page you write from.', 'I don\'t ask for special categories of data (health, criminal records and the like): please don\'t put them in the message.')},
+        ro: {title: 'Ce date colectez', text: paras('Din formularul de contact: numele, adresa de email și mesajul și, dacă le alegi, tipul de proiect, bugetul și termenele, plus limba paginii din care scrii.', 'Nu îți cer date speciale (despre sănătate, cazier și altele asemenea): te rog să nu le scrii în mesaj.')},
+      }),
+      section('block_text', {}, {
+        it: {title: 'Perché li uso', text: paras('Solo per risponderti e, se ne nasce una collaborazione, per prepararti una proposta. La base giuridica è l\'esecuzione di misure precontrattuali richieste da te (art. 6, par. 1, lett. b del GDPR).', 'Non uso i dati per newsletter o marketing, e non li vendo né li cedo a terzi.')},
+        en: {title: 'Why I use it', text: paras('Only to reply to you and, if we end up working together, to prepare a proposal. The legal basis is taking steps at your request before entering into a contract (Art. 6(1)(b) GDPR).', 'I don\'t use the data for newsletters or marketing, and I don\'t sell or pass it on to third parties.')},
+        ro: {title: 'De ce le folosesc', text: paras('Doar ca să-ți răspund și, dacă ajungem să colaborăm, ca să-ți pregătesc o propunere. Temeiul legal este efectuarea unor demersuri la cererea ta înainte de încheierea unui contract (art. 6 alin. (1) lit. b din GDPR).', 'Nu folosesc datele pentru newslettere sau marketing și nu le vând și nu le transmit terților.')},
+      }),
+      section('block_text', {}, {
+        it: {title: 'Dove sono e per quanto tempo', text: 'Il messaggio viene salvato nel sistema che gestisce i contenuti del sito e mi arriva per email. Lo conservo per il tempo necessario a gestire la richiesta, e comunque non oltre 24 mesi dall\'ultimo contatto; se nasce un rapporto di lavoro, valgono i tempi di conservazione previsti dalla legge per i documenti fiscali.'},
+        en: {title: 'Where it is and for how long', text: 'The message is saved in the system that manages the site\'s content and reaches me by email. I keep it as long as needed to handle the request, and in any case no longer than 24 months after our last contact; if we end up working together, the retention periods required by law for tax records apply.'},
+        ro: {title: 'Unde sunt și cât timp', text: 'Mesajul este salvat în sistemul care gestionează conținutul site-ului și îmi ajunge pe email. Îl păstrez cât timp e nevoie pentru a gestiona cererea și, oricum, nu mai mult de 24 de luni de la ultimul contact; dacă ajungem să colaborăm, se aplică termenele de păstrare prevăzute de lege pentru documentele fiscale.'},
+      }),
+      section('block_text', {}, {
+        it: {title: 'Protezione dallo spam', text: 'Per proteggere il modulo dallo spam uso **Google reCAPTCHA v3**, che analizza alcune informazioni sul dispositivo e sull\'uso della pagina e può impostare dei cookie. Questi dati sono trattati da Google secondo la propria informativa (policies.google.com/privacy) e possono essere trasferiti fuori dall\'Unione europea.'},
+        en: {title: 'Spam protection', text: 'To protect the form from spam I use **Google reCAPTCHA v3**, which analyses some information about the device and how the page is used, and may set cookies. This data is processed by Google under its own policy (policies.google.com/privacy) and may be transferred outside the European Union.'},
+        ro: {title: 'Protecția împotriva spamului', text: 'Ca să protejez formularul de spam folosesc **Google reCAPTCHA v3**, care analizează unele informații despre dispozitiv și despre folosirea paginii și poate seta cookie-uri. Aceste date sunt prelucrate de Google conform propriei politici (policies.google.com/privacy) și pot fi transferate în afara Uniunii Europene.'},
+      }),
+      section('block_text', {}, {
+        it: {title: 'Cookie e preferenze', text: 'Il sito non usa cookie di profilazione né strumenti di statistica. Salva nel tuo browser solo la scelta tra la versione legacy e quella nativa, per ricordarla alla prossima visita.'},
+        en: {title: 'Cookies and preferences', text: 'The site uses no profiling cookies and no analytics. It only saves in your browser your choice between the legacy and the native version, to remember it on your next visit.'},
+        ro: {title: 'Cookie-uri și preferințe', text: 'Site-ul nu folosește cookie-uri de profilare și nici instrumente de statistică. Salvează în browserul tău doar alegerea dintre versiunea legacy și cea nativă, ca s-o țină minte la următoarea vizită.'},
+      }),
+      section('block_text', {}, {
+        it: {title: 'I tuoi diritti', text: paras('Puoi chiedermi in ogni momento di accedere ai tuoi dati, correggerli, cancellarli, limitarne il trattamento, opporti al trattamento o riceverli in un formato leggibile (artt. 15–22 del GDPR), scrivendo all\'email qui sopra.', 'Se ritieni che il trattamento non sia corretto, puoi presentare reclamo al Garante per la protezione dei dati personali (garanteprivacy.it).')},
+        en: {title: 'Your rights', text: paras('You can ask me at any time to access, correct or delete your data, restrict or object to its processing, or receive it in a readable format (Art. 15–22 GDPR), by writing to the email above.', 'If you believe the processing isn\'t lawful, you can lodge a complaint with the Italian data protection authority, the Garante per la protezione dei dati personali (garanteprivacy.it).')},
+        ro: {title: 'Drepturile tale', text: paras('Îmi poți cere oricând să îți accesez, corectez sau șterg datele, să le restricționez prelucrarea, să te opui prelucrării sau să le primești într-un format ușor de citit (art. 15–22 din GDPR), scriindu-mi la adresa de email de mai sus.', 'Dacă crezi că prelucrarea nu este corectă, poți depune o plângere la autoritatea italiană pentru protecția datelor, Garante per la protezione dei dati personali (garanteprivacy.it).')},
+      }),
+    ],
+  },
 ]
 
 // --- case studies ------------------------------------------------------------------------

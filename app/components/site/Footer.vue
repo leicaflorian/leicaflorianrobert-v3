@@ -3,6 +3,8 @@ import type {Site} from '~/types/content'
 
 defineProps<{site: Site}>()
 
+const pageLink = usePageLink()
+
 const year = new Date().getFullYear()
 </script>
 
@@ -33,7 +35,10 @@ const year = new Date().getFullYear()
     <div class="border-t border-line">
       <div class="page flex flex-wrap justify-between gap-3 py-[22px] text-xs text-faint">
         <p class="m-0">{{ $t('footer.rights', {year, name: site.name}) }}</p>
-        <p class="m-0">{{ $t('footer.vat', {vat: site.vat}) }}</p>
+        <p class="m-0">
+          {{ $t('footer.vat', {vat: site.vat}) }} ·
+          <NuxtLink :to="pageLink('privacy')" class="text-faint hover:text-accent-light">{{ $t('footer.privacy') }}</NuxtLink>
+        </p>
       </div>
     </div>
   </footer>

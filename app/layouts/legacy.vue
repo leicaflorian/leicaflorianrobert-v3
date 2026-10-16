@@ -8,6 +8,7 @@ import type {Site} from '~/types/content'
 const [site] = await Promise.all([useSingleton<Site>('site'), usePages()])
 const {toggle} = useEngine()
 const menu = useMenu()
+const pageLink = usePageLink()
 </script>
 
 <template>
@@ -36,6 +37,7 @@ const menu = useMenu()
           {{ $t('engine.activate') }}
         </button>
         <p class="m-0 text-sm text-legacy-note">{{ $t('engine.optimized') }}</p>
+        <p class="m-0 text-sm"><LegacyLink :href="pageLink('privacy')">{{ $t('footer.privacy') }}</LegacyLink></p>
       </div>
     </div>
   </div>
