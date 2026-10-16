@@ -188,9 +188,18 @@ onBeforeUnmount(stop)
         <div v-if="shown" class="h-[220px] shrink-0 border-b border-line">
           <ServiceVisual :key="shown.id" :service="shown"/>
         </div>
-        <div v-if="shown" class="flex min-h-[104px] flex-col gap-1.5 border-b border-line px-6 py-5">
-          <span class="text-base font-bold">{{ shown.title }}</span>
-          <span class="text-[13px] leading-[1.65] text-pretty text-ink-soft">{{ shown.text }}</span>
+        <!-- every text in the same cell, only the shown one visible: always as tall as the longest -->
+        <div class="grid border-b border-line px-6 py-5">
+          <div
+            v-for="service in services"
+            :key="service.id"
+            class="flex flex-col gap-1.5 transition-opacity duration-200 [grid-area:1/1]"
+            :class="shown?.id === service.id ? 'opacity-100' : 'invisible opacity-0'"
+            :aria-hidden="shown?.id !== service.id"
+          >
+            <span class="text-base font-bold">{{ service.title }}</span>
+            <span class="text-[13px] leading-[1.65] text-pretty text-ink-soft">{{ service.text }}</span>
+          </div>
         </div>
         <div class="flex flex-col px-3 pt-3 pb-4" @mouseleave="hovered = null">
           <span class="px-3 pt-1 pb-2 text-[11px] tracking-[0.08em] text-ghost uppercase">{{ $t('services.guide.services') }}</span>
