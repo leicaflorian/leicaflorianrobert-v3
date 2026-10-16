@@ -31,7 +31,7 @@ onBeforeUnmount(() => {
       :aria-label="t('lang.label')"
       aria-haspopup="listbox"
       :aria-expanded="open"
-      class="-ml-1.5 flex cursor-pointer items-center gap-1.5 rounded-md border border-transparent bg-transparent px-2 py-1.5 text-[13px] text-subtle hover:border-line-control hover:bg-surface hover:text-ink-soft"
+      class="-ml-1.5 flex cursor-pointer items-center gap-1.5 rounded-md border border-transparent bg-transparent px-2 py-1.5 spring text-[13px] text-subtle hover:border-line-control hover:bg-surface hover:text-ink-soft"
       @click="open = !open"
     >
       <span>--lang=<span class="text-accent">{{ locale }}</span></span>
@@ -54,7 +54,7 @@ onBeforeUnmount(() => {
             :to="switchLocalePath(l.code)"
             role="option"
             :aria-selected="l.code === locale"
-            class="grid w-full grid-cols-[14px_28px_1fr] items-center gap-1.5 rounded-md px-2.5 py-[9px] hover:bg-surface-hover hover:text-ink"
+            class="grid w-full grid-cols-[14px_28px_1fr] items-center gap-1.5 spring rounded-md px-2.5 py-[9px] hover:bg-surface-hover hover:text-ink"
             :class="l.code === locale ? 'text-ink' : 'text-ink-soft'"
             @click="open = false"
           >

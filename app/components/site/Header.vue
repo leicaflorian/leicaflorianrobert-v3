@@ -56,7 +56,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
           <li v-for="item in menu" :key="item.key">
             <NuxtLink
               :to="item.href"
-              class="block rounded-lg px-3 py-2"
+              class="spring block rounded-lg px-3 py-2"
               :class="item.active ? 'bg-surface-raised text-accent hover:text-accent' : 'text-ink-soft hover:bg-surface hover:text-ink'"
             >
               {{ labelOf(item.slug) }}
@@ -66,7 +66,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
         <button
           type="button"
           :title="t('engine.gpuTitle')"
-          class="flex cursor-pointer items-center gap-2 rounded-full border border-line-control bg-surface px-3 py-[7px] text-xs text-ink-soft hover:border-accent hover:text-ink"
+          class="flex cursor-pointer items-center gap-2 spring rounded-full border border-line-control bg-surface px-3 py-[7px] text-xs text-ink-soft hover:border-accent hover:text-ink"
           @click="toggle"
         >
           <UiPulseDot/>
