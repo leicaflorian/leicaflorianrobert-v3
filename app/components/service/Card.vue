@@ -2,7 +2,7 @@
 import type {Component} from 'vue'
 import type {Service, ServiceIcon} from '~/types/content'
 import {
-  ServiceVisualConsulenza, ServiceVisualDesign, ServiceVisualDevops, ServiceVisualFormazione,
+  ServiceVisualAi, ServiceVisualConsulenza, ServiceVisualDesign, ServiceVisualDevops, ServiceVisualFormazione,
   ServiceVisualMobile, ServiceVisualWeb,
 } from '#components'
 
@@ -17,6 +17,7 @@ const VISUALS: Record<ServiceIcon, Component> = {
   mobile: ServiceVisualMobile,
   design: ServiceVisualDesign,
   devops: ServiceVisualDevops,
+  ai: ServiceVisualAi,
   formazione: ServiceVisualFormazione,
   consulenza: ServiceVisualConsulenza,
 }

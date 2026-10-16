@@ -165,6 +165,8 @@
   },
   "services": {
     "visual": {
+      "aiPrompt": "rezumă cererile de azi și actualizează CRM-ul",
+      "aiDone": "gata în 18s",
       "price": "49,00 € / lună",
       "pay": "Plătește ✓",
       "push": "push · acum",

@@ -165,6 +165,8 @@
   },
   "services": {
     "visual": {
+      "aiPrompt": "summarise today's requests and update the CRM",
+      "aiDone": "done in 18s",
       "price": "€49.00 / month",
       "pay": "Pay ✓",
       "push": "push · now",

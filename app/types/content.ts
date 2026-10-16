@@ -69,7 +69,7 @@ export interface Experience {
   description: string | null
 }
 
-export type ServiceIcon = 'web' | 'mobile' | 'design' | 'devops' | 'formazione' | 'consulenza'
+export type ServiceIcon = 'web' | 'mobile' | 'design' | 'devops' | 'ai' | 'formazione' | 'consulenza'
 
 export interface Service {
   id: number

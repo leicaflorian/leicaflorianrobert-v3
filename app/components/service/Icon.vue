@@ -5,12 +5,13 @@ import web from '~/assets/icons/icon-web.svg?raw'
 import mobile from '~/assets/icons/icon-mobile.svg?raw'
 import design from '~/assets/icons/icon-design.svg?raw'
 import devops from '~/assets/icons/icon-devops.svg?raw'
+import ai from '~/assets/icons/icon-ai.svg?raw'
 import formazione from '~/assets/icons/icon-formazione.svg?raw'
 import consulenza from '~/assets/icons/icon-consulenza.svg?raw'
 
 defineProps<{name: ServiceIcon}>()
 
-const ICONS: Record<ServiceIcon, string> = {web, mobile, design, devops, formazione, consulenza}
+const ICONS: Record<ServiceIcon, string> = {web, mobile, design, devops, ai, formazione, consulenza}
 </script>
 
 <template>

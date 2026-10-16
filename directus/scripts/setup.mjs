@@ -143,7 +143,7 @@ const COLLECTIONS = [
     icon: 'design_services',
     note: 'I servizi della Home.',
     fields: [
-      choice('icon', 'Icona', [['web', 'Web'], ['mobile', 'Mobile'], ['design', 'Design'], ['devops', 'DevOps'], ['formazione', 'Formazione'], ['consulenza', 'Consulenza']], 'web'),
+      choice('icon', 'Icona', [['web', 'Web'], ['mobile', 'Mobile'], ['design', 'Design'], ['devops', 'DevOps'], ['ai', 'AI'], ['formazione', 'Formazione'], ['consulenza', 'Consulenza']], 'web'),
       image('image', 'Immagine della card'),
     ],
     translations: [

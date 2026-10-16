@@ -165,6 +165,8 @@
   },
   "services": {
     "visual": {
+      "aiPrompt": "riassumi le richieste di oggi e aggiorna il CRM",
+      "aiDone": "fatto in 18s",
       "price": "€ 49,00 / mese",
       "pay": "Paga ✓",
       "push": "push · ora",

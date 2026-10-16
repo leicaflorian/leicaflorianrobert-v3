@@ -9891,6 +9891,8 @@ fields:
             value: design
           - text: DevOps
             value: devops
+          - text: AI
+            value: ai
           - text: Formazione
             value: formazione
           - text: Consulenza
