@@ -213,14 +213,18 @@ const SERVICES = [
     {title: 'DevOps & Infrastruttura', text: 'Server in cloud, deploy automatici, DNS, SSL, backup e monitoraggio, con DigitalOcean, Forge, Cleavr e Docker. Un progetto non è finito quando funziona sul mio computer: è finito quando è online e resta in piedi.'},
     {title: 'DevOps & Infrastructure', text: 'Cloud servers, automated deploys, DNS, SSL, backups and monitoring, with DigitalOcean, Forge, Cleavr and Docker. A project isn\'t done when it works on my machine: it\'s done when it\'s online and stays up.'},
     {title: 'DevOps & Infrastructură', text: 'Servere în cloud, deploy-uri automate, DNS, SSL, backup și monitorizare, cu DigitalOcean, Forge, Cleavr și Docker. Un proiect nu e gata când merge pe calculatorul meu: e gata când e online și rămâne online.'}),
+  service('ai',
+    {title: 'AI & Automazione', text: 'Chatbot sui tuoi contenuti, dati estratti dai documenti, automazioni e agenti che collegano i tuoi strumenti: l\'AI dove serve davvero, integrata nei sistemi che usi già.'},
+    {title: 'AI & Automation', text: 'Chatbots on your own content, data pulled out of documents, automations and agents that connect your tools: AI where it actually helps, built into the systems you already use.'},
+    {title: 'AI & Automatizare', text: 'Chatboți pe conținutul tău, date extrase din documente, automatizări și agenți care îți conectează instrumentele: AI acolo unde chiar ajută, integrat în sistemele pe care le folosești deja.'}),
   service('formazione',
-    {title: 'Formazione / Mentoring', text: 'Corsi e mentoring per sviluppatori che vogliono crescere sul serio — non solo copiare codice, ma capirlo davvero.'},
-    {title: 'Training / Mentoring', text: 'Courses and mentoring for developers who want to really grow — not just copy code, but truly understand it.'},
-    {title: 'Formare / Mentorat', text: 'Cursuri și mentorat pentru dezvoltatorii care vor să crească pe bune — nu doar să copieze cod, ci să-l înțeleagă cu adevărat.'}),
+    {title: 'Formazione / Mentoring', text: 'Corsi e mentoring per sviluppatori che vogliono crescere sul serio, anche nel lavorare con l\'AI, da Claude Code in poi: non copiare codice, ma capirlo e dirigerlo.'},
+    {title: 'Training / Mentoring', text: 'Courses and mentoring for developers who want to really grow, including working with AI, from Claude Code onwards: not copying code, but understanding and directing it.'},
+    {title: 'Formare / Mentorat', text: 'Cursuri și mentorat pentru dezvoltatorii care vor să crească pe bune, inclusiv în lucrul cu AI, de la Claude Code încolo: nu să copieze cod, ci să-l înțeleagă și să-l dirijeze.'}),
   service('consulenza',
-    {title: 'Consulenza tecnica', text: 'Code review, architettura, scelta dello stack — un parere esterno onesto, anche quando la risposta è "meglio riscriverlo".'},
-    {title: 'Technical consulting', text: 'Code reviews, architecture, choosing the stack — an honest outside opinion, even when the answer is "better rewrite it".'},
-    {title: 'Consultanță tehnică', text: 'Code review, arhitectură, alegerea stack-ului — o părere externă sinceră, chiar și când răspunsul este „mai bine îl rescriem".'}),
+    {title: 'Consulenza tecnica', text: 'Code review, architettura, scelta dello stack e dove l\'AI ha senso (e dove no) — un parere esterno onesto, anche quando la risposta è "meglio riscriverlo".'},
+    {title: 'Technical consulting', text: 'Code reviews, architecture, choosing the stack and where AI makes sense (and where it doesn\'t) — an honest outside opinion, even when the answer is "better rewrite it".'},
+    {title: 'Consultanță tehnică', text: 'Code review, arhitectură, alegerea stack-ului și unde are sens AI-ul (și unde nu) — o părere externă sinceră, chiar și când răspunsul este „mai bine îl rescriem".'}),
 ]
 
 /** Technologies of a group (see `group` in setup.mjs): how much I use them, not a rating. */
@@ -228,10 +232,10 @@ const tech = group => name => ({name, group})
 
 const TECHNOLOGIES = [
   ...['HTML5', 'CSS3 / SASS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Vue.js / Nuxt.js', 'Node.js', 'PHP',
-    'Laravel', 'Directus', 'MySQL / SQL Server / MongoDB', 'Git / CI/CD', 'Docker'].map(tech('daily')),
+    'Laravel', 'Directus', 'MySQL / SQL Server / MongoDB', 'Git / CI/CD', 'Docker', 'Claude Code'].map(tech('daily')),
   ...['Bootstrap', 'jQuery', 'Ionic', 'Webpack / Vite', 'Express / AdonisJS / Nest.js', 'Statamic', 'GraphQL',
     'DigitalOcean', 'Laravel Forge / Cleavr'].map(tech('production')),
-  ...['Go', 'NativeScript', 'React', 'Python', 'Rust', 'C#'].map(tech('explored')),
+  ...['Go', 'NativeScript', 'React', 'Python', 'Rust', 'C#', 'API LLM (Claude, OpenAI)'].map(tech('explored')),
 ]
 
 // --- pages -------------------------------------------------------------------------------
@@ -316,6 +320,7 @@ const PAGES = [
             'Dall\'inizio della mia carriera professionale questa passione mi ha spinto a voler imparare il più possibile come funziona il web, come funziona l\'informatica e come posso a mia volta farne parte anche io.',
             'Ho iniziato a programmare da autodidatta. Giorno dopo giorno, tassello dopo tassello, ho imparato cose nuove, mi sono costantemente messo alla prova, allargando i miei limiti, a volte anche fallendo, ma tutto questo mi ha fatto crescere professionalmente e acquisire le capacità necessarie per rendere questa passione un lavoro.',
             'Attualmente ho la splendida opportunità di trasmettere anche ad altri la mia passione, la mia esperienza e le conoscenze acquisite, formando programmatori Full Stack ed insegnando loro tutto il necessario per poter contribuire attivamente al mondo della programmazione! Oltre ad insegnare, continuo a lavorare come sviluppatore e mi diletto nello sperimentare nuove tecnologie e continuare ad imparare cose nuove.',
+            'Oggi l\'AI fa parte del mio modo di lavorare: la uso ogni giorno come un collega instancabile, che scrive e verifica codice sotto la mia direzione. Questo sito ne è la prova, e lo racconto nel suo case study.',
           ),
         },
         en: {
@@ -326,6 +331,7 @@ const PAGES = [
             'Since the start of my career, this passion has pushed me to learn as much as I can about how the web works, how computing works, and how I can become part of it myself.',
             'I started programming self-taught. Day after day, piece by piece, I learned new things, constantly tested myself, pushed my limits, sometimes failed — and all of this made me grow professionally and gave me the skills to turn this passion into a job.',
             'Today I have the wonderful opportunity to pass on my passion, my experience and what I\'ve learned, training Full Stack developers and teaching them everything they need to actively contribute to the world of programming! Besides teaching, I keep working as a developer and enjoy experimenting with new technologies and learning new things.',
+            'Today AI is part of how I work: I use it every day like a tireless colleague that writes and checks code under my direction. This site is the proof, and I tell the story in its case study.',
           ),
         },
         ro: {
@@ -336,6 +342,7 @@ const PAGES = [
             'De la începutul carierei mele, această pasiune m-a împins să învăț cât mai mult despre cum funcționează web-ul, cum funcționează informatica și cum pot și eu să devin parte din ele.',
             'Am început să programez ca autodidact. Zi după zi, pas cu pas, am învățat lucruri noi, m-am pus constant la încercare, mi-am depășit limitele, uneori am și greșit, dar toate acestea m-au ajutat să cresc profesional și să dobândesc abilitățile necesare pentru a transforma această pasiune într-o meserie.',
             'În prezent am minunata oportunitate de a le transmite și altora pasiunea, experiența și cunoștințele mele, formând programatori Full Stack și învățându-i tot ce le trebuie pentru a contribui activ la lumea programării! Pe lângă predat, continui să lucrez ca dezvoltator și îmi place să experimentez tehnologii noi și să învăț mereu lucruri noi.',
+            'Astăzi AI-ul face parte din felul în care lucrez: îl folosesc zilnic ca pe un coleg neobosit, care scrie și verifică cod sub îndrumarea mea. Acest site este dovada, iar povestea o spun în studiul lui de caz.',
           ),
         },
       }),
@@ -372,7 +379,7 @@ const PAGES = [
           label: '// {n} progetti',
           title: 'Progetti',
           intro: paras(
-            'Come disse qualcuno (non ricordo chi), "L\'unico limite è la tua immaginazione" e questo è vero anche per i progetti che puoi realizzare con me. Non c\'è nulla (quasi) che non possa essere fatto, se hai la voglia e ti rivolgi alla persona giusta. E dove non arrivano le mie capacità, ci arrivo con l\'AI.',
+            'Come disse qualcuno (non ricordo chi), "L\'unico limite è la tua immaginazione" e questo è vero anche per i progetti che puoi realizzare con me. Non c\'è nulla (quasi) che non possa essere fatto, se hai la voglia e ti rivolgi alla persona giusta. Oggi lavoro anche con l\'AI: mi fa andare più veloce, mentre decisioni, architettura e qualità restano mie.',
             'Qui di seguito troverai una lista di alcuni dei progetti che ho realizzato in passato, ma non esitare a contattarmi per qualsiasi altra cosa tu possa desiderare.',
           ),
         },
@@ -380,7 +387,7 @@ const PAGES = [
           label: '// {n} projects',
           title: 'Projects',
           intro: paras(
-            'As someone once said (I can\'t remember who), "The only limit is your imagination" — and that\'s true for the projects you can build with me too. There\'s (almost) nothing that can\'t be done, if you have the will and turn to the right person. And where my skills fall short, AI takes me the rest of the way.',
+            'As someone once said (I can\'t remember who), "The only limit is your imagination" — and that\'s true for the projects you can build with me too. There\'s (almost) nothing that can\'t be done, if you have the will and turn to the right person. And today I work with AI too: it makes me faster, while the decisions, the architecture and the quality stay mine.',
             'Below you\'ll find a list of some of the projects I\'ve built in the past, but don\'t hesitate to contact me for anything else you might have in mind.',
           ),
         },
@@ -388,7 +395,7 @@ const PAGES = [
           label: '// {n} proiecte',
           title: 'Proiecte',
           intro: paras(
-            'Cum a spus cineva (nu-mi amintesc cine), „Singura limită este imaginația ta", iar asta e valabil și pentru proiectele pe care le poți realiza cu mine. Nu există (aproape) nimic care să nu poată fi făcut, dacă ai voință și te adresezi persoanei potrivite. Iar acolo unde nu ajung abilitățile mele, ajung cu ajutorul AI.',
+            'Cum a spus cineva (nu-mi amintesc cine), „Singura limită este imaginația ta", iar asta e valabil și pentru proiectele pe care le poți realiza cu mine. Nu există (aproape) nimic care să nu poată fi făcut, dacă ai voință și te adresezi persoanei potrivite. Iar astăzi lucrez și cu AI: mă face mai rapid, în timp ce deciziile, arhitectura și calitatea rămân ale mele.',
             'Mai jos găsești o listă cu câteva dintre proiectele pe care le-am realizat în trecut, dar nu ezita să mă contactezi pentru orice altceva ți-ai dori.',
           ),
         },
@@ -579,6 +586,64 @@ const CASE_STUDIES = {
         it: {captions: lines('Chi sono', 'Versione mobile')},
         en: {captions: lines('About me', 'Mobile version')},
         ro: {captions: lines('Despre mine', 'Versiunea mobilă')},
+      }),
+      section('block_text', {}, {
+        it: {
+          label: 'come è stato costruito',
+          title: 'Diretto da me, scritto con l\'AI',
+          text: paras(
+            'Il design è nato in **Claude Design**. Il codice e i testi li ha scritti **Claude Code**, con il metodo **Superpowers**: per ogni modifica un piano, la mia approvazione, la verifica nel browser in entrambe le modalità e commit piccoli.',
+            'Non è un sito generato con un clic: è il risultato di tante scelte, ognuna discussa e decisa da me.',
+          ),
+        },
+        en: {
+          label: 'how it was built',
+          title: 'Directed by me, written with AI',
+          text: paras(
+            'The design was born in **Claude Design**. The code and the copy were written by **Claude Code**, with the **Superpowers** method: for every change a plan, my approval, a check in the browser in both modes and small commits.',
+            'It isn\'t a site generated with one click: it\'s the result of many choices, each one discussed and decided by me.',
+          ),
+        },
+        ro: {
+          label: 'cum a fost construit',
+          title: 'Condus de mine, scris cu AI',
+          text: paras(
+            'Designul s-a născut în **Claude Design**. Codul și textele le-a scris **Claude Code**, cu metoda **Superpowers**: pentru fiecare modificare un plan, aprobarea mea, verificarea în browser în ambele moduri și commit-uri mici.',
+            'Nu este un site generat dintr-un clic: este rezultatul multor alegeri, fiecare discutată și decisă de mine.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'chi ha fatto cosa',
+          title: 'Io e l\'AI',
+          items: lines(
+            'Io: obiettivi, architettura, contenuti, e l\'ultima parola su ogni passaggio.',
+            'L\'AI: il codice, i testi in tre lingue, le verifiche nel browser e i commit.',
+            'Tante idee sono mie: la timeline delle esperienze ripresa dal vecchio sito, sticky e con l\'anno che si accende mentre scorri.',
+            'Tante correzioni anche: lo spazio tra le sezioni, i dati allineati al CV, i nomi da non fare.',
+          ),
+        },
+        en: {
+          label: 'who did what',
+          title: 'Me and the AI',
+          items: lines(
+            'Me: goals, architecture, content, and the last word on every step.',
+            'The AI: the code, the copy in three languages, the browser checks and the commits.',
+            'Many ideas are mine: the experience timeline taken from the old site, sticky and lighting up the year as you scroll.',
+            'Many corrections too: the spacing between sections, the data aligned with my CV, the names not to mention.',
+          ),
+        },
+        ro: {
+          label: 'cine ce a făcut',
+          title: 'Eu și AI-ul',
+          items: lines(
+            'Eu: obiectivele, arhitectura, conținutul și ultimul cuvânt la fiecare pas.',
+            'AI-ul: codul, textele în trei limbi, verificările în browser și commit-urile.',
+            'Multe idei sunt ale mele: cronologia experiențelor preluată din vechiul site, sticky și cu anul care se aprinde când derulezi.',
+            'Și multe corecturi: spațiul dintre secțiuni, datele aliniate cu CV-ul, numele care nu trebuie menționate.',
+          ),
+        },
       }),
       NEXT_STEP,
     ],
