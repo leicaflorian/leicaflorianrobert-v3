@@ -39,7 +39,7 @@ const shown = computed(() => commits.value.find(c => c.project.id === (hovered.v
         v-for="({project, branch}, i) in commits"
         :key="project.id"
         :project="project"
-        class="grid min-h-[26px] grid-cols-[16px_16px_16px_minmax(0,1fr)] px-4 text-ink-soft hover:text-ink"
+        class="grid min-h-[26px] grid-cols-[16px_16px_16px_minmax(0,1fr)] px-4 text-ink-soft max-[860px]:min-h-9 hover:text-ink"
         :class="shown?.project.id === project.id && 'bg-surface text-ink'"
         @mouseenter="hovered = project.id"
         @focus="hovered = project.id"

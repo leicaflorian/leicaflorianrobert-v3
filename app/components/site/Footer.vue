@@ -19,16 +19,16 @@ const year = new Date().getFullYear()
       </div>
       <div>
         <h3 class="m-0 mb-4 text-xs font-medium text-accent">{{ $t('footer.contacts') }}</h3>
-        <div class="flex flex-col gap-2.5 text-[13px]">
-          <a :href="`mailto:${site.email}`" class="text-ink-soft hover:text-accent-light">{{ site.email }}</a>
-          <span class="text-subtle">{{ $t('footer.location', {city: site.city, province: site.province}) }}</span>
+        <div class="flex flex-col gap-2.5 text-[13px] max-[860px]:gap-0">
+          <a :href="`mailto:${site.email}`" class="text-ink-soft hover:text-accent-light max-[860px]:py-2.5">{{ site.email }}</a>
+          <span class="text-subtle max-[860px]:py-2.5">{{ $t('footer.location', {city: site.city, province: site.province}) }}</span>
         </div>
       </div>
       <div>
         <h3 class="m-0 mb-4 text-xs font-medium text-accent">{{ $t('footer.social') }}</h3>
-        <div class="flex flex-col gap-2.5 text-[13px]">
-          <a :href="site.github" target="_blank" rel="noopener" class="text-ink-soft hover:text-accent-light">GitHub ↗</a>
-          <a :href="site.linkedin" target="_blank" rel="noopener" class="text-ink-soft hover:text-accent-light">LinkedIn ↗</a>
+        <div class="flex flex-col gap-2.5 text-[13px] max-[860px]:gap-0">
+          <a :href="site.github" target="_blank" rel="noopener" class="text-ink-soft hover:text-accent-light max-[860px]:py-2.5">GitHub ↗</a>
+          <a :href="site.linkedin" target="_blank" rel="noopener" class="text-ink-soft hover:text-accent-light max-[860px]:py-2.5">LinkedIn ↗</a>
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@ const year = new Date().getFullYear()
         <p class="m-0">{{ $t('footer.rights', {year, name: site.name}) }}</p>
         <p class="m-0">
           {{ $t('footer.vat', {vat: site.vat}) }} ·
-          <NuxtLink :to="pageLink('privacy')" class="text-faint hover:text-accent-light">{{ $t('footer.privacy') }}</NuxtLink>
+          <NuxtLink :to="pageLink('privacy')" class="text-faint hover:text-accent-light max-[860px]:inline-block max-[860px]:py-2">{{ $t('footer.privacy') }}</NuxtLink>
         </p>
       </div>
     </div>
