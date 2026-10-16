@@ -190,9 +190,12 @@
         margin: 0;
     }
 
+    /* every link eases its hover colours; a transition-* or spring utility
+       on the element still wins, since utilities come after base */
     a {
         color: var(--color-accent);
         text-decoration: none;
+        transition: color .2s, background-color .2s, border-color .2s, text-decoration-color .2s;
     }
 
     a:hover {
