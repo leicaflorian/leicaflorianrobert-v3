@@ -59,6 +59,8 @@ function ask(text: string, only?: ServiceIcon[]) {
     selected.value = [...result]
     focused.value = result[0] ?? null
     phase.value = 'done'
+    // the focus moves to "continue in the form ↵", so Enter does what it says
+    nextTick(() => go.value?.focus({preventScroll: true}))
   })
 }
 
@@ -78,11 +80,27 @@ function restart() {
 }
 
 /** Carries the chosen services over to the contact form below, as project types. */
-function toForm() {
+function toForm(event: MouseEvent) {
+  if (!selected.value.length) return event.preventDefault()
   draft.value.project_types = [...new Set([...draft.value.project_types, ...selected.value.map(i => SERVICE_BRIEF[i])])]
 }
 
+/** The results as a terminal list: ↑ ↓ move the cursor, Space ticks, Enter goes on to the form. */
+function onKey(event: KeyboardEvent) {
+  const count = suggested.value.length
+  const at = suggested.value.indexOf(focused.value!)
+  if ((event.key === 'ArrowDown' || event.key === 'ArrowUp') && count) {
+    event.preventDefault()
+    focused.value = suggested.value[(at + (event.key === 'ArrowDown' ? 1 : count - 1) + count) % count] ?? null
+  } else if (event.key === ' ' && focused.value && !(event.target instanceof HTMLButtonElement)) {
+    // on a suggestion's own button, Space already clicks it
+    event.preventDefault()
+    toggle(focused.value)
+  }
+}
+
 const root = useTemplateRef('root')
+const go = useTemplateRef('go')
 useVisibleInterval(root, () => {
   if (!hovered.value && !focused.value) turn.value++
 }, 3500)
@@ -122,7 +140,7 @@ onBeforeUnmount(stop)
             <span>{{ line.text }}</span>
           </p>
 
-          <div v-if="phase === 'done'" class="ml-6 flex flex-col gap-1 motion-safe:animate-[line-in_.3s_ease-out_both]">
+          <div v-if="phase === 'done'" class="ml-6 flex flex-col gap-1 motion-safe:animate-[line-in_.3s_ease-out_both]" @keydown="onKey">
             <button
               v-for="icon in suggested"
               :key="icon"
@@ -140,8 +158,9 @@ onBeforeUnmount(stop)
             </button>
             <div class="mt-3 flex flex-wrap items-center gap-4">
               <a
+                ref="go"
                 href="#contact-form"
-                class="rounded-[10px] px-[18px] py-3 text-[13px] font-bold"
+                class="rounded-[10px] px-[18px] py-3 text-[13px] font-bold outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-deep"
                 :class="selected.length ? 'bg-accent text-bg hover:bg-accent-hover hover:text-bg' : 'pointer-events-none bg-surface-hover text-subtle'"
                 :aria-disabled="!selected.length"
                 @click="toForm"
