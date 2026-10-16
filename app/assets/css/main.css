@@ -180,6 +180,27 @@
         border-color .2s, background-color .2s, color .2s;
 }
 
+/* Page change in native mode (app.pageTransition in nuxt.config.ts).
+   Legacy has no rule, so its pages swap instantly, like in the '90s. */
+[data-engine="native"] .page-leave-active {
+    transition: opacity .15s ease-in, translate .15s ease-in;
+}
+
+[data-engine="native"] .page-enter-active {
+    transition: opacity .3s ease-out, translate .3s ease-out;
+}
+
+[data-engine="native"] .page-enter-from,
+[data-engine="native"] .page-leave-to {
+    opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    [data-engine="native"] .page-enter-from {
+        translate: 0 8px;
+    }
+}
+
 @layer base {
     html {
         background: var(--color-bg);

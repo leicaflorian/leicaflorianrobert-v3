@@ -11,6 +11,8 @@ export default defineNuxtConfig({
   ],
   devtools: {enabled: true},
   app: {
+    // the page fades out, then the next one in; only native mode styles it (main.css)
+    pageTransition: {name: 'page', mode: 'out-in'},
     head: {
       htmlAttrs: {lang: 'it'},
       link: [
