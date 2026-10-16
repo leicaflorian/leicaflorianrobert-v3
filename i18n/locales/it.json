@@ -106,6 +106,11 @@
     }
   },
   "about": {
+    "stack": {
+      "daily": "Ogni giorno",
+      "production": "In produzione",
+      "explored": "Esplorate"
+    },
     "years": "anni di esperienza",
     "tech": "tecnologie nello stack",
     "legacy": {

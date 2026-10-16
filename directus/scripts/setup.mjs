@@ -156,7 +156,10 @@ const COLLECTIONS = [
     icon: 'code',
     note: 'Lo stack di Chi sono.',
     display: '{{name}}',
-    fields: [string('name', 'Nome', {required: true})],
+    fields: [
+      string('name', 'Nome', {required: true}),
+      choice('group', 'Quanto la uso: ogni giorno, in produzione (anche in passato) o solo esplorata', [['daily', 'Ogni giorno'], ['production', 'In produzione'], ['explored', 'Esplorata']], 'daily'),
+    ],
     translations: [],
   },
   {

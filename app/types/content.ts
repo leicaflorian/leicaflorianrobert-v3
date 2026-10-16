@@ -80,9 +80,13 @@ export interface Service {
   text: string
 }
 
+/** How much I use a technology: every day, in production (also in the past), or only explored. */
+export type TechnologyGroup = 'daily' | 'production' | 'explored'
+
 export interface Technology {
   id: number
   name: string
+  group: TechnologyGroup
 }
 
 // --- pages and blocks ----------------------------------------------------------------
