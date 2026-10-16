@@ -256,27 +256,27 @@ const PAGES = [
     key: 'home',
     in_menu: true,
     translations: tr({
-      it: {slug: '', title: 'Home', seo_title: 'Costruisco esperienze digitali su misura', description: 'Siti, app e interfacce che funzionano davvero. 17 anni tra web, mobile e UI/UX.'},
-      en: {slug: '', title: 'Home', seo_title: 'I build digital experiences made to measure', description: 'Websites, apps and interfaces that actually work. 17 years across web, mobile and UI/UX.'},
-      ro: {slug: '', title: 'Acasă', seo_title: 'Construiesc experiențe digitale pe măsură', description: 'Site-uri, aplicații și interfețe care chiar funcționează. 17 ani între web, mobile și UI/UX.'},
+      it: {slug: '', title: 'Home', seo_title: 'Dall\'idea al server: siti, app e SaaS che arrivano online e ci restano', description: 'Sviluppatore Web & Mobile a Schio (Vicenza): siti, app e interfacce che funzionano davvero. 17 anni tra web, mobile e UI/UX.'},
+      en: {slug: '', title: 'Home', seo_title: 'From idea to server: websites, apps and SaaS that go live and stay live', description: 'Web & Mobile Developer in Schio (Vicenza, Italy): websites, apps and interfaces that actually work. 17 years across web, mobile and UI/UX.'},
+      ro: {slug: '', title: 'Acasă', seo_title: 'De la idee la server: site-uri, aplicații și SaaS care ajung online și rămân acolo', description: 'Dezvoltator Web & Mobile în Schio (Vicenza, Italia): site-uri, aplicații și interfețe care chiar funcționează. 17 ani între web, mobile și UI/UX.'},
     }),
     sections: [
       section('block_hero_home', {}, {
         it: {
-          title: 'Costruisco esperienze digitali',
-          title_accent: 'su misura',
+          title: 'Dall\'idea',
+          title_accent: 'al server',
           text: 'Siti, app e interfacce che funzionano davvero. 17 anni tra web, mobile e UI/UX.',
           legacy_text: 'Da 17 anni trasformo idee in siti, app e interfacce che funzionano davvero. Questa pagina è servita dal vecchio DOM: testo, link blu e tabelle.',
         },
         en: {
-          title: 'I build digital experiences',
-          title_accent: 'made to measure',
+          title: 'From idea',
+          title_accent: 'to server',
           text: 'Websites, apps and interfaces that actually work. 17 years across web, mobile and UI/UX.',
           legacy_text: 'For 17 years I have been turning ideas into websites, apps and interfaces that actually work. This page is served by the old DOM: text, blue links and tables.',
         },
         ro: {
-          title: 'Construiesc experiențe digitale',
-          title_accent: 'pe măsură',
+          title: 'De la idee',
+          title_accent: 'la server',
           text: 'Site-uri, aplicații și interfețe care chiar funcționează. 17 ani între web, mobile și UI/UX.',
           legacy_text: 'De 17 ani transform idei în site-uri, aplicații și interfețe care chiar funcționează. Această pagină este servită de vechiul DOM: text, linkuri albastre și tabele.',
         },
