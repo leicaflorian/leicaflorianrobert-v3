@@ -64,6 +64,10 @@ const project = (slug, url, extra, ...translations) => ({
 const PROJECTS = [
   project('v3', 'https://leicaflorianrobert.dev', {kind: 'personal', case_study: true}, name('My website V3'),
     note('Versione attuale del sito — case study', 'Current version of this site — case study', 'Versiunea actuală a site-ului — studiu de caz')),
+  project('tfp', 'https://thefullproject.it/', {case_study: true}, name('The Full Project'),
+    note('Sviluppo e infrastruttura — case study', 'Development and infrastructure — case study', 'Dezvoltare și infrastructură — studiu de caz')),
+  project('xpulire', 'https://www.xpulire.com/', {case_study: true}, name('xPulire'),
+    note('Infrastruttura di rete — case study', 'Network infrastructure — case study', 'Infrastructură de rețea — studiu de caz')),
   project('v2', 'https://leicaflorianrobert.dev', {kind: 'personal'}, name('My website V2')),
   project('wab', 'https://webartisanbros.com/', {featured: true, mockup: 'laptop'}, name('Web Artisan Bros')),
   project('slides', 'https://chrome.google.com/webstore/detail/slidescom-downloader/bciknjamldhnbbckmgbchmkdcalngnco?hl=it', {kind: 'personal'}, name('Slides.com downloader'),
@@ -501,6 +505,336 @@ const CASE_STUDIES = {
         it: {captions: lines('Chi sono', 'Versione mobile')},
         en: {captions: lines('About me', 'Mobile version')},
         ro: {captions: lines('Despre mine', 'Versiunea mobilă')},
+      }),
+      NEXT_STEP,
+    ],
+  },
+  tfp: {
+    year: 2024,
+    translations: {
+      it: {intro: 'Due anni in una web agency da sviluppatore e responsabile IT: siti, web app ed e-commerce, e l\'infrastruttura che li porta online e li tiene in piedi.', role: 'Sviluppo e IT', type: 'Web agency', stack: 'Laravel, Statamic, Vue, Nuxt, Directus, Docker, DigitalOcean'},
+      en: {intro: 'Two years at a web agency as developer and IT manager: websites, web apps and e-commerce, and the infrastructure that takes them online and keeps them up.', role: 'Development and IT', type: 'Web agency', stack: 'Laravel, Statamic, Vue, Nuxt, Directus, Docker, DigitalOcean'},
+      ro: {intro: 'Doi ani într-o agenție web ca dezvoltator și responsabil IT: site-uri, aplicații web și e-commerce, plus infrastructura care le pune online și le ține în funcțiune.', role: 'Dezvoltare și IT', type: 'Agenție web', stack: 'Laravel, Statamic, Vue, Nuxt, Directus, Docker, DigitalOcean'},
+    },
+    sections: [
+      section('block_text', {}, {
+        it: {
+          label: 'punto di partenza',
+          title: 'Tutto a mano',
+          text: paras(
+            'Quando sono arrivato i siti erano quasi tutti in WordPress, su pochi server, e si pubblicavano a mano: file trasferiti via FTP, un rilascio alla volta.',
+            'La gestione dei server è passata poi a un\'azienda esterna, ma col tempo si è visto che così non era gestibile. Alla fine l\'agenzia l\'ha affidata **interamente a me**.',
+          ),
+        },
+        en: {
+          label: 'starting point',
+          title: 'Everything by hand',
+          text: paras(
+            'When I arrived, the sites were almost all WordPress, on a handful of servers, and were published by hand: files uploaded over FTP, one release at a time.',
+            'Server management then moved to an outside company, but over time it became clear this wasn\'t manageable. In the end the agency handed it **entirely to me**.',
+          ),
+        },
+        ro: {
+          label: 'punct de plecare',
+          title: 'Totul de mână',
+          text: paras(
+            'Când am ajuns, site-urile erau aproape toate în WordPress, pe câteva servere, și se publicau de mână: fișiere transferate prin FTP, câte o lansare pe rând.',
+            'Gestionarea serverelor a trecut apoi la o firmă externă, dar cu timpul s-a văzut că așa nu se putea gestiona. În final agenția mi-a încredințat-o **în întregime mie**.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'sviluppo',
+          title: 'Cosa ho sviluppato',
+          items: lines(
+            'Siti web, dallo sviluppo alla messa online.',
+            'Web app su misura.',
+            'PWA, installabili sul telefono come un\'app.',
+            'E-commerce.',
+            'Laravel e Statamic sul backend, Vue e Nuxt sul frontend, Directus come CMS headless.',
+          ),
+        },
+        en: {
+          label: 'development',
+          title: 'What I built',
+          items: lines(
+            'Websites, from development to going live.',
+            'Custom web apps.',
+            'PWAs, installable on the phone like an app.',
+            'E-commerce.',
+            'Laravel and Statamic on the backend, Vue and Nuxt on the frontend, Directus as a headless CMS.',
+          ),
+        },
+        ro: {
+          label: 'dezvoltare',
+          title: 'Ce am dezvoltat',
+          items: lines(
+            'Site-uri web, de la dezvoltare la publicare.',
+            'Aplicații web pe măsură.',
+            'PWA, care se instalează pe telefon ca o aplicație.',
+            'E-commerce.',
+            'Laravel și Statamic pe backend, Vue și Nuxt pe frontend, Directus ca CMS headless.',
+          ),
+        },
+      }),
+      section('block_gallery', {}, {
+        it: {
+          label: 'infrastruttura',
+          title: 'Oltre 20 server, un solo metodo',
+          text: paras(
+            'Più di 20 server, tutti droplet su **DigitalOcean**. **Laravel Forge** e **Cleavr** ne gestiscono configurazione e deploy: nessun server configurato a mano, ognuno costruito allo stesso modo.',
+            'I progetti **Directus** e **Laravel** girano in container **Docker**.',
+          ),
+          captions: lines('schema dell\'infrastruttura', 'Laravel Forge', 'Cleavr'),
+        },
+        en: {
+          label: 'infrastructure',
+          title: 'Over 20 servers, one method',
+          text: paras(
+            'More than 20 servers, all droplets on **DigitalOcean**. **Laravel Forge** and **Cleavr** handle their configuration and deploys: no server set up by hand, each one built the same way.',
+            'The **Directus** and **Laravel** projects run in **Docker** containers.',
+          ),
+          captions: lines('infrastructure diagram', 'Laravel Forge', 'Cleavr'),
+        },
+        ro: {
+          label: 'infrastructură',
+          title: 'Peste 20 de servere, o singură metodă',
+          text: paras(
+            'Peste 20 de servere, toate droplet-uri pe **DigitalOcean**. **Laravel Forge** și **Cleavr** se ocupă de configurare și de deploy: niciun server configurat de mână, fiecare construit la fel.',
+            'Proiectele **Directus** și **Laravel** rulează în containere **Docker**.',
+          ),
+          captions: lines('schema infrastructurii', 'Laravel Forge', 'Cleavr'),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'pipeline',
+          title: 'Dal push alla produzione',
+          items: lines(
+            'Un push su git avvia il deploy: niente FTP, niente passaggi a mano.',
+            'Il branch decide dove va: server di staging/test o produzione.',
+            'Deploy senza interruzioni: il sito resta online mentre si aggiorna.',
+            'DNS, certificati SSL, email, backup e monitoraggio: tutto seguito da me.',
+          ),
+        },
+        en: {
+          label: 'pipeline',
+          title: 'From push to production',
+          items: lines(
+            'A git push starts the deploy: no FTP, no manual steps.',
+            'The branch decides where it goes: staging/test servers or production.',
+            'Zero-downtime deploys: the site stays online while it updates.',
+            'DNS, SSL certificates, email, backups and monitoring: all handled by me.',
+          ),
+        },
+        ro: {
+          label: 'pipeline',
+          title: 'De la push la producție',
+          items: lines(
+            'Un push pe git pornește deploy-ul: fără FTP, fără pași manuali.',
+            'Branch-ul decide unde ajunge: servere de staging/test sau producție.',
+            'Deploy fără întreruperi: site-ul rămâne online cât se actualizează.',
+            'DNS, certificate SSL, email, backup și monitorizare: toate gestionate de mine.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'risultati',
+          title: 'Un\'agenzia autonoma',
+          items: lines(
+            'Siti pubblicati più velocemente e con più qualità.',
+            'Nessun disservizio in due anni.',
+            'Costi dei server prevedibili.',
+            'Nessuna dipendenza da aziende esterne: dall\'idea allo sviluppo alla pubblicazione, tutto interno.',
+            'Più progetti gestiti insieme, e sempre più complessi.',
+          ),
+        },
+        en: {
+          label: 'results',
+          title: 'A self-sufficient agency',
+          items: lines(
+            'Sites published faster and with higher quality.',
+            'No outages in two years.',
+            'Predictable server costs.',
+            'No reliance on outside companies: from idea to development to launch, all in-house.',
+            'More projects handled at once, and increasingly complex ones.',
+          ),
+        },
+        ro: {
+          label: 'rezultate',
+          title: 'O agenție autonomă',
+          items: lines(
+            'Site-uri publicate mai repede și cu o calitate mai bună.',
+            'Nicio întrerupere a serviciului în doi ani.',
+            'Costuri previzibile pentru servere.',
+            'Nicio dependență de firme externe: de la idee la dezvoltare și publicare, totul intern.',
+            'Mai multe proiecte gestionate în paralel, tot mai complexe.',
+          ),
+        },
+      }),
+      NEXT_STEP,
+    ],
+  },
+  xpulire: {
+    year: 2025,
+    translations: {
+      it: {intro: 'Il trasloco dell\'infrastruttura IT di un\'azienda di attrezzature industriali per la pulizia: dalla rete improvvisata della vecchia sede a una rete progettata, cablata e documentata, senza fermare un giorno di lavoro.', role: 'IT e infrastruttura di rete', type: 'Infrastruttura di rete', stack: 'Cablaggio strutturato, rack, switch PoE, Wi-Fi, VoIP, UPS'},
+      en: {intro: 'Moving the IT infrastructure of a company selling industrial cleaning equipment: from the makeshift network of the old premises to a network that is designed, cabled and documented, without stopping a single working day.', role: 'IT and network infrastructure', type: 'Network infrastructure', stack: 'Structured cabling, rack, PoE switches, Wi-Fi, VoIP, UPS'},
+      ro: {intro: 'Mutarea infrastructurii IT a unei firme care vinde echipamente industriale de curățenie: de la rețeaua improvizată din vechiul sediu la o rețea proiectată, cablată și documentată, fără să oprească nicio zi de lucru.', role: 'IT și infrastructură de rețea', type: 'Infrastructură de rețea', stack: 'Cablare structurată, rack, switch-uri PoE, Wi-Fi, VoIP, UPS'},
+    },
+    sections: [
+      section('block_text', {}, {
+        it: {
+          label: 'punto di partenza',
+          title: 'Cavi volanti e password perse',
+          text: paras(
+            'Nella vecchia sede il server era un normale PC con Windows Server. Le password degli account dei computer erano andate perse, i cavi correvano liberi, e modem e router erano collegati in cascata, appoggiati uno sopra l\'altro.',
+            'Prima del trasloco ho seguito la manutenzione: configurazione e sistemazione dei PC, e aggiornamenti hardware dove servivano.',
+          ),
+        },
+        en: {
+          label: 'starting point',
+          title: 'Loose cables and lost passwords',
+          text: paras(
+            'In the old premises the server was an ordinary PC running Windows Server. The passwords of the computer accounts had been lost, cables ran loose, and the modem and router were chained together, stacked one on top of the other.',
+            'Before the move I took care of maintenance: setting up and sorting out the PCs, and upgrading their hardware where needed.',
+          ),
+        },
+        ro: {
+          label: 'punct de plecare',
+          title: 'Cabluri atârnând și parole pierdute',
+          text: paras(
+            'În vechiul sediu, serverul era un PC obișnuit cu Windows Server. Parolele conturilor de pe calculatoare se pierduseră, cablurile atârnau liber, iar modemul și routerul erau legate în cascadă, puse unul peste altul.',
+            'Înainte de mutare m-am ocupat de mentenanță: configurarea și punerea în ordine a PC-urilor și îmbunătățiri hardware acolo unde era nevoie.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'metodo',
+          title: 'Un trasloco in un giorno',
+          items: lines(
+            'Sopralluogo nella nuova sede e obiettivi definiti insieme all\'azienda.',
+            'Schema della rete e preventivo.',
+            'Tutto il materiale acquistato prima di iniziare.',
+            'Il lavoro in un giorno non lavorativo, per non fermare la produzione.',
+          ),
+        },
+        en: {
+          label: 'method',
+          title: 'A move in one day',
+          items: lines(
+            'A site survey of the new premises and goals set together with the company.',
+            'Network diagram and quote.',
+            'All the equipment bought before starting.',
+            'The work done on a non-working day, so production never stopped.',
+          ),
+        },
+        ro: {
+          label: 'metodă',
+          title: 'O mutare într-o zi',
+          items: lines(
+            'Inspecția noului sediu și obiective stabilite împreună cu firma.',
+            'Schema rețelei și oferta de preț.',
+            'Tot materialul cumpărat înainte de a începe.',
+            'Lucrarea făcută într-o zi nelucrătoare, ca să nu se oprească producția.',
+          ),
+        },
+      }),
+      section('block_gallery', {}, {
+        it: {
+          label: 'la nuova rete',
+          title: 'Tutto parte dal rack',
+          text: paras(
+            'Al centro un **rack** con gruppo di continuità, switch core **PoE** da 24 porte e patch panel. Da lì partono i collegamenti verso gli uffici, ognuno con il suo switch, verso la stampante e verso due **access point**: uno negli uffici e uno nel magazzino.',
+            'Ogni cavo è etichettato, e la rete è documentata.',
+          ),
+          captions: lines('schema della rete', 'il rack'),
+        },
+        en: {
+          label: 'the new network',
+          title: 'It all starts from the rack',
+          text: paras(
+            'At the centre, a **rack** with a UPS, a 24-port **PoE** core switch and a patch panel. From there, the links go out to the offices, each with its own switch, to the printer and to two **access points**: one in the offices and one in the warehouse.',
+            'Every cable is labelled, and the network is documented.',
+          ),
+          captions: lines('network diagram', 'the rack'),
+        },
+        ro: {
+          label: 'noua rețea',
+          title: 'Totul pornește din rack',
+          text: paras(
+            'În centru, un **rack** cu UPS, un switch core **PoE** cu 24 de porturi și un patch panel. De acolo pleacă legăturile spre birouri, fiecare cu switch-ul lui, spre imprimantă și spre două **access point**-uri: unul în birouri și unul în depozit.',
+            'Fiecare cablu este etichetat, iar rețeaua este documentată.',
+          ),
+          captions: lines('schema rețelei', 'rack-ul'),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'messa in opera',
+          title: 'Pronti a lavorare il giorno dopo',
+          items: lines(
+            'Cablaggio, rack, switch e access point installati e collegati.',
+            'Ogni postazione configurata.',
+            'Il vecchio server reinstallato, per le attività che ne hanno ancora bisogno.',
+            'Gruppo di continuità e telefoni IP configurati.',
+          ),
+        },
+        en: {
+          label: 'installation',
+          title: 'Ready to work the next day',
+          items: lines(
+            'Cabling, rack, switches and access points installed and connected.',
+            'Every workstation set up.',
+            'The old server reinstalled, for the tasks that still need it.',
+            'UPS and IP phones configured.',
+          ),
+        },
+        ro: {
+          label: 'punere în funcțiune',
+          title: 'Gata de lucru a doua zi',
+          items: lines(
+            'Cablare, rack, switch-uri și access point-uri instalate și conectate.',
+            'Fiecare stație de lucru configurată.',
+            'Vechiul server reinstalat, pentru activitățile care încă au nevoie de el.',
+            'UPS-ul și telefoanele IP configurate.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'risultati',
+          title: 'Una rete che si capisce',
+          items: lines(
+            'Una struttura chiara, con tecnologia moderna.',
+            'Sicurezza migliorata.',
+            'Wi-Fi in ogni angolo, anche nel magazzino.',
+            'Manutenzione semplice: tutto documentato ed etichettato.',
+          ),
+        },
+        en: {
+          label: 'results',
+          title: 'A network that makes sense',
+          items: lines(
+            'A clear structure, with modern technology.',
+            'Improved security.',
+            'Wi-Fi in every corner, warehouse included.',
+            'Easy maintenance: everything documented and labelled.',
+          ),
+        },
+        ro: {
+          label: 'rezultate',
+          title: 'O rețea care se înțelege',
+          items: lines(
+            'O structură clară, cu tehnologie modernă.',
+            'Securitate îmbunătățită.',
+            'Wi-Fi în fiecare colț, inclusiv în depozit.',
+            'Mentenanță simplă: totul documentat și etichetat.',
+          ),
+        },
       }),
       NEXT_STEP,
     ],
