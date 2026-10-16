@@ -113,7 +113,7 @@ onBeforeUnmount(stop)
           <p
             v-for="(line, i) in log"
             :key="i"
-            class="m-0 flex gap-3 motion-safe:animate-[step-in_.25s_ease-out_both]"
+            class="m-0 flex gap-3 motion-safe:animate-[line-in_.25s_ease-out_both]"
             :class="line.kind === 'step' ? 'text-xs text-subtle' : 'text-ink'"
           >
             <span class="shrink-0" :class="{user: 'text-ghost', step: 'text-gutter', answer: 'text-accent'}[line.kind]">
@@ -122,7 +122,7 @@ onBeforeUnmount(stop)
             <span>{{ line.text }}</span>
           </p>
 
-          <div v-if="phase === 'done'" class="ml-6 flex flex-col gap-1 motion-safe:animate-[step-in_.3s_ease-out_both]">
+          <div v-if="phase === 'done'" class="ml-6 flex flex-col gap-1 motion-safe:animate-[line-in_.3s_ease-out_both]">
             <button
               v-for="icon in suggested"
               :key="icon"
