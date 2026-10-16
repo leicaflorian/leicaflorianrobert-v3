@@ -34,6 +34,7 @@ Components are auto-imported with the folder as prefix: `components/home/Hero.vu
 - Types for Directus content are in `app/types/content.ts`; translated fields are marked `// translated`.
 - Directus text formatting: `**word**` highlights a word (`highlight()` for native via `v-html`, `plain()` for legacy), blank lines separate paragraphs (`paragraphs()`), one item per line for lists (`lines()`). All in `app/utils/text.ts`. Never `v-html` a Directus string without `highlight()`, which escapes it.
 - Images are Directus file ids (`FileId`), rendered via `@nuxt/image` with the `directus` provider (see `components/ui/MediaImage.vue`).
+- Where the design has no photo, the visuals are code: the service illustrations (`components/service/visual/`, picked by the service `icon`, an uploaded image wins), the ASCII portrait (`UiAsciiPortrait`, from `public/imgs`: the canvas reads its pixels, so it must be same-origin) and the widgets. Animations run only while visible (`useVisibleInterval`) and respect `prefers-reduced-motion`.
 
 ### Changing the schema
 
@@ -46,7 +47,7 @@ The schema is code, not clicks. To add a field or collection:
 
 Setup and seed skip what already exists: they add new things but don't alter existing fields or overwrite filled-in content. Field notes in Directus are in Italian, since they are for the site's editor.
 
-`directus/extensions/contact-endpoint/dist/index.js` is hand-written (no build step). It's the `POST /contact` endpoint used by `useContactForm`.
+`directus/extensions/contact-endpoint/dist/index.js` is hand-written (no build step). It's the `POST /contact` endpoint used by `useContactForm`. It accepts only the project brief keys of `app/utils/brief.ts` (type, budget, timeline): change both together, plus the choices of `messages` in `setup.mjs` and the labels in i18n (`form.brief.options`).
 
 ## Routing and i18n
 

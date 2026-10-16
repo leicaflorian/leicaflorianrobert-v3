@@ -57,18 +57,21 @@ app/
     blocks/               one folder per block type, each with Native.vue and Legacy.vue; Renderer.vue
     case-study/           the top of a case study (the project's own fields)
     site/                 header, footer, logo, language, boot overlay
-    ui/                   the small pieces: titles with cursor, labels, buttons, images
-    project/ service/ contact/ legacy/            cards, form, links
+    ui/                   the small pieces: titles with cursor, labels, buttons, images, ASCII portrait
+    project/ service/ contact/ legacy/            cards, service illustrations, form and project.json, links
+    widget/               the animated widgets (editor, lesson, neofetch) of the Widget block
   composables/
     useEngine.ts          the legacy/native mode, saved in the browser
     useContent.ts         reads from Directus, with the current language's translation (falling back to Italian)
     usePageLink.ts        links to pages by key, the menu, project links
-    useContactForm.ts     sends the form to the Directus /contact endpoint
+    useContactForm.ts     the form's draft (shared by both engines) and sending it to /contact
+  utils/brief.ts          the form's project brief options (type, budget, timeline)
   assets/css/main.css     the design's colors and fonts as Tailwind tokens
 i18n/locales/             interface texts (menu, labels, buttons) in it, en, ro
 directus/
   docker-compose.yml      Directus and PostgreSQL locally
   scripts/                setup, seed, screenshots
+  seed-files/             images the seed uploads (the V3 case study screenshots)
   extensions/contact-endpoint   POST /contact: reCAPTCHA v3 and saving to `messages`
   snapshot.yaml           the Directus schema
 design/                   the Claude Design export, for reference only
