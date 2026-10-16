@@ -183,11 +183,6 @@ const EXPERIENCES = [
     en: 'Platforms for sustainability and marketing, with TypeScript, Laravel, Vue.js and MySQL: custom APIs and optimisation of performance and user experience.',
     ro: 'Platforme pentru sustenabilitate și marketing, cu TypeScript, Laravel, Vue.js și MySQL: API-uri pe măsură și optimizarea performanței și a experienței utilizatorilor.',
   }),
-  experience('xPulire', 2025, 'https://www.xpulire.com/', 'IT & Network Infrastructure', {
-    it: 'Manutenzione dell\'infrastruttura IT e trasloco nella nuova sede: rete cablata, rack, Wi-Fi, postazioni e telefoni IP, in un giorno non lavorativo.',
-    en: 'IT infrastructure maintenance and the move to the new premises: cabled network, rack, Wi-Fi, workstations and IP phones, on a non-working day.',
-    ro: 'Mentenanța infrastructurii IT și mutarea în noul sediu: rețea cablată, rack, Wi-Fi, stații de lucru și telefoane IP, într-o zi nelucrătoare.',
-  }),
   experience('Deepser s.r.l.', 2026, null, 'Senior Back-end Developer', {
     it: 'Sviluppo e manutenzione della piattaforma aziendale e delle sue nuove funzionalità.',
     en: 'Development and maintenance of the company platform and its new features.',
