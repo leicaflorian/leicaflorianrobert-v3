@@ -284,7 +284,7 @@ const BLOCKS = [
   block('block_contact_form', {
     icon: 'contact_mail',
     note: 'Il form di contatto, con le domande sul progetto e, in native, il riepilogo accanto.',
-    translations: [label(), title(), text('text', 'Sopra il form, facoltativo'), text('steps', 'Cosa succede dopo l\'invio, facoltativo: un passo per riga')],
+    translations: [label(), title(), text('text', 'Sopra il form, facoltativo'), string('steps_title', 'Titolo dei passi, facoltativo (in native sta accanto al form)'), text('steps', 'Cosa succede dopo l\'invio, facoltativo: un passo per riga')],
   }),
   block('block_services', {
     icon: 'design_services',
