@@ -15,6 +15,8 @@ const menu = useMenu()
     <div class="mx-auto max-w-[880px] px-6 pb-12 pt-8">
       <h1 class="m-0 mb-1.5 text-[34px] font-bold">{{ site.name }}</h1>
       <p class="m-0 mb-3.5">{{ $t('engine.profession', {profession: site.profession}) }}</p>
+      <!-- legacy is what a first visit shows: say it's on purpose, so nobody takes it for a broken site -->
+      <p class="m-0 mb-3.5 text-sm text-legacy-note"><i>{{ $t('engine.experiment') }}</i></p>
       <nav class="flex flex-wrap gap-4">
         <LegacyLink v-for="item in menu" :key="item.key" :to="item.key" :current="item.active">
           {{ item.title }}

@@ -9,6 +9,7 @@
     "mobileSwitch": "engine: GPU → legacy DOM",
     "activate": "▶ Attiva Rendering Nativo",
     "optimized": "Ottimizzato per Netscape Navigator 4.0 — 800×600",
+    "experiment": "È un esperimento: il sito come sarebbe stato negli anni '90. Per vedere quello vero, premi il pulsante in fondo alla pagina.",
     "profession": "Professione: {profession}",
     "toNative": ["detach DOM tree", "init wgpu device", "compile shaders", "render {'@'}120fps"],
     "toLegacy": ["drop GPU context", "restore document.body", "load Times New Roman", "ready"]

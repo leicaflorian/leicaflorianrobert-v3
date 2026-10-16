@@ -9,6 +9,7 @@
     "mobileSwitch": "engine: GPU → legacy DOM",
     "activate": "▶ Activează randarea nativă",
     "optimized": "Optimizat pentru Netscape Navigator 4.0 — 800×600",
+    "experiment": "E un experiment: site-ul așa cum ar fi arătat în anii '90. Ca să-l vezi pe cel adevărat, apasă butonul de la sfârșitul paginii.",
     "profession": "Profesie: {profession}",
     "toNative": ["detach DOM tree", "init wgpu device", "compile shaders", "render {'@'}120fps"],
     "toLegacy": ["drop GPU context", "restore document.body", "load Times New Roman", "ready"]
