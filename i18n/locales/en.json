@@ -107,5 +107,17 @@
     "title": "Page not found",
     "text": "This page doesn't exist, or doesn't exist anymore.",
     "back": "← ./home"
+  },
+  "services": {
+    "visual": {
+      "price": "€49.00 / month",
+      "pay": "Pay ✓",
+      "push": "push · now",
+      "shipped": "Order shipped",
+      "start": "Get started →",
+      "why": "// why does it work?",
+      "explain": "starts at 0 and adds up every price",
+      "review": "Let's handle the timeout too, this is where everything hangs."
+    }
   }
 }

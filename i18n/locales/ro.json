@@ -107,5 +107,17 @@
     "title": "Pagina nu a fost găsită",
     "text": "Această pagină nu există sau nu mai există.",
     "back": "← ./acasa"
+  },
+  "services": {
+    "visual": {
+      "price": "49,00 € / lună",
+      "pay": "Plătește ✓",
+      "push": "push · acum",
+      "shipped": "Comandă expediată",
+      "start": "Începe acum →",
+      "why": "// de ce funcționează?",
+      "explain": "pornește de la 0 și adună fiecare preț",
+      "review": "Să tratăm și timeout-ul, aici se blochează tot."
+    }
   }
 }

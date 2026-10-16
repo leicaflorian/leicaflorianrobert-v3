@@ -107,5 +107,17 @@
     "title": "Pagina non trovata",
     "text": "Questa pagina non esiste, o non esiste più.",
     "back": "← ./home"
+  },
+  "services": {
+    "visual": {
+      "price": "€ 49,00 / mese",
+      "pay": "Paga ✓",
+      "push": "push · ora",
+      "shipped": "Ordine spedito",
+      "start": "Inizia ora →",
+      "why": "// perché funziona?",
+      "explain": "parte da 0 e accumula ogni prezzo",
+      "review": "Gestiamo anche il timeout, qui si blocca tutto."
+    }
   }
 }
