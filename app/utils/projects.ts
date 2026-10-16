@@ -1,10 +1,19 @@
-import type {BlockProjects, Project, ProjectBranch} from '~/types/content'
+import type {BlockProjects, Project, ProjectBranch, ProjectCategory} from '~/types/content'
 
 /** Whether a project belongs to a block's `kind` filter: agency work counts as client work. */
 export function isOfKind(project: Project, kind: BlockProjects['kind']): boolean {
   if (kind === 'client') return project.kind !== 'personal'
-  if (kind === 'personal') return project.kind === 'personal'
-  return true
+  if (kind === 'all') return true
+  return project.kind === kind
+}
+
+const CATEGORIES: ProjectCategory[] = ['corporate', 'initiative', 'platform']
+
+/** Projects by category, in a fixed order; those without one last, as `other`. Empty groups are left out. */
+export function groupByCategory(projects: Project[]): {category: ProjectCategory | 'other', projects: Project[]}[] {
+  return [...CATEGORIES, 'other' as const]
+    .map(category => ({category, projects: projects.filter(p => (p.category ?? 'other') === category)}))
+    .filter(group => group.projects.length)
 }
 
 /** A project's branch in the Projects graph: set in Directus, or from who it was for. */

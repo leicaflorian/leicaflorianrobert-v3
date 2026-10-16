@@ -140,6 +140,12 @@
       "direct": "cliente",
       "agency": "tramite agenzia",
       "personal": "personale"
+    },
+    "category": {
+      "corporate": "Siti aziendali",
+      "initiative": "Eventi, enti e iniziative",
+      "platform": "Piattaforme, shop e app",
+      "other": "Altri lavori"
     }
   },
   "contact": {

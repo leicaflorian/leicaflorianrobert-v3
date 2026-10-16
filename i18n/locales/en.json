@@ -140,6 +140,12 @@
       "direct": "client",
       "agency": "via agency",
       "personal": "personal"
+    },
+    "category": {
+      "corporate": "Company websites",
+      "initiative": "Events, institutions and initiatives",
+      "platform": "Platforms, shops and apps",
+      "other": "Other work"
     }
   },
   "contact": {

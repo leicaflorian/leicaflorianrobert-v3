@@ -1,7 +1,7 @@
 <!--
   The projects: featured (with the mockup) and the Home ones ("home"), only the featured
-  ones ("featured"), or all the others as an archive ("archive"). `kind` narrows them to
-  client work or personal projects.
+  ones ("featured"), all the others as an archive ("archive"), or just their names by category
+  ("grouped"). `kind` narrows them to client work or personal projects.
 -->
 <script setup lang="ts">
 import type {BlockProjects} from '~/types/content'
@@ -19,6 +19,7 @@ const featured = computed(() => props.block.show === 'archive' ? [] : projects.v
 const cards = computed(() => props.block.show === 'home'
   ? projects.value.filter(p => p.on_home && !p.featured)
   : props.block.show === 'archive' ? projects.value.filter(p => !p.featured) : [])
+const groups = computed(() => props.block.show === 'grouped' ? groupByCategory(projects.value) : [])
 </script>
 
 <template>
@@ -53,6 +54,27 @@ const cards = computed(() => props.block.show === 'home'
           :variant="block.show === 'home' ? 'compact' : 'archive'"
         />
       </div>
+      <dl v-if="groups.length" class="m-0 grid gap-8">
+        <div
+          v-for="group in groups"
+          :key="group.category"
+          class="grid grid-cols-[240px_1fr] gap-6 border-t border-line pt-7 max-[860px]:grid-cols-1 max-[860px]:gap-3"
+        >
+          <dt class="text-[13px] text-accent">{{ $t(`projects.category.${group.category}`) }}</dt>
+          <dd class="m-0 flex flex-wrap gap-x-7 gap-y-3">
+            <ProjectLink
+              v-for="project in group.projects"
+              :key="project.id"
+              :project="project"
+              class="inline-flex items-baseline gap-2 text-[15px] text-ink hover:text-accent"
+            >
+              <span>{{ project.name }}</span>
+              <span v-if="project.note" class="text-[13px] text-muted">{{ project.note }}</span>
+              <ProjectArrow :project="project" class="text-xs"/>
+            </ProjectLink>
+          </dd>
+        </div>
+      </dl>
     </div>
   </section>
 </template>

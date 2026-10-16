@@ -140,6 +140,12 @@
       "direct": "client",
       "agency": "prin agenție",
       "personal": "personal"
+    },
+    "category": {
+      "corporate": "Site-uri de companie",
+      "initiative": "Evenimente, instituții și inițiative",
+      "platform": "Platforme, magazine și aplicații",
+      "other": "Alte lucrări"
     }
   },
   "contact": {

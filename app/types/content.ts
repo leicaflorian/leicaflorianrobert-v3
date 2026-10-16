@@ -31,6 +31,8 @@ export type Mockup = 'laptop' | 'phone' | 'none'
 export type ProjectKind = 'direct' | 'agency' | 'personal'
 /** The branch of a project in the Projects graph: main holds the versions of this site, client is shown as prod, lab as dev. */
 export type ProjectBranch = 'main' | 'client' | 'lab'
+/** The group of a project in a block shown by category: what kind of work it was. */
+export type ProjectCategory = 'corporate' | 'initiative' | 'platform'
 
 export interface Project {
   id: number
@@ -39,6 +41,7 @@ export interface Project {
   /** The project has its own page on the site, under the page with `children: 'projects'`. */
   case_study: boolean
   kind: ProjectKind
+  category: ProjectCategory | null
   /** Empty: client or lab, from the kind. */
   branch: ProjectBranch | null
   featured: boolean
@@ -215,9 +218,10 @@ export interface BlockServices extends BlockBase {
 }
 
 export interface BlockProjects extends BlockBase {
-  show: 'home' | 'featured' | 'archive'
+  /** `grouped`: the names only, by category, for long lists of small jobs. */
+  show: 'home' | 'featured' | 'archive' | 'grouped'
   /** Which projects: `client` covers both `direct` and `agency`. */
-  kind: 'all' | 'client' | 'personal'
+  kind: 'all' | 'client' | 'personal' | 'direct' | 'agency'
   all_link: boolean
   // translated
   label: string | null
