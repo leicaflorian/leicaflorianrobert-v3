@@ -3,14 +3,14 @@
 const {draft, status, submit, reset} = useContactForm()
 const pageLink = usePageLink()
 
-const control = 'border border-black px-1 font-legacy text-base'
+const control = 'max-w-full border border-black px-1 font-legacy text-base'
 </script>
 
 <template>
   <form class="flex max-w-[420px] flex-col gap-2" @submit.prevent="submit" @reset.prevent="reset">
-    <fieldset class="m-0 flex flex-col gap-2 border border-black px-2 pb-2">
+    <fieldset class="m-0 min-w-0 flex flex-col gap-2 border border-black px-2 pb-2">
       <legend>{{ $t('form.groups.project') }}</legend>
-      <fieldset class="m-0 border border-black px-2 pb-1">
+      <fieldset class="m-0 min-w-0 border border-black px-2 pb-1">
         <legend>{{ $t('form.brief.legacy.types') }}</legend>
         <label v-for="type in BRIEF_OPTIONS.types" :key="type" class="mr-3 inline-block whitespace-nowrap">
           <input v-model="draft.project_types" type="checkbox" name="project_types" :value="type"> {{ $t(`form.brief.options.types.${type}`) }}
@@ -29,7 +29,7 @@ const control = 'border border-black px-1 font-legacy text-base'
         </select>
       </label>
     </fieldset>
-    <fieldset class="m-0 flex flex-col gap-2 border border-black px-2 pb-2">
+    <fieldset class="m-0 min-w-0 flex flex-col gap-2 border border-black px-2 pb-2">
       <legend>{{ $t('form.groups.you') }}</legend>
       <label>{{ $t('form.legacy.name') }} <input v-model="draft.name" type="text" name="name" required :class="control"></label>
       <label>{{ $t('form.legacy.email') }} <input v-model="draft.email" type="email" name="email" required :class="control"></label>
