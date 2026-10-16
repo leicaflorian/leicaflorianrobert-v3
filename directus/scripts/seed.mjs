@@ -1096,7 +1096,7 @@ const CASE_STUDIES = {
           label: 'idea',
           title: 'Il PDF che mancava',
           text: paras(
-            'Slides.com è un servizio per creare e mostrare presentazioni online, ma scaricarle in PDF non è sempre possibile.',
+            'Slides.com è un servizio per creare e mostrare presentazioni online, ma l\'export in PDF è solo nei **piani a pagamento**.',
             'L\'estensione aggiunge il download di **qualsiasi presentazione** in PDF, gratis. È nata come Slides.com Downloader ed è diventata Slides.com Companion, pensata per raccogliere altre funzioni.',
           ),
         },
@@ -1104,7 +1104,7 @@ const CASE_STUDIES = {
           label: 'idea',
           title: 'The missing PDF',
           text: paras(
-            'Slides.com is a service for creating and showing presentations online, but downloading them as a PDF isn\'t always possible.',
+            'Slides.com is a service for creating and showing presentations online, but PDF export is only in the **paid plans**.',
             'The extension adds the download of **any presentation** as a PDF, for free. It started as Slides.com Downloader and became Slides.com Companion, built to hold more features.',
           ),
         },
@@ -1112,7 +1112,7 @@ const CASE_STUDIES = {
           label: 'idee',
           title: 'PDF-ul care lipsea',
           text: paras(
-            'Slides.com este un serviciu pentru a crea și prezenta prezentări online, dar descărcarea lor în PDF nu este mereu posibilă.',
+            'Slides.com este un serviciu pentru a crea și prezenta prezentări online, dar exportul în PDF există doar în **planurile plătite**.',
             'Extensia adaugă descărcarea în PDF a **oricărei prezentări**, gratuit. A pornit ca Slides.com Downloader și a devenit Slides.com Companion, gândită pentru a aduna și alte funcții.',
           ),
         },
