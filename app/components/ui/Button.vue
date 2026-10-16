@@ -22,7 +22,7 @@ const tag = computed(() => props.to ? NuxtLink : props.href ? 'a' : 'button')
     :href="href"
     :type="to || href ? undefined : type"
     :disabled="disabled"
-    class="inline-flex items-center gap-2.5 rounded-[10px] px-6 py-[15px] text-sm transition-[transform,background-color,border-color] duration-[450ms] ease-spring disabled:cursor-wait disabled:opacity-60"
+    class="inline-flex items-center gap-2.5 rounded-[10px] px-6 py-[15px] text-sm transition-[transform,translate,scale,background-color,border-color] duration-[450ms] ease-spring disabled:cursor-wait disabled:opacity-60"
     :class="[
       variant === 'primary'
         ? 'cursor-pointer border-0 bg-accent font-bold text-bg hover:scale-[1.03] hover:bg-accent-hover hover:text-bg'

@@ -59,6 +59,7 @@ Setup and seed skip what already exists: they add new things but don't alter exi
 - Tailwind 4, configured in CSS only: `app/assets/css/main.css` (`@theme`). There is no `tailwind.config`.
 - Use the theme tokens (`bg-bg`, `text-ink`, `text-muted`, `text-accent`, `border-line-card`, `bg-legacy-face`, `font-legacy`...), not raw hex values. Add a token if one is missing.
 - Custom utilities: `page` (the 1120px column), `section-y` (section spacing), `spring` (hover transition).
+- In Tailwind 4 `translate-*` and `scale-*` set the CSS `translate` and `scale` properties, not `transform`: `transition-transform` doesn't animate them. Use `spring`, or list them (`transition-[translate]`). Loop animations go behind `motion-safe:`.
 - Responsive breakpoint used throughout: `max-[860px]:`.
 - `design/` is the Claude Design export, for reference only. The final pages are `* Dual Engine.dc.html` and `Case Study V3.dc.html`; match them when building UI. Don't import from `design/`.
 

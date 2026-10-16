@@ -104,9 +104,11 @@
     }
 }
 
-/* "Spring" hover for cards and buttons. */
+/* "Spring" hover for cards and buttons. Tailwind 4's translate-* and scale-* set their own
+   properties, not `transform`: all three are animated. */
 @utility spring {
-    transition: transform .5s var(--ease-spring), border-color .2s, background-color .2s, color .2s;
+    transition: transform .5s var(--ease-spring), translate .5s var(--ease-spring), scale .5s var(--ease-spring),
+        border-color .2s, background-color .2s, color .2s;
 }
 
 @layer base {
