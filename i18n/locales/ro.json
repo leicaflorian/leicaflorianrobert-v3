@@ -54,9 +54,13 @@
       "submit": "Trimite",
       "reset": "Șterge"
     },
+    "groups": {
+      "project": "Proiectul",
+      "you": "Datele tale"
+    },
     "brief": {
-      "types": "tipul proiectului · poți alege mai multe",
-      "budget": "buget orientativ",
+      "types": "tip · poți alege mai multe",
+      "budget": "buget",
       "timeline": "termene",
       "options": {
         "types": {

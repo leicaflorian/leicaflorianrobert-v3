@@ -54,9 +54,13 @@
       "submit": "Send",
       "reset": "Clear"
     },
+    "groups": {
+      "project": "The project",
+      "you": "Your details"
+    },
     "brief": {
-      "types": "project type · pick more than one",
-      "budget": "rough budget",
+      "types": "type · pick more than one",
+      "budget": "budget",
       "timeline": "timeline",
       "options": {
         "types": {

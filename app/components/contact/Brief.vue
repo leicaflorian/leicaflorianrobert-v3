@@ -46,7 +46,7 @@ const filled = computed(() => {
 </script>
 
 <template>
-  <div class="sticky top-24 min-w-0 overflow-hidden rounded-2xl border border-line-card bg-bg-deep max-[860px]:static">
+  <div class="min-w-0 overflow-hidden rounded-2xl border border-line-card bg-bg-deep">
     <div class="flex items-center justify-between gap-3 border-b border-line bg-surface px-4 py-3 text-xs text-subtle">
       <span class="flex items-center gap-1.5">
         <span v-for="i in 3" :key="i" class="size-[9px] rounded-full bg-gutter"/>

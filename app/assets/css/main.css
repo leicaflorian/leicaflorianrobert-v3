@@ -4,6 +4,8 @@
 @theme {
     /* fonts */
     --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    /* reading text (steps, form fields), so the mono stays an accent */
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     --font-legacy: "Times New Roman", Times, serif;
     --font-legacy-mono: "Courier New", monospace;
 

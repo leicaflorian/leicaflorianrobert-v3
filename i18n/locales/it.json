@@ -54,9 +54,13 @@
       "submit": "Invia",
       "reset": "Cancella"
     },
+    "groups": {
+      "project": "Il progetto",
+      "you": "I tuoi dati"
+    },
     "brief": {
-      "types": "tipo di progetto · anche più di uno",
-      "budget": "budget indicativo",
+      "types": "tipo · anche più di uno",
+      "budget": "budget",
       "timeline": "tempistiche",
       "options": {
         "types": {
