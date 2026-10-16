@@ -29,19 +29,19 @@ const SINGLETONS = {
     linkedin: 'https://www.linkedin.com/in/florian-robert-leica/',
     translations: tr({
       it: {
-        role: 'Full Stack Developer',
+        role: 'Sviluppatore Web & Mobile',
         profession: 'Sviluppatore Web & Mobile',
-        tagline: 'Sviluppatore Web Full Stack, UI/UX Designer, Mobile Developer. Da oltre 15 anni trasformo idee in prodotti digitali.',
+        tagline: 'Sviluppatore Web & Mobile. Da 17 anni trasformo idee in prodotti digitali.',
       },
       en: {
-        role: 'Full Stack Developer',
+        role: 'Web & Mobile Developer',
         profession: 'Web & Mobile Developer',
-        tagline: 'Full Stack Web Developer, UI/UX Designer, Mobile Developer. For over 15 years I have been turning ideas into digital products.',
+        tagline: 'Web & Mobile Developer. For 17 years I have been turning ideas into digital products.',
       },
       ro: {
-        role: 'Full Stack Developer',
+        role: 'Dezvoltator Web & Mobile',
         profession: 'Dezvoltator Web & Mobile',
-        tagline: 'Dezvoltator Web Full Stack, UI/UX Designer, Mobile Developer. De peste 15 ani transform idei în produse digitale.',
+        tagline: 'Dezvoltator Web & Mobile. De 17 ani transform idei în produse digitale.',
       },
     }),
   },
@@ -256,29 +256,29 @@ const PAGES = [
     key: 'home',
     in_menu: true,
     translations: tr({
-      it: {slug: '', title: 'Home', seo_title: 'Costruisco esperienze digitali su misura', description: 'Siti, app e interfacce che funzionano davvero. Oltre 15 anni tra web, mobile e UI/UX.'},
-      en: {slug: '', title: 'Home', seo_title: 'I build digital experiences made to measure', description: 'Websites, apps and interfaces that actually work. Over 15 years across web, mobile and UI/UX.'},
-      ro: {slug: '', title: 'Acasă', seo_title: 'Construiesc experiențe digitale pe măsură', description: 'Site-uri, aplicații și interfețe care chiar funcționează. Peste 15 ani între web, mobile și UI/UX.'},
+      it: {slug: '', title: 'Home', seo_title: 'Costruisco esperienze digitali su misura', description: 'Siti, app e interfacce che funzionano davvero. 17 anni tra web, mobile e UI/UX.'},
+      en: {slug: '', title: 'Home', seo_title: 'I build digital experiences made to measure', description: 'Websites, apps and interfaces that actually work. 17 years across web, mobile and UI/UX.'},
+      ro: {slug: '', title: 'Acasă', seo_title: 'Construiesc experiențe digitale pe măsură', description: 'Site-uri, aplicații și interfețe care chiar funcționează. 17 ani între web, mobile și UI/UX.'},
     }),
     sections: [
       section('block_hero_home', {}, {
         it: {
           title: 'Costruisco esperienze digitali',
           title_accent: 'su misura',
-          text: 'Siti, app e interfacce che funzionano davvero. Oltre 15 anni tra web, mobile e UI/UX.',
-          legacy_text: 'Da oltre 15 anni trasformo idee in siti, app e interfacce che funzionano davvero. Questa pagina è servita dal vecchio DOM: testo, link blu e tabelle.',
+          text: 'Siti, app e interfacce che funzionano davvero. 17 anni tra web, mobile e UI/UX.',
+          legacy_text: 'Da 17 anni trasformo idee in siti, app e interfacce che funzionano davvero. Questa pagina è servita dal vecchio DOM: testo, link blu e tabelle.',
         },
         en: {
           title: 'I build digital experiences',
           title_accent: 'made to measure',
-          text: 'Websites, apps and interfaces that actually work. Over 15 years across web, mobile and UI/UX.',
-          legacy_text: 'For over 15 years I have been turning ideas into websites, apps and interfaces that actually work. This page is served by the old DOM: text, blue links and tables.',
+          text: 'Websites, apps and interfaces that actually work. 17 years across web, mobile and UI/UX.',
+          legacy_text: 'For 17 years I have been turning ideas into websites, apps and interfaces that actually work. This page is served by the old DOM: text, blue links and tables.',
         },
         ro: {
           title: 'Construiesc experiențe digitale',
           title_accent: 'pe măsură',
-          text: 'Site-uri, aplicații și interfețe care chiar funcționează. Peste 15 ani între web, mobile și UI/UX.',
-          legacy_text: 'De peste 15 ani transform idei în site-uri, aplicații și interfețe care chiar funcționează. Această pagină este servită de vechiul DOM: text, linkuri albastre și tabele.',
+          text: 'Site-uri, aplicații și interfețe care chiar funcționează. 17 ani între web, mobile și UI/UX.',
+          legacy_text: 'De 17 ani transform idei în site-uri, aplicații și interfețe care chiar funcționează. Această pagină este servită de vechiul DOM: text, linkuri albastre și tabele.',
         },
       }),
       section('block_services', {}, {
@@ -302,15 +302,15 @@ const PAGES = [
     key: 'about',
     in_menu: true,
     translations: tr({
-      it: {slug: 'chi-sono', title: 'Chi sono', description: 'Sono Leica Florian Robert, sviluppatore Web Full Stack, UI e UX Designer, sviluppatore Mobile e insegnante di tecnologie web.'},
-      en: {slug: 'about', title: 'About me', description: 'I\'m Leica Florian Robert: Full Stack Web Developer, UI and UX Designer, Mobile Developer and web technologies teacher.'},
-      ro: {slug: 'despre-mine', title: 'Despre mine', description: 'Sunt Leica Florian Robert, dezvoltator Web Full Stack, UI și UX Designer, dezvoltator Mobile și profesor de tehnologii web.'},
+      it: {slug: 'chi-sono', title: 'Chi sono', description: 'Sono Leica Florian Robert, sviluppatore Web & Mobile: sviluppo full stack, progetto interfacce (UI e UX) e insegno tecnologie web.'},
+      en: {slug: 'about', title: 'About me', description: 'I\'m Leica Florian Robert, a Web & Mobile Developer: I build full stack, design interfaces (UI and UX) and teach web technologies.'},
+      ro: {slug: 'despre-mine', title: 'Despre mine', description: 'Sunt Leica Florian Robert, dezvoltator Web & Mobile: dezvolt full stack, proiectez interfețe (UI și UX) și predau tehnologii web.'},
     }),
     sections: [
       section('block_page_header', {variant: 'about'}, {
-        it: {label: '// su di me', title: 'Ciao, benvenuto/a', intro: 'Sono Leica Florian Robert, sviluppatore Web Full Stack, UI e UX Designer, sviluppatore Mobile, insegnante tecnologie web, grande appassionato d\'informatica e di tecnologia.'},
-        en: {label: '// about me', title: 'Hi, welcome', intro: 'I\'m Leica Florian Robert: Full Stack Web Developer, UI and UX Designer, Mobile Developer, web technologies teacher, and a big fan of computing and technology.'},
-        ro: {label: '// despre mine', title: 'Salut, bine ai venit', intro: 'Sunt Leica Florian Robert, dezvoltator Web Full Stack, UI și UX Designer, dezvoltator Mobile, profesor de tehnologii web, mare pasionat de informatică și tehnologie.'},
+        it: {label: '// su di me', title: 'Ciao, piacere', intro: 'Sono Leica Florian Robert, sviluppatore Web & Mobile: sviluppo full stack, progetto interfacce (UI e UX) e insegno tecnologie web. Sono un grande appassionato d\'informatica e di tecnologia.'},
+        en: {label: '// about me', title: 'Hi, nice to meet you', intro: 'I\'m Leica Florian Robert, a Web & Mobile Developer: I build full stack, design interfaces (UI and UX) and teach web technologies. I\'m a big fan of computing and technology.'},
+        ro: {label: '// despre mine', title: 'Salut, încântat de cunoștință', intro: 'Sunt Leica Florian Robert, dezvoltator Web & Mobile: dezvolt full stack, proiectez interfețe (UI și UX) și predau tehnologii web. Sunt un mare pasionat de informatică și tehnologie.'},
       }),
       section('block_text', {widgets: ['web', 'editor', 'lesson', 'agent']}, {
         it: {

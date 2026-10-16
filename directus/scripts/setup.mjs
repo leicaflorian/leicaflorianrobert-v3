@@ -81,7 +81,7 @@ const COLLECTIONS = [
       string('linkedin', 'URL del profilo', {width: 'half'}),
     ],
     translations: [
-      string('role', 'Nella hero della Home: «// Nome — Full Stack Developer»'),
+      string('role', 'Nella hero della Home: «// Nome — Sviluppatore Web & Mobile»'),
       string('profession', 'In modalità legacy: «Professione: …»'),
       text('tagline', 'La presentazione nel footer'),
     ],
@@ -203,7 +203,7 @@ const BLOCKS = [
       string('title', 'Titolo, parte bianca'),
       string('title_accent', 'Titolo, parte arancione'),
       text('text', 'Sotto il titolo'),
-      text('legacy_text', 'In modalità legacy, sotto «Benvenuto nel mio ipertesto»'),
+      text('legacy_text', 'In modalità legacy, sotto «Ciao, questo è il mio ipertesto»'),
     ],
   }),
   block('block_page_header', {
