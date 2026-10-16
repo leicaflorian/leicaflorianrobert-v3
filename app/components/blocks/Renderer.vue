@@ -54,17 +54,26 @@ const BLOCK_DATA: Partial<Record<BlockCollection, (section: Section) => Promise<
 // the composables share a cache key per collection: loading twice makes one request
 await Promise.all(props.sections.map(section => BLOCK_DATA[section.collection]?.(section)))
 
+const projects = props.sections.some(s => s.collection === 'block_projects') ? await usePublishedProjects() : null
+
+/** A featured row without featured projects has nothing to show: it's left out, numbering included. */
+function isEmpty({collection, item}: Section) {
+  return collection === 'block_projects' && 'show' in item && item.show === 'featured'
+    && !projects?.value.some(p => p.featured && isOfKind(p, item.kind))
+}
+const sections = computed(() => props.sections.filter(s => !isEmpty(s)))
+
 /** The labels with their numbers, counted on the native page so they don't change with the mode. */
 const labels = computed(() => {
   let n = 0
-  return new Map(props.sections.map((section) => {
+  return new Map(sections.value.map((section) => {
     const label = 'label' in section.item ? section.item.label : null
     if (!label || label.startsWith('//') || section.item.engines === 'legacy') return [section.id, label ?? undefined]
     return [section.id, `${String(++n).padStart(2, '0')} / ${label}`]
   }))
 })
 
-const visible = computed(() => props.sections.filter(s => s.item.engines === 'both' || s.item.engines === mode.value))
+const visible = computed(() => sections.value.filter(s => s.item.engines === 'both' || s.item.engines === mode.value))
 </script>
 
 <template>
