@@ -36,15 +36,13 @@
   "form": {
     "name": "prenume",
     "namePlaceholder": "Prenumele tău",
-    "surname": "nume",
-    "surnamePlaceholder": "Numele tău",
     "email": "email",
     "emailPlaceholder": "nume{'@'}exemplu.ro",
     "message": "mesaj",
-    "messagePlaceholder": "Povestește-mi despre proiectul tău...",
-    "submit": "Trimite mesajul →",
+    "messagePlaceholder": "De ex. țin totul într-un fișier Excel și aș vrea să-l transform într-o aplicație web pentru 5 colegi…",
+    "submit": "Trimite cererea →",
     "sending": "Se trimite...",
-    "sent": "Mesaj trimis: îți răspund cât mai curând.",
+    "sent": "Am primit! Îți răspund în 1–2 zile lucrătoare.",
     "error": "Nu am reușit să trimit mesajul. Încearcă din nou sau scrie-mi pe email.",
     "recaptcha": "Acest site este protejat de reCAPTCHA. Se aplică Politica de confidențialitate și Termenii de utilizare Google.",
     "legacy": {

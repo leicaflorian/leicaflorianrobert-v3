@@ -180,7 +180,7 @@ const COLLECTIONS = [
     collection: 'messages',
     icon: 'inbox',
     note: 'I messaggi arrivati dal form di contatto. Li scrive l\'endpoint /contact.',
-    display: '{{name}} {{surname}} — {{email}}',
+    display: '{{name}} — {{email}}',
     sortable: false,
     fields: [
       {field: 'date_created', type: 'timestamp', meta: {special: ['date-created'], interface: 'datetime', readonly: true, width: 'half'}, schema: {}},
@@ -685,7 +685,6 @@ async function createFlows() {
           type: 'markdown',
           body: [
             '**Nome:** {{$trigger.payload.name}}',
-            '**Cognome:** {{$trigger.payload.surname}}',
             '**Email:** {{$trigger.payload.email}}',
             '**Lingua:** {{$trigger.payload.locale}}',
             '**Tipo di progetto:** {{$trigger.payload.project_types}}',

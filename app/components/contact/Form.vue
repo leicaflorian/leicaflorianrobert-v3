@@ -48,15 +48,12 @@ const groups = computed(() => [
 
     <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-5">
       <label :class="label">{{ $t('form.name') }}
-        <input v-model="draft.name" type="text" name="name" required autocomplete="given-name" :placeholder="$t('form.namePlaceholder')" :class="field">
+        <input v-model="draft.name" type="text" name="name" required autocomplete="name" :placeholder="$t('form.namePlaceholder')" :class="field">
       </label>
-      <label :class="label">{{ $t('form.surname') }}
-        <input v-model="draft.surname" type="text" name="surname" autocomplete="family-name" :placeholder="$t('form.surnamePlaceholder')" :class="field">
+      <label :class="label">{{ $t('form.email') }}
+        <input v-model="draft.email" type="email" name="email" required autocomplete="email" :placeholder="$t('form.emailPlaceholder')" :class="field">
       </label>
     </div>
-    <label :class="label">{{ $t('form.email') }}
-      <input v-model="draft.email" type="email" name="email" required autocomplete="email" :placeholder="$t('form.emailPlaceholder')" :class="field">
-    </label>
     <label :class="label">{{ $t('form.message') }}
       <textarea v-model="draft.message" name="message" rows="5" required :placeholder="$t('form.messagePlaceholder')" :class="[field, 'resize-y']"/>
     </label>

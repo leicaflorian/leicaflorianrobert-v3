@@ -36,15 +36,13 @@
   "form": {
     "name": "first name",
     "namePlaceholder": "Your first name",
-    "surname": "last name",
-    "surnamePlaceholder": "Your last name",
     "email": "email",
     "emailPlaceholder": "name{'@'}example.com",
     "message": "message",
-    "messagePlaceholder": "Tell me about your project...",
-    "submit": "Send message →",
+    "messagePlaceholder": "E.g. I run everything on an Excel sheet and would like to turn it into a web app for 5 colleagues…",
+    "submit": "Send the request →",
     "sending": "Sending...",
-    "sent": "Message sent: I'll get back to you soon.",
+    "sent": "Got it! I'll reply within 1–2 working days.",
     "error": "I couldn't send your message. Please try again, or email me directly.",
     "recaptcha": "This site is protected by reCAPTCHA. The Google Privacy Policy and Terms of Service apply.",
     "legacy": {

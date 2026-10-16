@@ -36,15 +36,13 @@
   "form": {
     "name": "nome",
     "namePlaceholder": "Il tuo nome",
-    "surname": "cognome",
-    "surnamePlaceholder": "Il tuo cognome",
     "email": "email",
     "emailPlaceholder": "nome{'@'}esempio.it",
     "message": "messaggio",
-    "messagePlaceholder": "Raccontami del tuo progetto...",
-    "submit": "Invia messaggio →",
+    "messagePlaceholder": "Es. Ho un gestionale in Excel e vorrei trasformarlo in una web app per 5 colleghi…",
+    "submit": "Invia la richiesta →",
     "sending": "Invio in corso...",
-    "sent": "Messaggio inviato: ti rispondo al più presto.",
+    "sent": "Ricevuto! Ti rispondo entro 1–2 giorni lavorativi.",
     "error": "Non sono riuscito a inviare il messaggio. Riprova, oppure scrivimi via email.",
     "recaptcha": "Questo sito è protetto da reCAPTCHA. Si applicano la Privacy Policy e i Termini di servizio di Google.",
     "legacy": {

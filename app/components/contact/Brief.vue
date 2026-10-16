@@ -23,12 +23,11 @@ const text = (value: string, max = 0) => {
 }
 
 const rows = computed<Row[]>(() => {
-  const {name, surname, email, message, project_types, budget, timeline} = draft.value
+  const {name, email, message, project_types, budget, timeline} = draft.value
   const types = project_types.map(type => quote(t(`form.brief.options.types.${type}`)))
   return [
     {value: '{', punct: true, depth: 0},
     {key: t('form.name'), value: text(name), comma: true, depth: 1},
-    {key: t('form.surname'), value: text(surname), comma: true, depth: 1},
     {key: t('form.email'), value: text(email), comma: true, depth: 1},
     {key: t('form.message'), value: text(message, 120), comma: true, depth: 1},
     {key: t('form.brief.json.project'), value: '{', punct: true, depth: 1},
@@ -41,8 +40,8 @@ const rows = computed<Row[]>(() => {
 })
 
 const filled = computed(() => {
-  const {name, surname, email, message, project_types, budget, timeline} = draft.value
-  return [name.trim(), surname.trim(), email.trim(), message.trim(), project_types.length, budget, timeline].filter(Boolean).length
+  const {name, email, message, project_types, budget, timeline} = draft.value
+  return [name.trim(), email.trim(), message.trim(), project_types.length, budget, timeline].filter(Boolean).length
 })
 </script>
 

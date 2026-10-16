@@ -2,7 +2,6 @@ import type {BriefBudget, BriefTimeline, BriefType} from '~/utils/brief'
 
 export interface ContactMessage {
   name: string
-  surname: string
   email: string
   message: string
   project_types: BriefType[]
@@ -22,7 +21,7 @@ declare global {
 }
 
 const empty = (): ContactMessage => ({
-  name: '', surname: '', email: '', message: '', project_types: [], budget: null, timeline: null,
+  name: '', email: '', message: '', project_types: [], budget: null, timeline: null,
 })
 
 /**
