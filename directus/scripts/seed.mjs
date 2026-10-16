@@ -295,9 +295,9 @@ const PAGES = [
         ro: {label: 'proiecte', title: 'Lucrări selectate'},
       }),
       section('block_contact_form', {}, {
-        it: {label: 'contatti', title: 'Parliamone', text: 'Hai un progetto, un problema o solo un dubbio tecnico? Scrivimi: ti dico onestamente cosa farei, senza giri di parole.'},
-        en: {label: 'contact', title: 'Let\'s talk', text: 'Got a project, a problem or just a technical question? Write to me: I\'ll tell you honestly what I\'d do, no beating around the bush.'},
-        ro: {label: 'contact', title: 'Hai să vorbim', text: 'Ai un proiect, o problemă sau doar o nelămurire tehnică? Scrie-mi: îți spun sincer ce aș face, fără ocolișuri.'},
+        it: {label: 'contatti', title: 'Parliamone', text: 'Hai un progetto, un problema o solo un dubbio tecnico? Scrivimi: ti dico onestamente cosa farei, senza giri di parole.', steps_title: 'Come funziona', steps: lines('Mi scrivi (anche due righe vanno bene)', 'Ti rispondo entro 1–2 giorni lavorativi e, se serve, ci sentiamo in una call di 30 minuti', 'Ti mando una proposta chiara: tempi, costi, cosa è incluso')},
+        en: {label: 'contact', title: 'Let\'s talk', text: 'Got a project, a problem or just a technical question? Write to me: I\'ll tell you honestly what I\'d do, no beating around the bush.', steps_title: 'How it works', steps: lines('You write to me (two lines are enough)', 'I reply within 1–2 working days and, if needed, we have a 30-minute call', 'I send you a clear proposal: timing, costs, what\'s included')},
+        ro: {label: 'contact', title: 'Hai să vorbim', text: 'Ai un proiect, o problemă sau doar o nelămurire tehnică? Scrie-mi: îți spun sincer ce aș face, fără ocolișuri.', steps_title: 'Cum funcționează', steps: lines('Îmi scrii (sunt de ajuns două rânduri)', 'Îți răspund în 1–2 zile lucrătoare și, dacă e nevoie, vorbim într-un call de 30 de minute', 'Îți trimit o propunere clară: termene, costuri, ce este inclus')},
       }),
     ],
   },
