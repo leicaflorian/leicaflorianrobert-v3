@@ -117,6 +117,8 @@ const EXPERIENCES = [
   experience('Develon s.r.l.', 2020, 'https://www.develon.com', 'Senior Full Stack Developer'),
   experience('Boolean Careers', 2021, 'https://www.boolean.careers', 'Main Teacher nel corso di Full-Stack Web Development', 'Main Teacher of the Full-Stack Web Development course', 'Main Teacher la cursul de Full-Stack Web Development'),
   experience('Web Artisan Bros', 2023, 'https://webartisanbros.com', 'Co-founder & CTO'),
+  experience('The Full Project', 2024, 'https://thefullproject.it/', 'Full Stack Developer & IT Manager'),
+  experience('xPulire', 2025, 'https://www.xpulire.com/', 'IT & Network Infrastructure'),
 ]
 
 const service = (icon, it, en, ro) => ({icon, translations: tr({it, en, ro})})
@@ -135,9 +137,9 @@ const SERVICES = [
     {title: 'UI / UX Designer', text: 'Clear interfaces that guide users where they need to go — beautiful, yes, but above all working.'},
     {title: 'UI / UX Designer', text: 'Interfețe clare care îl conduc pe utilizator acolo unde trebuie să ajungă — frumoase, da, dar mai ales funcționale.'}),
   service('devops',
-    {title: 'DevOps & Infrastruttura', text: 'Server, CI/CD, performance e manutenzione continua — perché "funziona sul mio computer" non dovrebbe essere una frase che senti mai.'},
-    {title: 'DevOps & Infrastructure', text: 'Servers, CI/CD, performance and ongoing maintenance — because "it works on my machine" is something you should never hear.'},
-    {title: 'DevOps & Infrastructură', text: 'Servere, CI/CD, performanță și mentenanță continuă — pentru că „pe calculatorul meu merge" nu ar trebui să fie o frază pe care s-o auzi vreodată.'}),
+    {title: 'DevOps & Infrastruttura', text: 'Server in cloud, deploy automatici, DNS, SSL, backup e monitoraggio, con DigitalOcean, Forge, Cleavr e Docker. Un progetto non è finito quando funziona sul mio computer: è finito quando è online e resta in piedi.'},
+    {title: 'DevOps & Infrastructure', text: 'Cloud servers, automated deploys, DNS, SSL, backups and monitoring, with DigitalOcean, Forge, Cleavr and Docker. A project isn\'t done when it works on my machine: it\'s done when it\'s online and stays up.'},
+    {title: 'DevOps & Infrastructură', text: 'Servere în cloud, deploy-uri automate, DNS, SSL, backup și monitorizare, cu DigitalOcean, Forge, Cleavr și Docker. Un proiect nu e gata când merge pe calculatorul meu: e gata când e online și rămâne online.'}),
   service('formazione',
     {title: 'Formazione / Mentoring', text: 'Corsi e mentoring per sviluppatori che vogliono crescere sul serio — non solo copiare codice, ma capirlo davvero.'},
     {title: 'Training / Mentoring', text: 'Courses and mentoring for developers who want to really grow — not just copy code, but truly understand it.'},
@@ -151,6 +153,7 @@ const SERVICES = [
 const TECHNOLOGIES = [
   'HTML5', 'CSS3 / SASS', 'JavaScript', 'TypeScript', 'jQuery', 'Vue.js / Nuxt.js', 'Node.js', 'Nest.js',
   'NativeScript', 'Ionic', 'Webpack / Vite', 'PHP', 'Laravel', 'MongoDB / MySQL', 'Docker',
+  'Statamic', 'Directus', 'DigitalOcean', 'Laravel Forge / Cleavr',
 ].map(name => ({name}))
 
 // --- pages -------------------------------------------------------------------------------
