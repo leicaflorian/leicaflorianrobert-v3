@@ -2,6 +2,10 @@
 
 Personal website of Leica Florian Robert, V3 "Dual Engine": Nuxt 4 + Tailwind 4, statically generated, content from Directus 12, three languages. `README.md` covers setup, scripts, env vars and deployment: read it first; this file adds what you need to work on the code.
 
+## Superpowers
+
+**Prima di qualsiasi altra cosa si usa Superpowers** (regola del proprietario, 13/10/2026). All'inizio di ogni conversazione, e prima di ogni risposta o azione (anche una domanda di chiarimento), si richiama la skill `superpowers:using-superpowers` e si seguono le skill di Superpowers che riguardano il compito. Il plugin è installato in Claude Code (`/plugin`) e abilitato per il progetto in `.claude/settings.json`, che è versionato perché lo trovi anche una sessione nel cloud. Come si usa in questo progetto (voci del ToDo, worktree, TDD) è nella sezione *Superpowers in questo progetto*, più sotto.
+
 ## Commands
 
 ```bash
