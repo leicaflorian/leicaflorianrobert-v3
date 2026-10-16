@@ -73,8 +73,8 @@ const PROJECTS = [
   project('steelfuture', 'https://steelfuture.com/', {case_study: true}, name('Steel Future'),
     note('Gestionale aziendale', 'Business management software', 'Software de gestiune')),
   project('v2', 'https://leicaflorianrobert.dev', {kind: 'personal', branch: 'main', year: 2023}, name('My website V2')),
-  // no longer operating, and its site is gone: no link, not featured
-  project('wab', '', {year: 2023}, name('Web Artisan Bros')),
+  // co-founded, so mine rather than a client's; no longer operating, and its site is gone: no link, not featured
+  project('wab', '', {kind: 'personal', year: 2023}, name('Web Artisan Bros')),
   project('slides', 'https://chromewebstore.google.com/detail/slidescom-companion/bciknjamldhnbbckmgbchmkdcalngnco', {kind: 'personal', case_study: true}, name('Slides.com Companion'),
     note('Estensione Chrome ed Edge', 'Chrome and Edge extension', 'Extensie Chrome și Edge')),
   project('tvit', 'https://tvit.leicaflorianrobert.dev/channels', {kind: 'personal', on_home: true, case_study: true}, name('TvIt'),
