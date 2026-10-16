@@ -81,6 +81,8 @@ const PROJECTS = [
   // the site is no longer the one I built: the link goes to its code
   project('biologica', 'https://github.com/leicaflorian/biologioca_disinfestazioni', {}, name('Biologica Disinfestazioni'),
     note('Sito web — il codice su GitHub', 'Website — the code on GitHub', 'Site web — codul pe GitHub')),
+  project('nosponsor', 'https://github.com/leicaflorian/no-sponsor', {kind: 'personal', case_study: true}, name('NoSponsor'),
+    note('Estensione Chrome, in sviluppo', 'Chrome extension, in development', 'Extensie Chrome, în dezvoltare')),
   project('enigma', 'https://leicaflorian.github.io/enigma_machine', {kind: 'personal'}, name('Enigma'),
     note('Macchina Enigma', 'Enigma machine', 'Mașina Enigma')),
   project('fold', 'https://leicaflorian.github.io/fold_my_paper', {kind: 'personal'}, name('Fold my paper')),
@@ -1146,6 +1148,78 @@ const CASE_STUDIES = {
             'PDF-ul se creează cu comanda de tipărire a browserului, fără servicii externe.',
             'Un popup în Vue și un script în fundal, totul scris în TypeScript.',
             'Funcționează pe Chrome și Edge și este publicată în Chrome Web Store.',
+          ),
+        },
+      }),
+      NEXT_STEP,
+    ],
+  },
+  nosponsor: {
+    year: 2026,
+    translations: {
+      it: {intro: 'Un\'estensione per Chrome, in sviluppo, che trova i contenuti sponsorizzati e li evidenzia, li comprime in una barra cliccabile o li nasconde: su Google, Amazon, Subito.it ed eBay, e in modo generico su tutti gli altri siti.', role: 'Ideazione e sviluppo', type: 'Estensione browser, in sviluppo', stack: 'JavaScript, Chrome Extensions (Manifest V3)'},
+      en: {intro: 'A Chrome extension, in development, that finds sponsored content and highlights it, collapses it into a clickable bar or hides it: on Google, Amazon, Subito.it and eBay, and generically on every other site.', role: 'Concept and development', type: 'Browser extension, in development', stack: 'JavaScript, Chrome Extensions (Manifest V3)'},
+      ro: {intro: 'O extensie pentru Chrome, în dezvoltare, care găsește conținutul sponsorizat și îl evidențiază, îl restrânge într-o bară pe care se poate da clic sau îl ascunde: pe Google, Amazon, Subito.it și eBay, și în mod generic pe toate celelalte site-uri.', role: 'Concepție și dezvoltare', type: 'Extensie de browser, în dezvoltare', stack: 'JavaScript, Chrome Extensions (Manifest V3)'},
+    },
+    sections: [
+      section('block_text', {}, {
+        it: {
+          label: 'idea',
+          title: 'Sponsorizzato, ma non si vede',
+          text: paras(
+            'Su molti siti i contenuti sponsorizzati sono mescolati a quelli normali, e non sempre si distinguono. NoSponsor li trova e lascia scegliere cosa farne: **evidenziarli**, **comprimerli** in una barra cliccabile o **nasconderli**.',
+            'Ci sono rilevatori dedicati per **Google, Amazon, Subito.it ed eBay**. Sugli altri siti lavora un rilevamento generico, che si può disattivare, basato su etichette come "Sponsorizzato" o "Pubblicità" e sugli slot pubblicitari standard.',
+          ),
+        },
+        en: {
+          label: 'idea',
+          title: 'Sponsored, but hard to see',
+          text: paras(
+            'On many sites sponsored content is mixed in with the rest, and it doesn\'t always stand out. NoSponsor finds it and lets you choose what to do with it: **highlight** it, **collapse** it into a clickable bar or **hide** it.',
+            'There are dedicated detectors for **Google, Amazon, Subito.it and eBay**. On other sites a generic detection, which can be turned off, relies on labels like "Sponsored" or "Advertisement" and on standard ad slots.',
+          ),
+        },
+        ro: {
+          label: 'idee',
+          title: 'Sponsorizat, dar greu de văzut',
+          text: paras(
+            'Pe multe site-uri conținutul sponsorizat este amestecat cu restul și nu se distinge mereu. NoSponsor îl găsește și te lasă să alegi ce faci cu el: îl **evidențiezi**, îl **restrângi** într-o bară pe care se poate da clic sau îl **ascunzi**.',
+            'Există detectoare dedicate pentru **Google, Amazon, Subito.it și eBay**. Pe celelalte site-uri lucrează o detectare generică, care se poate dezactiva, bazată pe etichete precum „Sponsorizat" sau „Publicitate" și pe sloturile publicitare standard.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'come funziona',
+          title: 'Trovare senza rompere',
+          items: lines(
+            'Nessun elemento rimosso: l\'estensione li marca con una classe e il CSS fa il resto, così le pagine in React o Vue non si rompono e il cambio di modalità è istantaneo.',
+            'Tre strategie: selettori noti, etichette testuali risalendo alla card e, sui siti che offuscano, il testo realmente visibile, ricostruito nell\'ordine in cui appare a schermo.',
+            'Un MutationObserver copre lo scroll infinito e i contenuti caricati dopo.',
+            'Ogni elemento trovato porta con sé la regola che l\'ha individuato, per capire subito i falsi positivi.',
+            'Un contatore sull\'icona per ogni scheda, e un popup per scegliere la modalità e attivarla sito per sito.',
+          ),
+        },
+        en: {
+          label: 'how it works',
+          title: 'Finding without breaking',
+          items: lines(
+            'Nothing is removed: the extension marks elements with a class and CSS does the rest, so React or Vue pages don\'t break and switching mode is instant.',
+            'Three strategies: known selectors, text labels traced up to their card and, on sites that obfuscate, the text actually visible, rebuilt in on-screen order.',
+            'A MutationObserver covers infinite scroll and content loaded later.',
+            'Every element found carries the rule that found it, to spot false positives right away.',
+            'A per-tab counter on the icon, and a popup to choose the mode and turn it on site by site.',
+          ),
+        },
+        ro: {
+          label: 'cum funcționează',
+          title: 'Găsește fără să strice',
+          items: lines(
+            'Nimic nu este eliminat: extensia marchează elementele cu o clasă și CSS-ul face restul, așa că paginile în React sau Vue nu se strică, iar schimbarea modului este instantanee.',
+            'Trei strategii: selectori cunoscuți, etichete text urmărite până la card și, pe site-urile care ascund textul, textul vizibil cu adevărat, reconstruit în ordinea de pe ecran.',
+            'Un MutationObserver acoperă scroll-ul infinit și conținutul încărcat ulterior.',
+            'Fiecare element găsit poartă regula care l-a identificat, pentru a înțelege imediat rezultatele fals pozitive.',
+            'Un contor pe pictogramă pentru fiecare filă și un popup pentru a alege modul și a-l activa site cu site.',
           ),
         },
       }),
