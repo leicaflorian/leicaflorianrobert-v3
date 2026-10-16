@@ -219,12 +219,16 @@ const SERVICES = [
     {title: 'Consultanță tehnică', text: 'Code review, arhitectură, alegerea stack-ului — o părere externă sinceră, chiar și când răspunsul este „mai bine îl rescriem".'}),
 ]
 
+/** Technologies of a group (see `group` in setup.mjs): how much I use them, not a rating. */
+const tech = group => name => ({name, group})
+
 const TECHNOLOGIES = [
-  'HTML5', 'CSS3 / SASS', 'Tailwind CSS', 'Bootstrap', 'JavaScript', 'TypeScript', 'jQuery', 'Vue.js / Nuxt.js',
-  'Ionic', 'NativeScript', 'Webpack / Vite', 'Node.js', 'Express / AdonisJS / Nest.js', 'PHP', 'Laravel', 'Statamic',
-  'Directus', 'GraphQL', 'Go', 'MySQL / SQL Server / MongoDB', 'Git / CI/CD', 'Docker', 'DigitalOcean',
-  'Laravel Forge / Cleavr',
-].map(name => ({name}))
+  ...['HTML5', 'CSS3 / SASS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Vue.js / Nuxt.js', 'Node.js', 'PHP',
+    'Laravel', 'Directus', 'MySQL / SQL Server / MongoDB', 'Git / CI/CD', 'Docker'].map(tech('daily')),
+  ...['Bootstrap', 'jQuery', 'Ionic', 'Webpack / Vite', 'Express / AdonisJS / Nest.js', 'Statamic', 'GraphQL',
+    'DigitalOcean', 'Laravel Forge / Cleavr'].map(tech('production')),
+  ...['Go', 'NativeScript', 'React', 'Python'].map(tech('explored')),
+]
 
 // --- pages -------------------------------------------------------------------------------
 // Labels starting with `//` are shown as they are; the others are numbered by the site.
