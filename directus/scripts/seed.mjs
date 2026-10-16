@@ -295,9 +295,9 @@ const PAGES = [
         ro: {label: 'proiecte', title: 'Lucrări selectate'},
       }),
       section('block_contact_form', {}, {
-        it: {label: 'contatti', title: 'Parliamone', text: 'Sito, app, consulenza o solo un parere tecnico — scrivimi e vediamo insieme come darti una mano, senza giri di parole.'},
-        en: {label: 'contact', title: 'Let\'s talk', text: 'A website, an app, consulting or just a technical opinion — write to me and let\'s figure out together how I can help, no beating around the bush.'},
-        ro: {label: 'contact', title: 'Hai să vorbim', text: 'Site, aplicație, consultanță sau doar o părere tehnică — scrie-mi și vedem împreună cum te pot ajuta, fără ocolișuri.'},
+        it: {label: 'contatti', title: 'Parliamone', text: 'Hai un progetto, un problema o solo un dubbio tecnico? Scrivimi: ti dico onestamente cosa farei, senza giri di parole.'},
+        en: {label: 'contact', title: 'Let\'s talk', text: 'Got a project, a problem or just a technical question? Write to me: I\'ll tell you honestly what I\'d do, no beating around the bush.'},
+        ro: {label: 'contact', title: 'Hai să vorbim', text: 'Ai un proiect, o problemă sau doar o nelămurire tehnică? Scrie-mi: îți spun sincer ce aș face, fără ocolișuri.'},
       }),
     ],
   },
