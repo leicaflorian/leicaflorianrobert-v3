@@ -29,7 +29,7 @@ const cards = computed(() => props.block.show === 'home'
     </div>
   </section>
 
-  <section v-else :class="block.show === 'home' && 'border-t border-line'">
+  <section v-else class="border-t border-line">
     <div class="page section-y">
       <div v-if="label || block.title || block.all_link" class="mb-14 flex flex-wrap items-end justify-between gap-5">
         <div>
