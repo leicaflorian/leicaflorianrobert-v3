@@ -8,7 +8,7 @@ const site = await useSingleton<Site>('site')
 
 <template>
   <BlocksLegacyHeading v-if="block.title">{{ block.title }}</BlocksLegacyHeading>
-  <p class="m-0"><b>{{ site.name }}</b><br>{{ site.street }}<br>{{ site.postal_code }} {{ site.city }}, {{ site.province }}</p>
+  <p class="m-0"><b>{{ site.name }}</b><br>{{ site.city }} ({{ site.province }})</p>
   <p class="m-0 mt-3">{{ $t('contact.legacy.vat', {vat: site.vat, rea: site.rea, sdi: site.sdi}) }}</p>
   <p class="m-0 mt-3">
     {{ $t('contact.legacy.email') }} <LegacyLink :href="`mailto:${site.email}`">{{ site.email }}</LegacyLink><br>

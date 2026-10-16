@@ -46,9 +46,8 @@ const cardTitle = 'm-0 text-xs font-medium text-accent'
           <h3 :class="cardTitle">{{ $t('contact.company') }}</h3>
           <div class="text-[13px] leading-loose text-ink-soft">
             <div class="font-bold text-ink">{{ site.name }}</div>
-            <div>{{ site.street }}</div>
-            <div>{{ site.postal_code }} {{ site.city }}, {{ site.province }}</div>
-            <div class="mt-3"><span class="text-dim">piva:</span> <span class="text-code-number">{{ site.vat }}</span></div>
+            <div>{{ site.city }} ({{ site.province }})</div>
+            <div class="mt-3"><span class="text-dim">piva:</span> <span class="text-code-string">"{{ site.vat }}"</span></div>
             <div><span class="text-dim">rea:</span> <span class="text-code-string">"{{ site.rea }}"</span></div>
             <div><span class="text-dim">sdi:</span> <span class="text-code-string">"{{ site.sdi }}"</span></div>
           </div>
