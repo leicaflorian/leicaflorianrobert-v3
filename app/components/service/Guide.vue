@@ -92,6 +92,10 @@ function onKey(event: KeyboardEvent) {
   if ((event.key === 'ArrowDown' || event.key === 'ArrowUp') && count) {
     event.preventDefault()
     focused.value = suggested.value[(at + (event.key === 'ArrowDown' ? 1 : count - 1) + count) % count] ?? null
+  } else if (event.key === 'Enter') {
+    // Enter always goes on, even from a suggestion clicked a moment ago: there it would tick it
+    event.preventDefault()
+    go.value?.click()
   } else if (event.key === ' ' && focused.value && !(event.target instanceof HTMLButtonElement)) {
     // on a suggestion's own button, Space already clicks it
     event.preventDefault()
