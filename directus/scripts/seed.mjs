@@ -122,22 +122,77 @@ const PROJECTS = [
   project('worldlink', 'https://worldlinkcompany.com', {kind: 'agency'}, name('World Link')),
 ]
 
-const experience = (company, year, link, it, en = it, ro = it) => ({
-  company, year, link, translations: tr({it: {role: it}, en: {role: en}, ro: {role: ro}}),
-})
+/**
+ * An experience: the role is the same in every language unless given as `{it, en, ro}`,
+ * the description (what I did there, one or two sentences) always is.
+ */
+const experience = (company, year, link, role, description = null) => {
+  const roles = typeof role === 'string' ? {it: role, en: role, ro: role} : role
+  return {
+    company, year, link,
+    translations: tr(Object.fromEntries(Object.entries(roles).map(([locale, value]) => [
+      locale, {role: value, description: description?.[locale] ?? null},
+    ]))),
+  }
+}
 
 const EXPERIENCES = [
-  experience('Tecnobit s.r.l.', null, 'https://www.tecnobit.it/', 'Sviluppo software gestionale', 'Management software development', 'Dezvoltare software de gestiune'),
-  experience('Mediamotion s.r.l.', 2009, null, 'Junior Full Stack Developer'),
-  experience('Organizzazione no-profit', 2010, null, 'Desktop & Web Developer'),
-  experience('Self-employed', 2017, null, 'Full Stack Developer, Web Designer, Mobile Developer'),
-  experience('Zucchetti Software Giuridico s.r.l.', 2018, 'http://www.zucchettisoftwaregiuridico.it', 'Senior Front-End Developer'),
-  experience('Develon s.r.l.', 2020, 'https://www.develon.com', 'Senior Full Stack Developer'),
-  experience('Boolean Careers', 2021, 'https://www.boolean.careers', 'Main Teacher nel corso di Full-Stack Web Development', 'Main Teacher of the Full-Stack Web Development course', 'Main Teacher la cursul de Full-Stack Web Development'),
-  experience('Web Artisan Bros', 2023, 'https://webartisanbros.com', 'Co-founder & CTO'),
-  experience('The Full Project', 2024, 'https://thefullproject.it/', 'Full Stack Developer & IT Manager'),
-  experience('xPulire', 2025, 'https://www.xpulire.com/', 'IT & Network Infrastructure'),
-  experience('Deepser s.r.l.', 2026, null, 'Backend Developer'),
+  experience('Tecnobit s.r.l.', null, 'https://www.tecnobit.it/', {it: 'Sviluppo software gestionale', en: 'Management software development', ro: 'Dezvoltare software de gestiune'}),
+  experience('Mediamotion s.r.l.', 2008, null, 'Full Stack Developer', {
+    it: 'Siti con Adobe Flex, HTML e CSS sul frontend, Ruby on Rails e PHP sul backend, su database MySQL. Ne curavo anche grafica, SEO e il server locale che li ospitava.',
+    en: 'Websites with Adobe Flex, HTML and CSS on the frontend, Ruby on Rails and PHP on the backend, on MySQL databases. I also took care of their design, SEO and the local server hosting them.',
+    ro: 'Site-uri cu Adobe Flex, HTML și CSS pe frontend, Ruby on Rails și PHP pe backend, pe baze de date MySQL. Mă ocupam și de grafică, SEO și de serverul local care le găzduia.',
+  }),
+  experience('Organizzazione no-profit', 2010, null, 'Desktop & Web Developer', {
+    it: 'Applicazioni desktop gestionali in Visual Basic, Adobe Flex (AIR) e come app ed estensioni di Chrome, e siti in PHP e MySQL integrati con le API di Google: Drive, Maps e Sign-In.',
+    en: 'Desktop management applications in Visual Basic, Adobe Flex (AIR) and as Chrome apps and extensions, plus PHP and MySQL websites integrated with Google APIs: Drive, Maps and Sign-In.',
+    ro: 'Aplicații desktop de gestiune în Visual Basic, Adobe Flex (AIR) și ca aplicații și extensii Chrome, plus site-uri în PHP și MySQL integrate cu API-urile Google: Drive, Maps și Sign-In.',
+  }),
+  experience('Self-employed', 2017, null, 'Full Stack Developer, Web Designer, Mobile Developer', {
+    it: 'Siti e applicazioni per clienti diretti: interfacce responsive, app ibride con Cordova e poi Ionic, siti WordPress e Joomla con temi e moduli su misura.',
+    en: 'Websites and applications for direct clients: responsive interfaces, hybrid apps with Cordova and then Ionic, WordPress and Joomla sites with custom themes and modules.',
+    ro: 'Site-uri și aplicații pentru clienți direcți: interfețe responsive, aplicații hibride cu Cordova și apoi Ionic, site-uri WordPress și Joomla cu teme și module pe măsură.',
+  }),
+  experience('Zucchetti Software Giuridico s.r.l.', 2018, 'http://www.zucchettisoftwaregiuridico.it', 'Front-End Developer', {
+    it: 'Manutenzione e nuove funzionalità delle web app aziendali: componenti in Vue.js, refactoring del codice legacy e librerie interne riutilizzabili.',
+    en: 'Maintenance and new features of the company\'s web apps: Vue.js components, refactoring of legacy code and reusable internal libraries.',
+    ro: 'Mentenanța și funcționalitățile noi ale aplicațiilor web ale firmei: componente Vue.js, refactorizarea codului legacy și biblioteci interne reutilizabile.',
+  }),
+  experience('Develon s.r.l.', 2020, 'https://www.develon.com', 'Senior Full Stack Developer', {
+    it: 'Progetti enterprise monolitici e a microservizi, con Vue.js e Node.js (Express, AdonisJS, Nest.js): componenti UI, flussi backend e integrazioni con sistemi esterni.',
+    en: 'Enterprise projects, monolithic and microservice-based, with Vue.js and Node.js (Express, AdonisJS, Nest.js): UI components, backend flows and integrations with external systems.',
+    ro: 'Proiecte enterprise monolitice și pe microservicii, cu Vue.js și Node.js (Express, AdonisJS, Nest.js): componente UI, fluxuri backend și integrări cu sisteme externe.',
+  }),
+  experience('Boolean Careers', 2021, 'https://www.boolean.careers', {it: 'Main Teacher nel corso di Full-Stack Web Development', en: 'Main Teacher of the Full-Stack Web Development course', ro: 'Main Teacher la cursul de Full-Stack Web Development'}, {
+    it: 'Docente principale del corso Full Stack: lezioni da HTML a Laravel, React e Node.js, mentoring individuale e valutazione dei progetti di decine di studenti.',
+    en: 'Lead teacher of the Full Stack course: lessons from HTML to Laravel, React and Node.js, one-to-one mentoring and assessment of the projects of dozens of students.',
+    ro: 'Profesor principal al cursului Full Stack: lecții de la HTML la Laravel, React și Node.js, mentorat individual și evaluarea proiectelor a zeci de studenți.',
+  }),
+  experience('Web Artisan Bros', 2023, 'https://webartisanbros.com', 'Co-Founder & Full Stack Developer', {
+    it: 'Ho co-fondato una software house di prodotti digitali su misura: scelta dello stack, sviluppo frontend e backend, intero ciclo dei progetti e rapporto diretto con i clienti.',
+    en: 'I co-founded a software house building custom digital products: choosing the stack, frontend and backend development, the whole project lifecycle and direct contact with clients.',
+    ro: 'Am co-fondat o software house de produse digitale pe măsură: alegerea stack-ului, dezvoltare frontend și backend, întregul ciclu al proiectelor și relația directă cu clienții.',
+  }),
+  experience('The Full Project', 2023, 'https://thefullproject.it/', 'CTO & Full Stack Developer', {
+    it: 'CTO dell\'agenzia: architetture, processi e coordinamento del team. Ho gestito il reparto IT, dai server alle pipeline CI/CD, e creato i template Nuxt e Directus per i nuovi progetti.',
+    en: 'CTO of the agency: architecture, processes and team coordination. I ran the IT department, from servers to CI/CD pipelines, and built the Nuxt and Directus templates for new projects.',
+    ro: 'CTO al agenției: arhitecturi, procese și coordonarea echipei. Am condus departamentul IT, de la servere la pipeline-urile CI/CD, și am creat template-urile Nuxt și Directus pentru proiectele noi.',
+  }),
+  experience('Up2You', 2024, null, 'Full Stack Developer', {
+    it: 'Piattaforme per la sostenibilità e il marketing, con TypeScript, Laravel, Vue.js e MySQL: API su misura e ottimizzazione di prestazioni e user experience.',
+    en: 'Platforms for sustainability and marketing, with TypeScript, Laravel, Vue.js and MySQL: custom APIs and optimisation of performance and user experience.',
+    ro: 'Platforme pentru sustenabilitate și marketing, cu TypeScript, Laravel, Vue.js și MySQL: API-uri pe măsură și optimizarea performanței și a experienței utilizatorilor.',
+  }),
+  experience('xPulire', 2025, 'https://www.xpulire.com/', 'IT & Network Infrastructure', {
+    it: 'Manutenzione dell\'infrastruttura IT e trasloco nella nuova sede: rete cablata, rack, Wi-Fi, postazioni e telefoni IP, in un giorno non lavorativo.',
+    en: 'IT infrastructure maintenance and the move to the new premises: cabled network, rack, Wi-Fi, workstations and IP phones, on a non-working day.',
+    ro: 'Mentenanța infrastructurii IT și mutarea în noul sediu: rețea cablată, rack, Wi-Fi, stații de lucru și telefoane IP, într-o zi nelucrătoare.',
+  }),
+  experience('Deepser s.r.l.', 2026, null, 'Senior Back-end Developer', {
+    it: 'Sviluppo e manutenzione della piattaforma aziendale e delle sue nuove funzionalità.',
+    en: 'Development and maintenance of the company platform and its new features.',
+    ro: 'Dezvoltarea și mentenanța platformei firmei și a noilor sale funcționalități.',
+  }),
 ]
 
 const service = (icon, it, en, ro) => ({icon, translations: tr({it, en, ro})})
@@ -170,9 +225,10 @@ const SERVICES = [
 ]
 
 const TECHNOLOGIES = [
-  'HTML5', 'CSS3 / SASS', 'JavaScript', 'TypeScript', 'jQuery', 'Vue.js / Nuxt.js', 'Node.js', 'Nest.js',
-  'NativeScript', 'Ionic', 'Webpack / Vite', 'PHP', 'Laravel', 'MongoDB / MySQL', 'Docker',
-  'Statamic', 'Directus', 'DigitalOcean', 'Laravel Forge / Cleavr',
+  'HTML5', 'CSS3 / SASS', 'Tailwind CSS', 'Bootstrap', 'JavaScript', 'TypeScript', 'jQuery', 'Vue.js / Nuxt.js',
+  'Ionic', 'NativeScript', 'Webpack / Vite', 'Node.js', 'Express / AdonisJS / Nest.js', 'PHP', 'Laravel', 'Statamic',
+  'Directus', 'GraphQL', 'Go', 'MySQL / SQL Server / MongoDB', 'Git / CI/CD', 'Docker', 'DigitalOcean',
+  'Laravel Forge / Cleavr',
 ].map(name => ({name}))
 
 // --- pages -------------------------------------------------------------------------------
@@ -525,11 +581,11 @@ const CASE_STUDIES = {
     ],
   },
   tfp: {
-    year: 2024,
+    year: 2023,
     translations: {
-      it: {intro: 'Due anni in una web agency da sviluppatore e responsabile IT: siti, web app ed e-commerce, e l\'infrastruttura che li porta online e li tiene in piedi.', role: 'Sviluppo e IT', type: 'Web agency', stack: 'Laravel, Statamic, Vue, Nuxt, Directus, Docker, DigitalOcean'},
-      en: {intro: 'Two years at a web agency as developer and IT manager: websites, web apps and e-commerce, and the infrastructure that takes them online and keeps them up.', role: 'Development and IT', type: 'Web agency', stack: 'Laravel, Statamic, Vue, Nuxt, Directus, Docker, DigitalOcean'},
-      ro: {intro: 'Doi ani într-o agenție web ca dezvoltator și responsabil IT: site-uri, aplicații web și e-commerce, plus infrastructura care le pune online și le ține în funcțiune.', role: 'Dezvoltare și IT', type: 'Agenție web', stack: 'Laravel, Statamic, Vue, Nuxt, Directus, Docker, DigitalOcean'},
+      it: {intro: 'Due anni e mezzo in una web agency da CTO e sviluppatore: siti, web app ed e-commerce, e l\'infrastruttura che li porta online e li tiene in piedi.', role: 'CTO, sviluppo e IT', type: 'Web agency', stack: 'Laravel, Statamic, Vue, Nuxt, Directus, Docker, DigitalOcean'},
+      en: {intro: 'Two and a half years at a web agency as CTO and developer: websites, web apps and e-commerce, and the infrastructure that takes them online and keeps them up.', role: 'CTO, development and IT', type: 'Web agency', stack: 'Laravel, Statamic, Vue, Nuxt, Directus, Docker, DigitalOcean'},
+      ro: {intro: 'Doi ani și jumătate într-o agenție web ca CTO și dezvoltator: site-uri, aplicații web și e-commerce, plus infrastructura care le pune online și le ține în funcțiune.', role: 'CTO, dezvoltare și IT', type: 'Agenție web', stack: 'Laravel, Statamic, Vue, Nuxt, Directus, Docker, DigitalOcean'},
     },
     sections: [
       section('block_text', {}, {
@@ -660,7 +716,7 @@ const CASE_STUDIES = {
           title: 'Un\'agenzia autonoma',
           items: lines(
             'Siti pubblicati più velocemente e con più qualità.',
-            'Nessun disservizio in due anni.',
+            'Nessun disservizio in due anni e mezzo.',
             'Costi dei server prevedibili.',
             'Nessuna dipendenza da aziende esterne: dall\'idea allo sviluppo alla pubblicazione, tutto interno.',
             'Più progetti gestiti insieme, e sempre più complessi.',
@@ -671,7 +727,7 @@ const CASE_STUDIES = {
           title: 'A self-sufficient agency',
           items: lines(
             'Sites published faster and with higher quality.',
-            'No outages in two years.',
+            'No outages in two and a half years.',
             'Predictable server costs.',
             'No reliance on outside companies: from idea to development to launch, all in-house.',
             'More projects handled at once, and increasingly complex ones.',
@@ -682,7 +738,7 @@ const CASE_STUDIES = {
           title: 'O agenție autonomă',
           items: lines(
             'Site-uri publicate mai repede și cu o calitate mai bună.',
-            'Nicio întrerupere a serviciului în doi ani.',
+            'Nicio întrerupere a serviciului în doi ani și jumătate.',
             'Costuri previzibile pentru servere.',
             'Nicio dependență de firme externe: de la idee la dezvoltare și publicare, totul intern.',
             'Mai multe proiecte gestionate în paralel, tot mai complexe.',
