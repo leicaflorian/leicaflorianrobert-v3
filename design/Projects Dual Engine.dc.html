@@ -97,14 +97,38 @@ a:hover { color:#FF8A52; }
 
   <main style="flex:1;">
     <section>
-      <div id="pj-hero" style="max-width:1120px;margin:0 auto;padding:112px 24px 120px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:72px;align-items:end;">
+      <div id="pj-hero" style="max-width:1120px;margin:0 auto;padding:112px 24px 120px;display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:72px;align-items:center;">
         <div>
           <p style="margin:0 0 16px;font-size:13px;color:#FF5B14;">// {{ count }} progetti</p>
           <h1 style="margin:0;font-size:clamp(44px,7vw,96px);font-weight:800;line-height:0.95;letter-spacing:-0.05em;">Progetti<span aria-hidden="true" style="display:inline-block;width:0.5em;height:0.09em;margin-left:0.1em;background:#FF5B14;vertical-align:baseline;animation:cursorBlink 1s step-start infinite;"></span></h1>
+          <div style="margin-top:32px;display:flex;flex-direction:column;gap:16px;font-size:15px;color:#A3A09A;line-height:1.8;">
+            <p style="margin:0;">{{ intro1 }}</p>
+            <p style="margin:0;">{{ intro2 }}</p>
+          </div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:16px;font-size:15px;color:#A3A09A;line-height:1.8;">
-          <p style="margin:0;">{{ intro1 }}</p>
-          <p style="margin:0;">{{ intro2 }}</p>
+        <div style="min-width:0;border:1px solid #26262B;border-radius:16px;background:#0C0C0E;overflow:hidden;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid #222226;background:#18181B;font-size:12px;color:#8F8C85;">
+            <span style="display:flex;align-items:center;gap:6px;min-width:0;"><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;flex:none;"></span><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;flex:none;"></span><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;flex:none;"></span><span style="margin-left:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><span style="color:#5BD48A;">$</span> git log --graph --all</span></span>
+            <span style="display:flex;gap:10px;font-size:11px;flex:none;"><span style="color:#FF5B14;">● main</span><span style="color:#E8B04A;">● clienti</span><span style="color:#5BD48A;">● lab</span></span>
+          </div>
+          <div style="padding:14px 0;display:flex;flex-direction:column;font-size:12px;">
+            <sc-for list="{{ graph }}" as="g" hint-placeholder-count="12">
+              <a href="{{ g.url }}" target="{{ g.target }}" rel="noopener" onMouseEnter="{{ g.hover }}" style="display:grid;grid-template-columns:16px 16px 16px minmax(0,1fr);align-items:stretch;min-height:26px;padding:0 16px;color:#BDBAB2;background:{{ g.bg }};" style-hover="color:#EDEBE6;">
+                <sc-for list="{{ g.lanes }}" as="ln" hint-placeholder-count="3">
+                  <span style="position:relative;display:flex;align-items:center;justify-content:center;">
+                    <span style="position:absolute;left:50%;top:{{ ln.top }};bottom:{{ ln.bottom }};width:2px;margin-left:-1px;background:{{ ln.line }};"></span>
+                    <span style="position:relative;width:{{ ln.size }};height:{{ ln.size }};border-radius:99px;background:{{ ln.dot }};box-shadow:{{ ln.glow }};"></span>
+                  </span>
+                </sc-for>
+                <span style="display:flex;align-items:center;gap:10px;min-width:0;padding-left:8px;">
+                  <span style="color:#E8B04A;flex:none;">{{ g.hash }}</span>
+                  <sc-if value="{{ g.head }}" hint-placeholder-val="{{ false }}"><span style="flex:none;padding:0 6px;border-radius:4px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;">HEAD</span></sc-if>
+                  <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:{{ g.color }};">{{ g.name }}</span>
+                </span>
+              </a>
+            </sc-for>
+          </div>
+          <div style="display:flex;justify-content:space-between;gap:12px;padding:12px 16px;border-top:1px solid #222226;font-size:11px;color:#8F8C85;"><span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ graphInfo }}</span><span style="flex:none;color:#5A5852;">clicca un commit ↗</span></div>
         </div>
       </div>
     </section>
@@ -252,10 +276,10 @@ class Component extends DCLogic {
     const T = {
       it: { home: './home', about: './chi-sono', projects: './progetti', contact: './contatti', menu: 'menu', close: 'chiudi' },
       en: { home: './home', about: './about', projects: './projects', contact: './contact', menu: 'menu', close: 'close' },
-      es: { home: './inicio', about: './sobre-mi', projects: './proyectos', contact: './contacto', menu: 'menú', close: 'cerrar' },
+      ro: { home: './acasa', about: './despre', projects: './proiecte', contact: './contact', menu: 'meniu', close: 'închide' },
     };
     const t = T[lang] || T.it;
-    const langs = [['it','italiano'],['en','english'],['es','español']].map(([code, name]) => ({ code, name, mark: code === lang ? '>' : '', color: code === lang ? '#EDEBE6' : '#BDBAB2', select: () => this.setLang(code) }));
+    const langs = [['it','italiano'],['en','english'],['ro','română']].map(([code, name]) => ({ code, name, mark: code === lang ? '>' : '', color: code === lang ? '#EDEBE6' : '#BDBAB2', select: () => this.setLang(code) }));
     const langExtra = { lang, t, langs, langOpen: !!this.state.langOpen, toggleLangMenu: this.toggleLangMenu };
     const projects = [
       { key: 'v3', name: 'My website V3', url: 'Case Study V3.dc.html', note: 'Versione attuale del sito — case study', internal: true },
@@ -275,6 +299,21 @@ class Component extends DCLogic {
       try { if (p.internal) throw 0; const u = new URL(p.url); host = u.hostname.replace(/^www\./, '') + (u.hostname.endsWith('github.io') ? u.pathname.replace(/\/$/, '') : ''); } catch (e) {}
       return { ...p, host: p.internal ? 'case study →' : host, target: p.internal ? undefined : '_blank' };
     });
+    const BR = { main: { i: 0, c: '#FF5B14' }, client: { i: 1, c: '#E8B04A' }, lab: { i: 2, c: '#5BD48A' } };
+    const order = [['v3', 'main'], ['slides', 'lab'], ['tvit', 'lab'], ['wab', 'client'], ['v2', 'main'], ['biologica', 'client'], ['enigma', 'lab'], ['fold', 'lab'], ['gca', 'client'], ['ggc', 'client'], ['v1', 'main'], ['fib', 'lab']];
+    const last = {}; order.forEach(([, b], i) => { last[b] = i; });
+    const hov = this.state.gHover || 'v3';
+    const hashOf = (k) => { let h = 2166136261; for (const ch of k) h = Math.imul(h ^ ch.charCodeAt(0), 16777619); return (h >>> 0).toString(16).padStart(7, '0').slice(0, 7); };
+    const graph = order.map(([key, br], i) => {
+      const pr = projects.find(x => x.key === key);
+      const lanes = ['main', 'client', 'lab'].map(b => {
+        const alive = i <= last[b], here = b === br, bc = BR[b].c;
+        return { line: alive ? bc + (here ? '' : '66') : 'transparent', top: '0', bottom: i === last[b] ? '50%' : '0', dot: here ? bc : 'transparent', size: here ? (key === 'v3' ? '11px' : '9px') : '0', glow: here && key === hov ? '0 0 0 4px ' + bc + '33' : 'none' };
+      });
+      return { key, lanes, hash: hashOf(key), name: pr.name, url: pr.url, target: pr.target, head: key === 'v3', bg: key === hov ? '#18181B' : 'transparent', color: key === hov ? '#EDEBE6' : '#BDBAB2', hover: () => this.setState({ gHover: key }) };
+    });
+    const hp = projects.find(x => x.key === hov), hb = order.find(([k]) => k === hov)[1];
+    const graphInfo = (hb === 'main' ? 'main' : hb === 'client' ? 'clienti' : 'lab') + ' · ' + hp.name + ' · ' + (hp.note || hp.host);
     const toNative = this.state.mode === 'legacy';
     const bootLines = (toNative
       ? ['detach DOM tree', 'init wgpu device', 'compile shaders', 'render @120fps']
@@ -289,7 +328,7 @@ class Component extends DCLogic {
       toggleMode: this.toggleMode,
       intro1: 'Come disse qualcuno (non ricordo chi), "L\'unico limite è la tua immaginazione" e questo è vero anche per i progetti che puoi realizzare con me. Non c\'è nulla (quasi) che non possa essere fatto, se hai la voglia e ti rivolgi alla persona giusta. E dove non arrivano le mie capacità, ci arrivo con l\'AI.',
       intro2: 'Qui di seguito troverai una lista di alcuni dei progetti che ho realizzato in passato, ma non esitare a contattarmi per qualsiasi altra cosa tu possa desiderare.',
-      projects,
+      projects, graph, graphInfo,
       archive: projects.filter(p => p.key !== 'wab' && p.key !== 'gca'),
       count: projects.length,
     };

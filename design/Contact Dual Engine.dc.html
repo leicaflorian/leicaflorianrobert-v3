@@ -102,17 +102,31 @@ a:hover { color:#FF8A52; }
 
   <main style="flex:1;">
     <section>
-      <div id="ct-hero" style="max-width:1120px;margin:0 auto;padding:112px 24px 120px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:72px;align-items:end;">
+      <div id="ct-hero" style="max-width:1120px;margin:0 auto;padding:112px 24px 120px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:72px;align-items:center;">
         <div>
           <div style="display:inline-flex;align-items:center;gap:10px;padding:6px 14px;border:1px solid #2A2A2F;border-radius:999px;font-size:12px;color:#BDBAB2;background:#18181B;">
             <span style="width:8px;height:8px;border-radius:999px;background:#FF5B14;animation:pulseDot 2s infinite;"></span>
             Disponibile per nuovi progetti
           </div>
           <h1 style="margin:32px 0 0;font-size:clamp(44px,7vw,96px);font-weight:800;line-height:0.95;letter-spacing:-0.05em;">Contatti<span aria-hidden="true" style="display:inline-block;width:0.5em;height:0.09em;margin-left:0.1em;background:#FF5B14;vertical-align:baseline;animation:cursorBlink 1s step-start infinite;"></span></h1>
+          <div style="margin-top:32px;">
+            <p style="margin:0 0 20px;font-size:15px;color:#A3A09A;line-height:1.8;">Sito, app, consulenza o solo un parere tecnico — scrivimi e vediamo insieme come darti una mano, senza giri di parole.</p>
+            <a href="mailto:info@leicaflorianrobert.dev" style="display:inline-block;font-size:clamp(16px,2vw,22px);font-weight:700;color:#EDEBE6;border-bottom:2px solid #FF5B14;padding-bottom:6px;word-break:break-all;" style-hover="color:#FF5B14;">info@leicaflorianrobert.dev ↗</a>
+          </div>
         </div>
-        <div>
-          <p style="margin:0 0 20px;font-size:15px;color:#A3A09A;line-height:1.8;">Sito, app, consulenza o solo un parere tecnico — scrivimi e vediamo insieme come darti una mano, senza giri di parole.</p>
-          <a href="mailto:info@leicaflorianrobert.dev" style="display:inline-block;font-size:clamp(16px,2vw,22px);font-weight:700;color:#EDEBE6;border-bottom:2px solid #FF5B14;padding-bottom:6px;word-break:break-all;" style-hover="color:#FF5B14;">info@leicaflorianrobert.dev ↗</a>
+        <div style="min-width:0;border:1px solid #26262B;border-radius:16px;background:#0C0C0E;overflow:hidden;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid #222226;background:#18181B;font-size:12px;color:#8F8C85;">
+            <span style="display:flex;align-items:center;gap:6px;min-width:0;"><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;flex:none;"></span><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;flex:none;"></span><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;flex:none;"></span><span style="margin-left:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><span style="color:#5BD48A;">$</span> whereis leica</span></span>
+            <span style="flex:none;color:#FF5B14;">● online</span>
+          </div>
+          <div style="padding:20px 16px;">
+            <x-import component-from-global-scope="ascii-map" from="./ascii-map.js" cols="64" lon="11.55" lat="45.55" hint-size="100%,420px"></x-import>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid #222226;font-size:11px;">
+            <div style="padding:12px 16px;display:flex;flex-direction:column;gap:2px;border-right:1px solid #222226;"><span style="color:#5A5852;">Vicenza, Veneto</span><span style="color:#EDEBE6;">45.55°N 11.55°E</span></div>
+            <div style="padding:12px 16px;display:flex;flex-direction:column;gap:2px;border-right:1px solid #222226;"><span style="color:#5A5852;">fuso</span><span style="color:#EDEBE6;">Europe/Rome</span></div>
+            <div style="padding:12px 16px;display:flex;flex-direction:column;gap:2px;"><span style="color:#5A5852;">raggio</span><span style="color:#EDEBE6;">remoto ∞</span></div>
+          </div>
         </div>
       </div>
     </section>
@@ -278,10 +292,10 @@ class Component extends DCLogic {
     const T = {
       it: { home: './home', about: './chi-sono', projects: './progetti', contact: './contatti', menu: 'menu', close: 'chiudi' },
       en: { home: './home', about: './about', projects: './projects', contact: './contact', menu: 'menu', close: 'close' },
-      es: { home: './inicio', about: './sobre-mi', projects: './proyectos', contact: './contacto', menu: 'menú', close: 'cerrar' },
+      ro: { home: './acasa', about: './despre', projects: './proiecte', contact: './contact', menu: 'meniu', close: 'închide' },
     };
     const t = T[lang] || T.it;
-    const langs = [['it','italiano'],['en','english'],['es','español']].map(([code, name]) => ({ code, name, mark: code === lang ? '>' : '', color: code === lang ? '#EDEBE6' : '#BDBAB2', select: () => this.setLang(code) }));
+    const langs = [['it','italiano'],['en','english'],['ro','română']].map(([code, name]) => ({ code, name, mark: code === lang ? '>' : '', color: code === lang ? '#EDEBE6' : '#BDBAB2', select: () => this.setLang(code) }));
     const cfg = this.state.cfg || { tipo: [], budget: null, tempi: null };
     const CG = [
       { id: 'tipo', label: 'tipo di progetto · anche più di uno', multi: true, opts: ['sito', 'web app', 'app mobile', 'e-commerce', 'consulenza', 'formazione'] },

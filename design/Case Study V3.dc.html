@@ -245,10 +245,10 @@ class Component extends DCLogic {
     const T = {
       it: { home: './home', about: './chi-sono', projects: './progetti', contact: './contatti', menu: 'menu', close: 'chiudi' },
       en: { home: './home', about: './about', projects: './projects', contact: './contact', menu: 'menu', close: 'close' },
-      es: { home: './inicio', about: './sobre-mi', projects: './proyectos', contact: './contacto', menu: 'menú', close: 'cerrar' },
+      ro: { home: './acasa', about: './despre', projects: './proiecte', contact: './contact', menu: 'meniu', close: 'închide' },
     };
     const t = T[lang] || T.it;
-    const langs = [['it','italiano'],['en','english'],['es','español']].map(([code, name]) => ({ code, name, mark: code === lang ? '>' : '', color: code === lang ? '#EDEBE6' : '#BDBAB2', select: () => this.setLang(code) }));
+    const langs = [['it','italiano'],['en','english'],['ro','română']].map(([code, name]) => ({ code, name, mark: code === lang ? '>' : '', color: code === lang ? '#EDEBE6' : '#BDBAB2', select: () => this.setLang(code) }));
     const langExtra = { lang, t, langs, langOpen: !!this.state.langOpen, toggleLangMenu: this.toggleLangMenu };
     const projects = [
       { key: 'v3', name: 'My website V3', url: 'Case Study V3.dc.html', note: 'Versione attuale del sito — case study', internal: true },
