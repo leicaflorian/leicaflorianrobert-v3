@@ -3676,7 +3676,7 @@ fields:
       group: null
       hidden: false
       interface: input-multiline
-      note: Sotto il titolo
+      note: Sotto il titolo ({years} = anni di esperienza, dal 2009)
       options: null
       readonly: false
       required: false
@@ -3716,7 +3716,9 @@ fields:
       group: null
       hidden: false
       interface: input-multiline
-      note: In modalità legacy, sotto «Benvenuto nel mio ipertesto»
+      note: >-
+        In modalità legacy, sotto «Benvenuto nel mio ipertesto» ({years} = anni
+        di esperienza, dal 2009)
       options: null
       readonly: false
       required: false
@@ -8868,7 +8870,9 @@ fields:
       group: null
       hidden: false
       interface: input-multiline
-      note: Descrizione per i motori di ricerca
+      note: >-
+        Descrizione per i motori di ricerca ({years} = anni di esperienza, dal
+        2009)
       options: null
       readonly: false
       required: false
@@ -11392,7 +11396,7 @@ fields:
       group: null
       hidden: false
       interface: input-multiline
-      note: La presentazione nel footer
+      note: La presentazione nel footer ({years} = anni di esperienza, dal 2009)
       options: null
       readonly: false
       required: false

@@ -83,7 +83,7 @@ const COLLECTIONS = [
     translations: [
       string('role', 'Nella hero della Home: «// Nome — Sviluppatore Web & Mobile»'),
       string('profession', 'In modalità legacy: «Professione: …»'),
-      text('tagline', 'La presentazione nel footer'),
+      text('tagline', 'La presentazione nel footer ({years} = anni di esperienza, dal 2009)'),
     ],
   },
   {
@@ -100,7 +100,7 @@ const COLLECTIONS = [
       string('slug', 'Percorso, senza / iniziale: «chi-sono». Vuoto per la Home'),
       string('title', 'Titolo: menu legacy e scheda del browser'),
       string('seo_title', 'Titolo nella scheda del browser, se diverso dal titolo'),
-      text('description', 'Descrizione per i motori di ricerca'),
+      text('description', 'Descrizione per i motori di ricerca ({years} = anni di esperienza, dal 2009)'),
     ],
   },
   {
@@ -209,8 +209,8 @@ const BLOCKS = [
     translations: [
       string('title', 'Titolo, parte bianca'),
       string('title_accent', 'Titolo, parte arancione'),
-      text('text', 'Sotto il titolo'),
-      text('legacy_text', 'In modalità legacy, sotto «Ciao, questo è il mio ipertesto»'),
+      text('text', 'Sotto il titolo ({years} = anni di esperienza, dal 2009)'),
+      text('legacy_text', 'In modalità legacy, sotto «Ciao, questo è il mio ipertesto» ({years} = anni di esperienza, dal 2009)'),
     ],
   }),
   block('block_page_header', {

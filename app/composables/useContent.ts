@@ -30,7 +30,7 @@ export function useDirectus() {
 
 /**
  * Lifts the translated fields to the top level: first those of the requested language, then,
- * for each empty field, the Italian ones.
+ * for each empty field, the Italian ones. `{years}` in them becomes the years of experience.
  */
 export function translateItem<T>(item: RawItem, locale: string): T {
   const {translations = [], ...fields} = item
@@ -47,6 +47,9 @@ export function translateItem<T>(item: RawItem, locale: string): T {
   const merged: Record<string, unknown> = {...fallback}
   for (const [key, value] of Object.entries(current)) {
     if (value !== null && value !== '') merged[key] = value
+  }
+  for (const [key, value] of Object.entries(merged)) {
+    if (typeof value === 'string') merged[key] = withYears(value)
   }
 
   return {...fields, ...merged} as T

@@ -37,6 +37,7 @@ Components are auto-imported with the folder as prefix: `components/home/Hero.vu
 - **`i18n/locales/{it,en,ro}.json`** holds interface texts (buttons, form, boot lines, fixed legacy texts). Section titles and labels belong to the blocks. Add every key to all three files.
 - Types for Directus content are in `app/types/content.ts`; translated fields are marked `// translated`.
 - Directus text formatting: `**word**` highlights a word (`highlight()` for native via `v-html`, `plain()` for legacy), blank lines separate paragraphs (`paragraphs()`), one item per line for lists (`lines()`). All in `app/utils/text.ts`. Never `v-html` a Directus string without `highlight()`, which escapes it.
+- Never write the years of experience as a number: `{years}` in any Directus text becomes them (`translateItem` → `withYears()`), counted from `CAREER_START` (2009) in `app/utils/career.ts`, at build time.
 - Images are Directus file ids (`FileId`), rendered via `@nuxt/image` with the `directus` provider (see `components/ui/MediaImage.vue`).
 - Where the design has no photo, the visuals are code: the service illustrations (`components/service/visual/`, picked by the service `icon`, an uploaded image wins), the ASCII portrait (`UiAsciiPortrait`, from `public/imgs`: the canvas reads its pixels, so it must be same-origin) and the widgets. Animations run only while visible (`useVisibleInterval`) and respect `prefers-reduced-motion`.
 
