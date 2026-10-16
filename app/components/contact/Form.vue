@@ -36,7 +36,7 @@ const groups = computed(() => [
             :key="o"
             type="button"
             :aria-pressed="on"
-            class="min-h-10 cursor-pointer rounded-full border px-3.5 font-mono text-[13px] transition-all duration-150 hover:border-accent"
+            class="min-h-10 cursor-pointer rounded-full border px-3.5 font-mono text-[13px] transition-colors duration-300 hover:border-accent"
             :class="on ? 'border-accent bg-accent text-bg' : 'border-line-control bg-transparent text-ink-soft'"
             @click="toggle"
           >
