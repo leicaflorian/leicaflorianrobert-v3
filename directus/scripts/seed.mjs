@@ -74,8 +74,8 @@ const PROJECTS = [
     note('Gestionale aziendale', 'Business management software', 'Software de gestiune')),
   project('v2', 'https://leicaflorianrobert.dev', {kind: 'personal'}, name('My website V2')),
   project('wab', 'https://webartisanbros.com/', {featured: true, mockup: 'laptop'}, name('Web Artisan Bros')),
-  project('slides', 'https://chrome.google.com/webstore/detail/slidescom-downloader/bciknjamldhnbbckmgbchmkdcalngnco?hl=it', {kind: 'personal'}, name('Slides.com downloader'),
-    note('Estensione Chrome', 'Chrome extension', 'Extensie Chrome')),
+  project('slides', 'https://chromewebstore.google.com/detail/slidescom-companion/bciknjamldhnbbckmgbchmkdcalngnco', {kind: 'personal', case_study: true}, name('Slides.com Companion'),
+    note('Estensione Chrome ed Edge', 'Chrome and Edge extension', 'Extensie Chrome și Edge')),
   project('tvit', 'https://tvit.leicaflorianrobert.dev/channels', {kind: 'personal', on_home: true, case_study: true}, name('TvIt'),
     note('Canali TV in chiaro in una lista IPTV', 'Free-to-air TV channels in one IPTV list', 'Canale TV gratuite într-o listă IPTV')),
   // the site is no longer the one I built: the link goes to its code
@@ -1077,6 +1077,75 @@ const CASE_STUDIES = {
             'O listă M3U, și una în JSON, generată automat: un link pentru fiecare canal.',
             'Ghidul TV (EPG) colectat din paginile cu programe și actualizat în fiecare noapte.',
             'Se urmărește din browser, pe pagina canalelor, sau cu orice player IPTV non-proprietar, precum VLC.',
+          ),
+        },
+      }),
+      NEXT_STEP,
+    ],
+  },
+  slides: {
+    year: 2021,
+    translations: {
+      it: {intro: 'Un\'estensione per Chrome ed Edge che aggiunge a Slides.com, gratis, qualche funzione che manca: a partire dal download di qualsiasi presentazione in PDF.', role: 'Ideazione e sviluppo', type: 'Estensione browser', stack: 'TypeScript, Vue, Chrome Extensions API'},
+      en: {intro: 'A Chrome and Edge extension that adds a few missing features to Slides.com, for free: starting with downloading any presentation as a PDF.', role: 'Concept and development', type: 'Browser extension', stack: 'TypeScript, Vue, Chrome Extensions API'},
+      ro: {intro: 'O extensie pentru Chrome și Edge care adaugă gratuit în Slides.com câteva funcții care lipsesc: începând cu descărcarea oricărei prezentări în PDF.', role: 'Concepție și dezvoltare', type: 'Extensie de browser', stack: 'TypeScript, Vue, Chrome Extensions API'},
+    },
+    sections: [
+      section('block_text', {}, {
+        it: {
+          label: 'idea',
+          title: 'Il PDF che mancava',
+          text: paras(
+            'Slides.com è un servizio per creare e mostrare presentazioni online, ma scaricarle in PDF non è sempre possibile.',
+            'L\'estensione aggiunge il download di **qualsiasi presentazione** in PDF, gratis. È nata come Slides.com Downloader ed è diventata Slides.com Companion, pensata per raccogliere altre funzioni.',
+          ),
+        },
+        en: {
+          label: 'idea',
+          title: 'The missing PDF',
+          text: paras(
+            'Slides.com is a service for creating and showing presentations online, but downloading them as a PDF isn\'t always possible.',
+            'The extension adds the download of **any presentation** as a PDF, for free. It started as Slides.com Downloader and became Slides.com Companion, built to hold more features.',
+          ),
+        },
+        ro: {
+          label: 'idee',
+          title: 'PDF-ul care lipsea',
+          text: paras(
+            'Slides.com este un serviciu pentru a crea și prezenta prezentări online, dar descărcarea lor în PDF nu este mereu posibilă.',
+            'Extensia adaugă descărcarea în PDF a **oricărei prezentări**, gratuit. A pornit ca Slides.com Downloader și a devenit Slides.com Companion, gândită pentru a aduna și alte funcții.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'come funziona',
+          title: 'Dentro l\'estensione',
+          items: lines(
+            'Un content script lavora sulla pagina della presentazione.',
+            'Il PDF si crea con il comando di stampa del browser, senza servizi esterni.',
+            'Un popup in Vue, uno script in background, tutto scritto in TypeScript.',
+            'Funziona su Chrome ed Edge, ed è pubblicata sul Chrome Web Store.',
+          ),
+        },
+        en: {
+          label: 'how it works',
+          title: 'Inside the extension',
+          items: lines(
+            'A content script works on the presentation page.',
+            'The PDF is made with the browser\'s print command, with no outside services.',
+            'A Vue popup and a background script, all written in TypeScript.',
+            'It runs on Chrome and Edge, and is published on the Chrome Web Store.',
+          ),
+        },
+        ro: {
+          label: 'cum funcționează',
+          title: 'În interiorul extensiei',
+          items: lines(
+            'Un content script lucrează pe pagina prezentării.',
+            'PDF-ul se creează cu comanda de tipărire a browserului, fără servicii externe.',
+            'Un popup în Vue și un script în fundal, totul scris în TypeScript.',
+            'Funcționează pe Chrome și Edge și este publicată în Chrome Web Store.',
           ),
         },
       }),
