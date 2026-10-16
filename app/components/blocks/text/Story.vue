@@ -72,7 +72,7 @@ const {index: reading, goTo} = useParagraphInView(list)
           v-for="(chapter, i) in chapters"
           :key="i"
           class="border-l-2 py-12 pl-7 transition-colors duration-[350ms] max-[860px]:border-l-0 max-[860px]:py-6 max-[860px]:pl-0 max-[860px]:text-ink-soft"
-          :class="[i === reading ? 'border-accent text-ink' : 'border-line text-ghost', i === chapters.length - 1 && 'pb-[30vh] max-[860px]:pb-0']"
+          :class="i === reading ? 'border-accent text-ink' : 'border-line text-ghost'"
         >
           <p class="m-0" v-html="highlight(chapter.text)"/>
           <component :is="chapter.widget" v-if="chapter.widget" class="mt-6 min-[861px]:hidden"/>
