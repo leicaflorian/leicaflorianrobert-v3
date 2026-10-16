@@ -45,7 +45,7 @@ const groups = computed(() => props.block.show === 'grouped' ? groupByCategory(p
       <div
         v-if="cards.length"
         class="grid gap-6"
-        :class="block.show === 'home' ? 'mt-6 grid-cols-[repeat(auto-fit,minmax(300px,1fr))]' : 'grid-cols-[repeat(auto-fill,minmax(min(100%,320px),1fr))]'"
+        :class="block.show === 'home' ? 'mt-6 grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))]' : 'grid-cols-[repeat(auto-fill,minmax(min(100%,320px),1fr))]'"
       >
         <ProjectCard
           v-for="project in cards"

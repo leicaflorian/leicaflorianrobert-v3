@@ -24,7 +24,7 @@ const shown = computed(() => commits.value.find(c => c.project.id === (hovered.v
 
 <template>
   <div class="min-w-0 overflow-hidden rounded-2xl border border-line-card bg-bg-deep">
-    <div class="flex items-center justify-between gap-3 border-b border-line bg-surface px-4 py-3 text-xs text-subtle">
+    <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5 border-b border-line bg-surface px-4 py-3 text-xs text-subtle">
       <span class="flex min-w-0 items-center gap-1.5">
         <span v-for="i in 3" :key="i" class="size-[9px] shrink-0 rounded-full bg-gutter"/>
         <span class="ml-2 truncate"><span class="text-code-ok">$</span> git log --graph --all</span>

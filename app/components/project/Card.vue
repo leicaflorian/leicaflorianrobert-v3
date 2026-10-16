@@ -36,7 +36,7 @@ withDefaults(defineProps<{
     </div>
 
     <div v-else class="flex flex-col gap-2 px-7 py-[22px]">
-      <div class="flex items-center justify-between gap-3">
+      <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
         <h3 class="m-0 text-[17px] font-bold">{{ project.name }}</h3>
         <div class="flex shrink-0 items-center gap-3">
           <ProjectBadge :kind="project.kind"/>
