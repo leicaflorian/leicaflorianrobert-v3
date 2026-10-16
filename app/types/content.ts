@@ -65,6 +65,8 @@ export interface Experience {
   link: string | null
   // translated
   role: string
+  /** What I did there, in one or two sentences. */
+  description: string | null
 }
 
 export type ServiceIcon = 'web' | 'mobile' | 'design' | 'devops' | 'formazione' | 'consulenza'

@@ -16,7 +16,10 @@ const experiences = await useCollection<Experience>('experiences')
           <LegacyLink v-if="exp.link" :href="exp.link">{{ exp.company }}</LegacyLink>
           <template v-else>{{ exp.company }}</template>
         </td>
-        <td class="border border-black p-1.5">{{ exp.role }}</td>
+        <td class="border border-black p-1.5">
+          {{ exp.role }}
+          <template v-if="exp.description"><br><small>{{ exp.description }}</small></template>
+        </td>
       </tr>
     </tbody>
   </table>

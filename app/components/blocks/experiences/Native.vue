@@ -36,6 +36,9 @@ const timeline = computed(() => [...experiences.value].reverse())
           <span class="text-[17px] font-bold">{{ exp.company }}</span>
           <span class="text-sm text-muted max-[860px]:col-start-2">{{ exp.role }}</span>
           <span class="text-right text-ghost max-[860px]:hidden">{{ exp.link ? '↗' : '' }}</span>
+          <p v-if="exp.description" class="col-start-2 col-end-4 m-0 -mt-3 max-w-[640px] text-sm leading-[1.7] text-subtle max-[860px]:col-end-3 max-[860px]:mt-0">
+            {{ exp.description }}
+          </p>
         </component>
       </div>
     </div>

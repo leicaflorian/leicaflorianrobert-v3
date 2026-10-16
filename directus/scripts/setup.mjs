@@ -136,7 +136,7 @@ const COLLECTIONS = [
       string('company', 'Azienda', {width: 'half'}),
       string('link', 'Sito dell\'azienda, facoltativo'),
     ],
-    translations: [string('role', 'Ruolo')],
+    translations: [string('role', 'Ruolo'), text('description', 'Cosa facevo: una o due frasi')],
   },
   {
     collection: 'services',
