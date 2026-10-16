@@ -256,6 +256,22 @@
       "coffee": "Cafea",
       "perDay": "3 / zi",
       "theme": "tema {name}"
+    },
+    "web": {
+      "title": "cum funcționează web-ul",
+      "poweredBy": "curiozitate"
+    },
+    "agent": {
+      "session": "în sesiune",
+      "prompt": "scrie testele pentru checkout() și verifică cazurile limită",
+      "steps": {
+        "0": "citesc Checkout.vue și api.ts",
+        "1": "scriu checkout.spec.ts · 12 teste",
+        "2": "npm test → 12 trecute ✓",
+        "3": "Gata. Am acoperit și coșul gol și plata refuzată.",
+        "4": "revizie: leica · aprobat"
+      },
+      "footer": "tu decizi · AI-ul execută · tu verifici"
     }
   }
 }

@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import type {Component} from 'vue'
 import type {BlockWidgets, Widget} from '~/types/content'
-import {WidgetEditor, WidgetLesson, WidgetNeofetch} from '#components'
+import {WidgetAgent, WidgetEditor, WidgetLesson, WidgetNeofetch, WidgetWeb} from '#components'
 
 const props = defineProps<{
   block: BlockWidgets
@@ -13,7 +13,9 @@ const props = defineProps<{
   label?: string
 }>()
 
-const WIDGETS: Record<Widget, Component> = {editor: WidgetEditor, lesson: WidgetLesson, neofetch: WidgetNeofetch}
+const WIDGETS: Record<Widget, Component> = {
+  editor: WidgetEditor, lesson: WidgetLesson, neofetch: WidgetNeofetch, web: WidgetWeb, agent: WidgetAgent,
+}
 
 /** In a fixed order, whatever the order they were ticked in Directus. */
 const widgets = computed(() => (Object.keys(WIDGETS) as Widget[]).filter(w => props.block.widgets?.includes(w)))

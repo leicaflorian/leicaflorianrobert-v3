@@ -256,6 +256,22 @@
       "coffee": "Coffee",
       "perDay": "3 / day",
       "theme": "theme {name}"
+    },
+    "web": {
+      "title": "how the web works",
+      "poweredBy": "curiosity"
+    },
+    "agent": {
+      "session": "in session",
+      "prompt": "write the tests for checkout() and check the edge cases",
+      "steps": {
+        "0": "reading Checkout.vue and api.ts",
+        "1": "writing checkout.spec.ts · 12 tests",
+        "2": "npm test → 12 passed ✓",
+        "3": "Done. I also covered the empty cart and a declined payment.",
+        "4": "review: leica · approved"
+      },
+      "footer": "you decide · the AI acts · you check"
     }
   }
 }

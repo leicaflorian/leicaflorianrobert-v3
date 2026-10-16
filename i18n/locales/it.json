@@ -256,6 +256,22 @@
       "coffee": "Caffè",
       "perDay": "3 / giorno",
       "theme": "tema {name}"
+    },
+    "web": {
+      "title": "come funziona il web",
+      "poweredBy": "curiosità"
+    },
+    "agent": {
+      "session": "in sessione",
+      "prompt": "scrivi i test per checkout() e verifica i casi limite",
+      "steps": {
+        "0": "leggo Checkout.vue e api.ts",
+        "1": "scrivo checkout.spec.ts · 12 test",
+        "2": "npm test → 12 passati ✓",
+        "3": "Fatto. Ho coperto anche carrello vuoto e pagamento rifiutato.",
+        "4": "revisione: leica · approvato"
+      },
+      "footer": "tu decidi · l'AI esegue · tu verifichi"
     }
   }
 }

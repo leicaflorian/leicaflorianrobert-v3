@@ -139,10 +139,14 @@ export interface BlockPageHeader extends BlockBase {
 }
 
 export interface BlockText extends BlockBase {
+  /** A widget per paragraph, in order: the text becomes a story told beside them. */
+  widgets: Widget[] | null
   // translated
   label: string | null
   title: string
   text: string
+  /** With widgets: each paragraph's short name, one per line. */
+  steps: string | null
 }
 
 export interface BlockGallery extends BlockBase {
@@ -155,7 +159,7 @@ export interface BlockGallery extends BlockBase {
   captions: string | null
 }
 
-export type Widget = 'editor' | 'lesson' | 'neofetch'
+export type Widget = 'editor' | 'lesson' | 'neofetch' | 'web' | 'agent'
 
 export interface BlockWidgets extends BlockBase {
   widgets: Widget[] | null

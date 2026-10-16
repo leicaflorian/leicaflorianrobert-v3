@@ -27,6 +27,12 @@ const choice = (field, note, choices, defaultValue) => ({
   schema: {default_value: defaultValue},
 })
 /** Several choices from a fixed list, saved as comma-separated keys. */
+/** Picks from a fixed list that keep their order and can repeat, saved as CSV. */
+const tags = (field, note, options) => ({
+  field, type: 'csv',
+  meta: {interface: 'tags', note, special: ['cast-csv'], options: {presets: options, allowCustom: false}},
+  schema: {},
+})
 const choices = (field, note, options) => ({
   field, type: 'csv',
   meta: {interface: 'select-multiple-checkbox', note, special: ['cast-csv'], options: {choices: options.map(([value, label]) => ({value, text: label}))}, display: 'labels'},
@@ -214,8 +220,12 @@ const BLOCKS = [
   }),
   block('block_text', {
     icon: 'notes',
-    note: 'Titolo a sinistra, testo a destra.',
-    translations: [label(), title(), text('text', 'Paragrafi separati da una riga vuota')],
+    note: 'Titolo a sinistra, testo a destra. Con i widget diventa una storia: un widget per paragrafo, che cambia mentre si legge (solo native).',
+    fields: [tags('widgets', 'Facoltativo: un widget per paragrafo, nello stesso ordine (neofetch, web, editor, lesson, agent)', ['neofetch', 'web', 'editor', 'lesson', 'agent'])],
+    translations: [
+      label(), title(), text('text', 'Paragrafi separati da una riga vuota'),
+      text('steps', 'Con i widget: il nome breve di ogni paragrafo, uno per riga'),
+    ],
   }),
   block('block_gallery', {
     icon: 'photo_library',
@@ -230,7 +240,7 @@ const BLOCKS = [
   block('block_widgets', {
     icon: 'animation',
     note: 'Widget animati, solo in modalità native: un editor che scrive codice, una lezione su async/await e un neofetch con i temi.',
-    fields: [choices('widgets', 'Quali mostrare', [['editor', 'Editor'], ['lesson', 'Lezione'], ['neofetch', 'Neofetch']])],
+    fields: [choices('widgets', 'Quali mostrare', [['editor', 'Editor'], ['lesson', 'Lezione'], ['neofetch', 'Neofetch'], ['web', 'Come funziona il web'], ['agent', 'Sessione con l\'AI']])],
     translations: [label('Etichetta piccola, facoltativa'), title('Titolo, facoltativo')],
   }),
   block('block_list', {
