@@ -63,15 +63,15 @@ const project = (slug, url, extra, ...translations) => ({
 
 const PROJECTS = [
   project('v3', 'https://leicaflorianrobert.dev', {kind: 'personal', case_study: true}, name('My website V3'),
-    note('Versione attuale del sito — case study', 'Current version of this site — case study', 'Versiunea actuală a site-ului — studiu de caz')),
+    note('Versione attuale del sito', 'Current version of this site', 'Versiunea actuală a site-ului')),
   project('tfp', 'https://thefullproject.it/', {case_study: true}, name('The Full Project'),
-    note('Sviluppo e infrastruttura — case study', 'Development and infrastructure — case study', 'Dezvoltare și infrastructură — studiu de caz')),
+    note('Sviluppo e infrastruttura', 'Development and infrastructure', 'Dezvoltare și infrastructură')),
   project('xpulire', 'https://www.xpulire.com/', {case_study: true}, name('xPulire'),
-    note('Infrastruttura di rete — case study', 'Network infrastructure — case study', 'Infrastructură de rețea — studiu de caz')),
+    note('Infrastruttura di rete', 'Network infrastructure', 'Infrastructură de rețea')),
   project('imanpack', 'https://www.imanpack.it/', {case_study: true}, name('Imanpack'),
-    note('Newsletter automatiche con Mailchimp — case study', 'Automated newsletters with Mailchimp — case study', 'Newslettere automate cu Mailchimp — studiu de caz')),
+    note('Newsletter automatiche con Mailchimp', 'Automated newsletters with Mailchimp', 'Newslettere automate cu Mailchimp')),
   project('steelfuture', 'https://steelfuture.com/', {case_study: true}, name('Steel Future'),
-    note('Gestionale aziendale — case study', 'Business management software — case study', 'Software de gestiune — studiu de caz')),
+    note('Gestionale aziendale', 'Business management software', 'Software de gestiune')),
   project('v2', 'https://leicaflorianrobert.dev', {kind: 'personal'}, name('My website V2')),
   project('wab', 'https://webartisanbros.com/', {featured: true, mockup: 'laptop'}, name('Web Artisan Bros')),
   project('slides', 'https://chrome.google.com/webstore/detail/slidescom-downloader/bciknjamldhnbbckmgbchmkdcalngnco?hl=it', {kind: 'personal'}, name('Slides.com downloader'),
@@ -87,7 +87,7 @@ const PROJECTS = [
   // the client is never named: no name, no link
   project('fintech', '', {case_study: true},
     {it: {name: 'Piattaforma per investimenti'}, en: {name: 'Investment platform'}, ro: {name: 'Platformă de investiții'}},
-    note('Web app, app mobile e microservizi — case study', 'Web apps, mobile app and microservices — case study', 'Aplicații web, aplicație mobilă și microservicii — studiu de caz')),
+    note('Web app, app mobile e microservizi', 'Web apps, mobile app and microservices', 'Aplicații web, aplicație mobilă și microservicii')),
   project('fib', 'https://leicaflorian.github.io/fibonacci_counter/', {kind: 'personal'}, name('Fibonacci Counter')),
   // client work done through an agency, which is never named
   project('agrigento', 'https://agrigento2025.org', {kind: 'agency'}, name('Agrigento 2025')),
