@@ -76,7 +76,8 @@ const PROJECTS = [
   project('wab', 'https://webartisanbros.com/', {featured: true, mockup: 'laptop'}, name('Web Artisan Bros')),
   project('slides', 'https://chrome.google.com/webstore/detail/slidescom-downloader/bciknjamldhnbbckmgbchmkdcalngnco?hl=it', {kind: 'personal'}, name('Slides.com downloader'),
     note('Estensione Chrome', 'Chrome extension', 'Extensie Chrome')),
-  project('tvit', 'https://tvit.leicaflorianrobert.dev/channels', {kind: 'personal', on_home: true}, name('TvIt')),
+  project('tvit', 'https://tvit.leicaflorianrobert.dev/channels', {kind: 'personal', on_home: true, case_study: true}, name('TvIt'),
+    note('Canali TV in chiaro in una lista IPTV', 'Free-to-air TV channels in one IPTV list', 'Canale TV gratuite într-o listă IPTV')),
   // the site is no longer the one I built: the link goes to its code
   project('biologica', 'https://github.com/leicaflorian/biologioca_disinfestazioni', {}, name('Biologica Disinfestazioni'),
     note('Sito web — il codice su GitHub', 'Website — the code on GitHub', 'Site web — codul pe GitHub')),
@@ -1007,6 +1008,75 @@ const CASE_STUDIES = {
             'Fiecare client cu profilul și zona sa privată.',
             'Clienți autonomi în operațiuni, ca într-un internet banking.',
             'Cumpărături direct din aplicația mobilă.',
+          ),
+        },
+      }),
+      NEXT_STEP,
+    ],
+  },
+  tvit: {
+    year: 2022,
+    translations: {
+      it: {intro: 'Un progetto personale che raccoglie i canali TV italiani in chiaro, già trasmessi in streaming dalle emittenti, in un\'unica lista IPTV con la guida TV: da guardare nel browser o con qualsiasi player.', role: 'Ideazione e sviluppo', type: 'Progetto personale', stack: 'Laravel, Vue, Docker'},
+      en: {intro: 'A personal project that gathers Italian free-to-air TV channels, already streamed by the broadcasters, into a single IPTV list with a TV guide: to watch in the browser or with any player.', role: 'Concept and development', type: 'Personal project', stack: 'Laravel, Vue, Docker'},
+      ro: {intro: 'Un proiect personal care adună canalele TV italiene gratuite, deja transmise în streaming de televiziuni, într-o singură listă IPTV cu ghid TV: de urmărit în browser sau cu orice player.', role: 'Concepție și dezvoltare', type: 'Proiect personal', stack: 'Laravel, Vue, Docker'},
+    },
+    sections: [
+      section('block_text', {}, {
+        it: {
+          label: 'idea',
+          title: 'La TV in chiaro, in un posto solo',
+          text: paras(
+            'I canali italiani in chiaro si possono già guardare in streaming, ma ognuno sul sito della sua emittente. TvIt li raccoglie in **un\'unica lista IPTV**.',
+            'Nessun contenuto privato: solo i canali che le emittenti trasmettono già pubblicamente sui loro siti.',
+          ),
+        },
+        en: {
+          label: 'idea',
+          title: 'Free-to-air TV, in one place',
+          text: paras(
+            'Italian free-to-air channels can already be watched as streams, but each on its broadcaster\'s website. TvIt gathers them into **a single IPTV list**.',
+            'No private content: only the channels the broadcasters already stream publicly on their websites.',
+          ),
+        },
+        ro: {
+          label: 'idee',
+          title: 'Televiziunea gratuită, într-un singur loc',
+          text: paras(
+            'Canalele italiene gratuite se pot urmări deja în streaming, dar fiecare pe site-ul televiziunii sale. TvIt le adună într-o **singură listă IPTV**.',
+            'Niciun conținut privat: doar canalele pe care televiziunile le transmit deja public pe site-urile lor.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'come funziona',
+          title: 'Dal sito dell\'emittente al player',
+          items: lines(
+            'Reverse engineering dei player delle emittenti, per risalire ai flussi video.',
+            'Una lista M3U, e una in JSON, generata in automatico: un link per canale.',
+            'La guida TV (EPG) raccolta dalle pagine dei palinsesti e aggiornata ogni notte.',
+            'Si guarda dal browser, sulla pagina dei canali, o con qualsiasi player IPTV non proprietario, come VLC.',
+          ),
+        },
+        en: {
+          label: 'how it works',
+          title: 'From the broadcaster\'s site to the player',
+          items: lines(
+            'Reverse engineering the broadcasters\' players to trace the video streams.',
+            'An M3U list, and a JSON one, generated automatically: one link per channel.',
+            'The TV guide (EPG) scraped from the schedule pages and updated every night.',
+            'Watch it in the browser, on the channels page, or with any non-proprietary IPTV player, like VLC.',
+          ),
+        },
+        ro: {
+          label: 'cum funcționează',
+          title: 'De pe site-ul televiziunii în player',
+          items: lines(
+            'Reverse engineering pe playerele televiziunilor, pentru a ajunge la fluxurile video.',
+            'O listă M3U, și una în JSON, generată automat: un link pentru fiecare canal.',
+            'Ghidul TV (EPG) colectat din paginile cu programe și actualizat în fiecare noapte.',
+            'Se urmărește din browser, pe pagina canalelor, sau cu orice player IPTV non-proprietar, precum VLC.',
           ),
         },
       }),
