@@ -311,10 +311,11 @@ const PAGES = [
         en: {label: '// about me', title: 'Hi, welcome', intro: 'I\'m Leica Florian Robert: Full Stack Web Developer, UI and UX Designer, Mobile Developer, web technologies teacher, and a big fan of computing and technology.'},
         ro: {label: '// despre mine', title: 'Salut, bine ai venit', intro: 'Sunt Leica Florian Robert, dezvoltator Web Full Stack, UI și UX Designer, dezvoltator Mobile, profesor de tehnologii web, mare pasionat de informatică și tehnologie.'},
       }),
-      section('block_text', {}, {
+      section('block_text', {widgets: ['neofetch', 'web', 'editor', 'lesson', 'agent']}, {
         it: {
           label: 'storia',
           title: 'Da autodidatta a formatore',
+          steps: lines('chi sono', 'il web', 'autodidatta', 'insegnare', 'AI'),
           text: paras(
             'Adoro questi settori in quanto offrono opportunità uniche e (a volte) semplificano di molto la vita o comunque la migliorano e questa mia passione cerco di trasmetterla anche ad altri.',
             'Dall\'inizio della mia carriera professionale questa passione mi ha spinto a voler imparare il più possibile come funziona il web, come funziona l\'informatica e come posso a mia volta farne parte anche io.',
@@ -326,6 +327,7 @@ const PAGES = [
         en: {
           label: 'story',
           title: 'From self-taught to teacher',
+          steps: lines('who I am', 'the web', 'self-taught', 'teaching', 'AI'),
           text: paras(
             'I love these fields because they offer unique opportunities and (sometimes) make life a lot simpler, or at least better — and it\'s a passion I try to pass on to others too.',
             'Since the start of my career, this passion has pushed me to learn as much as I can about how the web works, how computing works, and how I can become part of it myself.',
@@ -337,6 +339,7 @@ const PAGES = [
         ro: {
           label: 'poveste',
           title: 'De la autodidact la formator',
+          steps: lines('cine sunt', 'web-ul', 'autodidact', 'predare', 'AI'),
           text: paras(
             'Iubesc aceste domenii pentru că oferă oportunități unice și (uneori) simplifică mult viața sau, oricum, o îmbunătățesc — iar această pasiune încerc să le-o transmit și altora.',
             'De la începutul carierei mele, această pasiune m-a împins să învăț cât mai mult despre cum funcționează web-ul, cum funcționează informatica și cum pot și eu să devin parte din ele.',
@@ -346,7 +349,6 @@ const PAGES = [
           ),
         },
       }),
-      section('block_widgets', {engines: 'native', widgets: ['editor', 'lesson', 'neofetch']}, same({})),
       section('block_experiences', {}, {
         it: {label: 'esperienze', title: 'Ecco alcune esperienze', text: 'Queste sono alcune delle esperienze più significative che ho avuto nel corso della mia carriera. Ci sono stati molti altri progetti e collaborazioni, e tutte queste esperienze mi hanno permesso di crescere professionalmente, ma sicuramente queste sono le più importanti.'},
         en: {label: 'experience', title: 'Some of my experience', text: 'These are some of the most significant experiences of my career. There have been many other projects and collaborations, and all of them helped me grow professionally, but these are certainly the most important.'},
