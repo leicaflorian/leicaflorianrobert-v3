@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+body { margin:0; background:#0B0B0D; }
+a { color:#FF5B14; text-decoration:none; } a:hover { color:#EDEBE6; }
+@keyframes cursorBlink { 0%,50%{opacity:1} 51%,100%{opacity:0} }
+@keyframes bar { 0%{width:8%} 70%,100%{width:86%} }
+@keyframes svIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+</style>
+</helmet>
+<section style="font-family:'JetBrains Mono',monospace;color:#EDEBE6;padding:64px;display:flex;flex-direction:column;gap:32px;border-bottom:1px solid #222226;">
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <span style="font-size:13px;color:#FF5B14;">turno 3 · evoluzione di <a href="#2b">2b</a> in agente</span>
+    <span style="font-size:13px;color:#8F8C85;max-width:720px;line-height:1.7;">Risposte simulate: l'agente riconosce parole chiave e consiglia i servizi. Prova a scrivere o usa i suggerimenti.</span>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start;">
+    <div id="3a" style="flex:none;width:1200px;display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;align-items:center;gap:12px;"><span style="padding:4px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:12px;font-weight:800;">3a</span><span style="font-size:13px;color:#8F8C85;">lfr agent · descrivi il progetto, ti consiglio i servizi</span></div>
+      <div style="background:#111113;border:1px solid #222226;border-radius:20px;padding:96px 40px;">
+        <p style="margin:0 0 16px;font-size:13px;color:#FF5B14;">01 / servizi</p>
+        <h2 style="margin:0 0 56px;font-size:44px;font-weight:800;letter-spacing:-0.03em;">Cosa posso fare per te?<span aria-hidden="true" style="display:inline-block;width:0.5em;height:0.09em;margin-left:0.1em;background:#FF5B14;animation:cursorBlink 1s step-start infinite;"></span></h2>
+        <div style="border:1px solid #26262B;border-radius:16px;background:#0C0C0E;overflow:hidden;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid #222226;background:#18181B;font-size:12px;color:#8F8C85;">
+            <span style="display:flex;align-items:center;gap:10px;"><span style="display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:#FF5B14;color:#111113;font-size:9px;font-weight:800;">lfr</span><span style="color:#EDEBE6;">lfr agent</span><span>· v3</span></span>
+            <button type="button" onClick="{{ agReset }}" style="padding:4px 8px;border:1px solid #2C2C31;border-radius:6px;background:transparent;font-family:inherit;font-size:11px;color:#8F8C85;cursor:pointer;" style-hover="color:#EDEBE6;border-color:#3A3A40;">↺ ricomincia</button>
+          </div>
+          <div style="display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);min-height:520px;">
+            <div style="display:flex;flex-direction:column;border-right:1px solid #222226;">
+              <div style="flex:1;padding:28px 32px;display:flex;flex-direction:column;gap:14px;font-size:14px;line-height:1.65;">
+                <div style="display:flex;gap:12px;"><span style="color:#FF5B14;">●</span><span style="color:#EDEBE6;">Ciao, sono l'assistente di Leica. Raccontami il progetto in una frase e ti dico come posso aiutarti.</span></div>
+                <sc-for list="{{ agLog }}" as="l" hint-placeholder-count="0">
+                  <div style="display:flex;gap:12px;animation:svIn .25s ease-out both;"><span style="flex:none;color:{{ l.markColor }};">{{ l.mark }}</span><span style="color:{{ l.color }};font-size:{{ l.size }};">{{ l.text }}</span></div>
+                </sc-for>
+                <sc-if value="{{ agDone }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;gap:4px;margin-left:24px;animation:svIn .3s ease-out both;">
+                    <sc-for list="{{ agRec }}" as="o" hint-placeholder-count="2">
+                      <button type="button" onClick="{{ o.toggle }}" onMouseEnter="{{ o.focus }}" style="display:flex;align-items:center;gap:12px;min-height:44px;padding:0 12px;border:0;border-radius:8px;background:{{ o.bg }};font-family:inherit;font-size:14px;text-align:left;cursor:pointer;color:{{ o.color }};">
+                        <span style="width:12px;color:#FF5B14;">{{ o.caret }}</span><span style="color:{{ o.boxColor }};">{{ o.box }}</span><span style="flex:1;">{{ o.title }}</span><span style="font-size:11px;color:#5A5852;">{{ o.why }}</span>
+                      </button>
+                    </sc-for>
+                    <div style="margin-top:12px;display:flex;align-items:center;gap:16px;">
+                      <a href="Contact Dual Engine.dc.html" onClick="{{ agGo }}" style="padding:12px 18px;border-radius:10px;background:{{ agBtnBg }};color:{{ agBtnColor }};font-size:13px;font-weight:700;" style-hover="color:#111113;">continua nel form ↵</a>
+                      <span style="font-size:12px;color:#8F8C85;">{{ agSum }}</span>
+                    </div>
+                  </div>
+                </sc-if>
+              </div>
+              <div style="padding:16px 32px 24px;border-top:1px solid #222226;display:flex;flex-direction:column;gap:12px;">
+                <sc-if value="{{ agIdle }}" hint-placeholder-val="{{ true }}">
+                  <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                    <sc-for list="{{ agSugg }}" as="g" hint-placeholder-count="4">
+                      <button type="button" onClick="{{ g.ask }}" style="padding:8px 12px;border:1px solid #2C2C31;border-radius:999px;background:transparent;font-family:inherit;font-size:12px;color:#BDBAB2;cursor:pointer;" style-hover="border-color:#FF5B14;color:#EDEBE6;">{{ g.text }}</button>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <form onSubmit="{{ agSubmit }}" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid {{ agInBorder }};border-radius:12px;background:#111113;transition:border-color .2s;">
+                  <span style="color:#FF5B14;font-weight:700;">›</span>
+                  <input type="text" value="{{ agInput }}" onChange="{{ agOnInput }}" onFocus="{{ agFocusIn }}" onBlur="{{ agFocusOut }}" placeholder="es. un e-commerce con pagamenti online" style="flex:1;min-width:0;border:0;background:transparent;outline:none;font-family:inherit;font-size:14px;color:#EDEBE6;"/>
+                  <button type="submit" style="padding:6px 10px;border:0;border-radius:6px;background:#222226;font-family:inherit;font-size:11px;color:#BDBAB2;cursor:pointer;" style-hover="background:#FF5B14;color:#111113;">invio ↵</button>
+                </form>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;">
+              <sc-if value="{{ agHasFocus }}" hint-placeholder-val="{{ false }}">
+                <div style="height:300px;display:flex;flex-direction:column;border-bottom:1px solid #222226;"><sc-if value="{{ ag.isWeb }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#111113;background-image:radial-gradient(#26262B 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;">
+        <div style="width:100%;max-width:260px;border:1px solid #2C2C31;border-radius:10px;background:#18181B;overflow:hidden;">
+          <div style="display:flex;align-items:center;gap:6px;padding:8px 10px;border-bottom:1px solid #26262B;">
+            <span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span><span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span><span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span>
+            <span style="flex:1;margin-left:6px;padding:3px 8px;border-radius:5px;background:#111113;font-size:10px;color:#8F8C85;">lfr.dev/app/checkout</span>
+          </div>
+          <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
+            <div style="height:8px;width:60%;border-radius:3px;background:#2C2C31;"></div>
+            <div style="height:8px;width:85%;border-radius:3px;background:#222226;"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+              <span style="font-size:11px;color:#BDBAB2;">€ 49,00 / mese</span>
+              <span style="padding:6px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;">Paga ✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ ag.isMobile }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#111113;background-image:radial-gradient(#26262B 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;">
+        <div style="width:130px;height:176px;border:6px solid #2C2C31;border-bottom:0;border-radius:24px 24px 0 0;background:#18181B;padding:18px 10px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;">
+          <div style="align-self:center;width:36px;height:4px;border-radius:4px;background:#2C2C31;margin-bottom:6px;"></div>
+          <div style="padding:8px;border-radius:8px;background:#222226;border-left:0;display:flex;flex-direction:column;gap:4px;">
+            <span style="font-size:9px;color:#FF5B14;">push · ora</span>
+            <span style="font-size:10px;color:#EDEBE6;">Ordine spedito</span>
+          </div>
+          <div style="padding:8px;border-radius:8px;background:#1C1C20;display:flex;flex-direction:column;gap:5px;">
+            <div style="height:6px;width:70%;border-radius:3px;background:#2C2C31;"></div>
+            <div style="height:6px;width:45%;border-radius:3px;background:#26262B;"></div>
+          </div>
+        </div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ ag.isDesign }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#111113;overflow:hidden;">
+        <div style="position:absolute;top:0;bottom:0;left:30%;border-left:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;top:0;bottom:0;right:30%;border-left:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;left:0;right:0;top:46%;border-top:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;left:30%;right:30%;top:calc(46% - 22px);height:44px;border:1px solid #FF5B14;border-radius:8px;background:#1C1C20;display:flex;align-items:center;justify-content:center;font-size:11px;color:#EDEBE6;">Inizia ora →</div>
+        <span style="position:absolute;left:calc(30% - 3px);top:calc(46% - 25px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;right:calc(30% - 4px);top:calc(46% - 25px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;left:calc(30% - 3px);top:calc(46% + 19px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;right:calc(30% - 4px);top:calc(46% + 19px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;left:50%;transform:translateX(-50%);top:calc(46% + 34px);padding:3px 7px;border-radius:4px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;">240 × 44</span>
+      </div>
+              </sc-if>
+              <sc-if value="{{ ag.isDevops }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:7px;font-size:12px;line-height:1.4;">
+        <span style="color:#8F8C85;">$ <span style="color:#EDEBE6;">git push origin main</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> build       38s</span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> test        124 passed</span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">→</span> deploy prod<span style="animation:cursorBlink 1s step-start infinite;color:#FF5B14;">_</span></span>
+        <div style="margin-top:auto;height:4px;border-radius:4px;background:#222226;overflow:hidden;"><div style="height:100%;width:86%;background:#FF5B14;animation:bar 3s ease-out infinite;"></div></div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ ag.isAi }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;font-size:12px;line-height:1.5;">
+        <span style="color:#EDEBE6;"><span style="color:#8F8C85;">&gt;</span> riassumi le richieste di oggi e aggiorna il CRM</span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">●</span> read inbox <span style="color:#8F8C85;">12</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">●</span> call crm.update <span style="color:#8F8C85;">3</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> fatto in 18s<span style="color:#FF5B14;animation:cursorBlink 1s step-start infinite;">_</span></span>
+      </div>
+              </sc-if>
+              <sc-if value="{{ ag.isFormazione }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:6px;font-size:12px;line-height:1.4;">
+        <div style="display:grid;grid-template-columns:40px 1fr;color:#8F8C85;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">1</span><span>// perché funziona?</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">2</span><span><span style="color:#FF8A57;">const</span> total = items</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;background:#1F1712;border-left:2px solid #FF5B14;"><span style="text-align:right;padding-right:12px;color:#FF5B14;">3</span><span>  .reduce((a, i) =&gt; a + i.price, 0)</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">4</span><span style="color:#8F8C85;">  ;</span></div>
+        <div style="position:absolute;right:20px;bottom:20px;max-width:170px;padding:9px 11px;border-radius:8px;border:1px solid #2C2C31;background:#18181B;font-size:10px;line-height:1.5;color:#BDBAB2;"><span style="color:#FF5B14;">a</span> parte da 0 e accumula ogni prezzo</div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ ag.isConsulenza }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:2px;font-size:12px;line-height:1.7;">
+        <div style="padding:0 20px;color:#8F8C85;">src/api/orders.js</div>
+        <div style="padding:0 20px;background:#2A1414;color:#E58A8A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">- fetch(url).then(r =&gt; r.json())</div>
+        <div style="padding:0 20px;background:#122418;color:#7FD6A0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">+ await api.get(url, { retry: 3 })</div>
+        <div style="margin:auto 20px 20px;display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:8px;border:1px solid #2C2C31;background:#18181B;">
+          <span style="flex:0 0 20px;height:20px;border-radius:20px;background:#FF5B14;color:#111113;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;">lfr</span>
+          <span style="font-size:11px;line-height:1.5;color:#BDBAB2;">Gestiamo anche il timeout, qui si blocca tutto.</span>
+        </div>
+      </div>
+              </sc-if></div>
+                <div style="padding:28px 32px;display:flex;flex-direction:column;gap:10px;">
+                  <span style="font-size:12px;color:#8F8C85;">{{ ag.num }} / 07</span>
+                  <span style="font-size:20px;font-weight:700;">{{ ag.title }}</span>
+                  <span style="font-size:14px;line-height:1.7;color:#BDBAB2;text-wrap:pretty;">{{ ag.text }}</span>
+                </div>
+              </sc-if>
+              <sc-if value="{{ agNoFocus }}" hint-placeholder-val="{{ true }}">
+                <div style="flex:1;padding:32px;display:flex;flex-direction:column;gap:6px;justify-content:center;font-size:13px;line-height:1.9;">
+                  <span style="margin-bottom:10px;font-size:11px;color:#5A5852;letter-spacing:0.08em;">SERVIZI DISPONIBILI</span>
+                  <sc-for list="{{ agAll }}" as="x" hint-placeholder-count="7">
+                    <span style="color:{{ x.color }};transition:color .3s;"><span style="color:{{ x.dot }};">●</span> {{ x.title }}</span>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="font-family:'JetBrains Mono',monospace;color:#EDEBE6;padding:64px;display:flex;flex-direction:column;gap:32px;border-bottom:1px solid #222226;">
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <span style="font-size:13px;color:#FF5B14;">turno 2 · tema terminale, lettura facile</span>
+    <span style="font-size:13px;color:#8F8C85;max-width:720px;line-height:1.7;">Tempi, stack e tag in 2c/2d sono di esempio.</span>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start;">
+    <div id="2a" style="flex:none;width:1200px;display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;align-items:center;gap:12px;"><span style="padding:4px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:12px;font-weight:800;">2a</span><span style="font-size:13px;color:#8F8C85;">leica --help · tabella flag / descrizione</span></div>
+      <div style="background:#111113;border:1px solid #222226;border-radius:20px;padding:96px 40px;">
+        <p style="margin:0 0 16px;font-size:13px;color:#FF5B14;">01 / servizi</p>
+        <h2 style="margin:0 0 56px;font-size:44px;font-weight:800;letter-spacing:-0.03em;">Cosa posso fare per te?<span aria-hidden="true" style="display:inline-block;width:0.5em;height:0.09em;margin-left:0.1em;background:#FF5B14;animation:cursorBlink 1s step-start infinite;"></span></h2>
+        <div style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,0.8fr);gap:32px;align-items:start;">
+          <div style="border:1px solid #26262B;border-radius:16px;background:#0C0C0E;overflow:hidden;">
+            <div style="display:flex;align-items:center;gap:6px;padding:12px 16px;border-bottom:1px solid #222226;background:#18181B;font-size:12px;color:#8F8C85;"><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="margin-left:8px;"><span style="color:#5BD48A;">$</span> leica --help</span></div>
+            <div style="padding:28px 0;display:flex;flex-direction:column;font-size:14px;">
+              <div style="padding:0 28px 20px;color:#8F8C85;line-height:1.7;">Uso: <span style="color:#EDEBE6;">leica</span> [servizio] [opzioni]<br/>Sviluppo, design e consulenza per il tuo progetto digitale.</div>
+              <div style="padding:0 28px 8px;font-size:11px;color:#5A5852;letter-spacing:0.08em;">SERVIZI</div>
+              <sc-for list="{{ help }}" as="r" hint-placeholder-count="7">
+                <button type="button" onMouseEnter="{{ r.pick }}" onClick="{{ r.pick }}" style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:20px;align-items:baseline;padding:12px 28px;border:0;border-left:2px solid {{ r.edge }};background:{{ r.bg }};font-family:inherit;font-size:14px;text-align:left;cursor:pointer;transition:background .15s;">
+                  <span style="color:{{ r.flagColor }};font-weight:700;">--{{ r.key }}</span>
+                  <span style="color:{{ r.color }};line-height:1.6;text-wrap:pretty;">{{ r.text }}</span>
+                </button>
+              </sc-for>
+              <div style="padding:20px 28px 0;color:#8F8C85;line-height:1.7;">Esempio: <span style="color:#EDEBE6;">leica --web --ai</span> &nbsp;<a href="Contact Dual Engine.dc.html" style="color:#FF5B14;">./parliamone →</a></div>
+            </div>
+          </div>
+          <div style="position:sticky;top:24px;border:1px solid #26262B;border-radius:16px;background:#18181B;overflow:hidden;">
+            <div style="display:flex;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #222226;font-size:12px;color:#8F8C85;"><span>--{{ h.key }}</span><span>{{ h.num }} / 07</span></div>
+            <div style="height:260px;display:flex;flex-direction:column;"><sc-if value="{{ h.isWeb }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#111113;background-image:radial-gradient(#26262B 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;">
+        <div style="width:100%;max-width:260px;border:1px solid #2C2C31;border-radius:10px;background:#18181B;overflow:hidden;">
+          <div style="display:flex;align-items:center;gap:6px;padding:8px 10px;border-bottom:1px solid #26262B;">
+            <span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span><span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span><span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span>
+            <span style="flex:1;margin-left:6px;padding:3px 8px;border-radius:5px;background:#111113;font-size:10px;color:#8F8C85;">lfr.dev/app/checkout</span>
+          </div>
+          <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
+            <div style="height:8px;width:60%;border-radius:3px;background:#2C2C31;"></div>
+            <div style="height:8px;width:85%;border-radius:3px;background:#222226;"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+              <span style="font-size:11px;color:#BDBAB2;">€ 49,00 / mese</span>
+              <span style="padding:6px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;">Paga ✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ h.isMobile }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#111113;background-image:radial-gradient(#26262B 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;">
+        <div style="width:130px;height:176px;border:6px solid #2C2C31;border-bottom:0;border-radius:24px 24px 0 0;background:#18181B;padding:18px 10px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;">
+          <div style="align-self:center;width:36px;height:4px;border-radius:4px;background:#2C2C31;margin-bottom:6px;"></div>
+          <div style="padding:8px;border-radius:8px;background:#222226;border-left:0;display:flex;flex-direction:column;gap:4px;">
+            <span style="font-size:9px;color:#FF5B14;">push · ora</span>
+            <span style="font-size:10px;color:#EDEBE6;">Ordine spedito</span>
+          </div>
+          <div style="padding:8px;border-radius:8px;background:#1C1C20;display:flex;flex-direction:column;gap:5px;">
+            <div style="height:6px;width:70%;border-radius:3px;background:#2C2C31;"></div>
+            <div style="height:6px;width:45%;border-radius:3px;background:#26262B;"></div>
+          </div>
+        </div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ h.isDesign }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#111113;overflow:hidden;">
+        <div style="position:absolute;top:0;bottom:0;left:30%;border-left:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;top:0;bottom:0;right:30%;border-left:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;left:0;right:0;top:46%;border-top:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;left:30%;right:30%;top:calc(46% - 22px);height:44px;border:1px solid #FF5B14;border-radius:8px;background:#1C1C20;display:flex;align-items:center;justify-content:center;font-size:11px;color:#EDEBE6;">Inizia ora →</div>
+        <span style="position:absolute;left:calc(30% - 3px);top:calc(46% - 25px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;right:calc(30% - 4px);top:calc(46% - 25px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;left:calc(30% - 3px);top:calc(46% + 19px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;right:calc(30% - 4px);top:calc(46% + 19px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;left:50%;transform:translateX(-50%);top:calc(46% + 34px);padding:3px 7px;border-radius:4px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;">240 × 44</span>
+      </div>
+              </sc-if>
+              <sc-if value="{{ h.isDevops }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:7px;font-size:12px;line-height:1.4;">
+        <span style="color:#8F8C85;">$ <span style="color:#EDEBE6;">git push origin main</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> build       38s</span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> test        124 passed</span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">→</span> deploy prod<span style="animation:cursorBlink 1s step-start infinite;color:#FF5B14;">_</span></span>
+        <div style="margin-top:auto;height:4px;border-radius:4px;background:#222226;overflow:hidden;"><div style="height:100%;width:86%;background:#FF5B14;animation:bar 3s ease-out infinite;"></div></div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ h.isAi }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;font-size:12px;line-height:1.5;">
+        <span style="color:#EDEBE6;"><span style="color:#8F8C85;">&gt;</span> riassumi le richieste di oggi e aggiorna il CRM</span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">●</span> read inbox <span style="color:#8F8C85;">12</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">●</span> call crm.update <span style="color:#8F8C85;">3</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> fatto in 18s<span style="color:#FF5B14;animation:cursorBlink 1s step-start infinite;">_</span></span>
+      </div>
+              </sc-if>
+              <sc-if value="{{ h.isFormazione }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:6px;font-size:12px;line-height:1.4;">
+        <div style="display:grid;grid-template-columns:40px 1fr;color:#8F8C85;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">1</span><span>// perché funziona?</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">2</span><span><span style="color:#FF8A57;">const</span> total = items</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;background:#1F1712;border-left:2px solid #FF5B14;"><span style="text-align:right;padding-right:12px;color:#FF5B14;">3</span><span>  .reduce((a, i) =&gt; a + i.price, 0)</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">4</span><span style="color:#8F8C85;">  ;</span></div>
+        <div style="position:absolute;right:20px;bottom:20px;max-width:170px;padding:9px 11px;border-radius:8px;border:1px solid #2C2C31;background:#18181B;font-size:10px;line-height:1.5;color:#BDBAB2;"><span style="color:#FF5B14;">a</span> parte da 0 e accumula ogni prezzo</div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ h.isConsulenza }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:2px;font-size:12px;line-height:1.7;">
+        <div style="padding:0 20px;color:#8F8C85;">src/api/orders.js</div>
+        <div style="padding:0 20px;background:#2A1414;color:#E58A8A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">- fetch(url).then(r =&gt; r.json())</div>
+        <div style="padding:0 20px;background:#122418;color:#7FD6A0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">+ await api.get(url, { retry: 3 })</div>
+        <div style="margin:auto 20px 20px;display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:8px;border:1px solid #2C2C31;background:#18181B;">
+          <span style="flex:0 0 20px;height:20px;border-radius:20px;background:#FF5B14;color:#111113;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;">lfr</span>
+          <span style="font-size:11px;line-height:1.5;color:#BDBAB2;">Gestiamo anche il timeout, qui si blocca tutto.</span>
+        </div>
+      </div>
+              </sc-if></div>
+            <div style="padding:20px 24px;border-top:1px solid #222226;font-size:16px;font-weight:700;">{{ h.title }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="2b" style="flex:none;width:1200px;display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;align-items:center;gap:12px;"><span style="padding:4px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:12px;font-weight:800;">2b</span><span style="font-size:13px;color:#8F8C85;">menu di installazione · scegli e vai al form</span></div>
+      <div style="background:#111113;border:1px solid #222226;border-radius:20px;padding:96px 40px;">
+        <p style="margin:0 0 16px;font-size:13px;color:#FF5B14;">01 / servizi</p>
+        <h2 style="margin:0 0 56px;font-size:44px;font-weight:800;letter-spacing:-0.03em;">Cosa posso fare per te?<span aria-hidden="true" style="display:inline-block;width:0.5em;height:0.09em;margin-left:0.1em;background:#FF5B14;animation:cursorBlink 1s step-start infinite;"></span></h2>
+        <div style="border:1px solid #26262B;border-radius:16px;background:#0C0C0E;overflow:hidden;">
+          <div style="display:flex;align-items:center;gap:6px;padding:12px 16px;border-bottom:1px solid #222226;background:#18181B;font-size:12px;color:#8F8C85;"><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="margin-left:8px;"><span style="color:#5BD48A;">$</span> npx create-progetto</span></div>
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);">
+            <div style="padding:32px;display:flex;flex-direction:column;gap:4px;font-size:15px;border-right:1px solid #222226;">
+              <span style="margin-bottom:6px;"><span style="color:#5BD48A;">?</span> <span style="color:#EDEBE6;font-weight:700;">Di cosa hai bisogno?</span></span>
+              <span style="margin-bottom:14px;font-size:12px;color:#5A5852;">clicca per selezionare · anche più di uno</span>
+              <sc-for list="{{ inst }}" as="o" hint-placeholder-count="7">
+                <button type="button" onClick="{{ o.toggle }}" onMouseEnter="{{ o.focus }}" style="display:flex;align-items:center;gap:12px;min-height:44px;padding:0 12px;border:0;border-radius:8px;background:{{ o.bg }};font-family:inherit;font-size:15px;text-align:left;cursor:pointer;color:{{ o.color }};">
+                  <span style="width:14px;color:#FF5B14;">{{ o.caret }}</span><span style="color:{{ o.boxColor }};">{{ o.box }}</span><span>{{ o.title }}</span>
+                </button>
+              </sc-for>
+              <div style="margin-top:20px;padding-top:20px;border-top:1px solid #222226;display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:13px;">
+                <span style="color:{{ instSumColor }};">{{ instSum }}</span>
+                <a href="Contact Dual Engine.dc.html" style="padding:12px 18px;border-radius:10px;background:{{ instBtnBg }};color:{{ instBtnColor }};font-weight:700;" style-hover="color:#111113;">continua ↵</a>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;">
+              <div style="height:280px;display:flex;flex-direction:column;border-bottom:1px solid #222226;"><sc-if value="{{ ins.isWeb }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#111113;background-image:radial-gradient(#26262B 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;">
+        <div style="width:100%;max-width:260px;border:1px solid #2C2C31;border-radius:10px;background:#18181B;overflow:hidden;">
+          <div style="display:flex;align-items:center;gap:6px;padding:8px 10px;border-bottom:1px solid #26262B;">
+            <span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span><span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span><span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span>
+            <span style="flex:1;margin-left:6px;padding:3px 8px;border-radius:5px;background:#111113;font-size:10px;color:#8F8C85;">lfr.dev/app/checkout</span>
+          </div>
+          <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
+            <div style="height:8px;width:60%;border-radius:3px;background:#2C2C31;"></div>
+            <div style="height:8px;width:85%;border-radius:3px;background:#222226;"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+              <span style="font-size:11px;color:#BDBAB2;">€ 49,00 / mese</span>
+              <span style="padding:6px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;">Paga ✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ ins.isMobile }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#111113;background-image:radial-gradient(#26262B 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;">
+        <div style="width:130px;height:176px;border:6px solid #2C2C31;border-bottom:0;border-radius:24px 24px 0 0;background:#18181B;padding:18px 10px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;">
+          <div style="align-self:center;width:36px;height:4px;border-radius:4px;background:#2C2C31;margin-bottom:6px;"></div>
+          <div style="padding:8px;border-radius:8px;background:#222226;border-left:0;display:flex;flex-direction:column;gap:4px;">
+            <span style="font-size:9px;color:#FF5B14;">push · ora</span>
+            <span style="font-size:10px;color:#EDEBE6;">Ordine spedito</span>
+          </div>
+          <div style="padding:8px;border-radius:8px;background:#1C1C20;display:flex;flex-direction:column;gap:5px;">
+            <div style="height:6px;width:70%;border-radius:3px;background:#2C2C31;"></div>
+            <div style="height:6px;width:45%;border-radius:3px;background:#26262B;"></div>
+          </div>
+        </div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ ins.isDesign }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#111113;overflow:hidden;">
+        <div style="position:absolute;top:0;bottom:0;left:30%;border-left:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;top:0;bottom:0;right:30%;border-left:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;left:0;right:0;top:46%;border-top:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;left:30%;right:30%;top:calc(46% - 22px);height:44px;border:1px solid #FF5B14;border-radius:8px;background:#1C1C20;display:flex;align-items:center;justify-content:center;font-size:11px;color:#EDEBE6;">Inizia ora →</div>
+        <span style="position:absolute;left:calc(30% - 3px);top:calc(46% - 25px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;right:calc(30% - 4px);top:calc(46% - 25px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;left:calc(30% - 3px);top:calc(46% + 19px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;right:calc(30% - 4px);top:calc(46% + 19px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;left:50%;transform:translateX(-50%);top:calc(46% + 34px);padding:3px 7px;border-radius:4px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;">240 × 44</span>
+      </div>
+              </sc-if>
+              <sc-if value="{{ ins.isDevops }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:7px;font-size:12px;line-height:1.4;">
+        <span style="color:#8F8C85;">$ <span style="color:#EDEBE6;">git push origin main</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> build       38s</span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> test        124 passed</span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">→</span> deploy prod<span style="animation:cursorBlink 1s step-start infinite;color:#FF5B14;">_</span></span>
+        <div style="margin-top:auto;height:4px;border-radius:4px;background:#222226;overflow:hidden;"><div style="height:100%;width:86%;background:#FF5B14;animation:bar 3s ease-out infinite;"></div></div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ ins.isAi }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;font-size:12px;line-height:1.5;">
+        <span style="color:#EDEBE6;"><span style="color:#8F8C85;">&gt;</span> riassumi le richieste di oggi e aggiorna il CRM</span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">●</span> read inbox <span style="color:#8F8C85;">12</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">●</span> call crm.update <span style="color:#8F8C85;">3</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> fatto in 18s<span style="color:#FF5B14;animation:cursorBlink 1s step-start infinite;">_</span></span>
+      </div>
+              </sc-if>
+              <sc-if value="{{ ins.isFormazione }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:6px;font-size:12px;line-height:1.4;">
+        <div style="display:grid;grid-template-columns:40px 1fr;color:#8F8C85;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">1</span><span>// perché funziona?</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">2</span><span><span style="color:#FF8A57;">const</span> total = items</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;background:#1F1712;border-left:2px solid #FF5B14;"><span style="text-align:right;padding-right:12px;color:#FF5B14;">3</span><span>  .reduce((a, i) =&gt; a + i.price, 0)</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">4</span><span style="color:#8F8C85;">  ;</span></div>
+        <div style="position:absolute;right:20px;bottom:20px;max-width:170px;padding:9px 11px;border-radius:8px;border:1px solid #2C2C31;background:#18181B;font-size:10px;line-height:1.5;color:#BDBAB2;"><span style="color:#FF5B14;">a</span> parte da 0 e accumula ogni prezzo</div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ ins.isConsulenza }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:2px;font-size:12px;line-height:1.7;">
+        <div style="padding:0 20px;color:#8F8C85;">src/api/orders.js</div>
+        <div style="padding:0 20px;background:#2A1414;color:#E58A8A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">- fetch(url).then(r =&gt; r.json())</div>
+        <div style="padding:0 20px;background:#122418;color:#7FD6A0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">+ await api.get(url, { retry: 3 })</div>
+        <div style="margin:auto 20px 20px;display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:8px;border:1px solid #2C2C31;background:#18181B;">
+          <span style="flex:0 0 20px;height:20px;border-radius:20px;background:#FF5B14;color:#111113;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;">lfr</span>
+          <span style="font-size:11px;line-height:1.5;color:#BDBAB2;">Gestiamo anche il timeout, qui si blocca tutto.</span>
+        </div>
+      </div>
+              </sc-if></div>
+              <div style="padding:28px 32px;display:flex;flex-direction:column;gap:10px;">
+                <span style="font-size:20px;font-weight:700;">{{ ins.title }}</span>
+                <span style="font-size:14px;line-height:1.7;color:#BDBAB2;text-wrap:pretty;">{{ ins.text }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="2c" style="flex:none;width:1200px;display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;align-items:center;gap:12px;"><span style="padding:4px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:12px;font-weight:800;">2c</span><span style="font-size:13px;color:#8F8C85;">htop · tutti i servizi a confronto</span></div>
+      <div style="background:#111113;border:1px solid #222226;border-radius:20px;padding:96px 40px;">
+        <p style="margin:0 0 16px;font-size:13px;color:#FF5B14;">01 / servizi</p>
+        <h2 style="margin:0 0 56px;font-size:44px;font-weight:800;letter-spacing:-0.03em;">Cosa posso fare per te?<span aria-hidden="true" style="display:inline-block;width:0.5em;height:0.09em;margin-left:0.1em;background:#FF5B14;animation:cursorBlink 1s step-start infinite;"></span></h2>
+        <div style="border:1px solid #26262B;border-radius:16px;background:#0C0C0E;overflow:hidden;font-size:13px;">
+          <div style="display:flex;align-items:center;gap:6px;padding:12px 16px;border-bottom:1px solid #222226;background:#18181B;font-size:12px;color:#8F8C85;"><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="width:9px;height:9px;border-radius:9px;background:#3A3A40;"></span><span style="margin-left:8px;"><span style="color:#5BD48A;">$</span> htop --servizi</span></div>
+          <div style="display:grid;grid-template-columns:56px minmax(0,1.1fr) minmax(0,2fr) minmax(0,0.8fr) minmax(0,1fr);gap:20px;padding:12px 24px;background:#FF5B14;color:#111113;font-size:11px;font-weight:800;letter-spacing:0.06em;"><span>PID</span><span>SERVIZIO</span><span>COSA OTTIENI</span><span>TEMPI</span><span>STACK</span></div>
+          <sc-for list="{{ top }}" as="r" hint-placeholder-count="7">
+            <div style="display:grid;grid-template-columns:56px minmax(0,1.1fr) minmax(0,2fr) minmax(0,0.8fr) minmax(0,1fr);gap:20px;align-items:baseline;padding:16px 24px;border-bottom:1px solid #1C1C20;color:#BDBAB2;" style-hover="background:#18181B;color:#EDEBE6;">
+              <span style="color:#5A5852;">{{ r.pid }}</span>
+              <span style="color:#EDEBE6;font-weight:700;">{{ r.title }}</span>
+              <span style="line-height:1.6;text-wrap:pretty;">{{ r.text }}</span>
+              <span style="color:#5BD48A;">{{ r.time }}</span>
+              <span style="color:#8F8C85;">{{ r.stack }}</span>
+            </div>
+          </sc-for>
+          <div style="display:flex;gap:20px;padding:10px 24px;font-size:11px;color:#8F8C85;"><span><span style="color:#111113;background:#8F8C85;padding:0 4px;">F1</span> aiuto</span><span><span style="color:#111113;background:#8F8C85;padding:0 4px;">F5</span> <a href="Contact Dual Engine.dc.html">parliamone</a></span><span style="margin-left:auto;">7 processi · 0 bloccati</span></div>
+        </div>
+      </div>
+    </div>
+    <div id="2d" style="flex:none;width:1200px;display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;align-items:center;gap:12px;"><span style="padding:4px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:12px;font-weight:800;">2d</span><span style="font-size:13px;color:#8F8C85;">pacchetti npm · card minimali</span></div>
+      <div style="background:#111113;border:1px solid #222226;border-radius:20px;padding:96px 40px;">
+        <p style="margin:0 0 16px;font-size:13px;color:#FF5B14;">01 / servizi</p>
+        <h2 style="margin:0 0 56px;font-size:44px;font-weight:800;letter-spacing:-0.03em;">Cosa posso fare per te?<span aria-hidden="true" style="display:inline-block;width:0.5em;height:0.09em;margin-left:0.1em;background:#FF5B14;animation:cursorBlink 1s step-start infinite;"></span></h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;">
+          <sc-for list="{{ pkgs }}" as="p" hint-placeholder-count="7">
+            <div style="display:flex;flex-direction:column;gap:14px;padding:24px;border:1px solid #26262B;border-radius:14px;background:#18181B;" style-hover="border-color:#FF5B14;">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:16px;font-weight:700;color:#EDEBE6;">@leica/<span style="color:#FF5B14;">{{ p.key }}</span></span><span style="font-size:11px;color:#5A5852;">v{{ p.ver }}</span></div>
+              <span style="font-size:14px;line-height:1.65;color:#BDBAB2;text-wrap:pretty;">{{ p.text }}</span>
+              <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                <sc-for list="{{ p.tags }}" as="t" hint-placeholder-count="3"><span style="padding:3px 8px;border-radius:5px;background:#222226;font-size:11px;color:#8F8C85;">{{ t }}</span></sc-for>
+              </div>
+              <button type="button" onClick="{{ p.copy }}" style="margin-top:auto;display:flex;justify-content:space-between;align-items:center;min-height:40px;padding:0 12px;border:1px solid #2C2C31;border-radius:8px;background:#0C0C0E;font-family:inherit;font-size:12px;color:#BDBAB2;cursor:pointer;" style-hover="border-color:#FF5B14;"><span><span style="color:#5BD48A;">$</span> npm i @leica/{{ p.key }}</span><span style="color:{{ p.cpColor }};">{{ p.cp }}</span></button>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="font-family:'JetBrains Mono',monospace;color:#EDEBE6;padding:64px;display:flex;flex-direction:column;gap:32px;">
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <span style="font-size:13px;color:#FF5B14;">turno 1 · sezione servizi, 3 layout</span>
+    <span style="font-size:13px;color:#8F8C85;max-width:720px;line-height:1.7;">Testi accorciati a 1–2 frasi (proposta, da rivedere). Stessi 7 visual in tutte e tre.</span>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start;">
+
+    <div id="1a" style="flex:none;width:1200px;display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;align-items:center;gap:12px;"><span style="padding:4px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:12px;font-weight:800;">1a</span><span style="font-size:13px;color:#8F8C85;">lista + un solo visual</span></div>
+      <div style="background:#111113;border:1px solid #222226;border-radius:20px;padding:96px 40px;">
+        <p style="margin:0 0 16px;font-size:13px;color:#FF5B14;">01 / servizi</p>
+        <h2 style="margin:0 0 56px;font-size:44px;font-weight:800;letter-spacing:-0.03em;">Cosa posso fare per te?<span aria-hidden="true" style="display:inline-block;width:0.5em;height:0.09em;margin-left:0.1em;background:#FF5B14;animation:cursorBlink 1s step-start infinite;"></span></h2>
+        <div style="display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);gap:48px;align-items:start;">
+          <div style="display:flex;flex-direction:column;border-top:1px solid #26262B;">
+            <sc-for list="{{ list1 }}" as="it" hint-placeholder-count="7">
+              <button type="button" onMouseEnter="{{ it.pick }}" onClick="{{ it.pick }}" style="display:grid;grid-template-columns:40px minmax(0,1fr) 20px;align-items:center;gap:12px;min-height:64px;padding:0 16px;border:0;border-bottom:1px solid #26262B;background:{{ it.bg }};color:{{ it.color }};font-family:inherit;font-size:18px;font-weight:700;text-align:left;cursor:pointer;transition:background .2s,color .2s;">
+                <span style="font-size:12px;font-weight:500;color:{{ it.numColor }};">{{ it.num }}</span>
+                <span>{{ it.title }}</span>
+                <span style="color:#FF5B14;opacity:{{ it.arrow }};transition:opacity .2s;">→</span>
+              </button>
+            </sc-for>
+          </div>
+          <div style="position:sticky;top:24px;border:1px solid #26262B;border-radius:16px;background:#18181B;overflow:hidden;">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #222226;font-size:12px;color:#8F8C85;"><span>~/servizi/{{ s1.key }}</span><span>{{ s1.num }} / 07</span></div>
+            <div style="height:300px;display:flex;flex-direction:column;"><sc-if value="{{ s1.isWeb }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#111113;background-image:radial-gradient(#26262B 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;">
+        <div style="width:100%;max-width:260px;border:1px solid #2C2C31;border-radius:10px;background:#18181B;overflow:hidden;">
+          <div style="display:flex;align-items:center;gap:6px;padding:8px 10px;border-bottom:1px solid #26262B;">
+            <span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span><span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span><span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span>
+            <span style="flex:1;margin-left:6px;padding:3px 8px;border-radius:5px;background:#111113;font-size:10px;color:#8F8C85;">lfr.dev/app/checkout</span>
+          </div>
+          <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
+            <div style="height:8px;width:60%;border-radius:3px;background:#2C2C31;"></div>
+            <div style="height:8px;width:85%;border-radius:3px;background:#222226;"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+              <span style="font-size:11px;color:#BDBAB2;">€ 49,00 / mese</span>
+              <span style="padding:6px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;">Paga ✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ s1.isMobile }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#111113;background-image:radial-gradient(#26262B 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;">
+        <div style="width:130px;height:176px;border:6px solid #2C2C31;border-bottom:0;border-radius:24px 24px 0 0;background:#18181B;padding:18px 10px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;">
+          <div style="align-self:center;width:36px;height:4px;border-radius:4px;background:#2C2C31;margin-bottom:6px;"></div>
+          <div style="padding:8px;border-radius:8px;background:#222226;border-left:0;display:flex;flex-direction:column;gap:4px;">
+            <span style="font-size:9px;color:#FF5B14;">push · ora</span>
+            <span style="font-size:10px;color:#EDEBE6;">Ordine spedito</span>
+          </div>
+          <div style="padding:8px;border-radius:8px;background:#1C1C20;display:flex;flex-direction:column;gap:5px;">
+            <div style="height:6px;width:70%;border-radius:3px;background:#2C2C31;"></div>
+            <div style="height:6px;width:45%;border-radius:3px;background:#26262B;"></div>
+          </div>
+        </div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ s1.isDesign }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#111113;overflow:hidden;">
+        <div style="position:absolute;top:0;bottom:0;left:30%;border-left:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;top:0;bottom:0;right:30%;border-left:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;left:0;right:0;top:46%;border-top:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;left:30%;right:30%;top:calc(46% - 22px);height:44px;border:1px solid #FF5B14;border-radius:8px;background:#1C1C20;display:flex;align-items:center;justify-content:center;font-size:11px;color:#EDEBE6;">Inizia ora →</div>
+        <span style="position:absolute;left:calc(30% - 3px);top:calc(46% - 25px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;right:calc(30% - 4px);top:calc(46% - 25px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;left:calc(30% - 3px);top:calc(46% + 19px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;right:calc(30% - 4px);top:calc(46% + 19px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;left:50%;transform:translateX(-50%);top:calc(46% + 34px);padding:3px 7px;border-radius:4px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;">240 × 44</span>
+      </div>
+              </sc-if>
+              <sc-if value="{{ s1.isDevops }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:7px;font-size:12px;line-height:1.4;">
+        <span style="color:#8F8C85;">$ <span style="color:#EDEBE6;">git push origin main</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> build       38s</span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> test        124 passed</span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">→</span> deploy prod<span style="animation:cursorBlink 1s step-start infinite;color:#FF5B14;">_</span></span>
+        <div style="margin-top:auto;height:4px;border-radius:4px;background:#222226;overflow:hidden;"><div style="height:100%;width:86%;background:#FF5B14;animation:bar 3s ease-out infinite;"></div></div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ s1.isAi }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;font-size:12px;line-height:1.5;">
+        <span style="color:#EDEBE6;"><span style="color:#8F8C85;">&gt;</span> riassumi le richieste di oggi e aggiorna il CRM</span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">●</span> read inbox <span style="color:#8F8C85;">12</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">●</span> call crm.update <span style="color:#8F8C85;">3</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> fatto in 18s<span style="color:#FF5B14;animation:cursorBlink 1s step-start infinite;">_</span></span>
+      </div>
+              </sc-if>
+              <sc-if value="{{ s1.isFormazione }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:6px;font-size:12px;line-height:1.4;">
+        <div style="display:grid;grid-template-columns:40px 1fr;color:#8F8C85;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">1</span><span>// perché funziona?</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">2</span><span><span style="color:#FF8A57;">const</span> total = items</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;background:#1F1712;border-left:2px solid #FF5B14;"><span style="text-align:right;padding-right:12px;color:#FF5B14;">3</span><span>  .reduce((a, i) =&gt; a + i.price, 0)</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">4</span><span style="color:#8F8C85;">  ;</span></div>
+        <div style="position:absolute;right:20px;bottom:20px;max-width:170px;padding:9px 11px;border-radius:8px;border:1px solid #2C2C31;background:#18181B;font-size:10px;line-height:1.5;color:#BDBAB2;"><span style="color:#FF5B14;">a</span> parte da 0 e accumula ogni prezzo</div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ s1.isConsulenza }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:2px;font-size:12px;line-height:1.7;">
+        <div style="padding:0 20px;color:#8F8C85;">src/api/orders.js</div>
+        <div style="padding:0 20px;background:#2A1414;color:#E58A8A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">- fetch(url).then(r =&gt; r.json())</div>
+        <div style="padding:0 20px;background:#122418;color:#7FD6A0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">+ await api.get(url, { retry: 3 })</div>
+        <div style="margin:auto 20px 20px;display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:8px;border:1px solid #2C2C31;background:#18181B;">
+          <span style="flex:0 0 20px;height:20px;border-radius:20px;background:#FF5B14;color:#111113;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;">lfr</span>
+          <span style="font-size:11px;line-height:1.5;color:#BDBAB2;">Gestiamo anche il timeout, qui si blocca tutto.</span>
+        </div>
+      </div>
+              </sc-if></div>
+            <div style="padding:28px;border-top:1px solid #222226;display:flex;flex-direction:column;gap:10px;min-height:120px;box-sizing:border-box;">
+              <span style="font-size:20px;font-weight:700;">{{ s1.title }}</span>
+              <span style="font-size:14px;line-height:1.7;color:#BDBAB2;text-wrap:pretty;">{{ s1.text }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="1b" style="flex:none;width:1200px;display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;align-items:center;gap:12px;"><span style="padding:4px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:12px;font-weight:800;">1b</span><span style="font-size:13px;color:#8F8C85;">card compatte · testo al passaggio del mouse</span></div>
+      <div style="background:#111113;border:1px solid #222226;border-radius:20px;padding:96px 40px;">
+        <p style="margin:0 0 16px;font-size:13px;color:#FF5B14;">01 / servizi</p>
+        <h2 style="margin:0 0 56px;font-size:44px;font-weight:800;letter-spacing:-0.03em;">Cosa posso fare per te?<span aria-hidden="true" style="display:inline-block;width:0.5em;height:0.09em;margin-left:0.1em;background:#FF5B14;animation:cursorBlink 1s step-start infinite;"></span></h2>
+        <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;">
+          <sc-for list="{{ cards2 }}" as="c" hint-placeholder-count="7">
+            <div onMouseEnter="{{ c.open }}" onMouseLeave="{{ c.close }}" style="grid-column:{{ c.span }};position:relative;display:flex;flex-direction:column;border:1px solid {{ c.border }};border-radius:16px;background:#18181B;overflow:hidden;transition:border-color .2s;">
+              <div style="height:200px;display:flex;flex-direction:column;"><sc-if value="{{ c.isWeb }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#111113;background-image:radial-gradient(#26262B 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;">
+        <div style="width:100%;max-width:260px;border:1px solid #2C2C31;border-radius:10px;background:#18181B;overflow:hidden;">
+          <div style="display:flex;align-items:center;gap:6px;padding:8px 10px;border-bottom:1px solid #26262B;">
+            <span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span><span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span><span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span>
+            <span style="flex:1;margin-left:6px;padding:3px 8px;border-radius:5px;background:#111113;font-size:10px;color:#8F8C85;">lfr.dev/app/checkout</span>
+          </div>
+          <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
+            <div style="height:8px;width:60%;border-radius:3px;background:#2C2C31;"></div>
+            <div style="height:8px;width:85%;border-radius:3px;background:#222226;"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+              <span style="font-size:11px;color:#BDBAB2;">€ 49,00 / mese</span>
+              <span style="padding:6px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;">Paga ✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ c.isMobile }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#111113;background-image:radial-gradient(#26262B 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;">
+        <div style="width:130px;height:176px;border:6px solid #2C2C31;border-bottom:0;border-radius:24px 24px 0 0;background:#18181B;padding:18px 10px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;">
+          <div style="align-self:center;width:36px;height:4px;border-radius:4px;background:#2C2C31;margin-bottom:6px;"></div>
+          <div style="padding:8px;border-radius:8px;background:#222226;border-left:0;display:flex;flex-direction:column;gap:4px;">
+            <span style="font-size:9px;color:#FF5B14;">push · ora</span>
+            <span style="font-size:10px;color:#EDEBE6;">Ordine spedito</span>
+          </div>
+          <div style="padding:8px;border-radius:8px;background:#1C1C20;display:flex;flex-direction:column;gap:5px;">
+            <div style="height:6px;width:70%;border-radius:3px;background:#2C2C31;"></div>
+            <div style="height:6px;width:45%;border-radius:3px;background:#26262B;"></div>
+          </div>
+        </div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ c.isDesign }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#111113;overflow:hidden;">
+        <div style="position:absolute;top:0;bottom:0;left:30%;border-left:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;top:0;bottom:0;right:30%;border-left:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;left:0;right:0;top:46%;border-top:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;left:30%;right:30%;top:calc(46% - 22px);height:44px;border:1px solid #FF5B14;border-radius:8px;background:#1C1C20;display:flex;align-items:center;justify-content:center;font-size:11px;color:#EDEBE6;">Inizia ora →</div>
+        <span style="position:absolute;left:calc(30% - 3px);top:calc(46% - 25px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;right:calc(30% - 4px);top:calc(46% - 25px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;left:calc(30% - 3px);top:calc(46% + 19px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;right:calc(30% - 4px);top:calc(46% + 19px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;left:50%;transform:translateX(-50%);top:calc(46% + 34px);padding:3px 7px;border-radius:4px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;">240 × 44</span>
+      </div>
+              </sc-if>
+              <sc-if value="{{ c.isDevops }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:7px;font-size:12px;line-height:1.4;">
+        <span style="color:#8F8C85;">$ <span style="color:#EDEBE6;">git push origin main</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> build       38s</span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> test        124 passed</span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">→</span> deploy prod<span style="animation:cursorBlink 1s step-start infinite;color:#FF5B14;">_</span></span>
+        <div style="margin-top:auto;height:4px;border-radius:4px;background:#222226;overflow:hidden;"><div style="height:100%;width:86%;background:#FF5B14;animation:bar 3s ease-out infinite;"></div></div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ c.isAi }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;font-size:12px;line-height:1.5;">
+        <span style="color:#EDEBE6;"><span style="color:#8F8C85;">&gt;</span> riassumi le richieste di oggi e aggiorna il CRM</span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">●</span> read inbox <span style="color:#8F8C85;">12</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">●</span> call crm.update <span style="color:#8F8C85;">3</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> fatto in 18s<span style="color:#FF5B14;animation:cursorBlink 1s step-start infinite;">_</span></span>
+      </div>
+              </sc-if>
+              <sc-if value="{{ c.isFormazione }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:6px;font-size:12px;line-height:1.4;">
+        <div style="display:grid;grid-template-columns:40px 1fr;color:#8F8C85;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">1</span><span>// perché funziona?</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">2</span><span><span style="color:#FF8A57;">const</span> total = items</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;background:#1F1712;border-left:2px solid #FF5B14;"><span style="text-align:right;padding-right:12px;color:#FF5B14;">3</span><span>  .reduce((a, i) =&gt; a + i.price, 0)</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">4</span><span style="color:#8F8C85;">  ;</span></div>
+        <div style="position:absolute;right:20px;bottom:20px;max-width:170px;padding:9px 11px;border-radius:8px;border:1px solid #2C2C31;background:#18181B;font-size:10px;line-height:1.5;color:#BDBAB2;"><span style="color:#FF5B14;">a</span> parte da 0 e accumula ogni prezzo</div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ c.isConsulenza }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:2px;font-size:12px;line-height:1.7;">
+        <div style="padding:0 20px;color:#8F8C85;">src/api/orders.js</div>
+        <div style="padding:0 20px;background:#2A1414;color:#E58A8A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">- fetch(url).then(r =&gt; r.json())</div>
+        <div style="padding:0 20px;background:#122418;color:#7FD6A0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">+ await api.get(url, { retry: 3 })</div>
+        <div style="margin:auto 20px 20px;display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:8px;border:1px solid #2C2C31;background:#18181B;">
+          <span style="flex:0 0 20px;height:20px;border-radius:20px;background:#FF5B14;color:#111113;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;">lfr</span>
+          <span style="font-size:11px;line-height:1.5;color:#BDBAB2;">Gestiamo anche il timeout, qui si blocca tutto.</span>
+        </div>
+      </div>
+              </sc-if></div>
+              <div style="display:flex;align-items:center;gap:12px;padding:18px 20px;border-top:1px solid #222226;">
+                <span style="font-size:11px;color:#8F8C85;">{{ c.num }}</span>
+                <span style="flex:1;font-size:15px;font-weight:700;">{{ c.title }}</span>
+                <span style="font-size:16px;color:#FF5B14;">{{ c.sign }}</span>
+              </div>
+              <div style="position:absolute;left:0;right:0;top:0;height:200px;box-sizing:border-box;padding:24px;display:flex;align-items:flex-end;background:linear-gradient(to top,rgba(17,17,19,0.97) 55%,rgba(17,17,19,0.6));opacity:{{ c.textOp }};transform:{{ c.textY }};transition:opacity .25s,transform .25s;pointer-events:none;">
+                <span style="font-size:13px;line-height:1.7;color:#EDEBE6;text-wrap:pretty;">{{ c.text }}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <div id="1c" style="flex:none;width:1200px;display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;align-items:center;gap:12px;"><span style="padding:4px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:12px;font-weight:800;">1c</span><span style="font-size:13px;color:#8F8C85;">tab come un editor</span></div>
+      <div style="background:#111113;border:1px solid #222226;border-radius:20px;padding:96px 40px;">
+        <p style="margin:0 0 16px;font-size:13px;color:#FF5B14;">01 / servizi</p>
+        <h2 style="margin:0 0 56px;font-size:44px;font-weight:800;letter-spacing:-0.03em;">Cosa posso fare per te?<span aria-hidden="true" style="display:inline-block;width:0.5em;height:0.09em;margin-left:0.1em;background:#FF5B14;animation:cursorBlink 1s step-start infinite;"></span></h2>
+        <div style="border:1px solid #26262B;border-radius:16px;background:#0C0C0E;overflow:hidden;">
+          <div style="display:flex;overflow-x:auto;border-bottom:1px solid #222226;background:#18181B;">
+            <sc-for list="{{ tabs3 }}" as="tb" hint-placeholder-count="7">
+              <button type="button" onClick="{{ tb.pick }}" style="flex:none;display:flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-right:1px solid #222226;border-top:2px solid {{ tb.top }};background:{{ tb.bg }};color:{{ tb.color }};font-family:inherit;font-size:12px;cursor:pointer;" style-hover="color:#EDEBE6;"><span style="color:{{ tb.dot }};">●</span>{{ tb.file }}</button>
+            </sc-for>
+          </div>
+          <div style="display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);min-height:340px;">
+            <div style="display:flex;flex-direction:column;border-right:1px solid #222226;"><sc-if value="{{ s3.isWeb }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#111113;background-image:radial-gradient(#26262B 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;">
+        <div style="width:100%;max-width:260px;border:1px solid #2C2C31;border-radius:10px;background:#18181B;overflow:hidden;">
+          <div style="display:flex;align-items:center;gap:6px;padding:8px 10px;border-bottom:1px solid #26262B;">
+            <span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span><span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span><span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span>
+            <span style="flex:1;margin-left:6px;padding:3px 8px;border-radius:5px;background:#111113;font-size:10px;color:#8F8C85;">lfr.dev/app/checkout</span>
+          </div>
+          <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
+            <div style="height:8px;width:60%;border-radius:3px;background:#2C2C31;"></div>
+            <div style="height:8px;width:85%;border-radius:3px;background:#222226;"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+              <span style="font-size:11px;color:#BDBAB2;">€ 49,00 / mese</span>
+              <span style="padding:6px 10px;border-radius:6px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;">Paga ✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ s3.isMobile }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#111113;background-image:radial-gradient(#26262B 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;">
+        <div style="width:130px;height:176px;border:6px solid #2C2C31;border-bottom:0;border-radius:24px 24px 0 0;background:#18181B;padding:18px 10px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;">
+          <div style="align-self:center;width:36px;height:4px;border-radius:4px;background:#2C2C31;margin-bottom:6px;"></div>
+          <div style="padding:8px;border-radius:8px;background:#222226;border-left:0;display:flex;flex-direction:column;gap:4px;">
+            <span style="font-size:9px;color:#FF5B14;">push · ora</span>
+            <span style="font-size:10px;color:#EDEBE6;">Ordine spedito</span>
+          </div>
+          <div style="padding:8px;border-radius:8px;background:#1C1C20;display:flex;flex-direction:column;gap:5px;">
+            <div style="height:6px;width:70%;border-radius:3px;background:#2C2C31;"></div>
+            <div style="height:6px;width:45%;border-radius:3px;background:#26262B;"></div>
+          </div>
+        </div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ s3.isDesign }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#111113;overflow:hidden;">
+        <div style="position:absolute;top:0;bottom:0;left:30%;border-left:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;top:0;bottom:0;right:30%;border-left:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;left:0;right:0;top:46%;border-top:1px dashed #3A2A22;"></div>
+        <div style="position:absolute;left:30%;right:30%;top:calc(46% - 22px);height:44px;border:1px solid #FF5B14;border-radius:8px;background:#1C1C20;display:flex;align-items:center;justify-content:center;font-size:11px;color:#EDEBE6;">Inizia ora →</div>
+        <span style="position:absolute;left:calc(30% - 3px);top:calc(46% - 25px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;right:calc(30% - 4px);top:calc(46% - 25px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;left:calc(30% - 3px);top:calc(46% + 19px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;right:calc(30% - 4px);top:calc(46% + 19px);width:6px;height:6px;background:#111113;border:1px solid #FF5B14;"></span>
+        <span style="position:absolute;left:50%;transform:translateX(-50%);top:calc(46% + 34px);padding:3px 7px;border-radius:4px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;">240 × 44</span>
+      </div>
+              </sc-if>
+              <sc-if value="{{ s3.isDevops }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:7px;font-size:12px;line-height:1.4;">
+        <span style="color:#8F8C85;">$ <span style="color:#EDEBE6;">git push origin main</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> build       38s</span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> test        124 passed</span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">→</span> deploy prod<span style="animation:cursorBlink 1s step-start infinite;color:#FF5B14;">_</span></span>
+        <div style="margin-top:auto;height:4px;border-radius:4px;background:#222226;overflow:hidden;"><div style="height:100%;width:86%;background:#FF5B14;animation:bar 3s ease-out infinite;"></div></div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ s3.isAi }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;font-size:12px;line-height:1.5;">
+        <span style="color:#EDEBE6;"><span style="color:#8F8C85;">&gt;</span> riassumi le richieste di oggi e aggiorna il CRM</span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">●</span> read inbox <span style="color:#8F8C85;">12</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">●</span> call crm.update <span style="color:#8F8C85;">3</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> fatto in 18s<span style="color:#FF5B14;animation:cursorBlink 1s step-start infinite;">_</span></span>
+      </div>
+              </sc-if>
+              <sc-if value="{{ s3.isFormazione }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:6px;font-size:12px;line-height:1.4;">
+        <div style="display:grid;grid-template-columns:40px 1fr;color:#8F8C85;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">1</span><span>// perché funziona?</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">2</span><span><span style="color:#FF8A57;">const</span> total = items</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;background:#1F1712;border-left:2px solid #FF5B14;"><span style="text-align:right;padding-right:12px;color:#FF5B14;">3</span><span>  .reduce((a, i) =&gt; a + i.price, 0)</span></div>
+        <div style="display:grid;grid-template-columns:40px 1fr;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">4</span><span style="color:#8F8C85;">  ;</span></div>
+        <div style="position:absolute;right:20px;bottom:20px;max-width:170px;padding:9px 11px;border-radius:8px;border:1px solid #2C2C31;background:#18181B;font-size:10px;line-height:1.5;color:#BDBAB2;"><span style="color:#FF5B14;">a</span> parte da 0 e accumula ogni prezzo</div>
+      </div>
+              </sc-if>
+              <sc-if value="{{ s3.isConsulenza }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:2px;font-size:12px;line-height:1.7;">
+        <div style="padding:0 20px;color:#8F8C85;">src/api/orders.js</div>
+        <div style="padding:0 20px;background:#2A1414;color:#E58A8A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">- fetch(url).then(r =&gt; r.json())</div>
+        <div style="padding:0 20px;background:#122418;color:#7FD6A0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">+ await api.get(url, { retry: 3 })</div>
+        <div style="margin:auto 20px 20px;display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:8px;border:1px solid #2C2C31;background:#18181B;">
+          <span style="flex:0 0 20px;height:20px;border-radius:20px;background:#FF5B14;color:#111113;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;">lfr</span>
+          <span style="font-size:11px;line-height:1.5;color:#BDBAB2;">Gestiamo anche il timeout, qui si blocca tutto.</span>
+        </div>
+      </div>
+              </sc-if></div>
+            <div style="padding:40px;display:flex;flex-direction:column;gap:16px;justify-content:center;">
+              <span style="font-size:12px;color:#8F8C85;">{{ s3.num }} / 07</span>
+              <span style="font-size:26px;font-weight:800;letter-spacing:-0.02em;">{{ s3.title }}</span>
+              <span style="font-size:15px;line-height:1.75;color:#BDBAB2;text-wrap:pretty;">{{ s3.text }}</span>
+              <a href="Contact Dual Engine.dc.html" style="margin-top:8px;font-size:13px;color:#FF5B14;" style-hover="color:#EDEBE6;">./parliamone →</a>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:6px 14px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;"><span>⎇ main · servizi/{{ s3.file }}</span><span>{{ s3.num }} / 07</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { s1: 'web', o2: null, s3: 'web', h: 'web', fi: 'web', sel: [], cp: null, agPhase: 'idle', agLog: [], agRec: [], agSel: [], agFi: null, agInput: '', agInF: false };
+  KW = { web: /sito|web|e-?commerce|shop|negozi|saas|landing|pagament|vetrina|portale|gestional/, mobile: /\bapp\b|mobile|ios|android|telefon|smartphone|prenotazion/, design: /design|\bui\b|\bux\b|grafic|interfacc|figma|restyling|usabil/, devops: /server|hosting|deploy|dominio|ssl|lent|cloud|docker|manutenz|e-?commerce|backup/, ai: /\bai\b|\bia\b|chatbot|automa|gpt|claude|agent|intelligenz|email|crm|document/, formazione: /cors|impar|mentor|formazion|insegn|team|junior|student/, consulenza: /consulen|parere|review|architett|stack|audit|riscriv|codice/ };
+  WHY = { web: 'sito / web app', mobile: 'app', design: 'interfaccia', devops: 'online e stabile', ai: 'automazione', formazione: 'imparare', consulenza: 'parere tecnico' };
+  agAsk = (text) => {
+    const q = (text || '').trim(); if (!q || this.state.agPhase === 'thinking') return;
+    (this.agT || []).forEach(clearTimeout); this.agT = [];
+    const low = q.toLowerCase();
+    let rec = Object.keys(this.KW).filter(k => this.KW[k].test(low));
+    const found = rec.length;
+    if (!found) rec = ['consulenza', 'web'];
+    const D = { u: (t) => ({ mark: '›', markColor: '#5A5852', text: t, color: '#EDEBE6', size: '14px' }), s: (t) => ({ mark: '⎿', markColor: '#3A3A40', text: t, color: '#8F8C85', size: '12px' }), a: (t) => ({ mark: '●', markColor: '#FF5B14', text: t, color: '#EDEBE6', size: '14px' }) };
+    this.setState({ agPhase: 'thinking', agLog: [D.u(q)], agRec: [], agSel: [], agFi: null, agInput: '' });
+    const steps = [D.s('analizzo la richiesta…'), D.s('confronto con 7 servizi'), D.s(found ? 'trovat' + (found === 1 ? 'o 1 servizio' : 'i ' + found + ' servizi') + ' adatti' : 'nessuna corrispondenza precisa')];
+    steps.forEach((st, i) => this.agT.push(setTimeout(() => this.setState(s => ({ agLog: [...s.agLog, st] })), 450 + i * 450)));
+    this.agT.push(setTimeout(() => this.setState(s => ({ agPhase: 'done', agRec: rec, agSel: rec, agFi: rec[0], agLog: [...s.agLog, D.a(found ? 'Per questo progetto ti consiglio:' : 'Non sono sicuro di aver capito: partirei da qui, poi ne parliamo.')] })), 450 + steps.length * 450 + 200));
+  };
+  componentWillUnmount() { (this.agT || []).forEach(clearTimeout); clearTimeout(this.cpT); }
+  renderVals() {
+    const D = [
+      ['web', 'Web Developer', "Siti, web app e SaaS su misura, dall'idea al lancio, integrazioni e pagamenti compresi."],
+      ['mobile', 'Mobile Developer', 'App native o cross-platform che i tuoi utenti continuano ad aprire.'],
+      ['design', 'UI / UX Designer', "Interfacce chiare che portano l'utente dove deve arrivare."],
+      ['devops', 'DevOps & Infrastruttura', 'Cloud, deploy automatici e monitoraggio. Finito vuol dire online e stabile, non "funziona sul mio computer".'],
+      ['ai', 'AI & Automazione', "Chatbot, estrazione dati e agenti integrati negli strumenti che usi già."],
+      ['formazione', 'Formazione / Mentoring', "Corsi e mentoring, anche sul lavoro con l'AI: capire il codice, non copiarlo."],
+      ['consulenza', 'Consulenza tecnica', 'Code review, architettura e scelta dello stack, con un parere esterno onesto.'],
+    ];
+    const flags = (k) => ({ isWeb: k === 'web', isMobile: k === 'mobile', isDesign: k === 'design', isDevops: k === 'devops', isAi: k === 'ai', isFormazione: k === 'formazione', isConsulenza: k === 'consulenza' });
+    const items = D.map(([key, title, text], i) => ({ key, title, text, num: String(i + 1).padStart(2, '0'), file: key + '.ts', ...flags(key) }));
+    const get = (k) => items.find(x => x.key === k);
+    const list1 = items.map(it => { const on = it.key === this.state.s1; return { ...it, pick: () => this.setState({ s1: it.key }), bg: on ? '#18181B' : 'transparent', color: on ? '#EDEBE6' : '#8F8C85', numColor: on ? '#FF5B14' : '#5A5852', arrow: on ? 1 : 0 }; });
+    const cards2 = items.map((it, i) => { const on = it.key === this.state.o2; return { ...it, span: i === 0 ? 'span 2' : 'span 1', open: () => this.setState({ o2: it.key }), close: () => this.setState({ o2: null }), border: on ? '#FF5B14' : '#26262B', sign: on ? '−' : '+', textOp: on ? 1 : 0, textY: on ? 'none' : 'translateY(8px)' }; });
+    const tabs3 = items.map(it => { const on = it.key === this.state.s3; return { ...it, pick: () => this.setState({ s3: it.key }), top: on ? '#FF5B14' : 'transparent', bg: on ? '#0C0C0E' : 'transparent', color: on ? '#EDEBE6' : '#8F8C85', dot: on ? '#FF5B14' : '#3A3A40' }; });
+    const help = items.map(it => { const on = it.key === this.state.h; return { ...it, pick: () => this.setState({ h: it.key }), bg: on ? '#18181B' : 'transparent', edge: on ? '#FF5B14' : 'transparent', flagColor: on ? '#FF5B14' : '#FF8A57', color: on ? '#EDEBE6' : '#BDBAB2' }; });
+    const sel = this.state.sel;
+    const inst = items.map(it => { const on = sel.includes(it.key), foc = it.key === this.state.fi; return { ...it, focus: () => this.setState({ fi: it.key }), toggle: () => this.setState(s => ({ fi: it.key, sel: s.sel.includes(it.key) ? s.sel.filter(x => x !== it.key) : [...s.sel, it.key] })), bg: foc ? '#18181B' : 'transparent', caret: foc ? '❯' : '', box: on ? '◉' : '◯', boxColor: on ? '#FF5B14' : '#5A5852', color: on || foc ? '#EDEBE6' : '#BDBAB2' }; });
+    const META = { web: ['2–8 settimane', 'Vue · Laravel', ['vue', 'laravel', 'stripe']], mobile: ['6–12 settimane', 'Ionic · Capacitor', ['ionic', 'capacitor', 'push']], design: ['1–4 settimane', 'Figma', ['figma', 'ux', 'prototipi']], devops: ['continuativo', 'Docker · Forge', ['docker', 'ci-cd', 'ssl']], ai: ['2–6 settimane', 'Claude · API', ['llm', 'agenti', 'rag']], formazione: ['su misura', 'JS · Vue · AI', ['corsi', 'mentoring', '1:1']], consulenza: ['1–5 giorni', 'qualsiasi', ['review', 'architettura', 'stack']] };
+    const top = items.map((it, i) => ({ ...it, pid: String(1001 + i), time: META[it.key][0], stack: META[it.key][1] }));
+    const pkgs = items.map((it, i) => { const on = this.state.cp === it.key; return { ...it, ver: '3.' + i + '.0', tags: META[it.key][2], copy: () => { try { navigator.clipboard.writeText('npm i @leica/' + it.key); } catch (e) {} this.setState({ cp: it.key }); clearTimeout(this.cpT); this.cpT = setTimeout(() => this.setState({ cp: null }), 1400); }, cp: on ? 'copiato ✓' : '⧉', cpColor: on ? '#5BD48A' : '#5A5852' }; });
+    const n = sel.length;
+    const agSel = this.state.agSel, agN = agSel.length;
+    const agRec = this.state.agRec.map(k => { const it = get(k), on = agSel.includes(k), foc = k === this.state.agFi; return { ...it, why: this.WHY[k], focus: () => this.setState({ agFi: k }), toggle: () => this.setState(s => ({ agFi: k, agSel: s.agSel.includes(k) ? s.agSel.filter(x => x !== k) : [...s.agSel, k] })), bg: foc ? '#18181B' : 'transparent', caret: foc ? '❯' : '', box: on ? '◉' : '◯', boxColor: on ? '#FF5B14' : '#5A5852', color: on || foc ? '#EDEBE6' : '#8F8C85' }; });
+    const agSuggT = ['un e-commerce con pagamenti', "un'app per le prenotazioni", "automatizzare email e CRM con l'AI", 'un parere sul mio codice'];
+    const agExtra = {
+      agLog: this.state.agLog, agDone: this.state.agPhase === 'done', agIdle: this.state.agPhase === 'idle', agRec,
+      agSugg: agSuggT.map(t => ({ text: t, ask: () => this.agAsk(t) })),
+      agInput: this.state.agInput, agOnInput: (e) => this.setState({ agInput: e.target.value }), agSubmit: (e) => { e.preventDefault(); this.agAsk(this.state.agInput); },
+      agFocusIn: () => this.setState({ agInF: true }), agFocusOut: () => this.setState({ agInF: false }), agInBorder: this.state.agInF ? '#FF5B14' : '#2C2C31',
+      agReset: () => { (this.agT || []).forEach(clearTimeout); this.setState({ agPhase: 'idle', agLog: [], agRec: [], agSel: [], agFi: null, agInput: '' }); },
+      agGo: () => { try { localStorage.setItem('lfr-cfg-prefill', JSON.stringify(agSel)); } catch (e) {} },
+      agSum: agN ? agN + ' selezionat' + (agN === 1 ? 'o' : 'i') + ' · li ritrovi nel form' : 'seleziona almeno un servizio',
+      agBtnBg: agN ? '#FF5B14' : '#222226', agBtnColor: agN ? '#111113' : '#8F8C85',
+      agHasFocus: !!this.state.agFi, agNoFocus: !this.state.agFi, ag: this.state.agFi ? get(this.state.agFi) : items[0],
+      agAll: items.map(it => { const hit = this.state.agPhase === 'thinking'; return { title: it.title, color: hit ? '#BDBAB2' : '#5A5852', dot: hit ? '#FF5B14' : '#2C2C31' }; }),
+    };
+    return { ...agExtra, help, h: get(this.state.h), inst, ins: get(this.state.fi), instSum: n ? '✓ ' + n + ' selezionat' + (n === 1 ? 'o' : 'i') + ' · li ritrovi nel form' : 'nessuna selezione', instSumColor: n ? '#5BD48A' : '#5A5852', instBtnBg: n ? '#FF5B14' : '#222226', instBtnColor: n ? '#111113' : '#8F8C85', top, pkgs,
+      list1, s1: get(this.state.s1), cards2, tabs3, s3: get(this.state.s3) };
+  }
+}
+</script>
+</body>
+</html>

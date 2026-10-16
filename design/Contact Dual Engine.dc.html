@@ -271,7 +271,8 @@ class Component extends DCLogic {
   toggleLangMenu = () => this.setState(s => ({ langOpen: !s.langOpen }));
   onDocClick = (e) => { if (this.state.langOpen && !e.target.closest('[data-lang-menu]')) this.setState({ langOpen: false }); };
   onKey = (e) => { if (e.key === 'Escape') this.setState({ langOpen: false }); };
-  componentDidMount() { document.addEventListener('click', this.onDocClick); document.addEventListener('keydown', this.onKey); }
+  applyPrefill = () => { try { const raw = localStorage.getItem('lfr-cfg-prefill'); if (!raw) return; localStorage.removeItem('lfr-cfg-prefill'); const M = { web: 'sito', mobile: 'app mobile', design: 'UI / UX', devops: 'DevOps', ai: 'AI', formazione: 'formazione', consulenza: 'consulenza' }; const tipo = [...new Set(JSON.parse(raw).map(k => M[k]).filter(Boolean))]; if (tipo.length) this.setState(s => ({ cfg: { ...(s.cfg || { budget: null, tempi: null }), tipo } })); } catch (e) {} };
+  componentDidMount() { this.applyPrefill(); document.addEventListener('click', this.onDocClick); document.addEventListener('keydown', this.onKey); }
 
   toggleMode = () => {
     if (this.state.booting) return;
@@ -298,7 +299,7 @@ class Component extends DCLogic {
     const langs = [['it','italiano'],['en','english'],['ro','română']].map(([code, name]) => ({ code, name, mark: code === lang ? '>' : '', color: code === lang ? '#EDEBE6' : '#BDBAB2', select: () => this.setLang(code) }));
     const cfg = this.state.cfg || { tipo: [], budget: null, tempi: null };
     const CG = [
-      { id: 'tipo', label: 'tipo di progetto · anche più di uno', multi: true, opts: ['sito', 'web app', 'app mobile', 'e-commerce', 'consulenza', 'formazione'] },
+      { id: 'tipo', label: 'tipo di progetto · anche più di uno', multi: true, opts: ['sito', 'web app', 'e-commerce', 'app mobile', 'UI / UX', 'DevOps', 'AI', 'consulenza', 'formazione'] },
       { id: 'budget', label: 'budget indicativo', opts: ['< 3k €', '3–10k €', '10–25k €', '25k+ €', 'da capire'] },
       { id: 'tempi', label: 'tempistiche', opts: ['urgente', '1–3 mesi', '3–6 mesi', 'flessibile'] },
     ];

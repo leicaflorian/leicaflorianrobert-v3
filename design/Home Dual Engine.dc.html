@@ -13,6 +13,7 @@
 <script src="./image-slot.js"></script>
 <style>
 @keyframes bar { 0%{width:8%} 70%,100%{width:86%} }
+@keyframes svIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
 @keyframes cfgLineIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
 @keyframes cursorBlink { 0%,50%{opacity:1} 51%,100%{opacity:0} }
 @keyframes pulseDot { 0%{box-shadow:0 0 0 0 rgba(255,91,20,.6)} 70%{box-shadow:0 0 0 8px rgba(255,91,20,0)} 100%{box-shadow:0 0 0 0 rgba(255,91,20,0)} }
@@ -25,11 +26,10 @@ a { color:#FF5B14; text-decoration:none; }
 a:hover { color:#FF8A52; }
 ::selection { background:#FF5B14; color:#111113; }
 @media (max-width: 640px) {
-  #n-services { display:flex !important; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:8px; }
-  #n-services > * { flex:0 0 84%; scroll-snap-align:start; }
 }
 @media (max-width: 1000px) { #n-path { display:none; } }
 #n-burger { display:none; }
+@media (max-width: 900px) { #n-agent { grid-template-columns:minmax(0,1fr) !important; } #n-agent-chat { border-right:0 !important; border-bottom:1px solid #222226; } }
 @media (max-width: 760px) { #n-right { display:none !important; } #n-burger { display:flex !important; } }
 @media (min-width: 761px) { #n-mobile { display:none !important; } }
 @media (max-width: 560px) { #n-nav { flex-wrap:wrap !important; } }
@@ -170,11 +170,51 @@ a:hover { color:#FF8A52; }
         <p style="margin:0 0 16px;font-size:13px;color:#FF5B14;">01 / servizi</p>
         <h2 style="margin:0 0 16px;font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-0.03em;">Cosa posso fare per te?<span aria-hidden="true" style="display:inline-block;width:0.5em;height:0.09em;margin-left:0.1em;background:#FF5B14;vertical-align:baseline;animation:cursorBlink 1s step-start infinite;"></span></h2>
         <p style="margin:0;color:#A3A09A;max-width:640px;line-height:1.8;font-size:15px;">Che tu abbia bisogno di un sito, un'app o un'interfaccia che non faccia scappare gli utenti, sei nel posto giusto anche tu. Ecco come posso aiutarti:</p>
-        <div id="n-services" style="margin-top:56px;display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
-          <sc-for list="{{ services }}" as="svc" hint-placeholder-count="6">
-            <div style="display:flex;flex-direction:column;border:1px solid #26262B;border-radius:16px;background:#18181B;overflow:hidden;transition:transform .5s cubic-bezier(.34,1.56,.64,1),border-color .2s;" style-hover="border-color:#FF5B14;transform:translateY(-6px);">
-              <sc-if value="{{ svc.isWeb }}" hint-placeholder-val="{{ false }}">
-      <div style="height:200px;flex:0 0 200px;background:#111113;background-image:radial-gradient(#26262B 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;">
+        <div id="n-services" style="margin-top:56px;border:1px solid #26262B;border-radius:16px;background:#0C0C0E;overflow:hidden;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid #222226;background:#18181B;font-size:12px;color:#8F8C85;">
+            <span style="display:flex;align-items:center;gap:10px;"><span style="display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:#FF5B14;color:#111113;font-size:9px;font-weight:800;">lfr</span><span style="color:#EDEBE6;">lfr agent</span><span>· v3</span></span>
+            <button type="button" onClick="{{ agReset }}" style="padding:4px 8px;border:1px solid #2C2C31;border-radius:6px;background:transparent;font-family:inherit;font-size:11px;color:#8F8C85;cursor:pointer;" style-hover="color:#EDEBE6;border-color:#3A3A40;">↺ ricomincia</button>
+          </div>
+          <div id="n-agent" style="display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);min-height:520px;">
+            <div id="n-agent-chat" style="display:flex;flex-direction:column;border-right:1px solid #222226;">
+              <div style="flex:1;padding:28px 32px;display:flex;flex-direction:column;gap:14px;font-size:14px;line-height:1.65;">
+                <div style="display:flex;gap:12px;"><span style="color:#FF5B14;">●</span><span style="color:#EDEBE6;">Ciao, sono l'assistente di Leica. Raccontami il progetto in una frase e ti dico come posso aiutarti.</span></div>
+                <sc-for list="{{ agLog }}" as="l" hint-placeholder-count="0">
+                  <div style="display:flex;gap:12px;animation:svIn .25s ease-out both;"><span style="flex:none;color:{{ l.markColor }};">{{ l.mark }}</span><span style="color:{{ l.color }};font-size:{{ l.size }};">{{ l.text }}</span></div>
+                </sc-for>
+                <sc-if value="{{ agDone }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;gap:4px;margin-left:24px;animation:svIn .3s ease-out both;">
+                    <sc-for list="{{ agRec }}" as="o" hint-placeholder-count="2">
+                      <button type="button" onClick="{{ o.toggle }}" onMouseEnter="{{ o.focus }}" style="display:flex;align-items:center;gap:12px;min-height:44px;padding:0 12px;border:0;border-radius:8px;background:{{ o.bg }};font-family:inherit;font-size:14px;text-align:left;cursor:pointer;color:{{ o.color }};">
+                        <span style="width:12px;color:#FF5B14;">{{ o.caret }}</span><span style="color:{{ o.boxColor }};">{{ o.box }}</span><span style="flex:1;">{{ o.title }}</span><span style="font-size:11px;color:#5A5852;">{{ o.why }}</span>
+                      </button>
+                    </sc-for>
+                    <div style="margin-top:12px;display:flex;align-items:center;gap:16px;">
+                      <a href="Contact Dual Engine.dc.html" onClick="{{ agGo }}" style="padding:12px 18px;border-radius:10px;background:{{ agBtnBg }};color:{{ agBtnColor }};font-size:13px;font-weight:700;" style-hover="color:#111113;">continua nel form ↵</a>
+                      <span style="font-size:12px;color:#8F8C85;">{{ agSum }}</span>
+                    </div>
+                  </div>
+                </sc-if>
+              </div>
+              <div style="padding:16px 32px 24px;border-top:1px solid #222226;display:flex;flex-direction:column;gap:12px;">
+                <sc-if value="{{ agIdle }}" hint-placeholder-val="{{ true }}">
+                  <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                    <sc-for list="{{ agSugg }}" as="g" hint-placeholder-count="4">
+                      <button type="button" onClick="{{ g.ask }}" style="padding:8px 12px;border:1px solid #2C2C31;border-radius:999px;background:transparent;font-family:inherit;font-size:12px;color:#BDBAB2;cursor:pointer;" style-hover="border-color:#FF5B14;color:#EDEBE6;">{{ g.text }}</button>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <form onSubmit="{{ agSubmit }}" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid {{ agInBorder }};border-radius:12px;background:#111113;transition:border-color .2s;">
+                  <span style="color:#FF5B14;font-weight:700;">›</span>
+                  <input type="text" value="{{ agInput }}" onChange="{{ agOnInput }}" onFocus="{{ agFocusIn }}" onBlur="{{ agFocusOut }}" placeholder="es. un e-commerce con pagamenti online" style="flex:1;min-width:0;border:0;background:transparent;outline:none;font-family:inherit;font-size:14px;color:#EDEBE6;"/>
+                  <button type="submit" style="padding:6px 10px;border:0;border-radius:6px;background:#222226;font-family:inherit;font-size:11px;color:#BDBAB2;cursor:pointer;" style-hover="background:#FF5B14;color:#111113;">invio ↵</button>
+                </form>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;">
+              <sc-if value="{{ agHasFocus }}" hint-placeholder-val="{{ false }}">
+                <div style="height:220px;display:flex;flex-direction:column;border-bottom:1px solid #222226;"><sc-if value="{{ ag.isWeb }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#111113;background-image:radial-gradient(#26262B 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;">
         <div style="width:100%;max-width:260px;border:1px solid #2C2C31;border-radius:10px;background:#18181B;overflow:hidden;">
           <div style="display:flex;align-items:center;gap:6px;padding:8px 10px;border-bottom:1px solid #26262B;">
             <span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span><span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span><span style="width:7px;height:7px;border-radius:9px;background:#3A3A40;"></span>
@@ -191,8 +231,8 @@ a:hover { color:#FF8A52; }
         </div>
       </div>
               </sc-if>
-              <sc-if value="{{ svc.isMobile }}" hint-placeholder-val="{{ false }}">
-      <div style="height:200px;flex:0 0 200px;background:#111113;background-image:radial-gradient(#26262B 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;">
+              <sc-if value="{{ ag.isMobile }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#111113;background-image:radial-gradient(#26262B 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;">
         <div style="width:130px;height:176px;border:6px solid #2C2C31;border-bottom:0;border-radius:24px 24px 0 0;background:#18181B;padding:18px 10px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;">
           <div style="align-self:center;width:36px;height:4px;border-radius:4px;background:#2C2C31;margin-bottom:6px;"></div>
           <div style="padding:8px;border-radius:8px;background:#222226;border-left:0;display:flex;flex-direction:column;gap:4px;">
@@ -206,8 +246,8 @@ a:hover { color:#FF8A52; }
         </div>
       </div>
               </sc-if>
-              <sc-if value="{{ svc.isDesign }}" hint-placeholder-val="{{ false }}">
-      <div style="position:relative;height:200px;flex:0 0 200px;background:#111113;overflow:hidden;">
+              <sc-if value="{{ ag.isDesign }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#111113;overflow:hidden;">
         <div style="position:absolute;top:0;bottom:0;left:30%;border-left:1px dashed #3A2A22;"></div>
         <div style="position:absolute;top:0;bottom:0;right:30%;border-left:1px dashed #3A2A22;"></div>
         <div style="position:absolute;left:0;right:0;top:46%;border-top:1px dashed #3A2A22;"></div>
@@ -219,8 +259,8 @@ a:hover { color:#FF8A52; }
         <span style="position:absolute;left:50%;transform:translateX(-50%);top:calc(46% + 34px);padding:3px 7px;border-radius:4px;background:#FF5B14;color:#111113;font-size:10px;font-weight:700;">240 × 44</span>
       </div>
               </sc-if>
-              <sc-if value="{{ svc.isDevops }}" hint-placeholder-val="{{ false }}">
-      <div style="height:200px;flex:0 0 200px;background:#0C0C0E;padding:22px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:7px;font-size:12px;line-height:1.4;">
+              <sc-if value="{{ ag.isDevops }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:7px;font-size:12px;line-height:1.4;">
         <span style="color:#8F8C85;">$ <span style="color:#EDEBE6;">git push origin main</span></span>
         <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> build       38s</span>
         <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> test        124 passed</span>
@@ -228,8 +268,16 @@ a:hover { color:#FF8A52; }
         <div style="margin-top:auto;height:4px;border-radius:4px;background:#222226;overflow:hidden;"><div style="height:100%;width:86%;background:#FF5B14;animation:bar 3s ease-out infinite;"></div></div>
       </div>
               </sc-if>
-              <sc-if value="{{ svc.isFormazione }}" hint-placeholder-val="{{ false }}">
-      <div style="position:relative;height:200px;flex:0 0 200px;background:#0C0C0E;padding:22px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:6px;font-size:12px;line-height:1.4;">
+              <sc-if value="{{ ag.isAi }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;font-size:12px;line-height:1.5;">
+        <span style="color:#EDEBE6;"><span style="color:#8F8C85;">&gt;</span> riassumi le richieste di oggi e aggiorna il CRM</span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">●</span> read inbox <span style="color:#8F8C85;">12</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#FF5B14;">●</span> call crm.update <span style="color:#8F8C85;">3</span></span>
+        <span style="color:#BDBAB2;"><span style="color:#5BD48A;">✓</span> fatto in 18s<span style="color:#FF5B14;animation:cursorBlink 1s step-start infinite;">_</span></span>
+      </div>
+              </sc-if>
+              <sc-if value="{{ ag.isFormazione }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:6px;font-size:12px;line-height:1.4;">
         <div style="display:grid;grid-template-columns:40px 1fr;color:#8F8C85;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">1</span><span>// perché funziona?</span></div>
         <div style="display:grid;grid-template-columns:40px 1fr;"><span style="text-align:right;padding-right:14px;color:#3A3A40;">2</span><span><span style="color:#FF8A57;">const</span> total = items</span></div>
         <div style="display:grid;grid-template-columns:40px 1fr;background:#1F1712;border-left:2px solid #FF5B14;"><span style="text-align:right;padding-right:12px;color:#FF5B14;">3</span><span>  .reduce((a, i) =&gt; a + i.price, 0)</span></div>
@@ -237,27 +285,40 @@ a:hover { color:#FF8A52; }
         <div style="position:absolute;right:20px;bottom:20px;max-width:170px;padding:9px 11px;border-radius:8px;border:1px solid #2C2C31;background:#18181B;font-size:10px;line-height:1.5;color:#BDBAB2;"><span style="color:#FF5B14;">a</span> parte da 0 e accumula ogni prezzo</div>
       </div>
               </sc-if>
-              <sc-if value="{{ svc.isConsulenza }}" hint-placeholder-val="{{ false }}">
-      <div style="position:relative;height:200px;flex:0 0 200px;background:#0C0C0E;padding:22px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:2px;font-size:12px;line-height:1.7;">
+              <sc-if value="{{ ag.isConsulenza }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;height:100%;flex:1 1 auto;background:#0C0C0E;padding:22px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:2px;font-size:12px;line-height:1.7;">
         <div style="padding:0 20px;color:#8F8C85;">src/api/orders.js</div>
-        <div style="padding:0 20px;background:#2A1414;color:#E58A8A;">- fetch(url).then(r =&gt; r.json())</div>
-        <div style="padding:0 20px;background:#122418;color:#7FD6A0;">+ await api.get(url, { retry: 3 })</div>
-        <div style="position:absolute;left:20px;right:20px;bottom:20px;display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:8px;border:1px solid #2C2C31;background:#18181B;">
+        <div style="padding:0 20px;background:#2A1414;color:#E58A8A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">- fetch(url).then(r =&gt; r.json())</div>
+        <div style="padding:0 20px;background:#122418;color:#7FD6A0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">+ await api.get(url, { retry: 3 })</div>
+        <div style="margin:auto 20px 20px;display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:8px;border:1px solid #2C2C31;background:#18181B;">
           <span style="flex:0 0 20px;height:20px;border-radius:20px;background:#FF5B14;color:#111113;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;">lfr</span>
           <span style="font-size:11px;line-height:1.5;color:#BDBAB2;">Gestiamo anche il timeout, qui si blocca tutto.</span>
         </div>
       </div>
-              </sc-if>
-              <div style="padding:28px;display:flex;flex-direction:column;gap:12px;">
-                <div style="display:flex;align-items:center;justify-content:space-between;">
-                  <div style="width:40px;height:40px;padding:9px;box-sizing:border-box;border-radius:10px;background:rgba(255,91,20,0.12);color:#FF5B14;" dangerouslySetInnerHTML="{{ svc.iconHtml }}"></div>
-                  <span style="font-size:12px;color:#6A675F;">{{ svc.num }}</span>
+              </sc-if></div>
+                <div style="padding:20px 24px;display:flex;flex-direction:column;gap:6px;min-height:104px;box-sizing:border-box;border-bottom:1px solid #222226;">
+                  <span style="font-size:16px;font-weight:700;">{{ ag.title }}</span>
+                  <span style="font-size:13px;line-height:1.65;color:#BDBAB2;text-wrap:pretty;">{{ ag.text }}</span>
                 </div>
-                <h3 style="margin:8px 0 0;font-size:18px;font-weight:700;">{{ svc.title }}</h3>
-                <p style="margin:0;color:#A3A09A;line-height:1.75;font-size:14px;">{{ svc.text }}</p>
-              </div>
+                <div onMouseLeave="{{ agLeave }}" style="padding:12px 12px 16px;display:flex;flex-direction:column;">
+                  <span style="padding:4px 12px 8px;font-size:11px;color:#5A5852;letter-spacing:0.08em;">SERVIZI</span>
+                  <sc-for list="{{ agDots }}" as="d" hint-placeholder-count="7">
+                    <button type="button" onMouseEnter="{{ d.pick }}" onFocus="{{ d.pick }}" onClick="{{ d.ask }}" style="display:grid;grid-template-columns:28px minmax(0,1fr) 14px;align-items:center;gap:8px;min-height:36px;padding:0 12px;border:0;border-radius:8px;background:{{ d.bg }};font-family:inherit;font-size:13px;text-align:left;cursor:pointer;color:{{ d.color }};transition:background .15s,color .15s;">
+                      <span style="font-size:11px;color:{{ d.numColor }};">{{ d.num }}</span><span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ d.title }}</span><span style="color:#FF5B14;">{{ d.mark }}</span>
+                    </button>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ agNoFocus }}" hint-placeholder-val="{{ true }}">
+                <div style="flex:1;padding:32px;display:flex;flex-direction:column;gap:6px;justify-content:center;font-size:13px;line-height:1.9;">
+                  <span style="margin-bottom:10px;font-size:11px;color:#5A5852;letter-spacing:0.08em;">SERVIZI DISPONIBILI</span>
+                  <sc-for list="{{ agAll }}" as="x" hint-placeholder-count="7">
+                    <span style="color:{{ x.color }};transition:color .3s;"><span style="color:{{ x.dot }};">●</span> {{ x.title }}</span>
+                  </sc-for>
+                </div>
+              </sc-if>
             </div>
-          </sc-for>
+          </div>
         </div>
       </div>
     </section>
@@ -416,14 +477,30 @@ a:hover { color:#FF8A52; }
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { mode: (() => { try { return localStorage.getItem('lfr-engine') || 'legacy'; } catch (e) { return 'legacy'; } })(), booting: false, lang: (() => { try { return localStorage.getItem('lfr-lang') || 'it'; } catch (e) { return 'it'; } })() };
+  state = { mode: (() => { try { return localStorage.getItem('lfr-engine') || 'legacy'; } catch (e) { return 'legacy'; } })(), booting: false, agPhase: 'idle', agLog: [], agRec: [], agSel: [], agFi: null, agInput: '', agInF: false, lang: (() => { try { return localStorage.getItem('lfr-lang') || 'it'; } catch (e) { return 'it'; } })() };
+  KW = { web: /sito|web|e-?commerce|shop|negozi|saas|landing|pagament|vetrina|portale|gestional/, mobile: /\bapp\b|mobile|ios|android|telefon|smartphone|prenotazion/, design: /design|\bui\b|\bux\b|grafic|interfacc|figma|restyling|usabil/, devops: /server|hosting|deploy|dominio|ssl|lent|cloud|docker|manutenz|e-?commerce|backup/, ai: /\bai\b|\bia\b|chatbot|automa|gpt|claude|agent|intelligenz|email|crm|document/, formazione: /cors|impar|mentor|formazion|insegn|team|junior|student/, consulenza: /consulen|parere|review|architett|stack|audit|riscriv|codice/ };
+  WHY = { web: 'sito / web app', mobile: 'app', design: 'interfaccia', devops: 'online e stabile', ai: 'automazione', formazione: 'imparare', consulenza: 'parere tecnico' };
+  agAsk = (text, force) => {
+    const q = (text || '').trim(); if (!q || this.state.agPhase === 'thinking') return;
+    (this.agT || []).forEach(clearTimeout); clearInterval(this.agIv); this.agT = [];
+    const low = q.toLowerCase();
+    let rec = force || Object.keys(this.KW).filter(k => this.KW[k].test(low));
+    const found = rec.length;
+    if (!found) rec = ['consulenza', 'web'];
+    const D = { u: (t) => ({ mark: '›', markColor: '#5A5852', text: t, color: '#EDEBE6', size: '14px' }), s: (t) => ({ mark: '⎿', markColor: '#3A3A40', text: t, color: '#8F8C85', size: '12px' }), a: (t) => ({ mark: '●', markColor: '#FF5B14', text: t, color: '#EDEBE6', size: '14px' }) };
+    this.setState({ agPhase: 'thinking', agLog: [D.u(q)], agRec: [], agSel: [], agFi: null, agInput: '' });
+    const steps = [D.s('analizzo la richiesta…'), D.s('confronto con 7 servizi'), D.s(found ? 'trovat' + (found === 1 ? 'o 1 servizio' : 'i ' + found + ' servizi') + ' adatti' : 'nessuna corrispondenza precisa')];
+    steps.forEach((st, i) => this.agT.push(setTimeout(() => this.setState(s => ({ agLog: [...s.agLog, st] })), 450 + i * 450)));
+    this.agT.push(setTimeout(() => this.setState(s => ({ agPhase: 'done', agRec: rec, agSel: rec, agFi: rec[0], agLog: [...s.agLog, D.a(found ? 'Per questo progetto ti consiglio:' : 'Non sono sicuro di aver capito: partirei da qui, poi ne parliamo.')] })), 450 + steps.length * 450 + 200));
+  };
   setLang = (lang) => { this.setState({ lang, langOpen: false }); try { localStorage.setItem('lfr-lang', lang); } catch (e) {} };
   toggleLangMenu = () => this.setState(s => ({ langOpen: !s.langOpen }));
   toggleMenu = () => this.setState(s => ({ menuOpen: !s.menuOpen }));
   onDocClick = (e) => { if (this.state.langOpen && !e.target.closest('[data-lang-menu]')) this.setState({ langOpen: false }); };
   onKey = (e) => { if (e.key === 'Escape') this.setState({ langOpen: false, menuOpen: false }); };
   onResize = () => { if (this.state.menuOpen && window.innerWidth > 760) this.setState({ menuOpen: false }); };
-  componentDidMount() { document.addEventListener('click', this.onDocClick); document.addEventListener('keydown', this.onKey); window.addEventListener('resize', this.onResize); }
+  applyPrefill = () => { try { const raw = localStorage.getItem('lfr-cfg-prefill'); if (!raw) return; localStorage.removeItem('lfr-cfg-prefill'); const M = { web: 'sito', mobile: 'app mobile', design: 'UI / UX', devops: 'DevOps', ai: 'AI', formazione: 'formazione', consulenza: 'consulenza' }; const tipo = [...new Set(JSON.parse(raw).map(k => M[k]).filter(Boolean))]; if (tipo.length) this.setState(s => ({ cfg: { ...(s.cfg || { budget: null, tempi: null }), tipo } })); } catch (e) {} };
+  componentDidMount() { this.agIv = setInterval(() => { if (!this.state.agFi && !this.state.agHover) this.setState(s => ({ agTick: (s.agTick || 0) + 1 })); }, 3500); this.applyPrefill(); document.addEventListener('click', this.onDocClick); document.addEventListener('keydown', this.onKey); window.addEventListener('resize', this.onResize); }
   photoRef = React.createRef();
   glowRef = React.createRef();
   snippetRef = React.createRef();
@@ -452,7 +529,7 @@ class Component extends DCLogic {
     [this.photoRef, this.glowRef, this.snippetRef].forEach(r => { if (r.current) r.current.style.transform = ''; });
   };
 
-  componentWillUnmount() { clearTimeout(this.t1); clearTimeout(this.t2); document.removeEventListener('click', this.onDocClick); document.removeEventListener('keydown', this.onKey); window.removeEventListener('resize', this.onResize); }
+  componentWillUnmount() { clearTimeout(this.t1); clearTimeout(this.t2); (this.agT || []).forEach(clearTimeout); document.removeEventListener('click', this.onDocClick); document.removeEventListener('keydown', this.onKey); window.removeEventListener('resize', this.onResize); }
 
   renderVals() {
     const lang = this.state.lang;
@@ -465,7 +542,7 @@ class Component extends DCLogic {
     const langs = [['it','italiano'],['en','english'],['ro','română']].map(([code, name]) => ({ code, name, mark: code === lang ? '>' : '', color: code === lang ? '#EDEBE6' : '#BDBAB2', select: () => this.setLang(code) }));
     const cfg = this.state.cfg || { tipo: [], budget: null, tempi: null };
     const CG = [
-      { id: 'tipo', label: 'tipo di progetto · anche più di uno', multi: true, opts: ['sito', 'web app', 'app mobile', 'e-commerce', 'consulenza', 'formazione'] },
+      { id: 'tipo', label: 'tipo di progetto · anche più di uno', multi: true, opts: ['sito', 'web app', 'e-commerce', 'app mobile', 'UI / UX', 'DevOps', 'AI', 'consulenza', 'formazione'] },
       { id: 'budget', label: 'budget indicativo', opts: ['< 3k €', '3–10k €', '10–25k €', '25k+ €', 'da capire'] },
       { id: 'tempi', label: 'tempistiche', opts: ['urgente', '1–3 mesi', '3–6 mesi', 'flessibile'] },
     ];
@@ -497,6 +574,37 @@ class Component extends DCLogic {
     ];
     const cfgFilled = [cf.nome.trim(), cf.cognome.trim(), cf.email.trim(), msg, cfg.tipo.length, cfg.budget, cfg.tempi].filter(Boolean).length;
     const cfgExtra = { cfgGroups, cfgJson: cfgRows.map((r, i) => ({ ...r, n: i + 1 })), cfgReady: cfgFilled === 7 ? '✓ valido' : cfgFilled + '/7', cfgReadyColor: cfgFilled === 7 ? '#5BD48A' : '#8F8C85', cf, onCf };
+    const AGD = [
+      ['web', 'Web Developer', "Siti, web app e SaaS su misura, dall'idea al lancio, integrazioni e pagamenti compresi."],
+      ['mobile', 'Mobile Developer', 'App native o cross-platform che i tuoi utenti continuano ad aprire.'],
+      ['design', 'UI / UX Designer', "Interfacce chiare che portano l'utente dove deve arrivare."],
+      ['devops', 'DevOps & Infrastruttura', 'Cloud, deploy automatici e monitoraggio. Finito vuol dire online e stabile, non "funziona sul mio computer".'],
+      ['ai', 'AI & Automazione', "Chatbot, estrazione dati e agenti integrati negli strumenti che usi già."],
+      ['formazione', 'Formazione / Mentoring', "Corsi e mentoring, anche sul lavoro con l'AI: capire il codice, non copiarlo."],
+      ['consulenza', 'Consulenza tecnica', 'Code review, architettura e scelta dello stack, con un parere esterno onesto.'],
+    ];
+    const agFlags = (k) => ({ isWeb: k === 'web', isMobile: k === 'mobile', isDesign: k === 'design', isDevops: k === 'devops', isAi: k === 'ai', isFormazione: k === 'formazione', isConsulenza: k === 'consulenza' });
+    const agItems = AGD.map(([key, title, text], i) => ({ key, title, text, num: String(i + 1).padStart(2, '0'), file: key + '.ts', ...agFlags(key) }));
+    const agGet = (k) => agItems.find(x => x.key === k);
+    const agSel = this.state.agSel, agN = agSel.length;
+    const agCur = this.state.agHover || this.state.agFi || agItems[(this.state.agTick || 0) % agItems.length].key;
+    const agRec = this.state.agRec.map(k => { const it = agGet(k), on = agSel.includes(k), foc = k === this.state.agFi; return { ...it, why: this.WHY[k], focus: () => this.setState({ agFi: k }), toggle: () => this.setState(s => ({ agFi: k, agSel: s.agSel.includes(k) ? s.agSel.filter(x => x !== k) : [...s.agSel, k] })), bg: foc ? '#18181B' : 'transparent', caret: foc ? '❯' : '', box: on ? '◉' : '◯', boxColor: on ? '#FF5B14' : '#5A5852', color: on || foc ? '#EDEBE6' : '#8F8C85' }; });
+    const agSuggT = ['un e-commerce con pagamenti', "un'app per le prenotazioni", "automatizzare email e CRM con l'AI", 'un parere sul mio codice'];
+    const agExtra = {
+      agLog: this.state.agLog, agDone: this.state.agPhase === 'done', agIdle: this.state.agPhase === 'idle', agRec,
+      agSugg: agSuggT.map(t => ({ text: t, ask: () => this.agAsk(t) })),
+      agInput: this.state.agInput, agOnInput: (e) => this.setState({ agInput: e.target.value }), agSubmit: (e) => { e.preventDefault(); this.agAsk(this.state.agInput); },
+      agFocusIn: () => this.setState({ agInF: true }), agFocusOut: () => this.setState({ agInF: false }), agInBorder: this.state.agInF ? '#FF5B14' : '#2C2C31',
+      agReset: () => { (this.agT || []).forEach(clearTimeout); this.setState({ agPhase: 'idle', agLog: [], agRec: [], agSel: [], agFi: null, agInput: '' }); },
+      agGo: (e) => { e.preventDefault(); try { localStorage.setItem('lfr-cfg-prefill', JSON.stringify(agSel)); } catch (er) {} this.applyPrefill(); const el = document.getElementById('n-contact'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }); },
+      agSum: agN ? agN + ' selezionat' + (agN === 1 ? 'o' : 'i') + ' · li ritrovi nel form' : 'seleziona almeno un servizio',
+      agBtnBg: agN ? '#FF5B14' : '#222226', agBtnColor: agN ? '#111113' : '#8F8C85',
+      agHasFocus: true, agNoFocus: false, ag: agGet(agCur),
+      agDots: agItems.map(it => { const on = it.key === agCur; return { num: it.num, title: it.title, pick: () => this.setState({ agHover: it.key }), ask: () => this.agAsk('Mi interessa: ' + it.title, [it.key]), bg: on ? '#18181B' : 'transparent', color: on ? '#EDEBE6' : '#8F8C85', numColor: on ? '#FF5B14' : '#5A5852', mark: agSel.includes(it.key) ? '◉' : '' }; }),
+      agLeave: () => this.setState({ agHover: null }),
+      agAll: agItems.map(it => { const hit = this.state.agPhase === 'thinking'; return { title: it.title, color: hit ? '#BDBAB2' : '#5A5852', dot: hit ? '#FF5B14' : '#2C2C31' }; }),
+    };
+
     const langExtra = { lang, t, langs, langOpen: !!this.state.langOpen, toggleLangMenu: this.toggleLangMenu, menuOpen: !!this.state.menuOpen, toggleMenu: this.toggleMenu, menuLabel: this.state.menuOpen ? t.close : t.menu };
     const icons = {
       web: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="3"><rect x="10" y="14" width="22" height="18"/><path d="M30 8V40"/></svg>',
@@ -522,6 +630,7 @@ class Component extends DCLogic {
     ).map((text, i) => ({ text, delay: `${i * 0.12}s` }));
     return {
       ...langExtra,
+      ...agExtra,
       ...cfgExtra,
       isLegacy: this.state.mode === 'legacy',
       isNative: this.state.mode === 'native',
