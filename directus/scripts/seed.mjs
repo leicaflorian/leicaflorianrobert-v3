@@ -137,11 +137,15 @@ const experience = (company, year, link, role, description = null) => {
 }
 
 const EXPERIENCES = [
-  experience('Tecnobit s.r.l.', null, 'https://www.tecnobit.it/', {it: 'Sviluppo software gestionale', en: 'Management software development', ro: 'Dezvoltare software de gestiune'}),
   experience('Mediamotion s.r.l.', 2008, null, 'Full Stack Developer', {
     it: 'Siti con Adobe Flex, HTML e CSS sul frontend, Ruby on Rails e PHP sul backend, su database MySQL. Ne curavo anche grafica, SEO e il server locale che li ospitava.',
     en: 'Websites with Adobe Flex, HTML and CSS on the frontend, Ruby on Rails and PHP on the backend, on MySQL databases. I also took care of their design, SEO and the local server hosting them.',
     ro: 'Site-uri cu Adobe Flex, HTML și CSS pe frontend, Ruby on Rails și PHP pe backend, pe baze de date MySQL. Mă ocupam și de grafică, SEO și de serverul local care le găzduia.',
+  }),
+  experience('Tecnobit s.r.l.', 2009, 'https://www.tecnobit.it/', {it: 'Sviluppo software gestionale', en: 'Management software development', ro: 'Dezvoltare software de gestiune'}, {
+    it: 'Un software gestionale in Visual Basic e MySQL per l\'Ordine degli Ingegneri della Provincia di Potenza, distribuito su CD-ROM agli iscritti. Ne ho curato grafica, interfaccia, architettura e sviluppo.',
+    en: 'Management software in Visual Basic and MySQL for the Order of Engineers of the Province of Potenza, distributed on CD-ROM to its members. I handled its design, interface, architecture and development.',
+    ro: 'Un software de gestiune în Visual Basic și MySQL pentru Ordinul Inginerilor din Provincia Potenza, distribuit membrilor pe CD-ROM. M-am ocupat de grafică, interfață, arhitectură și dezvoltare.',
   }),
   experience('Organizzazione no-profit', 2010, null, 'Desktop & Web Developer', {
     it: 'Applicazioni desktop gestionali in Visual Basic, Adobe Flex (AIR) e come app ed estensioni di Chrome, e siti in PHP e MySQL integrati con le API di Google: Drive, Maps e Sign-In.',
