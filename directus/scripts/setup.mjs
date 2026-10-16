@@ -290,6 +290,16 @@ const GALLERY_FILES = 'block_gallery_files'
 /** Collections from earlier schemas, removed by setup. */
 const OBSOLETE = ['page_home', 'page_about', 'page_projects', 'page_contact', 'page_case_study']
 
+/**
+ * The folders of the Data Model and of the content menu, in order. Collections left out stay at
+ * the root, after the folders; junctions (translations, sections, gallery files) go under their parent.
+ */
+const FOLDERS = [
+  {collection: 'website', icon: 'language', note: 'Il sito: impostazioni, pagine e lingue.', children: ['site', 'pages', 'languages']},
+  {collection: 'portfolio', icon: 'work', note: 'Progetti, esperienze, servizi e tecnologie, mostrati dai blocchi.', children: ['projects', 'experiences', 'services', 'technologies']},
+  {collection: 'blocks', icon: 'view_agenda', note: 'I tipi di blocco con cui si compongono pagine e progetti.', hidden: true, children: BLOCKS.map(b => b.collection)},
+]
+
 /** The collections whose changes must trigger a site rebuild. */
 const CONTENT_COLLECTIONS = [
   ...[...COLLECTIONS, ...BLOCKS]
@@ -497,6 +507,39 @@ async function createGalleryImages() {
   console.log('+ block_gallery.images')
 }
 
+/** Creates the folders and moves each collection into its place: the only meta setup keeps in sync. */
+async function groupCollections() {
+  const placement = new Map()
+  FOLDERS.forEach((folder, i) => {
+    placement.set(folder.collection, {group: null, sort: i + 1})
+    folder.children.forEach((child, j) => placement.set(child, {group: folder.collection, sort: j + 1}))
+  })
+  for (const def of [...COLLECTIONS, ...BLOCKS]) {
+    if (!placement.has(def.collection)) placement.set(def.collection, {group: null, sort: FOLDERS.length + 1})
+    if (def.translations.length) placement.set(`${def.collection}_translations`, {group: def.collection, sort: 1})
+  }
+  for (const parent of WITH_SECTIONS) placement.set(`${parent}_sections`, {group: parent, sort: 2})
+  placement.set(GALLERY_FILES, {group: 'block_gallery', sort: 2})
+
+  for (const folder of FOLDERS) {
+    if (await exists(folder.collection)) continue
+    await api('POST', '/collections', {
+      collection: folder.collection,
+      meta: {icon: folder.icon, note: folder.note, hidden: Boolean(folder.hidden), collapse: 'closed', ...placement.get(folder.collection)},
+      schema: null,
+    })
+    console.log(`+ folder ${folder.collection}`)
+  }
+
+  const current = new Map((await api('GET', '/collections')).map(c => [c.collection, c.meta]))
+  for (const [collection, {group, sort}] of placement) {
+    const meta = current.get(collection)
+    if (!meta || (meta.group === group && meta.sort === sort)) continue
+    await api('PATCH', `/collections/${collection}`, {meta: {group, sort}})
+    console.log(`~ ${collection}: ${group ?? 'root'}`)
+  }
+}
+
 /** Removes the collections of earlier schemas, with their translations. */
 async function removeObsolete() {
   for (const collection of OBSOLETE.flatMap(c => [`${c}_translations`, c])) {
@@ -607,6 +650,7 @@ await removeObsolete()
 for (const def of [...COLLECTIONS, ...BLOCKS]) await createCollection(def)
 for (const parent of WITH_SECTIONS) await createSections(parent)
 await createGalleryImages()
+await groupCollections()
 await grantPublicRead()
 await createFlows()
 console.log('Schema ready.')

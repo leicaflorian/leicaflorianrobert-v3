@@ -39,7 +39,7 @@ Components are auto-imported with the folder as prefix: `components/home/Hero.vu
 
 The schema is code, not clicks. To add a field or collection:
 
-1. Edit `COLLECTIONS` in `directus/scripts/setup.mjs` (helpers `string`, `text`, `boolean`, `choice`, `image`...; translated fields go in `translations`).
+1. Edit `COLLECTIONS` in `directus/scripts/setup.mjs` (helpers `string`, `text`, `boolean`, `choice`, `image`...; translated fields go in `translations`). Put a new collection in its folder in `FOLDERS` (block types go in `blocks` automatically).
 2. Add seed content for all three languages in `directus/scripts/seed.mjs`.
 3. Update the matching interface in `app/types/content.ts`.
 4. Run `npm run directus:setup`, `npm run directus:seed`, then `npm run directus:snapshot` and commit `directus/snapshot.yaml`.
