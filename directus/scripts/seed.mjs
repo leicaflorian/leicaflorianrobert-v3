@@ -70,6 +70,8 @@ const PROJECTS = [
     note('Infrastruttura di rete — case study', 'Network infrastructure — case study', 'Infrastructură de rețea — studiu de caz')),
   project('imanpack', 'https://www.imanpack.it/', {case_study: true}, name('Imanpack'),
     note('Newsletter automatiche con Mailchimp — case study', 'Automated newsletters with Mailchimp — case study', 'Newslettere automate cu Mailchimp — studiu de caz')),
+  project('steelfuture', 'https://steelfuture.com/', {case_study: true}, name('Steel Future'),
+    note('Gestionale aziendale — case study', 'Business management software — case study', 'Software de gestiune — studiu de caz')),
   project('v2', 'https://leicaflorianrobert.dev', {kind: 'personal'}, name('My website V2')),
   project('wab', 'https://webartisanbros.com/', {featured: true, mockup: 'laptop'}, name('Web Artisan Bros')),
   project('slides', 'https://chrome.google.com/webstore/detail/slidescom-downloader/bciknjamldhnbbckmgbchmkdcalngnco?hl=it', {kind: 'personal'}, name('Slides.com downloader'),
@@ -774,6 +776,107 @@ const CASE_STUDIES = {
             'Cererile utilizatorilor de abonare la newsletter respectate.',
             'Newslettere bilingve, pentru a ajunge și la clienții internaționali.',
             'Fără muncă manuală în Mailchimp: ajunge să introduci datele în CMS, de rest se ocupă sistemul.',
+          ),
+        },
+      }),
+      NEXT_STEP,
+    ],
+  },
+  steelfuture: {
+    year: 2023,
+    translations: {
+      it: {intro: 'Il gestionale in PHP 5 di un\'azienda di lavorazione dell\'acciaio: problemi risolti, software ottimizzato, nuove funzionalità, e il codice finalmente versionato, con deploy automatico.', role: 'Sviluppo e manutenzione', type: 'Gestionale aziendale', stack: 'PHP 5, Git, GitHub'},
+      en: {intro: 'The PHP 5 management software of a steel processing company: issues fixed, software optimised, new features, and the code finally under version control, with automatic deploys.', role: 'Development and maintenance', type: 'Business management software', stack: 'PHP 5, Git, GitHub'},
+      ro: {intro: 'Software-ul de gestiune în PHP 5 al unei firme de prelucrare a oțelului: probleme rezolvate, software optimizat, funcționalități noi și, în sfârșit, codul versionat, cu deploy automat.', role: 'Dezvoltare și mentenanță', type: 'Software de gestiune', stack: 'PHP 5, Git, GitHub'},
+    },
+    sections: [
+      section('block_text', {}, {
+        it: {
+          label: 'punto di partenza',
+          title: 'Un gestionale di altri tempi',
+          text: paras(
+            'Steel Future lavora con un gestionale molto vecchio, scritto in **PHP 5**. Il codice stava su un server locale dell\'azienda, raggiungibile solo in locale, e **non era versionato**.',
+            'Mi hanno chiamato per sistemare alcuni problemi e ottimizzare il software.',
+          ),
+        },
+        en: {
+          label: 'starting point',
+          title: 'Management software from another era',
+          text: paras(
+            'Steel Future works with very old management software, written in **PHP 5**. The code sat on a local server at the company, reachable only locally, and **wasn\'t under version control**.',
+            'They called me in to fix some issues and optimise the software.',
+          ),
+        },
+        ro: {
+          label: 'punct de plecare',
+          title: 'Un software de gestiune din alte vremuri',
+          text: paras(
+            'Steel Future lucrează cu un software de gestiune foarte vechi, scris în **PHP 5**. Codul stătea pe un server local al firmei, accesibil doar local, și **nu era versionat**.',
+            'M-au chemat să rezolv câteva probleme și să optimizez software-ul.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'cosa ho fatto',
+          title: 'Sistemare, ottimizzare, aggiungere',
+          items: lines(
+            'Risolti i problemi del codice legacy.',
+            'Software ottimizzato.',
+            'Nuove funzionalità.',
+            'Codice versionato su GitHub.',
+            'Deploy automatico con un push su git.',
+          ),
+        },
+        en: {
+          label: 'what I did',
+          title: 'Fix, optimise, extend',
+          items: lines(
+            'Legacy code issues fixed.',
+            'Software optimised.',
+            'New features.',
+            'Code under version control on GitHub.',
+            'Automatic deploys on a git push.',
+          ),
+        },
+        ro: {
+          label: 'ce am făcut',
+          title: 'Reparat, optimizat, extins',
+          items: lines(
+            'Problemele codului legacy rezolvate.',
+            'Software optimizat.',
+            'Funcționalități noi.',
+            'Cod versionat pe GitHub.',
+            'Deploy automat la un push pe git.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'risultati',
+          title: 'Più semplice da usare',
+          items: lines(
+            'Un software più semplice da usare.',
+            'Operatività migliorata, con i problemi legacy risolti.',
+            'Ogni modifica tracciata, e pubblicata con un push.',
+          ),
+        },
+        en: {
+          label: 'results',
+          title: 'Easier to use',
+          items: lines(
+            'Software that is easier to use.',
+            'Smoother operations, with the legacy issues fixed.',
+            'Every change tracked, and published with a push.',
+          ),
+        },
+        ro: {
+          label: 'rezultate',
+          title: 'Mai simplu de folosit',
+          items: lines(
+            'Un software mai simplu de folosit.',
+            'Activitate îmbunătățită, cu problemele legacy rezolvate.',
+            'Fiecare modificare urmărită și publicată cu un push.',
           ),
         },
       }),
