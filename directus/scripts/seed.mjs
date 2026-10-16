@@ -745,6 +745,38 @@ const CASE_STUDIES = {
           ),
         },
       }),
+      section('block_list', {}, {
+        it: {
+          label: 'risultati',
+          title: 'Dati nel CMS, il resto in automatico',
+          items: lines(
+            'Clienti contattati in modo più automatico e più pulito.',
+            'Rispettate le richieste di iscrizione alla newsletter degli utenti.',
+            'Newsletter bilingui, per raggiungere anche i clienti internazionali.',
+            'Niente più lavoro a mano su Mailchimp: basta inserire i dati nel CMS, al resto pensa il sistema.',
+          ),
+        },
+        en: {
+          label: 'results',
+          title: 'Data in the CMS, the rest automatic',
+          items: lines(
+            'Customers reached in a more automated, cleaner way.',
+            'Users\' newsletter sign-up requests respected.',
+            'Bilingual newsletters, to reach international customers too.',
+            'No more manual work on Mailchimp: just enter the data in the CMS, the system takes care of the rest.',
+          ),
+        },
+        ro: {
+          label: 'rezultate',
+          title: 'Datele în CMS, restul automat',
+          items: lines(
+            'Clienți contactați într-un mod mai automat și mai curat.',
+            'Cererile utilizatorilor de abonare la newsletter respectate.',
+            'Newslettere bilingve, pentru a ajunge și la clienții internaționali.',
+            'Fără muncă manuală în Mailchimp: ajunge să introduci datele în CMS, de rest se ocupă sistemul.',
+          ),
+        },
+      }),
       NEXT_STEP,
     ],
   },
