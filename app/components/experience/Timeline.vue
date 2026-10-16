@@ -6,7 +6,11 @@
 <script setup lang="ts">
 import type {Experience} from '~/types/content'
 
-const props = defineProps<{experiences: Experience[]}>()
+const props = defineProps<{
+  experiences: Experience[]
+  /** The year being read in the list, lit up. */
+  active?: number | null
+}>()
 
 const slots = computed(() => {
   const years = props.experiences.flatMap(e => e.year ?? [])
@@ -28,9 +32,14 @@ const slots = computed(() => {
           <a
             v-if="inYear.length"
             :href="`#exp-${inYear.at(-1)!.id}`"
-            class="group relative flex flex-col items-center gap-3 text-xs text-muted hover:text-accent"
+            class="group relative flex flex-col items-center gap-3 text-xs hover:text-accent"
+            :class="year === active ? 'text-accent' : 'text-muted'"
+            :aria-current="year === active ? 'true' : undefined"
           >
-            <span class="spring size-3 rounded-full border-2 border-ink bg-bg group-hover:scale-150 group-hover:border-accent"/>
+            <span
+              class="spring size-3 rounded-full border-2 group-hover:scale-150 group-hover:border-accent"
+              :class="year === active ? 'scale-125 border-accent bg-accent' : 'border-ink bg-bg'"
+            />
             {{ year }}
             <span class="pointer-events-none absolute bottom-full mb-3 whitespace-nowrap text-ink opacity-0 transition-opacity group-hover:opacity-100">
               {{ inYear.map(e => e.company).join(' · ') }}

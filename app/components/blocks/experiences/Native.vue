@@ -10,6 +10,10 @@ defineProps<{
 const experiences = await useCollection<Experience>('experiences')
 /** Most recent first; those without a year at the end. */
 const timeline = computed(() => [...experiences.value].reverse())
+
+const list = useTemplateRef('list')
+const bar = useTemplateRef('bar')
+const yearInView = useYearInView(list, () => bar.value?.$el)
 </script>
 
 <template>
@@ -23,13 +27,14 @@ const timeline = computed(() => [...experiences.value].reverse())
         <p v-if="block.text" class="m-0 self-end text-[15px] leading-[1.8] text-muted">{{ block.text }}</p>
       </div>
       <!-- sticky under the site header while the list scrolls by -->
-      <ExperienceTimeline :experiences="experiences" class="sticky top-16 z-30 mb-6 bg-bg/90 pt-10 pb-6 backdrop-blur-md max-[860px]:hidden"/>
-      <div class="border-t border-line-card">
+      <ExperienceTimeline ref="bar" :experiences="experiences" :active="yearInView" class="sticky top-16 z-30 mb-6 bg-bg/90 pt-10 pb-6 backdrop-blur-md max-[860px]:hidden"/>
+      <div ref="list" class="border-t border-line-card">
         <component
           :is="exp.link ? 'a' : 'div'"
           v-for="exp in timeline"
           :id="`exp-${exp.id}`"
           :key="exp.id"
+          :data-year="exp.year"
           :href="exp.link ?? undefined"
           :target="exp.link ? '_blank' : undefined"
           :rel="exp.link ? 'noopener' : undefined"
