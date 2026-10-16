@@ -125,14 +125,17 @@ const PROJECTS = [
 
 /**
  * An experience: the role is the same in every language unless given as `{it, en, ro}`,
- * the description (what I did there, one or two sentences) always is.
+ * the description (what I did there, one or two sentences) always is. The years are the
+ * start, `[start, end]` or `[start, 'now']`; a company that is a description rather than
+ * a name ("Self-employed") gets its translations as `label`.
  */
-const experience = (company, year, link, role, description = null) => {
+const experience = (company, years, link, role, description = null, label = null) => {
   const roles = typeof role === 'string' ? {it: role, en: role, ro: role} : role
+  const [year, end = null] = [years].flat()
   return {
-    company, year, link,
+    company, year, end_year: end === 'now' ? null : end, current: end === 'now', link,
     translations: tr(Object.fromEntries(Object.entries(roles).map(([locale, value]) => [
-      locale, {role: value, description: description?.[locale] ?? null},
+      locale, {company_label: label?.[locale] ?? null, role: value, description: description?.[locale] ?? null},
     ]))),
   }
 }
@@ -148,47 +151,47 @@ const EXPERIENCES = [
     en: 'Management software in Visual Basic and MySQL for the Order of Engineers of the Province of Potenza, distributed on CD-ROM to its members. I handled its design, interface, architecture and development.',
     ro: 'Un software de gestiune în Visual Basic și MySQL pentru Ordinul Inginerilor din Provincia Potenza, distribuit membrilor pe CD-ROM. M-am ocupat de grafică, interfață, arhitectură și dezvoltare.',
   }),
-  experience('Organizzazione no-profit', 2010, null, 'Desktop & Web Developer', {
+  experience('Organizzazione no-profit', [2010, 2017], null, 'Desktop & Web Developer', {
     it: 'Applicazioni desktop gestionali in Visual Basic, Adobe Flex (AIR) e come app ed estensioni di Chrome, e siti in PHP e MySQL integrati con le API di Google: Drive, Maps e Sign-In.',
     en: 'Desktop management applications in Visual Basic, Adobe Flex (AIR) and as Chrome apps and extensions, plus PHP and MySQL websites integrated with Google APIs: Drive, Maps and Sign-In.',
     ro: 'Aplicații desktop de gestiune în Visual Basic, Adobe Flex (AIR) și ca aplicații și extensii Chrome, plus site-uri în PHP și MySQL integrate cu API-urile Google: Drive, Maps și Sign-In.',
-  }),
+  }, {it: 'Organizzazione no-profit', en: 'Non-profit organisation', ro: 'Organizație non-profit'}),
   experience('Self-employed', 2017, null, 'Full Stack Developer, Web Designer, Mobile Developer', {
     it: 'Siti e applicazioni per clienti diretti: interfacce responsive, app ibride con Cordova e poi Ionic, siti WordPress e Joomla con temi e moduli su misura.',
     en: 'Websites and applications for direct clients: responsive interfaces, hybrid apps with Cordova and then Ionic, WordPress and Joomla sites with custom themes and modules.',
     ro: 'Site-uri și aplicații pentru clienți direcți: interfețe responsive, aplicații hibride cu Cordova și apoi Ionic, site-uri WordPress și Joomla cu teme și module pe măsură.',
-  }),
-  experience('Zucchetti Software Giuridico s.r.l.', 2018, 'http://www.zucchettisoftwaregiuridico.it', 'Front-End Developer', {
+  }, {it: 'Libero professionista', en: 'Freelancer', ro: 'Liber profesionist'}),
+  experience('Zucchetti Software Giuridico s.r.l.', [2018, 2020], 'http://www.zucchettisoftwaregiuridico.it', 'Front-End Developer', {
     it: 'Manutenzione e nuove funzionalità delle web app aziendali: componenti in Vue.js, refactoring del codice legacy e librerie interne riutilizzabili.',
     en: 'Maintenance and new features of the company\'s web apps: Vue.js components, refactoring of legacy code and reusable internal libraries.',
     ro: 'Mentenanța și funcționalitățile noi ale aplicațiilor web ale firmei: componente Vue.js, refactorizarea codului legacy și biblioteci interne reutilizabile.',
   }),
-  experience('Develon s.r.l.', 2020, 'https://www.develon.com', 'Senior Full Stack Developer', {
+  experience('Develon s.r.l.', [2020, 2021], 'https://www.develon.com', 'Senior Full Stack Developer', {
     it: 'Progetti enterprise monolitici e a microservizi, con Vue.js e Node.js (Express, AdonisJS, Nest.js): componenti UI, flussi backend e integrazioni con sistemi esterni.',
     en: 'Enterprise projects, monolithic and microservice-based, with Vue.js and Node.js (Express, AdonisJS, Nest.js): UI components, backend flows and integrations with external systems.',
     ro: 'Proiecte enterprise monolitice și pe microservicii, cu Vue.js și Node.js (Express, AdonisJS, Nest.js): componente UI, fluxuri backend și integrări cu sisteme externe.',
   }),
-  experience('Boolean Careers', 2021, 'https://www.boolean.careers', {it: 'Main Teacher nel corso di Full-Stack Web Development', en: 'Main Teacher of the Full-Stack Web Development course', ro: 'Main Teacher la cursul de Full-Stack Web Development'}, {
+  experience('Boolean Careers', [2021, 2024], 'https://www.boolean.careers', {it: 'Main Teacher nel corso di Full-Stack Web Development', en: 'Main Teacher of the Full-Stack Web Development course', ro: 'Main Teacher la cursul de Full-Stack Web Development'}, {
     it: 'Docente principale del corso Full Stack: lezioni da HTML a Laravel, React e Node.js, mentoring individuale e valutazione dei progetti di decine di studenti.',
     en: 'Lead teacher of the Full Stack course: lessons from HTML to Laravel, React and Node.js, one-to-one mentoring and assessment of the projects of dozens of students.',
     ro: 'Profesor principal al cursului Full Stack: lecții de la HTML la Laravel, React și Node.js, mentorat individual și evaluarea proiectelor a zeci de studenți.',
   }),
-  experience('Web Artisan Bros', 2023, null, 'Co-Founder & Full Stack Developer', {
+  experience('Web Artisan Bros', [2023, 2025], null, 'Co-Founder & Full Stack Developer', {
     it: 'Ho co-fondato una software house di prodotti digitali su misura: scelta dello stack, sviluppo frontend e backend, intero ciclo dei progetti e rapporto diretto con i clienti.',
     en: 'I co-founded a software house building custom digital products: choosing the stack, frontend and backend development, the whole project lifecycle and direct contact with clients.',
     ro: 'Am co-fondat o software house de produse digitale pe măsură: alegerea stack-ului, dezvoltare frontend și backend, întregul ciclu al proiectelor și relația directă cu clienții.',
   }),
-  experience('The Full Project', 2023, 'https://thefullproject.it/', 'CTO & Full Stack Developer', {
+  experience('The Full Project', [2023, 2026], 'https://thefullproject.it/', 'CTO & Full Stack Developer', {
     it: 'CTO dell\'agenzia: architetture, processi e coordinamento del team. Ho gestito il reparto IT, dai server alle pipeline CI/CD, e creato i template Nuxt e Directus per i nuovi progetti.',
     en: 'CTO of the agency: architecture, processes and team coordination. I ran the IT department, from servers to CI/CD pipelines, and built the Nuxt and Directus templates for new projects.',
     ro: 'CTO al agenției: arhitecturi, procese și coordonarea echipei. Am condus departamentul IT, de la servere la pipeline-urile CI/CD, și am creat template-urile Nuxt și Directus pentru proiectele noi.',
   }),
-  experience('Up2You', 2024, null, 'Full Stack Developer', {
+  experience('Up2You', [2024, 2025], null, 'Full Stack Developer', {
     it: 'Piattaforme per la sostenibilità e il marketing, con TypeScript, Laravel, Vue.js e MySQL: API su misura e ottimizzazione di prestazioni e user experience.',
     en: 'Platforms for sustainability and marketing, with TypeScript, Laravel, Vue.js and MySQL: custom APIs and optimisation of performance and user experience.',
     ro: 'Platforme pentru sustenabilitate și marketing, cu TypeScript, Laravel, Vue.js și MySQL: API-uri pe măsură și optimizarea performanței și a experienței utilizatorilor.',
   }),
-  experience('Deepser s.r.l.', 2026, null, 'Senior Back-end Developer', {
+  experience('Deepser s.r.l.', [2026, 'now'], null, 'Senior Back-end Developer', {
     it: 'Sviluppo e manutenzione della piattaforma aziendale e delle sue nuove funzionalità.',
     en: 'Development and maintenance of the company platform and its new features.',
     ro: 'Dezvoltarea și mentenanța platformei firmei și a noilor sale funcționalități.',
