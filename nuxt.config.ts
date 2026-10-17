@@ -16,7 +16,9 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: {lang: 'it'},
       link: [
-        {rel: 'icon', type: 'image/svg+xml', href: '/imgs/logo-lfr-app.svg'},
+        // PNG, not the SVG logo: a favicon can't load JetBrains Mono, so the SVG text falls back to another font
+        {rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32.png'},
+        {rel: 'icon', type: 'image/png', sizes: '64x64', href: '/favicon-64.png'},
         {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
       ],
       meta: [
