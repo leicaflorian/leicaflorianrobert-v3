@@ -2174,6 +2174,7 @@ const CASE_STUDIES = {
 // a file in seed-files, uploaded only where the project has none.
 const PROJECT_IMAGES = {
   v3: 'project-v3.png',
+  tfp: 'project-tfp.png',
   v1: 'project-v1.png',
   v2: 'project-v2.jpg',
   slides: 'project-slides.png',
