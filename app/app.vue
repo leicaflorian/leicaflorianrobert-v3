@@ -1,5 +1,8 @@
 <script setup lang="ts">
 const {mode} = useEngine()
+const route = useRoute()
+// the CV page is a bare sheet: no layout, no engine switch
+const bare = computed(() => route.meta.layout === false)
 const i18nHead = useLocaleHead()
 
 useHead(() => ({
@@ -12,8 +15,8 @@ useHead(() => ({
 
 <template>
   <NuxtRouteAnnouncer/>
-  <NuxtLayout :name="mode">
+  <NuxtLayout :name="bare ? false : mode">
     <NuxtPage/>
   </NuxtLayout>
-  <SiteEngineBoot/>
+  <SiteEngineBoot v-if="!bare"/>
 </template>

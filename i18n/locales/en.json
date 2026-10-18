@@ -294,5 +294,14 @@
       },
       "footer": "you decide · the AI acts · you check"
     }
+  },
+  "cv": {
+    "title": "Curriculum vitae",
+    "profile": "profile",
+    "experience": "experience",
+    "stack": "stack",
+    "languages": "languages",
+    "education": "education",
+    "contacts": "contact"
   }
 }

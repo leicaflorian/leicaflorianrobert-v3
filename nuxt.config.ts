@@ -51,7 +51,8 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      routes: ['/', '/en', '/ro'],
+      // the CV pages: nothing links to them, scripts/cv-pdf.mjs prints them to PDF
+      routes: ['/', '/en', '/ro', '/cv', '/en/cv', '/ro/cv'],
     },
   },
   vite: {
