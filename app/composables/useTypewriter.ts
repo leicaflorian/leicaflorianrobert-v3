@@ -74,7 +74,8 @@ export function useTypewriter(
     const step = Math.min(CHAR_MS, MAX_MS / chars.length)
     const start = performance.now()
     const tick = (now: number) => {
-      const typed = Math.min(Math.floor((now - start) / step), chars.length)
+      // a frame's timestamp can come before `start`
+      const typed = Math.min(Math.max(Math.floor((now - start) / step), 0), chars.length)
       if (typed === chars.length) return finish()
       const [node, offset] = chars[typed]!
       range!.setStart(node, offset)
