@@ -9606,8 +9606,8 @@ fields:
       hidden: false
       interface: boolean
       note: >-
-        Copertina solo testo (nome, tipo e anno), senza lo screenshot nella
-        finestra del browser accanto: per uno screenshot che dice poco
+        Copertina tipografica (nome, tipo e anno) al posto dello screenshot: per
+        i progetti senza immagine è sempre così
       options: null
       readonly: false
       required: false
