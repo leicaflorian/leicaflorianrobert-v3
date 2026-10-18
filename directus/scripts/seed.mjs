@@ -92,7 +92,7 @@ const PROJECTS = [
     note('Documenti, scadenze e conti di famiglia, letti dall\'AI', 'Family documents, deadlines and accounts, read by AI', 'Documente, termene și conturi de familie, citite de AI')),
   project('tailwab', 'https://tailwab.leicaflorianrobert.dev', {kind: 'personal', case_study: true}, name('TailWab'),
     note('Tipografia e spaziature fluide per Tailwind', 'Fluid typography and spacing for Tailwind', 'Tipografie și spațieri fluide pentru Tailwind')),
-  project('pimpmycrud', 'https://packagist.org/packages/leicaflorian/pimp_my_crud', {kind: 'personal'}, name('Pimp My CRUD'),
+  project('pimpmycrud', 'https://packagist.org/packages/leicaflorian/pimp_my_crud', {kind: 'personal', typographic: true}, name('Pimp My CRUD'),
     note('Pacchetto Laravel che genera i CRUD', 'Laravel package that generates CRUDs', 'Pachet Laravel care generează CRUD-uri')),
   project('enigma', 'https://leicaflorian.github.io/enigma_machine', {kind: 'personal', typographic: true}, name('Enigma'),
     note('Macchina Enigma', 'Enigma machine', 'Mașina Enigma')),
@@ -2182,6 +2182,11 @@ const PROJECT_IMAGES = {
   tailwab: 'project-tailwab.png',
 }
 
+// The logo in the typographic cover of a project without an image, uploaded where it has none.
+const PROJECT_LOGOS = {
+  imanpack: 'logo-imanpack.png',
+}
+
 // --- loading -----------------------------------------------------------------------------
 
 async function seedSingleton(collection, data) {
@@ -2286,13 +2291,13 @@ async function seedGalleryFiles() {
   }
 }
 
-/** The images of `PROJECT_IMAGES`, for the projects that don't have one yet. */
-async function seedProjectImages() {
-  for (const [slug, name] of Object.entries(PROJECT_IMAGES)) {
-    const [project] = await api('GET', `/items/projects?filter[slug][_eq]=${slug}&fields=id,image`)
-    if (!project || project.image) continue
-    await api('PATCH', `/items/projects/${project.id}`, {image: await upload(name)})
-    console.log(`+ image of ${slug}`)
+/** The files of `PROJECT_IMAGES` or `PROJECT_LOGOS` in `field`, for the projects that don't have one yet. */
+async function seedProjectFiles(field, files) {
+  for (const [slug, name] of Object.entries(files)) {
+    const [project] = await api('GET', `/items/projects?filter[slug][_eq]=${slug}&fields=id,${field}`)
+    if (!project || project[field]) continue
+    await api('PATCH', `/items/projects/${project.id}`, {[field]: await upload(name)})
+    console.log(`+ ${field} of ${slug}`)
   }
 }
 
@@ -2304,7 +2309,8 @@ await seedCollection('pages', pages, 'key')
 await seedCollection('projects', PROJECTS, 'slug')
 await seedCaseStudies()
 await seedGalleryFiles()
-await seedProjectImages()
+await seedProjectFiles('image', PROJECT_IMAGES)
+await seedProjectFiles('logo', PROJECT_LOGOS)
 await seedCollection('experiences', EXPERIENCES, 'company')
 await seedCollection('services', SERVICES, 'icon')
 await seedCollection('technologies', TECHNOLOGIES, 'name')

@@ -43,7 +43,7 @@ The Directus admin panel is at http://localhost:8055, with the credentials from 
 | `npm run directus:setup` | Creates collections, translations, public read permissions and flows. Safe to re-run: skips what already exists |
 | `npm run directus:seed` | Loads the design's content. Doesn't touch what's already filled in |
 | `npm run directus:snapshot` | Saves the schema to `directus/snapshot.yaml` |
-| `node directus/scripts/screenshots.mjs` | Screenshots of project websites that have no image, uploaded to Directus (`--all` to redo them all) |
+| `node directus/scripts/screenshots.mjs` | Screenshots of project websites that have no image, uploaded to Directus (`--all` to redo them all); typographic projects are skipped |
 
 ## How it's built
 
