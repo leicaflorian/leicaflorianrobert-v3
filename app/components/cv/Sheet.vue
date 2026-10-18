@@ -13,6 +13,8 @@ const props = defineProps<{data: CvData}>()
 const CONTENT_BOTTOM_MM = 297 - 12
 const PX_PER_MM = 96 / 25.4
 
+const contactLink = 'text-dim hover:text-paper-ink'
+
 const sheet = useTemplateRef('sheet')
 const shown = ref(props.data.experiences.length)
 const ready = ref(false)
@@ -46,10 +48,11 @@ onMounted(async () => {
       <section>
         <CvHeading>{{ $t('cv.contacts') }}</CvHeading>
         <ul class="m-0 flex list-none flex-col gap-[0.6mm] p-0 font-mono text-[7pt] text-dim">
-          <li>{{ data.email }}</li>
-          <li>{{ hostOf(data.website) }}</li>
-          <li>{{ shortUrl(data.linkedin) }}</li>
-          <li>{{ shortUrl(data.github) }}</li>
+          <!-- links, so they can be clicked in the PDF; paper colours, not the site's orange links -->
+          <li><a :href="`mailto:${data.email}`" :class="contactLink">{{ data.email }}</a></li>
+          <li><a :href="data.website" :class="contactLink">{{ hostOf(data.website) }}</a></li>
+          <li><a :href="data.linkedin" :class="contactLink">{{ shortUrl(data.linkedin) }}</a></li>
+          <li><a :href="data.github" :class="contactLink">{{ shortUrl(data.github) }}</a></li>
           <li>{{ data.city }}</li>
         </ul>
       </section>
