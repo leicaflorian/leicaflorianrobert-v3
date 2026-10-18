@@ -1602,67 +1602,179 @@ const CASE_STUDIES = {
   tvit: {
     year: 2022,
     translations: {
-      it: {intro: 'Un progetto personale che raccoglie i canali TV italiani in chiaro, già trasmessi in streaming dalle emittenti, in un\'unica lista IPTV con la guida TV: da guardare nel browser o con qualsiasi player.', role: 'Ideazione e sviluppo', type: 'Progetto personale', stack: 'Laravel, Vue, Docker'},
-      en: {intro: 'A personal project that gathers Italian free-to-air TV channels, already streamed by the broadcasters, into a single IPTV list with a TV guide: to watch in the browser or with any player.', role: 'Concept and development', type: 'Personal project', stack: 'Laravel, Vue, Docker'},
-      ro: {intro: 'Un proiect personal care adună canalele TV italiene gratuite, deja transmise în streaming de televiziuni, într-o singură listă IPTV cu ghid TV: de urmărit în browser sau cu orice player.', role: 'Concepție și dezvoltare', type: 'Proiect personal', stack: 'Laravel, Vue, Docker'},
+      it: {intro: 'Un progetto personale nato da un\'esigenza mia: una lista IPTV con i canali TV italiani in chiaro, letti dalle fonti delle emittenti, e la guida TV. Da guardare con qualsiasi player o direttamente nel browser.', role: 'Ideazione e sviluppo', type: 'Progetto personale', stack: 'Laravel, Vue, Inertia, Docker'},
+      en: {intro: 'A personal project born from a need of my own: an IPTV list of the free-to-air Italian TV channels, read from the broadcasters\' own sources, with the TV guide. To watch with any player or straight in the browser.', role: 'Concept and development', type: 'Personal project', stack: 'Laravel, Vue, Inertia, Docker'},
+      ro: {intro: 'Un proiect personal născut dintr-o nevoie a mea: o listă IPTV cu canalele TV italiene gratuite, citite din sursele televiziunilor, și ghidul TV. De urmărit cu orice player sau direct în browser.', role: 'Concepție și dezvoltare', type: 'Proiect personal', stack: 'Laravel, Vue, Inertia, Docker'},
     },
     sections: [
       section('block_text', {}, {
         it: {
-          label: 'idea',
-          title: 'La TV in chiaro, in un posto solo',
+          label: 'punto di partenza',
+          title: 'Una lista che non c\'era',
           text: paras(
-            'I canali italiani in chiaro si possono già guardare in streaming, ma ognuno sul sito della sua emittente. TvIt li raccoglie in **un\'unica lista IPTV**.',
+            'Tutto è cominciato in salotto. Guardavo la TV con una **Nvidia Shield TV**, un box Android, e con un\'app IPTV: mi serviva solo una lista dei canali italiani che funzionasse. Quelle che trovavo smettevano di andare dopo pochi giorni, o non andavano affatto.',
+            'Non trovandone una affidabile, ho deciso di scriverla io.',
             'Nessun contenuto privato: solo i canali che le emittenti trasmettono già pubblicamente sui loro siti.',
           ),
         },
         en: {
-          label: 'idea',
-          title: 'Free-to-air TV, in one place',
+          label: 'starting point',
+          title: 'A list that didn\'t exist',
           text: paras(
-            'Italian free-to-air channels can already be watched as streams, but each on its broadcaster\'s website. TvIt gathers them into **a single IPTV list**.',
+            'It all started in the living room. I watched TV with an **Nvidia Shield TV**, an Android box, and an IPTV app: all I needed was a list of Italian channels that worked. The ones I found stopped working after a few days, or never worked at all.',
+            'Unable to find a reliable one, I decided to write it myself.',
             'No private content: only the channels the broadcasters already stream publicly on their websites.',
           ),
         },
         ro: {
-          label: 'idee',
-          title: 'Televiziunea gratuită, într-un singur loc',
+          label: 'punct de plecare',
+          title: 'O listă care nu exista',
           text: paras(
-            'Canalele italiene gratuite se pot urmări deja în streaming, dar fiecare pe site-ul televiziunii sale. TvIt le adună într-o **singură listă IPTV**.',
+            'Totul a început în sufragerie. Mă uitam la televizor cu un **Nvidia Shield TV**, un box Android, și cu o aplicație IPTV: îmi trebuia doar o listă de canale italiene care să funcționeze. Cele pe care le găseam nu mai mergeau după câteva zile sau nu mergeau deloc.',
+            'Negăsind una de încredere, am decis s-o scriu eu.',
             'Niciun conținut privat: doar canalele pe care televiziunile le transmit deja public pe site-urile lor.',
           ),
         },
       }),
-      section('block_list', {}, {
+      section('block_text', {}, {
         it: {
-          label: 'come funziona',
-          title: 'Dal sito dell\'emittente al player',
-          items: lines(
-            'Lo studio dei player delle emittenti, per capire da dove arrivano i flussi video pubblici.',
-            'Una lista M3U, e una in JSON, generata in automatico: un link per canale.',
-            'La guida TV (EPG) raccolta dalle pagine dei palinsesti e aggiornata ogni notte.',
-            'Si guarda dal browser, sulla pagina dei canali, o con qualsiasi player IPTV non proprietario, come VLC.',
+          label: 'evoluzione',
+          title: 'Da hometv a TvIt',
+          text: paras(
+            'La prima versione, nel 2019, si chiamava **hometv** ed era scritta in TypeScript. Faceva il suo lavoro, ma con il tempo i casi particolari si moltiplicavano: canali che cambiavano indirizzo, sorgenti che rispondevano in modo diverso, controlli da ripetere ogni notte.',
+            'Nel 2022 l\'ho riscritta da zero in **Laravel**: più veloce, e con code, pianificazione dei lavori, client HTTP e test già pronti, proprio quello che serviva per gestire bene ogni eccezione. È nata così TvIt.',
           ),
         },
         en: {
-          label: 'how it works',
-          title: 'From the broadcaster\'s site to the player',
-          items: lines(
-            'Studying the broadcasters\' players to find where the public video streams come from.',
-            'An M3U list, and a JSON one, generated automatically: one link per channel.',
-            'The TV guide (EPG) scraped from the schedule pages and updated every night.',
-            'Watch it in the browser, on the channels page, or with any non-proprietary IPTV player, like VLC.',
+          label: 'evolution',
+          title: 'From hometv to TvIt',
+          text: paras(
+            'The first version, in 2019, was called **hometv** and was written in TypeScript. It did its job, but over time the special cases multiplied: channels changing address, sources answering in different ways, checks to repeat every night.',
+            'In 2022 I rewrote it from scratch in **Laravel**: faster, and with queues, job scheduling, an HTTP client and tests out of the box, exactly what I needed to handle every exception properly. That\'s how TvIt was born.',
           ),
         },
         ro: {
-          label: 'cum funcționează',
-          title: 'De pe site-ul televiziunii în player',
-          items: lines(
-            'Studiul playerelor televiziunilor, pentru a afla de unde vin fluxurile video publice.',
-            'O listă M3U, și una în JSON, generată automat: un link pentru fiecare canal.',
-            'Ghidul TV (EPG) colectat din paginile cu programe și actualizat în fiecare noapte.',
-            'Se urmărește din browser, pe pagina canalelor, sau cu orice player IPTV non-proprietar, precum VLC.',
+          label: 'evoluție',
+          title: 'De la hometv la TvIt',
+          text: paras(
+            'Prima versiune, în 2019, se numea **hometv** și era scrisă în TypeScript. Își făcea treaba, dar cu timpul cazurile speciale se înmulțeau: canale care își schimbau adresa, surse care răspundeau diferit, verificări de repetat în fiecare noapte.',
+            'În 2022 am rescris-o de la zero în **Laravel**: mai rapidă și cu cozi, planificarea sarcinilor, client HTTP și teste deja pregătite, exact ce îmi trebuia ca să tratez bine fiecare excepție. Așa s-a născut TvIt.',
           ),
+        },
+      }),
+      // the diagram has text in it: one image per language
+      section('block_gallery', {}, {
+        it: {
+          label: 'reverse engineering',
+          title: 'Come fanno le emittenti',
+          text: paras(
+            'All\'inizio non sapevo nulla di come funzionasse lo streaming di una diretta TV. Per capirlo ho fatto un po\' di reverse engineering: ho aperto i siti delle emittenti con gli strumenti per sviluppatori del browser e ho seguito, una per una, le richieste dei loro player.',
+            'Ho scoperto che nella pagina l\'indirizzo del video non c\'è. Il player chiede prima a un servizio dell\'emittente dove si trova la diretta, e ottiene un indirizzo temporaneo, con un token che scade dopo poco, verso la CDN che distribuisce il video. Il video stesso non è un file unico, ma una playlist **.m3u8** di piccoli segmenti di pochi secondi, che il player scarica uno dopo l\'altro (HLS).',
+            'Una volta capito il meccanismo, l\'ho replicato. Nella lista ogni canale punta a TvIt; quando un player lo apre, TvIt fa la stessa richiesta che farebbe il player dell\'emittente e lo rimanda all\'indirizzo appena ottenuto. Il video arriva **direttamente dalla CDN dell\'emittente**, senza passare dal mio server.',
+            'C\'è un vantaggio in più: siccome la lista punta a TvIt e non alle emittenti, quando un\'emittente cambia qualcosa basta correggere TvIt, e la lista salvata nei player continua a funzionare.',
+          ),
+          captions: 'Il percorso di un canale, dal player alla CDN dell\'emittente',
+          localized_images: files('cs-tvit-flusso-it.png'),
+        },
+        en: {
+          label: 'reverse engineering',
+          title: 'How the broadcasters do it',
+          text: paras(
+            'At first I knew nothing about how a live TV stream works. To find out I did a bit of reverse engineering: I opened the broadcasters\' websites with the browser\'s developer tools and followed, one by one, the requests of their players.',
+            'I found out that the video address isn\'t in the page. The player first asks a broadcaster\'s service where the live stream is, and gets a temporary address, with a token that expires shortly, pointing to the CDN that serves the video. The video itself isn\'t a single file but an **.m3u8** playlist of small segments a few seconds long, which the player downloads one after the other (HLS).',
+            'Once I understood the mechanism, I replicated it. In the list every channel points to TvIt; when a player opens it, TvIt makes the same request the broadcaster\'s player would make and redirects it to the address it just got. The video comes **straight from the broadcaster\'s CDN**, without going through my server.',
+            'There\'s one more advantage: since the list points to TvIt and not to the broadcasters, when a broadcaster changes something it\'s enough to fix TvIt, and the list saved in the players keeps working.',
+          ),
+          captions: 'The path of a channel, from the player to the broadcaster\'s CDN',
+          localized_images: files('cs-tvit-flusso-en.png'),
+        },
+        ro: {
+          label: 'reverse engineering',
+          title: 'Cum fac televiziunile',
+          text: paras(
+            'La început nu știam nimic despre cum funcționează streamingul unei transmisii TV în direct. Ca să înțeleg, am făcut puțin reverse engineering: am deschis site-urile televiziunilor cu instrumentele pentru dezvoltatori ale browserului și am urmărit, una câte una, cererile playerelor lor.',
+            'Am descoperit că adresa video-ului nu se află în pagină. Playerul întreabă mai întâi un serviciu al televiziunii unde se află transmisia și primește o adresă temporară, cu un token care expiră repede, către CDN-ul care distribuie video-ul. Video-ul în sine nu este un singur fișier, ci un playlist **.m3u8** de segmente mici, de câteva secunde, pe care playerul le descarcă unul după altul (HLS).',
+            'După ce am înțeles mecanismul, l-am replicat. În listă fiecare canal trimite la TvIt; când un player îl deschide, TvIt face aceeași cerere pe care ar face-o playerul televiziunii și îl redirecționează la adresa tocmai obținută. Video-ul vine **direct din CDN-ul televiziunii**, fără să treacă prin serverul meu.',
+            'Mai e un avantaj: pentru că lista trimite la TvIt și nu la televiziuni, când o televiziune schimbă ceva e suficient să corectez TvIt, iar lista salvată în playere continuă să funcționeze.',
+          ),
+          captions: 'Drumul unui canal, de la player la CDN-ul televiziunii',
+          localized_images: files('cs-tvit-flusso-ro.png'),
+        },
+      }),
+      section('block_gallery', {images: files('cs-tvit-canali.png', 'cs-tvit-player.png')}, {
+        it: {
+          label: 'le sfide',
+          title: 'Dalla lista al sito',
+          text: paras(
+            'L\'idea iniziale era solo la lista. Poi ho voluto un sito per guardare i canali dal browser, con la guida TV accanto, ed è lì che sono arrivati i problemi veri.',
+            'Li ho risolti uno alla volta, con passione e pazienza, e mi sono divertito a farlo.',
+          ),
+          items: lines(
+            '**CORS.** Alcuni servizi delle emittenti non permettono al browser di leggere le loro risposte da un altro sito. TvIt fa la richiesta al posto del browser e gli passa solo l\'indirizzo finale della CDN, che il browser può aprire.',
+            '**Il server è fuori dall\'Italia.** Alcune emittenti bloccano le richieste dall\'estero, e il mio server non è in Italia. Per questo TvIt quasi sempre non scarica il video ma rimanda il player all\'emittente, che lo serve a chi guarda; i canali disponibili solo in Italia sono segnati sul sito con una bandierina.',
+            '**Indirizzi che scadono.** Per alcuni canali l\'indirizzo dura pochi minuti: TvIt lo chiede di nuovo a ogni avvio, invece di scriverlo una volta per tutte.',
+            '**Emittenti che cambiano.** CDN, indirizzi e pagine cambiano senza preavviso. Ogni volta si torna agli strumenti per sviluppatori, si ritrova la richiesta giusta e si aggiorna TvIt.',
+          ),
+          captions: lines('La pagina dei canali', 'Il player nel browser'),
+        },
+        en: {
+          label: 'the challenges',
+          title: 'From the list to the website',
+          text: paras(
+            'The original idea was just the list. Then I wanted a website to watch the channels in the browser, with the TV guide next to them, and that\'s where the real problems came in.',
+            'I solved them one at a time, with passion and patience, and enjoyed doing it.',
+          ),
+          items: lines(
+            '**CORS.** Some broadcaster services don\'t let the browser read their responses from another site. TvIt makes the request in the browser\'s place and passes on only the final CDN address, which the browser can open.',
+            '**The server is outside Italy.** Some broadcasters block requests from abroad, and my server isn\'t in Italy. That\'s why TvIt almost never downloads the video but sends the player back to the broadcaster, which serves it to the viewer; channels available only in Italy are marked on the site with a small flag.',
+            '**Addresses that expire.** For some channels the address lasts a few minutes: TvIt asks for it again at every start, instead of writing it down once and for all.',
+            '**Broadcasters that change.** CDNs, addresses and pages change without notice. Each time it\'s back to the developer tools, finding the right request again and updating TvIt.',
+          ),
+          captions: lines('The channels page', 'The player in the browser'),
+        },
+        ro: {
+          label: 'provocările',
+          title: 'De la listă la site',
+          text: paras(
+            'Ideea inițială era doar lista. Apoi am vrut un site ca să urmăresc canalele din browser, cu ghidul TV alături, și abia atunci au apărut problemele adevărate.',
+            'Le-am rezolvat pe rând, cu pasiune și răbdare, și m-am distrat făcând asta.',
+          ),
+          items: lines(
+            '**CORS.** Unele servicii ale televiziunilor nu permit browserului să le citească răspunsurile de pe alt site. TvIt face cererea în locul browserului și îi transmite doar adresa finală din CDN, pe care browserul o poate deschide.',
+            '**Serverul este în afara Italiei.** Unele televiziuni blochează cererile din străinătate, iar serverul meu nu este în Italia. De aceea TvIt aproape niciodată nu descarcă video-ul, ci trimite playerul înapoi la televiziune, care îl servește celui care se uită; canalele disponibile doar în Italia sunt marcate pe site cu un steguleț.',
+            '**Adrese care expiră.** Pentru unele canale adresa durează câteva minute: TvIt o cere din nou la fiecare pornire, în loc s-o scrie o dată pentru totdeauna.',
+            '**Televiziuni care se schimbă.** CDN-uri, adrese și pagini se schimbă fără avertisment. De fiecare dată te întorci la instrumentele pentru dezvoltatori, găsești din nou cererea potrivită și actualizezi TvIt.',
+          ),
+          captions: lines('Pagina canalelor', 'Playerul în browser'),
+        },
+      }),
+      section('block_gallery', {images: files('cs-tvit-guida.png', 'cs-tvit-lista.png')}, {
+        it: {
+          label: 'guida TV',
+          title: 'La guida, scritta a mano',
+          text: paras(
+            'La guida dei programmi (EPG) non arriva da un\'API: si legge dalle pagine dei palinsesti, canale per canale, ogni notte alle 3. Lo scraper l\'ho scritto a mano, senza AI, studiando il codice delle pagine e decidendo cosa prendere: orari, titolo, categoria, descrizione e immagine.',
+            'Le pagine dei palinsesti cambiano struttura ogni tanto. Per questo, se lo scraper non trova più nessun programma, si ferma e lo segnala, invece di lasciare la guida vuota senza che nessuno se ne accorga.',
+          ),
+          captions: lines('La guida TV sul sito', 'La lista M3U pronta per i player'),
+        },
+        en: {
+          label: 'TV guide',
+          title: 'The guide, written by hand',
+          text: paras(
+            'The programme guide (EPG) doesn\'t come from an API: it\'s read from the schedule pages, channel by channel, every night at 3. I wrote the scraper by hand, without AI, studying the code of the pages and deciding what to take: times, title, category, description and image.',
+            'The schedule pages change their structure every now and then. That\'s why, if the scraper no longer finds any programme, it stops and reports it, instead of leaving the guide empty without anyone noticing.',
+          ),
+          captions: lines('The TV guide on the website', 'The M3U list, ready for the players'),
+        },
+        ro: {
+          label: 'ghid TV',
+          title: 'Ghidul, scris de mână',
+          text: paras(
+            'Ghidul programelor (EPG) nu vine dintr-un API: se citește din paginile cu grila de programe, canal cu canal, în fiecare noapte la ora 3. Scraperul l-am scris de mână, fără AI, studiind codul paginilor și decizând ce să iau: ore, titlu, categorie, descriere și imagine.',
+            'Paginile cu grila de programe își schimbă structura din când în când. De aceea, dacă scraperul nu mai găsește niciun program, se oprește și semnalează asta, în loc să lase ghidul gol fără ca nimeni să observe.',
+          ),
+          captions: lines('Ghidul TV pe site', 'Lista M3U gata pentru playere'),
         },
       }),
       section('block_list', {}, {
@@ -1670,25 +1782,48 @@ const CASE_STUDIES = {
           label: 'risultati',
           title: 'Usata anche da altri',
           items: lines(
-            '65 stelle e 4 fork su GitHub: il mio repository più seguito.',
-            'Lista e guida TV si aggiornano da sole, senza interventi a mano.',
+            '**65 stelle e 4 fork su GitHub**: il mio repository più seguito, segno che la lista la usano in molti.',
+            '**Più stabile di altre liste**: quando un canale smette di andare, lo si corregge in un punto solo, e tutti i player tornano a vederlo.',
+            '**Il player web**, comodo quando si è in viaggio e non si ha il proprio player a portata di mano.',
+            '**Lista e guida si aggiornano da sole**, senza interventi a mano.',
           ),
         },
         en: {
           label: 'results',
           title: 'Used by others too',
           items: lines(
-            '65 stars and 4 forks on GitHub: my most followed repository.',
-            'The list and the TV guide update themselves, with no manual work.',
+            '**65 stars and 4 forks on GitHub**: my most followed repository, a sign that many people use the list.',
+            '**More stable than other lists**: when a channel stops working, it\'s fixed in one place, and every player can watch it again.',
+            '**The web player**, handy when travelling without your own player at hand.',
+            '**The list and the guide update themselves**, with no manual work.',
           ),
         },
         ro: {
           label: 'rezultate',
           title: 'Folosită și de alții',
           items: lines(
-            '65 de stele și 4 fork-uri pe GitHub: cel mai urmărit repository al meu.',
-            'Lista și ghidul TV se actualizează singure, fără intervenții manuale.',
+            '**65 de stele și 4 fork-uri pe GitHub**: repository-ul meu cel mai urmărit, semn că lista o folosesc mulți.',
+            '**Mai stabilă decât alte liste**: când un canal nu mai merge, se corectează într-un singur loc, iar toate playerele îl pot urmări din nou.',
+            '**Playerul web**, comod când ești pe drum și nu ai playerul tău la îndemână.',
+            '**Lista și ghidul se actualizează singure**, fără intervenții manuale.',
           ),
+        },
+      }),
+      section('block_text', {}, {
+        it: {
+          label: 'bilancio',
+          title: 'Cosa mi ha lasciato',
+          text: 'TvIt è un side project, e lo è sempre stato. Eppure mi ha dato grandi soddisfazioni: il risultato più grande non sono le stelle, ma essermi divertito a costruirlo, aver scoperto come funziona davvero lo streaming e aver superato, uno dopo l\'altro, ostacoli che all\'inizio non sapevo nemmeno di avere davanti.',
+        },
+        en: {
+          label: 'looking back',
+          title: 'What it left me',
+          text: 'TvIt is a side project, and it always has been. Yet it has given me great satisfaction: the biggest result isn\'t the stars, but having fun building it, discovering how streaming really works and getting past, one after the other, obstacles I didn\'t even know were ahead of me at the start.',
+        },
+        ro: {
+          label: 'bilanț',
+          title: 'Ce mi-a lăsat',
+          text: 'TvIt este un side project și a fost mereu. Și totuși mi-a adus mari satisfacții: cel mai mare rezultat nu sunt stelele, ci faptul că m-am distrat construindu-l, am descoperit cum funcționează cu adevărat streamingul și am trecut, unul după altul, peste obstacole despre care la început nici nu știam că le am în față.',
         },
       }),
       NEXT_STEP,
