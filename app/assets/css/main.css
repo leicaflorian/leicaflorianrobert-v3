@@ -110,6 +110,34 @@
     60% { transform: translate(-4px, 1px); clip-path: inset(30% 0 40% 0) }
     80% { transform: translate(3px, 0); clip-path: inset(70% 0 5% 0) }
 }
+/* The Stack easter egg (blocks/stack/Tag.vue): on click the box shakes and the name splits in two colours. */
+@media (prefers-reduced-motion: no-preference) {
+    .tech-glitch { animation: tech-glitch .42s steps(1) }
+    .tech-glitch .tech-glitch-text::before,
+    .tech-glitch .tech-glitch-text::after {
+        content: attr(data-text);
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        animation: tech-glitch-slice .42s steps(1) both;
+    }
+    .tech-glitch .tech-glitch-text::before { color: var(--color-accent) }
+    .tech-glitch .tech-glitch-text::after { color: var(--color-code-number); animation-direction: reverse }
+}
+@keyframes tech-glitch {
+    0%, 100% { transform: none }
+    15% { transform: translate(-3px, 1px) skewX(-6deg) }
+    35% { transform: translate(3px, -1px) }
+    55% { transform: translate(-2px, 0) skewX(4deg) }
+    75% { transform: translate(2px, 1px) }
+}
+@keyframes tech-glitch-slice {
+    0% { transform: translateX(-3px); clip-path: inset(0 0 65% 0) }
+    25% { transform: translateX(3px); clip-path: inset(55% 0 10% 0) }
+    50% { transform: translateX(-2px); clip-path: inset(25% 0 45% 0) }
+    75% { transform: translateX(2px); clip-path: inset(75% 0 0 0) }
+    100% { transform: none; clip-path: inset(0 0 100% 0) }
+}
 /* The visuals in place of images: progress bar, lines appearing. */
 @keyframes bar-fill {
     0% { width: 8% }
