@@ -2100,6 +2100,17 @@ const CASE_STUDIES = {
   },
 }
 
+// The image of a project (its card, and the case study cover when there's no `cover`):
+// a file in seed-files, uploaded only where the project has none.
+const PROJECT_IMAGES = {
+  v1: 'project-v1.png',
+  v2: 'project-v2.jpg',
+  slides: 'project-slides.png',
+  nosponsor: 'project-nosponsor.png',
+  familymanager: 'project-familymanager.png',
+  tailwab: 'project-tailwab.png',
+}
+
 // --- loading -----------------------------------------------------------------------------
 
 async function seedSingleton(collection, data) {
@@ -2204,6 +2215,16 @@ async function seedGalleryFiles() {
   }
 }
 
+/** The images of `PROJECT_IMAGES`, for the projects that don't have one yet. */
+async function seedProjectImages() {
+  for (const [slug, name] of Object.entries(PROJECT_IMAGES)) {
+    const [project] = await api('GET', `/items/projects?filter[slug][_eq]=${slug}&fields=id,image`)
+    if (!project || project.image) continue
+    await api('PATCH', `/items/projects/${project.id}`, {image: await upload(name)})
+    console.log(`+ image of ${slug}`)
+  }
+}
+
 await waitForDirectus()
 for (const [collection, data] of Object.entries(SINGLETONS)) await seedSingleton(collection, data)
 const pages = []
@@ -2212,6 +2233,7 @@ await seedCollection('pages', pages, 'key')
 await seedCollection('projects', PROJECTS, 'slug')
 await seedCaseStudies()
 await seedGalleryFiles()
+await seedProjectImages()
 await seedCollection('experiences', EXPERIENCES, 'company')
 await seedCollection('services', SERVICES, 'icon')
 await seedCollection('technologies', TECHNOLOGIES, 'name')
