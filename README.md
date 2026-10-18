@@ -15,6 +15,7 @@ Requires Node 22 (see `.nvmrc`; ESLint doesn't run on Node 20) and Docker.
 
 ```bash
 npm install
+npx playwright install chromium         # prints the CV to PDF in npm run generate
 
 # Directus and PostgreSQL
 cp directus/.env.example directus/.env   # then change SECRET, ADMIN_EMAIL, ADMIN_PASSWORD
@@ -36,7 +37,8 @@ The Directus admin panel is at http://localhost:8055, with the credentials from 
 | Command | What it does |
 | --- | --- |
 | `npm run dev` | The site in development |
-| `npm run generate` | The static site in `.output/public` (Directus must be reachable: content is read at build time) |
+| `npm run generate` | The static site in `.output/public` (Directus must be reachable: content is read at build time), then the CV PDFs (`scripts/cv-pdf.mjs`) |
+| `npm run cv:pdf` | Prints the CV PDFs again from an existing `.output/public` |
 | `npm run typecheck` | Type checking |
 | `npm run lint` / `lint:fix` | ESLint (code and formatting); `lint:fix` fixes what it can |
 | `npm run directus:up` / `directus:down` | Starts / stops Directus in Docker |
@@ -90,6 +92,8 @@ design/                   the Claude Design export, for reference only
 
 **A project that can't be shown.** Instead of a screenshot, a project can pick an illustration drawn in code with its `visual` field (today only `banking`, a client area like an online bank's, used by the investment platform): it fills the cover's browser window, with no domain in the bar and no logo tile. A new illustration needs its value in the `visual` choices in `setup.mjs` and in `ProjectVisual` in `app/types/content.ts`, its components in `components/project/visual/<name>/`, wired into `ProjectCover`, and a copy in `scripts/cover-preview.html`.
 
+**The CV.** `pages/cv.vue` is the one route outside the Directus pages: a bare A4 sheet (no layout, no engine) at `/cv`, `/en/cv`, `/ro/cv`, listed in `nitro.prerender.routes` since nothing links to it, and `noindex`. It's built from the same content as the site (`useCvData()`: `site`, the About header intro as the profile, `experiences`, the daily and production `technologies`, plus `education` and `spoken_languages`), with no data the site doesn't already show. It fits one page: the experiences go in newest first while they fit, and the title then says how many are shown. After `nuxt generate`, `scripts/cv-pdf.mjs` opens the three pages in headless Chromium and saves `/cv/leica-florian-robert-cv-<locale>.pdf`; it fails the build on an empty or dark sheet, or when Chromium is missing, and warns if a CV runs past one page. The «Scarica CV» button (`useCvLink()`) shows on the blocks with `cv_button` on (the About header and Contact info). In `npm run dev` the PDFs don't exist, so the button leads to a 404: open `/cv` and print it from the browser to check the layout.
+
 **Languages.** Every collection with texts has its own `<name>_translations` in Directus. The site downloads all translations and shows the current language's one; an empty field falls back to Italian.
 
 **Modes.** The generated site is always in legacy mode, so the HTML is the same for everyone and complete for search engines. In the browser, after loading, it switches to the saved mode; a script in the page head hides the legacy page from visitors who chose native, to avoid a flash.
@@ -111,4 +115,4 @@ The schema has over 25 collections, the limit without a license: activate the Di
 
 ## Deployment
 
-The site is static. When content changes in Directus, the «Ricostruisci il sito» (rebuild the site) flow calls `DEPLOY_WEBHOOK_URL` (the Coolify deploy webhook), which regenerates and publishes the site.
+The site is static. When content changes in Directus, the «Ricostruisci il sito» (rebuild the site) flow calls `DEPLOY_WEBHOOK_URL` (the Coolify deploy webhook), which regenerates and publishes the site. The build needs Chromium for the CV PDFs: `npx playwright install --with-deps chromium` before `npm run generate`.
