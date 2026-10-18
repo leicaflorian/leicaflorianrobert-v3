@@ -699,10 +699,11 @@ const CASE_STUDIES = {
           ),
         },
       }),
+      // screenshots of the site itself: one pair per language
       section('block_gallery', {engines: 'native'}, {
-        it: {captions: lines('Chi sono', 'Versione mobile')},
-        en: {captions: lines('About me', 'Mobile version')},
-        ro: {captions: lines('Despre mine', 'Versiunea mobilă')},
+        it: {captions: lines('Chi sono', 'Versione mobile'), localized_images: files('cs-v3-chi-sono-it.png', 'cs-v3-mobile-it.png')},
+        en: {captions: lines('About me', 'Mobile version'), localized_images: files('cs-v3-chi-sono-en.png', 'cs-v3-mobile-en.png')},
+        ro: {captions: lines('Despre mine', 'Versiunea mobilă'), localized_images: files('cs-v3-chi-sono-ro.png', 'cs-v3-mobile-ro.png')},
       }),
       section('block_list', {}, {
         it: {
