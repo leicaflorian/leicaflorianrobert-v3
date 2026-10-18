@@ -8,13 +8,9 @@
 import {createServer} from 'node:http'
 import {readFile, mkdir, writeFile} from 'node:fs/promises'
 import {extname, join, normalize} from 'node:path'
-import {chromium} from 'playwright'
+import {CV_FILE, CV_PAGES, CvError, launchBrowser, printCv} from './cv-print.mjs'
 
 const ROOT = '.output/public'
-/** The file name the "Download CV" button links to: keep in step with useCvLink(). */
-const CV_FILE = locale => `cv/leica-florian-robert-cv-${locale}.pdf`
-const PAGES = {it: '/cv', en: '/en/cv', ro: '/ro/cv'}
-const MAX_PAGES = 1
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json',
@@ -36,77 +32,31 @@ function serve() {
   return new Promise(resolve => server.listen(0, '127.0.0.1', () => resolve(server)))
 }
 
-function fail(message) {
-  console.error(`✗ ${message}`)
-  process.exitCode = 1
-}
-
 const server = await serve()
 const origin = `http://127.0.0.1:${server.address().port}`
 
 let browser
 try {
-  browser = await chromium.launch()
+  browser = await launchBrowser()
 } catch (error) {
   server.close()
-  console.error(`✗ Chromium doesn't start: run \`npx playwright install chromium\` (on a bare Linux build, with --with-deps).\n${error.message}`)
+  console.error(`✗ ${error.message}`)
   process.exit(1)
 }
 
 try {
   await mkdir(join(ROOT, 'cv'), {recursive: true})
-  const page = await browser.newPage()
-  // the sheet lays out differently on screen (one long page): check it as it prints
-  await page.emulateMedia({media: 'print'})
-
-  for (const [locale, path] of Object.entries(PAGES)) {
-    const response = await page.goto(origin + path, {waitUntil: 'networkidle'})
-    if (!response?.ok()) {
-      fail(`${locale}: ${path} is missing from ${ROOT} (${response?.status()}); is it in nitro.prerender.routes?`)
-      continue
+  for (const [locale, path] of Object.entries(CV_PAGES)) {
+    try {
+      const {pdf, pages} = await printCv(browser, origin + path)
+      await writeFile(join(ROOT, CV_FILE(locale)), pdf)
+      console.log(`✓ ${CV_FILE(locale)} · ${pages} pages`)
+    } catch (error) {
+      if (!(error instanceof CvError)) throw error
+      // print nothing rather than a wrong or cut-off CV
+      console.error(`✗ ${locale}: ${error.message}`)
+      process.exitCode = 1
     }
-    // the sheet drops the experiences that don't fit, then marks itself ready
-    if (!await page.waitForSelector('[data-cv-ready]', {timeout: 10_000}).then(() => true, () => false)) {
-      fail(`${locale}: the CV never got ready (data-cv-ready)`)
-      continue
-    }
-
-    // the checks a broken page would fail: print nothing rather than a wrong or cut-off CV
-    const sheet = await page.evaluate(() => {
-      const side = document.querySelector('[data-cv-side]')
-      return {
-        name: document.querySelector('h1')?.textContent?.trim(),
-        experiences: document.querySelectorAll('[data-cv-experience]').length,
-        background: getComputedStyle(document.documentElement).backgroundColor,
-        overflow: side ? side.scrollHeight - side.clientHeight : 0,
-      }
-    })
-    if (!sheet.name) {
-      fail(`${locale}: the CV has no name (h1)`)
-      continue
-    }
-    if (!sheet.experiences) {
-      fail(`${locale}: the CV has no experiences`)
-      continue
-    }
-    if (sheet.background !== 'rgb(255, 255, 255)') {
-      fail(`${locale}: the CV is not on white paper (html background ${sheet.background})`)
-      continue
-    }
-    if (sheet.overflow > 0) {
-      fail(`${locale}: the grey column overflows the page by ${sheet.overflow}px (its end would be cut off)`)
-      continue
-    }
-
-    const pdf = await page.pdf({preferCSSPageSize: true, printBackground: true})
-    const pages = pdf.toString('latin1').match(/\/Type\s*\/Page[^s]/g)?.length ?? 0
-    if (pages > MAX_PAGES) {
-      fail(`${locale}: the CV runs to ${pages} pages, not ${MAX_PAGES}`)
-      continue
-    }
-
-    await writeFile(join(ROOT, CV_FILE(locale)), pdf)
-    console.log(`✓ ${CV_FILE(locale)} · ${pages} pages`)
   }
 } finally {
   await browser.close()

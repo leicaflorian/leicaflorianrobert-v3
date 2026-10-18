@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 import tailwindcss from '@tailwindcss/vite'
+import cvDevHandler from './scripts/cv-dev.mjs'
 
 export default defineNuxtConfig({
   modules: [
@@ -55,6 +56,8 @@ export default defineNuxtConfig({
       routes: ['/', '/en', '/ro', '/cv', '/en/cv', '/ro/cv'],
     },
   },
+  // in dev the CV PDFs aren't generated: print them on request (scripts/cv-dev.mjs)
+  devServerHandlers: [{route: '/cv', handler: cvDevHandler}],
   vite: {
     plugins: [
       tailwindcss(),
