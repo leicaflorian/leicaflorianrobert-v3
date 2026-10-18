@@ -24,7 +24,7 @@ services:
       - uploads:/directus/uploads
     environment:
       SERVICE_FQDN_DIRECTUS_8055: ""
-      PUBLIC_URL: ${SERVICE_FQDN_DIRECTUS}
+      PUBLIC_URL: ${SERVICE_URL_DIRECTUS}
       SECRET: ${SERVICE_BASE64_64_SECRET}
       ADMIN_EMAIL: ${ADMIN_EMAIL}
       ADMIN_PASSWORD: ${SERVICE_PASSWORD_ADMIN}
@@ -51,7 +51,7 @@ services:
       # the variables flows can read with {{ $env.NAME }}
       FLOWS_ENV_ALLOW_LIST: DEPLOY_WEBHOOK_URL,DEPLOY_WEBHOOK_TOKEN,CONTACT_EMAIL_TO
     healthcheck:
-      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:8055/server/health"]
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:8055/server/ping"]
       interval: 10s
       timeout: 5s
       retries: 10
