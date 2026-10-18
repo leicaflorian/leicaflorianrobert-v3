@@ -8,6 +8,6 @@ defineProps<{block: BlockCta}>()
   <p class="m-0 mt-6">
     <b>{{ block.title }} {{ block.title_accent }}</b>
     <template v-if="block.text"> {{ block.text }}</template>
-    <LegacyLink to="contact">{{ $t('common.contactMe') }}</LegacyLink>
+    <LegacyLink to="contact">{{ $t('common.contactMe') }} →</LegacyLink>
   </p>
 </template>

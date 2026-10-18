@@ -39,8 +39,8 @@ const groups = computed(() => props.block.show === 'grouped' ? groupByCategory(p
           <UiSectionLabel v-if="label">{{ label }}</UiSectionLabel>
           <UiSectionTitle v-if="block.title">{{ block.title }}</UiSectionTitle>
         </div>
-        <NuxtLink v-if="block.all_link" :to="pageLink('projects')" class="border-b border-accent pb-1 text-sm text-ink hover:text-ink">
-          {{ $t('common.allProjects') }} →
+        <NuxtLink v-if="block.all_link" :to="pageLink('projects')" class="inline-flex items-center gap-2 border-b border-accent pb-1 text-sm text-ink hover:text-ink">
+          {{ $t('common.allProjects') }}<UiArrowIcon/>
         </NuxtLink>
       </div>
       <ProjectFeaturedGrid v-if="featured.length" v-reveal :projects="featured"/>

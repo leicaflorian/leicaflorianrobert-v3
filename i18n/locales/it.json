@@ -19,7 +19,7 @@
   },
   "common": {
     "available": "Disponibile per nuovi progetti",
-    "contactMe": "Contattami →",
+    "contactMe": "Contattami",
     "allProjects": "Tutti i progetti",
     "imagePlaceholder": "Immagine in arrivo"
   },
@@ -40,7 +40,7 @@
     "emailPlaceholder": "nome{'@'}esempio.it",
     "message": "messaggio",
     "messagePlaceholder": "Es. Ho un gestionale in Excel e vorrei trasformarlo in una web app per 5 colleghi…",
-    "submit": "Invia la richiesta →",
+    "submit": "Invia la richiesta",
     "sending": "Invio in corso...",
     "sent": "Ricevuto! Ti rispondo entro 1–2 giorni lavorativi.",
     "error": "Non sono riuscito a inviare il messaggio. Riprova, oppure scrivimi via email.",
@@ -210,7 +210,7 @@
       "pay": "Paga ✓",
       "push": "push · ora",
       "shipped": "Ordine spedito",
-      "start": "Inizia ora →",
+      "start": "Inizia ora",
       "why": "// perché funziona?",
       "explain": "parte da 0 e accumula ogni prezzo",
       "review": "Gestiamo anche il timeout, qui si blocca tutto."

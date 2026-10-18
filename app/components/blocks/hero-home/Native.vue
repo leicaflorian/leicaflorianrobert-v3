@@ -47,7 +47,7 @@ function onLeave() {
         </UiPageTitle>
         <p v-reveal class="m-0 mt-8 max-w-[480px] text-[15px] leading-[1.8] text-muted">{{ block.text }}</p>
         <div v-reveal class="mt-11 flex flex-wrap gap-3">
-          <UiButton to="contact" glow>{{ $t('common.contactMe') }}</UiButton>
+          <UiButton to="contact" glow>{{ $t('common.contactMe') }}<UiArrowIcon class="size-3.5"/></UiButton>
           <UiButton to="projects" variant="secondary">{{ $t('home.seeProjects') }}</UiButton>
         </div>
       </div>

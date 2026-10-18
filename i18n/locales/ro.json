@@ -19,7 +19,7 @@
   },
   "common": {
     "available": "Disponibil pentru proiecte noi",
-    "contactMe": "Contactează-mă →",
+    "contactMe": "Contactează-mă",
     "allProjects": "Toate proiectele",
     "imagePlaceholder": "Imagine în curând"
   },
@@ -40,7 +40,7 @@
     "emailPlaceholder": "nume{'@'}exemplu.ro",
     "message": "mesaj",
     "messagePlaceholder": "De ex. țin totul într-un fișier Excel și aș vrea să-l transform într-o aplicație web pentru 5 colegi…",
-    "submit": "Trimite cererea →",
+    "submit": "Trimite cererea",
     "sending": "Se trimite...",
     "sent": "Am primit! Îți răspund în 1–2 zile lucrătoare.",
     "error": "Nu am reușit să trimit mesajul. Încearcă din nou sau scrie-mi pe email.",
@@ -210,7 +210,7 @@
       "pay": "Plătește ✓",
       "push": "push · acum",
       "shipped": "Comandă expediată",
-      "start": "Începe acum →",
+      "start": "Începe acum",
       "why": "// de ce funcționează?",
       "explain": "pornește de la 0 și adună fiecare preț",
       "review": "Să tratăm și timeout-ul, aici se blochează tot."

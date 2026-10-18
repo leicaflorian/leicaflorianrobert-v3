@@ -71,7 +71,8 @@ const groups = computed(() => [
 
     <div class="flex flex-col items-start gap-4">
       <UiButton type="submit" :disabled="status === 'sending'" class="justify-center max-[860px]:w-full">
-        {{ status === 'sending' ? $t('form.sending') : $t('form.submit') }}
+        <template v-if="status === 'sending'">{{ $t('form.sending') }}</template>
+        <template v-else>{{ $t('form.submit') }}<UiArrowIcon class="size-3.5"/></template>
       </UiButton>
       <p class="m-0 text-[11px] leading-[1.6] text-faint">
         <i18n-t keypath="form.privacy" scope="global">

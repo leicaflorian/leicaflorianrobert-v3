@@ -19,7 +19,7 @@
   },
   "common": {
     "available": "Available for new projects",
-    "contactMe": "Contact me →",
+    "contactMe": "Contact me",
     "allProjects": "All projects",
     "imagePlaceholder": "Image coming soon"
   },
@@ -40,7 +40,7 @@
     "emailPlaceholder": "name{'@'}example.com",
     "message": "message",
     "messagePlaceholder": "E.g. I run everything on an Excel sheet and would like to turn it into a web app for 5 colleagues…",
-    "submit": "Send the request →",
+    "submit": "Send the request",
     "sending": "Sending...",
     "sent": "Got it! I'll reply within 1–2 working days.",
     "error": "I couldn't send your message. Please try again, or email me directly.",
@@ -210,7 +210,7 @@
       "pay": "Pay ✓",
       "push": "push · now",
       "shipped": "Order shipped",
-      "start": "Get started →",
+      "start": "Get started",
       "why": "// why does it work?",
       "explain": "starts at 0 and adds up every price",
       "review": "Let's handle the timeout too, this is where everything hangs."

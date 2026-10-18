@@ -18,7 +18,7 @@ const corners = [
     <div class="absolute inset-y-0 right-[30%] border-l border-dashed border-guide"/>
     <div class="absolute inset-x-0 top-[46%] border-t border-dashed border-guide"/>
     <div class="absolute inset-x-[30%] top-[calc(46%-22px)] flex h-11 items-center justify-center rounded-lg border border-accent bg-surface-raised text-[11px] text-ink transition-[scale] duration-500 ease-spring group-hover:scale-105">
-      {{ $t('services.visual.start') }}
+      {{ $t('services.visual.start') }}<UiArrowIcon class="ml-1.5 size-2.5"/>
     </div>
     <span
       v-for="{at, delay} in corners"
