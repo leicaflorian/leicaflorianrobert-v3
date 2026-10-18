@@ -52,7 +52,7 @@ const footer = computed(() => [props.project.year, props.project.stack].filter(B
       <NuxtImg :src="project.logo" alt="" :width="480" loading="lazy" class="block h-full w-auto max-w-full object-contain"/>
     </div>
     <div
-      v-else-if="project.logo"
+      v-else-if="project.logo && !windowed"
       class="mb-[3.2cqw] self-start"
       :class="project.logo_plate && 'rounded-[max(6px,1cqw)] bg-plate px-[max(9px,2cqw)] py-[max(6px,1.4cqw)]'"
     >
