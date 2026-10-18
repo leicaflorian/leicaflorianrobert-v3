@@ -290,6 +290,32 @@ collections:
       versioning: false
     schema:
       name: block_gallery_translations
+  - collection: block_gallery_translations_files
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      autosave_revision_interval: null
+      collapse: open
+      collection: block_gallery_translations_files
+      color: null
+      display_template: null
+      group: block_gallery
+      hidden: true
+      icon: import_export
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: 3
+      sort_field: null
+      status: active
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: block_gallery_translations_files
   - collection: block_hero_home
     meta:
       accountability: all
@@ -3486,6 +3512,232 @@ fields:
       max_length: null
       numeric_precision: null
       numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: block_gallery_translations
+    field: items
+    type: text
+    meta:
+      collection: block_gallery_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: items
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: Un elenco tra il testo e le immagini, un punto per riga, facoltativo
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 8
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: items
+      table: block_gallery_translations
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: block_gallery_translations
+    field: localized_images
+    type: alias
+    meta:
+      collection: block_gallery_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: localized_images
+      group: null
+      hidden: false
+      interface: files
+      note: >-
+        Facoltativo: le immagini in questa lingua (uno schema con del testo), al
+        posto di quelle comuni
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 9
+      special:
+        - files
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: block_gallery_translations_files
+    field: id
+    type: integer
+    meta:
+      collection: block_gallery_translations_files
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: block_gallery_translations_files
+      data_type: integer
+      default_value: nextval('block_gallery_translations_files_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: block_gallery_translations_files
+    field: block_gallery_translations_id
+    type: integer
+    meta:
+      collection: block_gallery_translations_files
+      conditions: null
+      display: null
+      display_options: null
+      field: block_gallery_translations_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: block_gallery_translations_id
+      table: block_gallery_translations_files
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: block_gallery_translations
+      foreign_key_column: id
+  - collection: block_gallery_translations_files
+    field: directus_files_id
+    type: uuid
+    meta:
+      collection: block_gallery_translations_files
+      conditions: null
+      display: null
+      display_options: null
+      field: directus_files_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: directus_files_id
+      table: block_gallery_translations_files
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_files
+      foreign_key_column: id
+  - collection: block_gallery_translations_files
+    field: sort
+    type: integer
+    meta:
+      collection: block_gallery_translations_files
+      conditions: null
+      display: null
+      display_options: null
+      field: sort
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: sort
+      table: block_gallery_translations_files
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
       is_nullable: true
       is_unique: false
       is_indexed: false
@@ -11022,6 +11274,46 @@ fields:
       has_auto_increment: false
       foreign_key_table: null
       foreign_key_column: null
+  - collection: projects_translations
+    field: award
+    type: string
+    meta:
+      collection: projects_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: award
+      group: null
+      hidden: false
+      interface: input
+      note: 'Case study: un premio, facoltativo'
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 11
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: award
+      table: projects_translations
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: services
     field: id
     type: integer
@@ -13113,6 +13405,48 @@ relations:
       constraint_name: block_gallery_translations_languages_code_foreign
       on_update: NO ACTION
       on_delete: SET NULL
+  - collection: block_gallery_translations_files
+    field: directus_files_id
+    related_collection: directus_files
+    meta:
+      junction_field: block_gallery_translations_id
+      many_collection: block_gallery_translations_files
+      many_field: directus_files_id
+      one_allowed_collections: null
+      one_collection: directus_files
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: block_gallery_translations_files
+      column: directus_files_id
+      foreign_key_table: directus_files
+      foreign_key_column: id
+      constraint_name: block_gallery_translations_files_directus_files_id_foreign
+      on_update: NO ACTION
+      on_delete: CASCADE
+  - collection: block_gallery_translations_files
+    field: block_gallery_translations_id
+    related_collection: block_gallery_translations
+    meta:
+      junction_field: directus_files_id
+      many_collection: block_gallery_translations_files
+      many_field: block_gallery_translations_id
+      one_allowed_collections: null
+      one_collection: block_gallery_translations
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: localized_images
+      sort_field: sort
+    schema:
+      table: block_gallery_translations_files
+      column: block_gallery_translations_id
+      foreign_key_table: block_gallery_translations
+      foreign_key_column: id
+      constraint_name: block_gallery_translations_files_block_gal__640f85a8_foreign
+      on_update: NO ACTION
+      on_delete: CASCADE
   - collection: block_hero_home_translations
     field: block_hero_home_id
     related_collection: block_hero_home
