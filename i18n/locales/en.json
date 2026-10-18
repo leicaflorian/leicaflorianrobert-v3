@@ -302,6 +302,11 @@
     "stack": "stack",
     "languages": "languages",
     "education": "education",
-    "contacts": "contact"
+    "contacts": "contact",
+    "latest": "latest {n} experiences",
+    "download": "Download my CV",
+    "legacy": {
+      "download": "Download my résumé (PDF)"
+    }
   }
 }

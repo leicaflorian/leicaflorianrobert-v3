@@ -302,6 +302,11 @@
     "stack": "stack",
     "languages": "limbi",
     "education": "educație",
-    "contacts": "contact"
+    "contacts": "contact",
+    "latest": "ultimele {n} experiențe",
+    "download": "Descarcă CV-ul",
+    "legacy": {
+      "download": "Descarcă CV-ul meu (PDF)"
+    }
   }
 }

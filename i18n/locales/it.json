@@ -302,6 +302,11 @@
     "stack": "stack",
     "languages": "lingue",
     "education": "formazione",
-    "contacts": "contatti"
+    "contacts": "contatti",
+    "latest": "ultime {n} esperienze",
+    "download": "Scarica il CV",
+    "legacy": {
+      "download": "Scarica il mio curriculum (PDF)"
+    }
   }
 }

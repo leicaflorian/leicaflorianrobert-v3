@@ -14,7 +14,7 @@ const ROOT = '.output/public'
 /** The file name the "Download CV" button links to: keep in step with useCvLink(). */
 const CV_FILE = locale => `cv/leica-florian-robert-cv-${locale}.pdf`
 const PAGES = {it: '/cv', en: '/en/cv', ro: '/ro/cv'}
-const MAX_PAGES = 2
+const MAX_PAGES = 1
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json',
@@ -56,6 +56,8 @@ try {
 try {
   await mkdir(join(ROOT, 'cv'), {recursive: true})
   const page = await browser.newPage()
+  // the sheet lays out differently on screen (one long page): check it as it prints
+  await page.emulateMedia({media: 'print'})
 
   for (const [locale, path] of Object.entries(PAGES)) {
     const response = await page.goto(origin + path, {waitUntil: 'networkidle'})
@@ -63,7 +65,11 @@ try {
       fail(`${locale}: ${path} is missing from ${ROOT} (${response?.status()}); is it in nitro.prerender.routes?`)
       continue
     }
-    await page.evaluate(() => document.fonts.ready)
+    // the sheet drops the experiences that don't fit, then marks itself ready
+    if (!await page.waitForSelector('[data-cv-ready]', {timeout: 10_000}).then(() => true, () => false)) {
+      fail(`${locale}: the CV never got ready (data-cv-ready)`)
+      continue
+    }
 
     // the checks a broken page would fail: print nothing rather than a wrong CV
     const sheet = await page.evaluate(() => {
