@@ -76,8 +76,8 @@ const footer = computed(() => [props.project.year, props.project.stack].filter(B
       </p>
     </div>
 
-    <!-- just under year · stack; in cards, where the text is smaller, a bit lower, so it keeps a gap under the name -->
-    <div v-if="shot" class="absolute inset-x-[14%] top-[38%] overflow-hidden rounded-t-[1.4cqw] border border-b-0 border-line-control bg-bg-deep shadow-[0_-2cqw_6cqw_rgb(0_0_0/0.45)] @max-[600px]:top-[40%]">
+    <!-- just under year · stack; in cards, without that line, just under the name -->
+    <div v-if="shot" class="absolute inset-x-[14%] top-[38%] overflow-hidden rounded-t-[1.4cqw] border border-b-0 border-line-control bg-bg-deep shadow-[0_-2cqw_6cqw_rgb(0_0_0/0.45)] @max-[600px]:top-[33%]">
       <div class="flex h-[max(12px,3.4cqw)] items-center gap-[0.7cqw] border-b border-line-control bg-surface-raised px-[1.4cqw]">
         <span v-for="dot in 3" :key="dot" class="size-[max(4px,1cqw)] shrink-0 rounded-full bg-gutter"/>
         <span v-if="project.url" class="ml-[1.2cqw] max-w-1/2 truncate rounded-full bg-bg px-[1cqw] text-[max(6px,1.1cqw)] leading-[max(8px,2cqw)] text-dim">{{ hostOf(project.url) }}</span>
