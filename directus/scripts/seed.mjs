@@ -83,8 +83,8 @@ const PROJECTS = [
   // the site is no longer the one I built: the link goes to its code
   project('biologica', 'https://github.com/leicaflorian/biologioca_disinfestazioni', {}, name('Biologica Disinfestazioni'),
     note('Sito web — il codice su GitHub', 'Website — the code on GitHub', 'Site web — codul pe GitHub')),
-  project('nosponsor', 'https://github.com/leicaflorian/no-sponsor', {kind: 'personal', case_study: true}, name('NoSponsor'),
-    note('Estensione Chrome, in sviluppo', 'Chrome extension, in development', 'Extensie Chrome, în dezvoltare')),
+  project('nosponsor', 'https://chromewebstore.google.com/detail/nlbdnpodndocljlpajidbahbdomalbea', {kind: 'personal', case_study: true}, name('NoSponsor'),
+    note('Estensione Chrome, sul Chrome Web Store', 'Chrome extension, on the Chrome Web Store', 'Extensie Chrome, în Chrome Web Store')),
   project('booleancli', 'https://www.npmjs.com/package/boolean-cli', {kind: 'personal', case_study: true}, name('Boolean CLI'),
     note('CLI per docenti e tutor, su npm', 'CLI for teachers and tutors, on npm', 'CLI pentru profesori și tutori, pe npm')),
   project('pimpmycrud', 'https://packagist.org/packages/leicaflorian/pimp_my_crud', {kind: 'personal'}, name('Pimp My CRUD'),
@@ -1369,9 +1369,9 @@ const CASE_STUDIES = {
   nosponsor: {
     year: 2026,
     translations: {
-      it: {intro: 'Un\'estensione per Chrome, in sviluppo, che trova i contenuti sponsorizzati e li evidenzia, li comprime in una barra cliccabile o li nasconde: su Google, Amazon, Subito.it ed eBay, e in modo generico su tutti gli altri siti.', role: 'Ideazione e sviluppo', type: 'Estensione browser, in sviluppo', stack: 'JavaScript, Chrome Extensions (Manifest V3)'},
-      en: {intro: 'A Chrome extension, in development, that finds sponsored content and highlights it, collapses it into a clickable bar or hides it: on Google, Amazon, Subito.it and eBay, and generically on every other site.', role: 'Concept and development', type: 'Browser extension, in development', stack: 'JavaScript, Chrome Extensions (Manifest V3)'},
-      ro: {intro: 'O extensie pentru Chrome, în dezvoltare, care găsește conținutul sponsorizat și îl evidențiază, îl restrânge într-o bară pe care se poate da clic sau îl ascunde: pe Google, Amazon, Subito.it și eBay, și în mod generic pe toate celelalte site-uri.', role: 'Concepție și dezvoltare', type: 'Extensie de browser, în dezvoltare', stack: 'JavaScript, Chrome Extensions (Manifest V3)'},
+      it: {intro: 'Un\'estensione per Chrome, pubblicata sul Chrome Web Store, che trova i contenuti sponsorizzati e li evidenzia, li comprime in una barra cliccabile o li nasconde: su Google, Amazon, Subito.it ed eBay, e in modo generico su tutti gli altri siti. Su YouTube copre gli annunci video.', role: 'Ideazione e sviluppo', type: 'Estensione browser', stack: 'TypeScript, WXT, Chrome Extensions (Manifest V3)'},
+      en: {intro: 'A Chrome extension, published on the Chrome Web Store, that finds sponsored content and highlights it, collapses it into a clickable bar or hides it: on Google, Amazon, Subito.it and eBay, and generically on every other site. On YouTube it covers video ads.', role: 'Concept and development', type: 'Browser extension', stack: 'TypeScript, WXT, Chrome Extensions (Manifest V3)'},
+      ro: {intro: 'O extensie pentru Chrome, publicată în Chrome Web Store, care găsește conținutul sponsorizat și îl evidențiază, îl restrânge într-o bară pe care se poate da clic sau îl ascunde: pe Google, Amazon, Subito.it și eBay, și în mod generic pe toate celelalte site-uri. Pe YouTube acoperă reclamele video.', role: 'Concepție și dezvoltare', type: 'Extensie de browser', stack: 'TypeScript, WXT, Chrome Extensions (Manifest V3)'},
     },
     sections: [
       section('block_text', {}, {
@@ -1432,6 +1432,61 @@ const CASE_STUDIES = {
             'Un MutationObserver acoperă scroll-ul infinit și conținutul încărcat ulterior.',
             'Fiecare element găsit poartă regula care l-a identificat, pentru a înțelege imediat rezultatele fals pozitive.',
             'Un contor pe pictogramă pentru fiecare filă și un popup pentru a alege modul și a-l activa site cu site.',
+          ),
+        },
+      }),
+      section('block_text', {}, {
+        it: {
+          label: 'youtube',
+          title: 'Un velo sugli annunci video',
+          text: paras(
+            'Su YouTube, quando parte un annuncio, NoSponsor ci mette sopra un **velo**: il video è nero, l\'audio è tolto e va a **16x**, la velocità più alta che il browser permette. Un annuncio di 30 secondi dura circa due secondi, con il tempo che manca scritto in alto.',
+            'Finito l\'annuncio si ritrova tutto com\'era: l\'audio, e la velocità a cui si stava guardando. Un muto messo da chi guarda resta, e l\'audio riacceso a mano durante l\'annuncio non viene tolto.',
+          ),
+        },
+        en: {
+          label: 'youtube',
+          title: 'A veil over video ads',
+          text: paras(
+            'On YouTube, when an ad starts, NoSponsor puts a **veil** over it: the video goes black, the sound is muted and it plays at **16x**, the highest speed the browser allows. A 30-second ad lasts about two seconds, with the time left shown at the top.',
+            'When the ad ends everything is back as it was: the sound, and the speed you were watching at. A mute set by the viewer stays, and sound turned back on by hand during the ad isn\'t taken away.',
+          ),
+        },
+        ro: {
+          label: 'youtube',
+          title: 'Un văl peste reclamele video',
+          text: paras(
+            'Pe YouTube, când pornește o reclamă, NoSponsor pune peste ea un **văl**: video-ul e negru, sunetul e oprit și merge la **16x**, viteza cea mai mare pe care o permite browserul. O reclamă de 30 de secunde durează cam două secunde, cu timpul rămas scris sus.',
+            'Când reclama se termină, totul revine cum era: sunetul și viteza cu care te uitai. Sunetul oprit de cel care se uită rămâne oprit, iar sunetul repornit de mână în timpul reclamei nu mai este oprit.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'risultati',
+          title: 'Dal prototipo allo store',
+          items: lines(
+            'Riscritta in TypeScript su WXT, con test unitari ed end-to-end confrontati con la prima versione, e una CI.',
+            'In italiano o in inglese, secondo la lingua del browser.',
+            'Pubblicata sul Chrome Web Store, con un link nel popup per segnalare uno sponsor mancato.',
+          ),
+        },
+        en: {
+          label: 'results',
+          title: 'From prototype to store',
+          items: lines(
+            'Rewritten in TypeScript on WXT, with unit and end-to-end tests checked against the first version, and CI.',
+            'In Italian or English, following the browser\'s language.',
+            'Published on the Chrome Web Store, with a link in the popup to report a missed sponsor.',
+          ),
+        },
+        ro: {
+          label: 'rezultate',
+          title: 'De la prototip la store',
+          items: lines(
+            'Rescrisă în TypeScript pe WXT, cu teste unitare și end-to-end comparate cu prima versiune, și un CI.',
+            'În italiană sau în engleză, după limba browserului.',
+            'Publicată în Chrome Web Store, cu un link în popup pentru a semnala un sponsor scăpat.',
           ),
         },
       }),
