@@ -15,7 +15,7 @@
   :root {
     --bg: #111113; --bg-deep: #0C0C0E; --surface: #18181B; --surface-raised: #1C1C20;
     --line-card: #26262B; --line-control: #2C2C31; --gutter: #3A3A40;
-    --ink: #EDEBE6; --muted: #A3A09A; --dim: #6A675F; --accent: #FF5B14; --plate: #FFFFFF;
+    --ink: #EDEBE6; --muted: #A3A09A; --dim: #6A675F; --accent: #FF5B14; --plate: #FFFFFF; --line-tile: #FFFFFF29; 
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'JetBrains Mono', monospace; padding: 40px; }
@@ -40,7 +40,7 @@
   .foot { margin: 1.8cqw 0 0; font-size: max(9px, 1.8cqw); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
   /* the window: centred, starting under the text, cut by the bottom edge */
-  .shot { position: absolute; left: 14%; right: 14%; top: 47%; }
+  .shot { position: absolute; left: 14%; right: 14%; top: 38%; }
   /* small covers (cards): no year and stack, the window moves up to keep the same gap */
   @container (max-width: 600px) {
     .foot { display: none; }
@@ -58,13 +58,16 @@
   .window img { display: block; width: 100%; }
 
   /* the logo, bottom left: centred on the window's left edge (left: 14%), whatever its size */
-  .logo { position: absolute; z-index: 1; left: 14%; bottom: 7cqh; transform: translateX(-50%); filter: drop-shadow(0 1.2cqw 2.4cqw rgba(0, 0, 0, .55)); }
+  /* over the screenshot: the same tile for every logo, filled edge to edge, with a light border */
+  .shot-logo { position: absolute; z-index: 1; left: 14%; bottom: 7cqh; transform: translateX(-50%); width: max(46px, 9cqw); height: max(46px, 9cqw);
+               overflow: hidden; border-radius: 22%; border: 1px solid var(--line-tile); background: var(--surface-raised); filter: drop-shadow(0 1.2cqw 2.4cqw rgba(0, 0, 0, .55)); }
+  .shot-logo.plate { background: var(--plate); }
+  .shot-logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  /* no screenshot: above the type; a dark logo made for white pages (logo_plate) on a white plate */
   .logo.icon img { display: block; width: max(46px, 9cqw); height: auto; }
-  /* a dark logo made for white pages (logo_plate), on a white plate */
   .logo.plate { background: var(--plate); border-radius: max(6px, 1cqw); padding: max(6px, 1.4cqw) max(9px, 2cqw); }
   .logo.plate img { display: block; max-height: max(28px, 6cqw); max-width: max(110px, 22cqw); width: auto; height: auto; }
-  /* no screenshot: the plate goes above the type, as today */
-  .no-shot .logo { position: static; transform: none; display: inline-block; margin-bottom: 3cqw; }
+  .no-shot .logo { display: inline-block; margin-bottom: 3cqw; }
 </style>
 </head>
 <body>
@@ -88,7 +91,7 @@
     steelfuture: {name: 'Steel Future', type: 'Gestionale aziendale', foot: '2023 · PHP 5, Git, GitHub'},
   }
   const FILES = '../directus/seed-files/'
-  const logo = p => p.logo ? `<div class="logo ${p.plate ? 'plate' : 'icon'}"><img src="${FILES}${p.logo}" alt=""></div>` : ''
+  const logo = p => p.logo ? `<div class="${p.shot ? 'shot-logo' : 'logo'} ${p.plate ? 'plate' : 'icon'}"><img src="${FILES}${p.logo}" alt=""></div>` : ''
   const cover = p => `
     <div class="cover ${p.shot ? '' : 'no-shot'}">
       <div class="type">

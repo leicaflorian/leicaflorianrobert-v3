@@ -23,6 +23,7 @@
     --color-line-control: #2C2C31;    /* buttons, fields, menus */
     --color-line-strong: #303035;     /* secondary button */
     --color-gutter: #3A3A40;          /* window dots, line numbers */
+    --color-line-tile: #FFFFFF29;     /* around the logo tiles over a project's screenshot */
     --color-guide: #3A2A22;           /* design guides */
 
     /* text */

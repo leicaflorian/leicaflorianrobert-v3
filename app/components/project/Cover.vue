@@ -1,7 +1,7 @@
 <!--
   A project's picture, drawn in code: type, name and year · stack at the top and, when the
   project has a screenshot (and isn't marked `typographic`), the screenshot below in a
-  browser window cut by the bottom edge, with the logo over its bottom left corner.
+  browser window cut by the bottom edge, with the logo in a tile over its bottom left corner.
   Without a screenshot the text is centred, with the logo above it. Being text, the cover
   follows the language, and it scales with its box (container query units; the box always
   has its own size), from a card, where year and stack are left out, to the case study
@@ -35,14 +35,21 @@ const footer = computed(() => [props.project.year, props.project.stack].filter(B
     :aria-label="project.name"
     class="relative flex size-full flex-col justify-center overflow-hidden bg-[radial-gradient(circle_at_85%_110%,color-mix(in_srgb,var(--color-accent)_22%,transparent),transparent_55%),linear-gradient(160deg,var(--color-surface),var(--color-bg)_60%,var(--color-bg-deep))] px-[9%] font-mono [container-type:size]"
   >
-    <!-- with a screenshot, centred on the window's left edge; dark logos made for white pages get a white plate -->
+    <!-- over the screenshot: the same rounded tile for every logo, filled by it edge to edge (logo files
+         are cropped to their drawing), centred on the window's left edge, its light border keeping dark
+         logos off the dark background; dark logos made for white pages get a white tile. A fixed size:
+         with only a width the tile would grow to the image -->
     <div
-      v-if="project.logo"
-      class="z-1 drop-shadow-[0_1.2cqw_2.4cqw_rgb(0_0_0/0.55)]"
-      :class="[
-        shot ? 'absolute bottom-[7cqh] left-[14%] -translate-x-1/2' : 'mb-[3.2cqw] self-start',
-        project.logo_plate && 'rounded-[max(6px,1cqw)] bg-plate px-[max(9px,2cqw)] py-[max(6px,1.4cqw)]',
-      ]"
+      v-if="project.logo && shot"
+      class="absolute bottom-[7cqh] left-[14%] z-1 size-[max(46px,9cqw)] -translate-x-1/2 overflow-hidden rounded-[22%] border border-line-tile drop-shadow-[0_1.2cqw_2.4cqw_rgb(0_0_0/0.55)]"
+      :class="project.logo_plate ? 'bg-plate' : 'bg-surface-raised'"
+    >
+      <NuxtImg :src="project.logo" alt="" :width="480" loading="lazy" class="block size-full object-contain"/>
+    </div>
+    <div
+      v-else-if="project.logo"
+      class="mb-[3.2cqw] self-start"
+      :class="project.logo_plate && 'rounded-[max(6px,1cqw)] bg-plate px-[max(9px,2cqw)] py-[max(6px,1.4cqw)]'"
     >
       <NuxtImg
         :src="project.logo"
@@ -69,8 +76,8 @@ const footer = computed(() => [props.project.year, props.project.stack].filter(B
       </p>
     </div>
 
-    <!-- in cards, without year and stack, the window moves up to keep the same gap -->
-    <div v-if="shot" class="absolute inset-x-[14%] top-[47%] overflow-hidden rounded-t-[1.4cqw] border border-b-0 border-line-control bg-bg-deep shadow-[0_-2cqw_6cqw_rgb(0_0_0/0.45)] @max-[600px]:top-[40%]">
+    <!-- just under year · stack; in cards, where the text is smaller, a bit lower, so it keeps a gap under the name -->
+    <div v-if="shot" class="absolute inset-x-[14%] top-[38%] overflow-hidden rounded-t-[1.4cqw] border border-b-0 border-line-control bg-bg-deep shadow-[0_-2cqw_6cqw_rgb(0_0_0/0.45)] @max-[600px]:top-[40%]">
       <div class="flex h-[max(12px,3.4cqw)] items-center gap-[0.7cqw] border-b border-line-control bg-surface-raised px-[1.4cqw]">
         <span v-for="dot in 3" :key="dot" class="size-[max(4px,1cqw)] shrink-0 rounded-full bg-gutter"/>
         <span v-if="project.url" class="ml-[1.2cqw] max-w-1/2 truncate rounded-full bg-bg px-[1cqw] text-[max(6px,1.1cqw)] leading-[max(8px,2cqw)] text-dim">{{ hostOf(project.url) }}</span>
