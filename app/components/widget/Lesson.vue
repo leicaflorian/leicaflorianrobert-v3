@@ -73,7 +73,7 @@ const bubble = (shown?: boolean) => shown ? 'opacity-100 translate-y-0' : 'opaci
     </div>
     <div class="flex items-center gap-2 text-[11px] transition-colors duration-200" :class="current.loop ? 'text-accent' : 'text-subtle'">
       <span class="h-px flex-1" :class="current.loop ? 'bg-accent' : 'bg-line-control'"/>
-      <span class="whitespace-nowrap">{{ caption }}</span>
+      <UiArrowText :text="caption" class="whitespace-nowrap"/>
       <span class="h-px flex-1" :class="current.loop ? 'bg-accent' : 'bg-line-control'"/>
     </div>
     <div class="relative mt-auto flex flex-col gap-1.5">

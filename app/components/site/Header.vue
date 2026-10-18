@@ -104,7 +104,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
             class="flex min-h-12 cursor-pointer items-center justify-between rounded-[10px] border border-line-control bg-surface px-4 text-[13px] text-ink-soft"
             @click="toggle"
           >
-            <span>{{ t('engine.mobileSwitch') }}</span>
+            <UiArrowText :text="t('engine.mobileSwitch')"/>
             <UiPulseDot/>
           </button>
         </div>

@@ -42,12 +42,12 @@ const caseStudy = computed(() => projectLink({slug: 'v3', url: '', case_study: t
         :class="i < step ? 'opacity-100' : 'translate-y-1 opacity-0'"
       >
         <span class="shrink-0" :class="line.markClass">{{ line.mark }}</span>
-        <span :class="line.textClass">{{ $t(`widgets.agent.steps.${i}`) }}</span>
+        <UiArrowText :text="$t(`widgets.agent.steps.${i}`)" :class="line.textClass"/>
       </span>
     </div>
     <div class="flex items-center justify-between gap-3 border-t border-line px-4 py-2.5 text-[11px] text-subtle">
       <span>{{ $t('widgets.agent.footer') }}</span>
-      <NuxtLink :to="caseStudy" class="shrink-0 text-accent">./case-study →</NuxtLink>
+      <NuxtLink :to="caseStudy" class="inline-flex shrink-0 items-center gap-1.5 text-accent">./case-study<UiArrowIcon/></NuxtLink>
     </div>
   </div>
 </template>
