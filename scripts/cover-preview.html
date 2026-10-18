@@ -35,7 +35,7 @@
   .inner { display: flex; flex-direction: column; height: 100%; padding: 9cqh 9% 0; }
   .no-shot .inner { justify-content: center; padding-top: 0; }
   .windowed .inner { padding-top: 14cqw; } /* as wide as the space left of the window */
-  .windowed .type + .shot { margin-top: 2.4cqw; }
+  .windowed .type + .shot { margin-top: calc(2.4cqw + 8px); }
   .windowed .shot:first-child { margin-top: 0; }
   .type { flex: none; }
   .kicker { margin: 0 0 1.6cqw; font-size: max(9px, 1.7cqw); color: var(--accent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

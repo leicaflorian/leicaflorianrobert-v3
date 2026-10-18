@@ -83,7 +83,7 @@ const footer = computed(() => [props.project.year, props.project.stack].filter(B
 
     <!-- right under the type, cut by the cover's bottom edge; a screenshot shorter than the space left (a wide
          one in the big cover) is stretched to the edge, anchored at the top, so the window never floats -->
-    <div v-if="windowed" class="mx-[6%] mt-[2.4cqw] flex shrink-0 grow flex-col overflow-hidden rounded-t-[1.4cqw] border border-b-0 border-line-control bg-bg-deep shadow-[0_-2cqw_6cqw_rgb(0_0_0/0.45)]">
+    <div v-if="windowed" class="mx-[6%] mt-[calc(2.4cqw+8px)] flex shrink-0 grow flex-col overflow-hidden rounded-t-[1.4cqw] border border-b-0 border-line-control bg-bg-deep shadow-[0_-2cqw_6cqw_rgb(0_0_0/0.45)]">
       <div class="flex h-[max(12px,3.4cqw)] items-center gap-[0.7cqw] border-b border-line-control bg-surface-raised px-[1.4cqw]">
         <span v-for="dot in 3" :key="dot" class="size-[max(4px,1cqw)] shrink-0 rounded-full bg-gutter"/>
         <span v-if="project.url && !project.visual" class="ml-[1.2cqw] max-w-1/2 truncate rounded-full bg-bg px-[1cqw] text-[max(6px,1.1cqw)] leading-[max(8px,2cqw)] text-dim">{{ hostOf(project.url) }}</span>
