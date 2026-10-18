@@ -29,3 +29,6 @@ directus/uploads/*
 !directus/uploads/.gitkeep
 # Directus extensions are written directly in dist/, with no build step
 !directus/extensions/*/dist
+
+# brainstorming mockups and plan ledgers (Superpowers)
+.superpowers/
