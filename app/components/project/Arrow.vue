@@ -1,6 +1,6 @@
 <!--
   Where a project leads: its case study, a page of this site (an arrow with a tag; nothing when
-  `badged`, since `ProjectBadge` already says it), or the external website, in a new tab (↗);
+  `badged`, since `ProjectBadge` already says it), or the external website, in a new tab (an arrow up and right);
   nothing for a project without either.
 -->
 <script setup lang="ts">
@@ -16,5 +16,5 @@ withDefaults(defineProps<{project: Project, badged?: boolean}>(), {badged: false
       <UiArrowIcon/>
     </span>
   </template>
-  <span v-else-if="project.url" class="shrink-0 text-accent">↗</span>
+  <UiArrowIcon v-else-if="project.url" direction="up-right" class="shrink-0 text-accent"/>
 </template>

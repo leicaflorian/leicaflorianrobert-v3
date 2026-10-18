@@ -68,7 +68,7 @@ const shown = computed(() => commits.value.find(c => c.project.id === (hovered.v
       <span v-if="shown" class="truncate">
         {{ $t(`projects.graph.branches.${shown.branch}`) }} · {{ shown.project.name }} · {{ shown.project.note || hostOf(shown.project.url) }}
       </span>
-      <span class="shrink-0 text-ghost">{{ $t('projects.graph.hint') }}</span>
+      <UiArrowText :text="$t('projects.graph.hint')" class="shrink-0 text-ghost"/>
     </div>
   </div>
 </template>

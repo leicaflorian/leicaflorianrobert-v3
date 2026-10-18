@@ -27,8 +27,8 @@ const year = new Date().getFullYear()
       <div>
         <h3 class="m-0 mb-4 text-xs font-medium text-accent">{{ $t('footer.social') }}</h3>
         <div class="flex flex-col gap-2.5 text-[13px] max-[860px]:gap-0">
-          <a :href="site.github" target="_blank" rel="noopener" class="text-ink-soft hover:text-accent-light max-[860px]:py-2.5">GitHub ↗</a>
-          <a :href="site.linkedin" target="_blank" rel="noopener" class="text-ink-soft hover:text-accent-light max-[860px]:py-2.5">LinkedIn ↗</a>
+          <a :href="site.github" target="_blank" rel="noopener" class="text-ink-soft hover:text-accent-light max-[860px]:py-2.5">GitHub <UiArrowIcon direction="up-right" class="inline-block align-[-0.1em]"/></a>
+          <a :href="site.linkedin" target="_blank" rel="noopener" class="text-ink-soft hover:text-accent-light max-[860px]:py-2.5">LinkedIn <UiArrowIcon direction="up-right" class="inline-block align-[-0.1em]"/></a>
         </div>
       </div>
     </div>

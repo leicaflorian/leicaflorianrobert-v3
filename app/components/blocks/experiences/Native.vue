@@ -43,7 +43,7 @@ const yearInView = useYearInView(list, () => bar.value?.$el)
           <span class="text-[13px] text-accent">{{ periodOf(exp, $t('about.now')) }}</span>
           <span class="text-[17px] font-bold">{{ companyOf(exp) }}</span>
           <span class="text-sm text-muted max-[860px]:col-start-2">{{ exp.role }}</span>
-          <span class="text-right text-ghost max-[860px]:hidden">{{ exp.link ? '↗' : '' }}</span>
+          <span class="text-right text-ghost max-[860px]:hidden"><UiArrowIcon v-if="exp.link" direction="up-right" class="inline-block"/></span>
           <p v-if="exp.description" class="col-start-2 col-end-4 m-0 -mt-3 max-w-[640px] text-sm leading-[1.7] text-subtle max-[860px]:col-end-3 max-[860px]:mt-0">
             {{ exp.description }}
           </p>

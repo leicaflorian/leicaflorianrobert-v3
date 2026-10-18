@@ -17,7 +17,7 @@ const facts = computed(() => [
 <template>
   <section>
     <div class="page pb-18 pt-24">
-      <NuxtLink :to="pageLink('projects')" class="inline-flex text-[13px] text-subtle hover:text-accent">{{ $t('caseStudy.back') }}</NuxtLink>
+      <NuxtLink :to="pageLink('projects')" class="inline-flex text-[13px] text-subtle hover:text-accent"><UiArrowText :text="$t('caseStudy.back')"/></NuxtLink>
       <p class="m-0 mb-4 mt-12 text-[13px] text-accent">{{ $t('caseStudy.comment') }}</p>
       <UiPageTitle>{{ project.name }}</UiPageTitle>
       <p v-if="project.intro" v-reveal class="m-0 mt-8 max-w-[640px] text-[17px] leading-[1.8] text-muted">{{ project.intro }}</p>
@@ -28,7 +28,7 @@ const facts = computed(() => [
         </div>
         <div v-if="project.url" class="bg-surface px-6 py-5">
           <p class="m-0 mb-1.5 text-xs text-dim">{{ $t('caseStudy.facts.link') }}</p>
-          <a :href="project.url" target="_blank" rel="noopener" class="break-all text-sm text-ink hover:text-accent">{{ hostOf(project.url) }} ↗</a>
+          <a :href="project.url" target="_blank" rel="noopener" class="break-all text-sm text-ink hover:text-accent">{{ hostOf(project.url) }} <UiArrowIcon direction="up-right" class="inline-block align-[-0.1em]"/></a>
         </div>
       </div>
     </div>

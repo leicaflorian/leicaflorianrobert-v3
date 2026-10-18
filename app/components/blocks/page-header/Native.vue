@@ -55,7 +55,7 @@ const cvLink = useCvLink()
           </div>
           <div class="flex justify-between gap-3 border-t border-line px-4 py-3 text-[11px] text-ghost">
             <span>leica.webp · 1600×2008</span>
-            <span>{{ $t('about.hover') }}</span>
+            <UiArrowText :text="$t('about.hover')"/>
           </div>
         </div>
       </div>
@@ -89,7 +89,7 @@ const cvLink = useCvLink()
         <a
           :href="`mailto:${site.email}`"
           class="mt-5 inline-block break-all border-b-2 border-accent pb-1.5 text-[clamp(16px,2vw,22px)] font-bold text-ink hover:text-accent"
-        >{{ site.email }} ↗</a>
+        >{{ site.email }} <UiArrowIcon direction="up-right" class="inline-block align-[-0.1em]"/></a>
       </div>
       <div v-reveal class="relative min-w-0">
         <div class="absolute inset-[20%_10%_10%_10%] rounded-full bg-accent opacity-[0.14] blur-[110px]"/>

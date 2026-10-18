@@ -39,10 +39,10 @@ const cardTitle = 'm-0 text-xs font-medium text-accent'
         <div :class="card">
           <h3 :class="cardTitle">{{ $t('contact.social') }}</h3>
           <a :href="site.github" target="_blank" rel="noopener" class="flex justify-between gap-3 border-b border-line-card py-3.5 text-sm text-ink hover:text-accent">
-            <span>GitHub</span><span class="min-w-0 truncate text-subtle">{{ shortUrl(site.github) }} ↗</span>
+            <span>GitHub</span><span class="min-w-0 truncate text-subtle">{{ shortUrl(site.github) }} <UiArrowIcon direction="up-right" class="inline-block align-[-0.1em]"/></span>
           </a>
           <a :href="site.linkedin" target="_blank" rel="noopener" class="flex justify-between gap-3 pb-3.5 text-sm text-ink hover:text-accent">
-            <span>LinkedIn</span><span class="min-w-0 truncate text-subtle">{{ lastSegment(site.linkedin) }} ↗</span>
+            <span>LinkedIn</span><span class="min-w-0 truncate text-subtle">{{ lastSegment(site.linkedin) }} <UiArrowIcon direction="up-right" class="inline-block align-[-0.1em]"/></span>
           </a>
         </div>
 
