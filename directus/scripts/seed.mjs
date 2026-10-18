@@ -90,6 +90,8 @@ const PROJECTS = [
   // a private family archive: no link
   project('familymanager', '', {kind: 'personal', case_study: true}, name('Family Manager'),
     note('Documenti, scadenze e conti di famiglia, letti dall\'AI', 'Family documents, deadlines and accounts, read by AI', 'Documente, termene și conturi de familie, citite de AI')),
+  project('tailwab', 'https://tailwab.leicaflorianrobert.dev', {kind: 'personal', case_study: true}, name('TailWab'),
+    note('Tipografia e spaziature fluide per Tailwind', 'Fluid typography and spacing for Tailwind', 'Tipografie și spațieri fluide pentru Tailwind')),
   project('pimpmycrud', 'https://packagist.org/packages/leicaflorian/pimp_my_crud', {kind: 'personal'}, name('Pimp My CRUD'),
     note('Pacchetto Laravel che genera i CRUD', 'Laravel package that generates CRUDs', 'Pachet Laravel care generează CRUD-uri')),
   project('enigma', 'https://leicaflorian.github.io/enigma_machine', {kind: 'personal'}, name('Enigma'),
@@ -1880,6 +1882,75 @@ const CASE_STUDIES = {
             'Family Manager Agent: un program în Go, pentru Mac și Windows, care comandă scannerul de acasă pentru pagina de scanare. Nu trimite nimic nimănui, iar codul este public pe GitHub.',
             'Agenda cu ce expiră și când, și mementourile deschise în Google Calendar, ca un calendar la care te abonezi.',
             'În producție pe un server administrat cu Coolify, cu o copie de rezervă în fiecare noapte.',
+          ),
+        },
+      }),
+      NEXT_STEP,
+    ],
+  },
+  tailwab: {
+    year: 2024,
+    translations: {
+      it: {intro: 'Uno strumento web che genera la configurazione di Tailwind CSS con la tipografia fluida: testi e spaziature che crescono con lo schermo, senza media query. Un progetto di Web Artisan Bros.', role: 'Ideazione e sviluppo', type: 'Strumento web', stack: 'Nuxt, Tailwind, FormKit, Shiki, Vitest'},
+      en: {intro: 'A web tool that generates the Tailwind CSS configuration with fluid typography: text and spacing that grow with the screen, with no media queries. A Web Artisan Bros project.', role: 'Concept and development', type: 'Web tool', stack: 'Nuxt, Tailwind, FormKit, Shiki, Vitest'},
+      ro: {intro: 'Un instrument web care generează configurația Tailwind CSS cu tipografie fluidă: texte și spațieri care cresc odată cu ecranul, fără media query. Un proiect Web Artisan Bros.', role: 'Concepție și dezvoltare', type: 'Instrument web', stack: 'Nuxt, Tailwind, FormKit, Shiki, Vitest'},
+    },
+    sections: [
+      section('block_text', {}, {
+        it: {
+          label: 'idea',
+          title: 'Niente salti tra i breakpoint',
+          text: paras(
+            'Con i breakpoint la dimensione del testo salta da un valore all\'altro. Con **clamp()** cresce in linea retta tra una larghezza minima e una massima dello schermo: niente media query, e le stesse proporzioni a ogni larghezza.',
+            'TailWab fa i conti per **ogni classe** di Tailwind, sull\'idea di Utopia e della Fluid Typography, e dà il codice pronto da copiare.',
+          ),
+        },
+        en: {
+          label: 'idea',
+          title: 'No jumps between breakpoints',
+          text: paras(
+            'With breakpoints, text size jumps from one value to the next. With **clamp()** it grows in a straight line between a minimum and a maximum screen width: no media queries, and the same proportions at every width.',
+            'TailWab does the maths for **every class** in Tailwind, on the idea of Utopia and Fluid Typography, and hands you the code ready to copy.',
+          ),
+        },
+        ro: {
+          label: 'idee',
+          title: 'Fără salturi între breakpoint-uri',
+          text: paras(
+            'Cu breakpoint-urile, dimensiunea textului sare de la o valoare la alta. Cu **clamp()** crește în linie dreaptă între o lățime minimă și una maximă a ecranului: fără media query și cu aceleași proporții la orice lățime.',
+            'TailWab face calculele pentru **fiecare clasă** din Tailwind, după ideea Utopia și a Fluid Typography, și îți dă codul gata de copiat.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'come funziona',
+          title: 'Dalle impostazioni al codice',
+          items: lines(
+            'Due pagine: Fluid Fonts per le 13 classi text-*, con dimensione e interlinea, e Fluid Spaces per le 34 chiavi della scala delle spaziature.',
+            'Larghezza minima e massima, fattore di scala e mobile first: ogni cambio rifà la tabella, e ogni riga si può correggere a mano.',
+            'Il codice da copiare: variabili CSS, un blocco @theme per Tailwind v4 o la configurazione per la v3.',
+            'Tutto nel browser, senza backend, con i caratteri serviti dal sito stesso. Il codice generato è fissato dai test.',
+          ),
+        },
+        en: {
+          label: 'how it works',
+          title: 'From settings to code',
+          items: lines(
+            'Two pages: Fluid Fonts for the 13 text-* classes, with size and line height, and Fluid Spaces for the 34 keys of the spacing scale.',
+            'Minimum and maximum width, scale factor and mobile first: every change rebuilds the table, and every row can be adjusted by hand.',
+            'The code to copy: CSS variables, an @theme block for Tailwind v4 or the configuration for v3.',
+            'All in the browser, with no backend, and fonts served by the site itself. The generated code is pinned by tests.',
+          ),
+        },
+        ro: {
+          label: 'cum funcționează',
+          title: 'De la setări la cod',
+          items: lines(
+            'Două pagini: Fluid Fonts pentru cele 13 clase text-*, cu dimensiune și înălțimea rândului, și Fluid Spaces pentru cele 34 de chei ale scării de spațieri.',
+            'Lățimea minimă și maximă, factorul de scală și mobile first: fiecare schimbare reface tabelul, iar fiecare rând se poate corecta de mână.',
+            'Codul de copiat: variabile CSS, un bloc @theme pentru Tailwind v4 sau configurația pentru v3.',
+            'Totul în browser, fără backend, cu fonturile servite chiar de site. Codul generat este fixat de teste.',
           ),
         },
       }),
