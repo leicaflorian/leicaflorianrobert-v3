@@ -39,10 +39,16 @@ const rows = computed<Row[]>(() => {
   ]
 })
 
-const filled = computed(() => {
+/**
+ * The fields the counter checks, one per data row of the JSON. The design counts 7 because it
+ * splits first and last name; the form has a single name field, so the total follows this list.
+ */
+const fields = computed(() => {
   const {name, email, message, project_types, budget, timeline} = draft.value
-  return [name.trim(), email.trim(), message.trim(), project_types.length, budget, timeline].filter(Boolean).length
+  return [name.trim(), email.trim(), message.trim(), project_types.length, budget, timeline]
 })
+const filled = computed(() => fields.value.filter(Boolean).length)
+const ready = computed(() => filled.value === fields.value.length)
 </script>
 
 <template>
@@ -52,7 +58,7 @@ const filled = computed(() => {
         <span v-for="i in 3" :key="i" class="size-[9px] rounded-full bg-gutter"/>
         <span class="ml-2">{{ $t('form.brief.json.file') }}</span>
       </span>
-      <span :class="filled === 7 ? 'text-code-ok' : ''">{{ filled === 7 ? $t('form.brief.json.ready') : `${filled}/7` }}</span>
+      <span :class="ready ? 'text-code-ok' : ''">{{ ready ? $t('form.brief.json.ready') : `${filled}/${fields.length}` }}</span>
     </div>
     <div class="box-border flex min-h-80 flex-col py-6 pr-4 text-[13px] leading-[1.8]" aria-hidden="true">
       <div v-for="(row, i) in rows" :key="i" class="grid animate-[line-in_.25s_ease-out_both] grid-cols-[44px_minmax(0,1fr)]">
