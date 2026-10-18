@@ -304,6 +304,12 @@
     "education": "education",
     "contacts": "contact",
     "latest": "latest {n} experiences",
+    "consent": "I authorise the processing of the personal data contained in my CV under Italian Legislative Decree 196/2003 and EU Regulation 2016/679 (GDPR).",
+    "contact": {
+      "email": "email",
+      "website": "website",
+      "city": "city"
+    },
     "download": "Download my CV",
     "legacy": {
       "download": "Download my résumé (PDF)"

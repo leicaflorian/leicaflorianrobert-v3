@@ -304,6 +304,12 @@
     "education": "formazione",
     "contacts": "contatti",
     "latest": "ultime {n} esperienze",
+    "consent": "Autorizzo il trattamento dei dati personali contenuti nel mio curriculum vitae ai sensi del D.Lgs. 196/2003 e del Regolamento UE 2016/679 (GDPR).",
+    "contact": {
+      "email": "email",
+      "website": "sito",
+      "city": "città"
+    },
     "download": "Scarica il CV",
     "legacy": {
       "download": "Scarica il mio curriculum (PDF)"

@@ -304,6 +304,12 @@
     "education": "educație",
     "contacts": "contact",
     "latest": "ultimele {n} experiențe",
+    "consent": "Autorizez prelucrarea datelor personale din CV-ul meu în conformitate cu Decretul Legislativ italian 196/2003 și cu Regulamentul UE 2016/679 (GDPR).",
+    "contact": {
+      "email": "email",
+      "website": "site",
+      "city": "oraș"
+    },
     "download": "Descarcă CV-ul",
     "legacy": {
       "download": "Descarcă CV-ul meu (PDF)"
