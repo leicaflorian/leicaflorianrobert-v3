@@ -59,7 +59,7 @@ app/
     case-study/           the top of a case study (the project's own fields)
     site/                 header, footer, logo, language, boot overlay
     ui/                   the small pieces: titles with cursor, labels, buttons, images, ASCII portrait
-    project/ service/ contact/ legacy/            cards, service illustrations, form and project.json, links
+    project/ service/ contact/ legacy/            cards, covers and their illustrations, service illustrations, form and project.json, links
     widget/               the animated widgets (editor, lesson, neofetch) of the Widget block
   composables/
     useEngine.ts          the legacy/native mode, saved in the browser
@@ -85,6 +85,8 @@ design/                   the Claude Design export, for reference only
 **A new block type** needs: the collection in `BLOCKS` in `directus/scripts/setup.mjs` (setup also adds it to the types allowed in `sections`), its interface in `app/types/content.ts` (and in `Blocks`), its name in `BLOCK_COLLECTIONS` in `useContent.ts`, and `components/blocks/<name>/Native.vue` and `Legacy.vue`, registered in `components/blocks/Renderer.vue`. If the block reads other content (a collection, like the projects), add the composable to `BLOCK_DATA` in the Renderer too.
 
 **Replacing a project image or logo.** Replace the file in `directus/seed-files/` (the seed never overwrites a filled-in field), then in Directus upload it as a **new file** and point the project to it. Don't replace the content of the old file (`PATCH /files/<id>`): its URL stays the same and Directus serves assets with `Cache-Control: public, max-age=2592000`, so a browser that already loaded it keeps the old image for up to 30 days. The old file can then be deleted from the library.
+
+**A project that can't be shown.** Instead of a screenshot, a project can pick an illustration drawn in code with its `visual` field (today only `banking`, a client area like an online bank's, used by the investment platform): it fills the cover's browser window, with no domain in the bar and no logo tile. A new illustration needs its value in the `visual` choices in `setup.mjs` and in `ProjectVisual` in `app/types/content.ts`, its components in `components/project/visual/<name>/`, wired into `ProjectCover`, and a copy in `scripts/cover-preview.html`.
 
 **Languages.** Every collection with texts has its own `<name>_translations` in Directus. The site downloads all translations and shows the current language's one; an empty field falls back to Italian.
 
