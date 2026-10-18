@@ -122,6 +122,7 @@ const COLLECTIONS = [
       choice('branch', 'Il ramo nel grafo della pagina Progetti: main per le versioni del sito; se vuoto, prod (clienti) o dev (personali) secondo il tipo', [['main', 'main'], ['client', 'prod (clienti)'], ['lab', 'dev (personali)']], null),
       image('image', 'Screenshot (WebP; 16:10 per i siti, 9:19,5 per le app)'),
       boolean('typographic', 'Copertina tipografica (nome, tipo e anno) al posto dello screenshot: per i progetti senza immagine è sempre così'),
+      image('logo', 'Logo del progetto o del cliente, su un riquadro chiaro nella copertina tipografica'),
       integer('year', 'Anno: nei case study e per l\'ordine del grafo nella pagina Progetti'),
       image('cover', 'Case study: immagine grande sotto il titolo; se vuota, lo screenshot'),
     ],

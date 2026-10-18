@@ -50,6 +50,8 @@ export interface Project {
   image: FileId
   /** Show the typographic cover instead of `image` (it's shown anyway when there is no image). */
   typographic: boolean
+  /** Shown on a light plate in the typographic cover. */
+  logo: FileId
   year: number | null
   cover: FileId
   // translated
