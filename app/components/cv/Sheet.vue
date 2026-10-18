@@ -95,7 +95,7 @@ onMounted(async () => {
     <div class="min-w-0 flex-1">
       <section class="pt-[12mm]">
         <CvHeading>{{ $t('cv.profile') }}</CvHeading>
-        <p v-for="(paragraph, i) in paragraphs(data.profile)" :key="i" class="m-0 mb-[2mm] text-[10pt] leading-[1.55] last:mb-0">{{ paragraph }}</p>
+        <p v-for="(paragraph, i) in paragraphs(data.profile)" :key="i" class="m-0 mb-[2mm] text-[9pt] leading-[1.5] last:mb-0">{{ paragraph }}</p>
       </section>
 
       <section class="pt-[7mm]">
