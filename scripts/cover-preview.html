@@ -34,6 +34,9 @@
   /* the cover can't measure itself: the padding is on a box inside it */
   .inner { display: flex; flex-direction: column; height: 100%; padding: 9cqh 9% 0; }
   .no-shot .inner { justify-content: center; padding-top: 0; }
+  .windowed .inner { padding-top: 14cqw; } /* as wide as the space left of the window */
+  .windowed .type + .shot { margin-top: 2.4cqw; }
+  .windowed .shot:first-child { margin-top: 0; }
   .type { flex: none; }
   .kicker { margin: 0 0 1.6cqw; font-size: max(9px, 1.7cqw); color: var(--accent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .name { margin: 0; font-size: 6.4cqw; font-weight: 800; line-height: 1.02; letter-spacing: -0.03em; }
@@ -42,11 +45,12 @@
   .foot { margin: 1.8cqw 0 0; font-size: max(9px, 1.8cqw); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
   /* the window: right under the text, whatever its length, cut by the bottom edge */
-  .shot { flex: none; margin: 4.5cqw 6% 0; }
+  /* a screenshot shorter than the space left is stretched to the edge, anchored at the top */
+  .shot { flex: 1 0 auto; display: flex; margin: 4.5cqw 6% 0; }
+  .shot .window { flex: 1; display: flex; flex-direction: column; }
   /* small covers (cards): no year and stack, a smaller gap */
   @container (max-width: 600px) {
     .foot { display: none; }
-    .shot { margin-top: 3.5cqw; }
   }
   .window {
     overflow: hidden; background: var(--bg-deep);
@@ -57,7 +61,7 @@
   .dot { width: 1cqw; height: 1cqw; min-width: 4px; min-height: 4px; border-radius: 50%; background: var(--gutter); }
   .url { margin-left: 1.2cqw; max-width: 50%; height: 2cqw; min-height: 8px; border-radius: 99px; background: var(--bg); color: var(--dim);
          font-size: max(6px, 1.1cqw); display: flex; align-items: center; padding: 0 1cqw; white-space: nowrap; overflow: hidden; }
-  .window img { display: block; width: 100%; }
+  .window img { display: block; width: 100%; flex: 1 0 auto; object-fit: cover; object-position: top; }
 
   /* the logo, bottom left: centred on the window's left edge (left: 14%), whatever its size */
   /* over the screenshot: a tile of the same height for every logo, as wide as the logo up to a limit, with a light border */
@@ -187,15 +191,16 @@
       <div class="buy"><b></b></div>
     </div>
 `}
+  // with a window, only the type: the name is in the card and on the case study page
   const cover = p => {
     const windowed = p.shot || p.visual
     return `
-    <div class="cover ${windowed ? '' : 'no-shot'}"><div class="inner">
+    <div class="cover ${windowed ? 'windowed' : 'no-shot'}"><div class="inner">
       <div class="type">
         ${windowed ? '' : logo(p)}
         <p class="kicker">// ${p.type}</p>
-        <p class="name">${p.name}</p>
-        <p class="foot">${p.foot}</p>
+        ${windowed ? '' : `<p class="name">${p.name}</p>
+        <p class="foot">${p.foot}</p>`}
       </div>
       ${windowed ? `<div class="shot"><div class="window">
         <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>${p.url && !p.visual ? `<span class="url">${p.url}</span>` : ''}</div>

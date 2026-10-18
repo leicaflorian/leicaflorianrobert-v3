@@ -1,9 +1,10 @@
 <!--
-  A project's picture, drawn in code: type, name and year · stack at the top and, when the
-  project has a screenshot (and isn't marked `typographic`) or an illustration (`visual`, for a
-  project that can't be shown), right under the text a browser window with it, cut by the
-  bottom edge, with the logo in a tile over its bottom left corner (or, for the illustration,
-  its phone over the bottom right). Without either the text is centred, with the logo above it. Being text, the cover
+  A project's picture, drawn in code. When the project has a screenshot (and isn't marked
+  `typographic`) or an illustration (`visual`, for a project that can't be shown): the type at
+  the top and right under it a browser window with it, cut by the bottom edge, with the logo in
+  a tile over its bottom left corner (or, for the illustration, its phone over the bottom right);
+  the name is left out, being in the card and on the case study page. Without either: type,
+  name and year · stack, centred, with the logo above them. Being text, the cover
   follows the language, and it scales with its box (container query units; the box always
   has its own size), from a card, where year and stack are left out, to the case study
   header. A device mockup (`bare`) or a case study `cover` gets the image alone.
@@ -68,29 +69,27 @@ const footer = computed(() => [props.project.year, props.project.stack].filter(B
 
     <ProjectVisualBankingPhone v-if="project.visual === 'banking'" class="absolute bottom-[-6cqh] right-[9%] z-1"/>
 
-    <!-- the box can't measure itself: with a window the top margin is on this box, in its units -->
-    <div :class="windowed && 'flex-none pt-[9cqh]'">
-      <p class="m-0 truncate text-accent" :class="windowed ? 'mb-[1.6cqw] text-[max(9px,1.7cqw)]' : 'mb-[2.4cqw] text-[max(10px,1.9cqw)]'">// {{ kicker }}</p>
-      <p class="m-0 font-extrabold leading-[1.02] tracking-[-0.03em] text-balance text-ink" :class="windowed ? 'text-[6.4cqw]' : 'text-[8cqw]'">
+    <!-- with a window, only the type: name, year and stack are already in the card and on the case study
+         page. The box can't measure itself, so the top margin is on this text, in its units: as wide as the
+         space left of the window (14%) -->
+    <p v-if="windowed" class="m-0 flex-none truncate pt-[14cqw] text-[max(9px,1.7cqw)] text-accent">// {{ kicker }}</p>
+    <div v-else>
+      <p class="m-0 mb-[2.4cqw] truncate text-[max(10px,1.9cqw)] text-accent">// {{ kicker }}</p>
+      <p class="m-0 text-[8cqw] font-extrabold leading-[1.02] tracking-[-0.03em] text-balance text-ink">
         {{ project.name }}<span aria-hidden="true" class="ml-[0.12em] inline-block h-[0.1em] w-[0.5em] bg-accent align-baseline"/>
       </p>
-      <p
-        v-if="footer"
-        class="m-0 truncate text-muted @max-[600px]:hidden"
-        :class="windowed ? 'mt-[1.8cqw] text-[max(9px,1.8cqw)]' : 'mt-[3cqw] text-[max(10px,2.1cqw)]'"
-      >
-        {{ footer }}
-      </p>
+      <p v-if="footer" class="m-0 mt-[3cqw] truncate text-[max(10px,2.1cqw)] text-muted @max-[600px]:hidden">{{ footer }}</p>
     </div>
 
-    <!-- right under the text, whatever its length (a long name takes two lines), cut by the cover's bottom edge -->
-    <div v-if="windowed" class="mx-[6%] mt-[4.5cqw] flex-none overflow-hidden rounded-t-[1.4cqw] border border-b-0 border-line-control bg-bg-deep shadow-[0_-2cqw_6cqw_rgb(0_0_0/0.45)] @max-[600px]:mt-[3.5cqw]">
+    <!-- right under the type, cut by the cover's bottom edge; a screenshot shorter than the space left (a wide
+         one in the big cover) is stretched to the edge, anchored at the top, so the window never floats -->
+    <div v-if="windowed" class="mx-[6%] mt-[2.4cqw] flex shrink-0 grow flex-col overflow-hidden rounded-t-[1.4cqw] border border-b-0 border-line-control bg-bg-deep shadow-[0_-2cqw_6cqw_rgb(0_0_0/0.45)]">
       <div class="flex h-[max(12px,3.4cqw)] items-center gap-[0.7cqw] border-b border-line-control bg-surface-raised px-[1.4cqw]">
         <span v-for="dot in 3" :key="dot" class="size-[max(4px,1cqw)] shrink-0 rounded-full bg-gutter"/>
         <span v-if="project.url && !project.visual" class="ml-[1.2cqw] max-w-1/2 truncate rounded-full bg-bg px-[1cqw] text-[max(6px,1.1cqw)] leading-[max(8px,2cqw)] text-dim">{{ hostOf(project.url) }}</span>
       </div>
       <ProjectVisualBankingScreen v-if="project.visual === 'banking'"/>
-      <NuxtImg v-else-if="shot" :src="shot" alt="" :width="width" loading="lazy" class="block h-auto w-full"/>
+      <NuxtImg v-else-if="shot" :src="shot" alt="" :width="width" loading="lazy" class="block h-auto w-full grow object-cover object-top"/>
     </div>
   </div>
 </template>
