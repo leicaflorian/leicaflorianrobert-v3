@@ -784,6 +784,58 @@ collections:
       translations: null
       unarchive_value: null
       versioning: false
+  - collection: education
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      autosave_revision_interval: null
+      collapse: open
+      collection: education
+      color: null
+      display_template: '{{institution}}'
+      group: portfolio
+      hidden: false
+      icon: school
+      item_duplication_fields: null
+      note: La formazione del CV, dalla più vecchia alla più recente.
+      preview_url: null
+      singleton: false
+      sort: 3
+      sort_field: sort
+      status: active
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: education
+  - collection: education_translations
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      autosave_revision_interval: null
+      collapse: open
+      collection: education_translations
+      color: null
+      display_template: null
+      group: education
+      hidden: true
+      icon: import_export
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: 1
+      sort_field: null
+      status: active
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: education_translations
   - collection: experiences
     meta:
       accountability: all
@@ -1088,7 +1140,7 @@ collections:
       note: I servizi della Home.
       preview_url: null
       singleton: false
-      sort: 3
+      sort: 5
       sort_field: sort
       status: active
       translations: null
@@ -1174,6 +1226,58 @@ collections:
       versioning: false
     schema:
       name: site_translations
+  - collection: spoken_languages
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      autosave_revision_interval: null
+      collapse: open
+      collection: spoken_languages
+      color: null
+      display_template: '{{code}}'
+      group: portfolio
+      hidden: false
+      icon: translate
+      item_duplication_fields: null
+      note: Le lingue che parlo, nel CV.
+      preview_url: null
+      singleton: false
+      sort: 4
+      sort_field: sort
+      status: active
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: spoken_languages
+  - collection: spoken_languages_translations
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      autosave_revision_interval: null
+      collapse: open
+      collection: spoken_languages_translations
+      color: null
+      display_template: null
+      group: spoken_languages
+      hidden: true
+      icon: import_export
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: 1
+      sort_field: null
+      status: active
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: spoken_languages_translations
   - collection: technologies
     meta:
       accountability: all
@@ -1192,7 +1296,7 @@ collections:
       note: Lo stack di Chi sono.
       preview_url: null
       singleton: false
-      sort: 4
+      sort: 6
       sort_field: sort
       status: active
       translations: null
@@ -1775,6 +1879,47 @@ fields:
       validation: null
       validation_message: null
       width: full
+  - collection: block_contact_info
+    field: cv_button
+    type: boolean
+    meta:
+      collection: block_contact_info
+      conditions: null
+      display: null
+      display_options: null
+      field: cv_button
+      group: null
+      hidden: false
+      interface: boolean
+      note: Mostra il pulsante «Scarica CV»
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 4
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: cv_button
+      table: block_contact_info
+      data_type: boolean
+      default_value: false
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: block_contact_info_translations
     field: id
     type: integer
@@ -4265,6 +4410,47 @@ fields:
       validation: null
       validation_message: null
       width: full
+  - collection: block_page_header
+    field: cv_button
+    type: boolean
+    meta:
+      collection: block_page_header
+      conditions: null
+      display: null
+      display_options: null
+      field: cv_button
+      group: null
+      hidden: false
+      interface: boolean
+      note: Mostra il pulsante «Scarica CV»
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 6
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: cv_button
+      table: block_page_header
+      data_type: boolean
+      default_value: false
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: block_page_header_translations
     field: id
     type: integer
@@ -6990,6 +7176,475 @@ fields:
     schema:
       name: title
       table: block_widgets_translations
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: education
+    field: id
+    type: integer
+    meta:
+      collection: education
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: education
+      data_type: integer
+      default_value: nextval('education_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: education
+    field: sort
+    type: integer
+    meta:
+      collection: education
+      conditions: null
+      display: null
+      display_options: null
+      field: sort
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: sort
+      table: education
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: education
+    field: year
+    type: integer
+    meta:
+      collection: education
+      conditions: null
+      display: null
+      display_options: null
+      field: year
+      group: null
+      hidden: false
+      interface: input
+      note: Anno di inizio; vuoto se non si mostra
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: year
+      table: education
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: education
+    field: end_year
+    type: integer
+    meta:
+      collection: education
+      conditions: null
+      display: null
+      display_options: null
+      field: end_year
+      group: null
+      hidden: false
+      interface: input
+      note: Anno di fine; vuoto se è lo stesso dell'inizio
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: end_year
+      table: education
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: education
+    field: institution
+    type: string
+    meta:
+      collection: education
+      conditions: null
+      display: null
+      display_options: null
+      field: institution
+      group: null
+      hidden: false
+      interface: input
+      note: Scuola o ente
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: institution
+      table: education
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: education
+    field: place
+    type: string
+    meta:
+      collection: education
+      conditions: null
+      display: null
+      display_options: null
+      field: place
+      group: null
+      hidden: false
+      interface: input
+      note: Città, oppure «Online»
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: place
+      table: education
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: education
+    field: translations
+    type: alias
+    meta:
+      collection: education
+      conditions: null
+      display: null
+      display_options: null
+      field: translations
+      group: null
+      hidden: false
+      interface: translations
+      note: null
+      options:
+        defaultLanguage: it
+        defaultOpenSplitView: true
+        languageField: name
+      readonly: false
+      required: false
+      searchable: true
+      sort: 7
+      special:
+        - translations
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: education_translations
+    field: id
+    type: integer
+    meta:
+      collection: education_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: education_translations
+      data_type: integer
+      default_value: nextval('education_translations_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: education_translations
+    field: education_id
+    type: integer
+    meta:
+      collection: education_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: education_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: education_id
+      table: education_translations
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: education
+      foreign_key_column: id
+  - collection: education_translations
+    field: languages_code
+    type: string
+    meta:
+      collection: education_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: languages_code
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: languages_code
+      table: education_translations
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: languages
+      foreign_key_column: code
+  - collection: education_translations
+    field: institution_label
+    type: string
+    meta:
+      collection: education_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: institution_label
+      group: null
+      hidden: false
+      interface: input
+      note: >-
+        L'ente in questa lingua, se va tradotto (es. «Autodidatta»); se vuoto,
+        il campo Scuola o ente
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: institution_label
+      table: education_translations
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: education_translations
+    field: title
+    type: string
+    meta:
+      collection: education_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: title
+      group: null
+      hidden: false
+      interface: input
+      note: Titolo o corso
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: title
+      table: education_translations
       data_type: character varying
       default_value: null
       max_length: 255
@@ -11598,6 +12253,353 @@ fields:
       has_auto_increment: false
       foreign_key_table: null
       foreign_key_column: null
+  - collection: spoken_languages
+    field: id
+    type: integer
+    meta:
+      collection: spoken_languages
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: spoken_languages
+      data_type: integer
+      default_value: nextval('spoken_languages_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: spoken_languages
+    field: sort
+    type: integer
+    meta:
+      collection: spoken_languages
+      conditions: null
+      display: null
+      display_options: null
+      field: sort
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: sort
+      table: spoken_languages
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: spoken_languages
+    field: code
+    type: string
+    meta:
+      collection: spoken_languages
+      conditions: null
+      display: null
+      display_options: null
+      field: code
+      group: null
+      hidden: false
+      interface: input
+      note: 'Codice ISO della lingua: it, ro, en'
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: code
+      table: spoken_languages
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: spoken_languages
+    field: translations
+    type: alias
+    meta:
+      collection: spoken_languages
+      conditions: null
+      display: null
+      display_options: null
+      field: translations
+      group: null
+      hidden: false
+      interface: translations
+      note: null
+      options:
+        defaultLanguage: it
+        defaultOpenSplitView: true
+        languageField: name
+      readonly: false
+      required: false
+      searchable: true
+      sort: 4
+      special:
+        - translations
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: spoken_languages_translations
+    field: id
+    type: integer
+    meta:
+      collection: spoken_languages_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: spoken_languages_translations
+      data_type: integer
+      default_value: nextval('spoken_languages_translations_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: spoken_languages_translations
+    field: spoken_languages_id
+    type: integer
+    meta:
+      collection: spoken_languages_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: spoken_languages_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: spoken_languages_id
+      table: spoken_languages_translations
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: spoken_languages
+      foreign_key_column: id
+  - collection: spoken_languages_translations
+    field: languages_code
+    type: string
+    meta:
+      collection: spoken_languages_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: languages_code
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: languages_code
+      table: spoken_languages_translations
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: languages
+      foreign_key_column: code
+  - collection: spoken_languages_translations
+    field: name
+    type: string
+    meta:
+      collection: spoken_languages_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: name
+      group: null
+      hidden: false
+      interface: input
+      note: La lingua
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: name
+      table: spoken_languages_translations
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: spoken_languages_translations
+    field: level
+    type: string
+    meta:
+      collection: spoken_languages_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: level
+      group: null
+      hidden: false
+      interface: input
+      note: 'Il livello: «madrelingua», «avanzato»…'
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: level
+      table: spoken_languages_translations
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: technologies
     field: id
     type: integer
@@ -12468,6 +13470,48 @@ relations:
       constraint_name: block_widgets_translations_languages_code_foreign
       on_update: NO ACTION
       on_delete: SET NULL
+  - collection: education_translations
+    field: education_id
+    related_collection: education
+    meta:
+      junction_field: languages_code
+      many_collection: education_translations
+      many_field: education_id
+      one_allowed_collections: null
+      one_collection: education
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: translations
+      sort_field: null
+    schema:
+      table: education_translations
+      column: education_id
+      foreign_key_table: education
+      foreign_key_column: id
+      constraint_name: education_translations_education_id_foreign
+      on_update: NO ACTION
+      on_delete: CASCADE
+  - collection: education_translations
+    field: languages_code
+    related_collection: languages
+    meta:
+      junction_field: education_id
+      many_collection: education_translations
+      many_field: languages_code
+      one_allowed_collections: null
+      one_collection: languages
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: education_translations
+      column: languages_code
+      foreign_key_table: languages
+      foreign_key_column: code
+      constraint_name: education_translations_languages_code_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
   - collection: experiences_translations
     field: experiences_id
     related_collection: experiences
@@ -12856,5 +13900,47 @@ relations:
       foreign_key_table: languages
       foreign_key_column: code
       constraint_name: site_translations_languages_code_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: spoken_languages_translations
+    field: spoken_languages_id
+    related_collection: spoken_languages
+    meta:
+      junction_field: languages_code
+      many_collection: spoken_languages_translations
+      many_field: spoken_languages_id
+      one_allowed_collections: null
+      one_collection: spoken_languages
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: translations
+      sort_field: null
+    schema:
+      table: spoken_languages_translations
+      column: spoken_languages_id
+      foreign_key_table: spoken_languages
+      foreign_key_column: id
+      constraint_name: spoken_languages_translations_spoken_languages_id_foreign
+      on_update: NO ACTION
+      on_delete: CASCADE
+  - collection: spoken_languages_translations
+    field: languages_code
+    related_collection: languages
+    meta:
+      junction_field: spoken_languages_id
+      many_collection: spoken_languages_translations
+      many_field: languages_code
+      one_allowed_collections: null
+      one_collection: languages
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: spoken_languages_translations
+      column: languages_code
+      foreign_key_table: languages
+      foreign_key_column: code
+      constraint_name: spoken_languages_translations_languages_code_foreign
       on_update: NO ACTION
       on_delete: SET NULL

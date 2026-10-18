@@ -204,6 +204,48 @@ const EXPERIENCES = [
   }),
 ]
 
+/**
+ * A school or course in the CV, built like an experience: the years are the start or
+ * `[start, end]`, the title is `{it, en, ro}`, and an institution that is a description
+ * rather than a name ("Self-taught") gets its translations as `label`.
+ */
+const education = (institution, place, years, title, label = null) => {
+  const [year, end = null] = [years].flat()
+  return {
+    institution, place, year, end_year: end,
+    translations: tr(Object.fromEntries(Object.entries(title).map(([locale, value]) => [
+      locale, {institution_label: label?.[locale] ?? null, title: value},
+    ]))),
+  }
+}
+
+const EDUCATION = [
+  education('IPSSAR «P. Artusi»', 'Recoaro Terme', [2005, 2009], {
+    it: 'Qualifica di Operatore Sala-Bar',
+    en: 'Food and Beverage Service Qualification',
+    ro: 'Calificare de Operator Sală-Bar',
+  }),
+  education('Self-taught', null, [2009, 2020], {
+    it: 'Programmazione e sviluppo web',
+    en: 'Programming and web development',
+    ro: 'Programare și dezvoltare web',
+  }, {it: 'Autodidatta', en: 'Self-taught', ro: 'Autodidact'}),
+  education('Lezioni-online', 'Online', 2017, {
+    it: 'HTML5 e JavaScript Frameworks Specialist',
+    en: 'HTML5 and JavaScript Frameworks Specialist',
+    ro: 'HTML5 și JavaScript Frameworks Specialist',
+  }),
+  education('We Train Italy', 'Online', 2017, {it: 'SEO Specialist', en: 'SEO Specialist', ro: 'SEO Specialist'}),
+]
+
+const spoken = (code, it, en, ro) => ({code, translations: tr({it, en, ro})})
+
+const SPOKEN_LANGUAGES = [
+  spoken('it', {name: 'Italiano', level: 'madrelingua'}, {name: 'Italian', level: 'native'}, {name: 'Italiană', level: 'nativ'}),
+  spoken('ro', {name: 'Rumeno', level: 'madrelingua'}, {name: 'Romanian', level: 'native'}, {name: 'Română', level: 'nativ'}),
+  spoken('en', {name: 'Inglese', level: 'avanzato'}, {name: 'English', level: 'advanced'}, {name: 'Engleză', level: 'avansat'}),
+]
+
 const service = (icon, it, en, ro) => ({icon, translations: tr({it, en, ro})})
 
 const SERVICES = [
@@ -316,7 +358,7 @@ const PAGES = [
       ro: {slug: 'despre-mine', title: 'Despre mine', description: 'Sunt Leica Florian Robert, dezvoltator Web & Mobile: dezvolt full stack, proiectez interfețe (UI și UX) și predau tehnologii web.'},
     }),
     sections: [
-      section('block_page_header', {variant: 'about'}, {
+      section('block_page_header', {variant: 'about', cv_button: true}, {
         it: {label: '// su di me', title: 'Ciao, piacere', intro: 'Sono Leica Florian Robert, sviluppatore Web & Mobile: sviluppo full stack, progetto interfacce (UI e UX) e insegno tecnologie web. Sono un grande appassionato d\'informatica e di tecnologia.'},
         en: {label: '// about me', title: 'Hi, nice to meet you', intro: 'I\'m Leica Florian Robert, a Web & Mobile Developer: I build full stack, design interfaces (UI and UX) and teach web technologies. I\'m a big fan of computing and technology.'},
         ro: {label: '// despre mine', title: 'Salut, încântat de cunoștință', intro: 'Sunt Leica Florian Robert, dezvoltator Web & Mobile: dezvolt full stack, proiectez interfețe (UI și UX) și predau tehnologii web. Sunt un mare pasionat de informatică și tehnologie.'},
@@ -447,13 +489,13 @@ const PAGES = [
         en: {title: 'Contact', intro: 'Tell me what you have in mind, even if it\'s just a rough idea. No commitment.'},
         ro: {title: 'Contact', intro: 'Povestește-mi ce ai în minte, chiar dacă e doar o idee schițată. Fără niciun angajament.'},
       }),
-      section('block_contact_info', {engines: 'legacy'}, same({})),
+      section('block_contact_info', {engines: 'legacy', cv_button: true}, same({})),
       section('block_contact_form', {}, {
         it: {label: 'scrivimi', title: 'Parliamone', steps_title: 'Come funziona', steps: lines('Mi scrivi (anche due righe vanno bene)', 'Ti rispondo entro 1–2 giorni lavorativi e, se serve, ci sentiamo in una call di 30 minuti', 'Ti mando una proposta chiara: tempi, costi, cosa è incluso')},
         en: {label: 'write to me', title: 'Let\'s talk', steps_title: 'How it works', steps: lines('You write to me (two lines are enough)', 'I reply within 1–2 working days and, if needed, we have a 30-minute call', 'I send you a clear proposal: timing, costs, what\'s included')},
         ro: {label: 'scrie-mi', title: 'Hai să vorbim', steps_title: 'Cum funcționează', steps: lines('Îmi scrii (sunt de ajuns două rânduri)', 'Îți răspund în 1–2 zile lucrătoare și, dacă e nevoie, vorbim într-un call de 30 de minute', 'Îți trimit o propunere clară: termene, costuri, ce este inclus')},
       }),
-      section('block_contact_info', {engines: 'native'}, {
+      section('block_contact_info', {engines: 'native', cv_button: true}, {
         it: {label: 'recapiti', title: 'Dove trovarmi'},
         en: {label: 'details', title: 'Where to find me'},
         ro: {label: 'date de contact', title: 'Unde mă găsești'},
@@ -2486,6 +2528,8 @@ await seedGalleryFiles()
 await seedProjectFiles('image', PROJECT_IMAGES)
 await seedProjectFiles('logo', PROJECT_LOGOS)
 await seedCollection('experiences', EXPERIENCES, 'company')
+await seedCollection('education', EDUCATION, 'institution')
+await seedCollection('spoken_languages', SPOKEN_LANGUAGES, 'code')
 await seedCollection('services', SERVICES, 'icon')
 await seedCollection('technologies', TECHNOLOGIES, 'name')
 console.log('Content loaded.')

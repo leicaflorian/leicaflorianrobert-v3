@@ -92,6 +92,32 @@ export interface Experience {
   description: string | null
 }
 
+/** A school or course, shown in the CV. */
+export interface Education {
+  id: number
+  /** The start year. */
+  year: number | null
+  /** Empty when it ended the year it started. */
+  end_year: number | null
+  institution: string
+  /** The city, or "Online". */
+  place: string | null
+  // translated
+  /** The institution in this language, when it is a description rather than a name ("Self-taught"). */
+  institution_label: string | null
+  title: string
+}
+
+/** A language I speak, shown in the CV. */
+export interface SpokenLanguage {
+  id: number
+  /** ISO 639-1: `it`, `ro`, `en`. */
+  code: string
+  // translated
+  name: string
+  level: string
+}
+
 export type ServiceIcon = 'web' | 'mobile' | 'design' | 'devops' | 'ai' | 'formazione' | 'consulenza'
 
 export interface Service {
@@ -150,6 +176,8 @@ export interface BlockHeroHome extends BlockBase {
 
 export interface BlockPageHeader extends BlockBase {
   variant: 'plain' | 'about' | 'projects' | 'contact'
+  /** Shows the "Download CV" button. */
+  cv_button: boolean
   // translated
   /** `{n}` becomes the number of projects. */
   label: string | null
@@ -262,6 +290,8 @@ export interface BlockStack extends BlockBase {
 }
 
 export interface BlockContactInfo extends BlockBase {
+  /** Shows the "Download CV" button. */
+  cv_button: boolean
   // translated
   label: string | null
   title: string | null
