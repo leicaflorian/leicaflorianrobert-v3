@@ -1536,9 +1536,9 @@ const CASE_STUDIES = {
   fintech: {
     year: 2020,
     translations: {
-      it: {intro: 'Per una società di investimenti finanziari ho costruito tutta l\'infrastruttura informatica: due web app gestionali, un\'app mobile e i servizi che le tengono insieme, dall\'idea alla pubblicazione.', role: 'Ideazione, design, sviluppo e infrastruttura', type: 'Piattaforma web e mobile', stack: 'Node.js, AdonisJS, Nuxt, Vue, Ionic'},
-      en: {intro: 'For a financial investment company I built the whole IT infrastructure: two management web apps, a mobile app and the services that hold them together, from idea to launch.', role: 'Concept, design, development and infrastructure', type: 'Web and mobile platform', stack: 'Node.js, AdonisJS, Nuxt, Vue, Ionic'},
-      ro: {intro: 'Pentru o firmă de investiții financiare am construit întreaga infrastructură IT: două aplicații web de gestiune, o aplicație mobilă și serviciile care le țin împreună, de la idee la lansare.', role: 'Concepție, design, dezvoltare și infrastructură', type: 'Platformă web și mobilă', stack: 'Node.js, AdonisJS, Nuxt, Vue, Ionic'},
+      it: {intro: 'Per una società di investimenti finanziari ho costruito tutta l\'infrastruttura informatica: due web app gestionali, un\'app mobile e i servizi che le tengono insieme, dall\'idea alla pubblicazione.', role: 'Ideazione, design, sviluppo e infrastruttura', type: 'Piattaforma web e mobile', stack: 'Node.js, AdonisJS, NestJS, Laravel, Nuxt, Vue, Ionic, MongoDB, Heroku, DigitalOcean, AWS'},
+      en: {intro: 'For a financial investment company I built the whole IT infrastructure: two management web apps, a mobile app and the services that hold them together, from idea to launch.', role: 'Concept, design, development and infrastructure', type: 'Web and mobile platform', stack: 'Node.js, AdonisJS, NestJS, Laravel, Nuxt, Vue, Ionic, MongoDB, Heroku, DigitalOcean, AWS'},
+      ro: {intro: 'Pentru o firmă de investiții financiare am construit întreaga infrastructură IT: două aplicații web de gestiune, o aplicație mobilă și serviciile care le țin împreună, de la idee la lansare.', role: 'Concepție, design, dezvoltare și infrastructură', type: 'Platformă web și mobilă', stack: 'Node.js, AdonisJS, NestJS, Laravel, Nuxt, Vue, Ionic, MongoDB, Heroku, DigitalOcean, AWS'},
     },
     sections: [
       section('block_text', {}, {
@@ -1575,8 +1575,9 @@ const CASE_STUDIES = {
             'Ideazione delle applicazioni, insieme all\'azienda.',
             'La grafica.',
             'Due web app gestionali, con Nuxt e Vue sul frontend e Node.js e AdonisJS sul backend.',
-            'Un\'app mobile con Ionic.',
-            'La pubblicazione di tutto.',
+            'Un\'app mobile con Ionic, Vue e Capacitor, per Android e iOS, con il suo server in NestJS.',
+            'I microservizi in Laravel che tengono insieme tutto.',
+            'I server e la pubblicazione di tutto, app comprese.',
           ),
         },
         en: {
@@ -1586,8 +1587,9 @@ const CASE_STUDIES = {
             'Designing the applications, together with the company.',
             'The visual design.',
             'Two management web apps, with Nuxt and Vue on the frontend and Node.js and AdonisJS on the backend.',
-            'A mobile app with Ionic.',
-            'Launching all of it.',
+            'A mobile app with Ionic, Vue and Capacitor, for Android and iOS, with its own NestJS server.',
+            'The Laravel microservices that hold it all together.',
+            'The servers and launching all of it, apps included.',
           ),
         },
         ro: {
@@ -1597,34 +1599,205 @@ const CASE_STUDIES = {
             'Conceperea aplicațiilor, împreună cu firma.',
             'Grafica.',
             'Două aplicații web de gestiune, cu Nuxt și Vue pe frontend și Node.js și AdonisJS pe backend.',
-            'O aplicație mobilă cu Ionic.',
-            'Publicarea tuturor.',
+            'O aplicație mobilă cu Ionic, Vue și Capacitor, pentru Android și iOS, cu propriul server în NestJS.',
+            'Microserviciile în Laravel care țin totul împreună.',
+            'Serverele și publicarea tuturor, inclusiv a aplicațiilor.',
+          ),
+        },
+      }),
+      section('block_text', {}, {
+        it: {
+          label: 'architettura',
+          title: 'Una porta sola',
+          text: paras(
+            'Le web app e l\'app mobile parlano con un solo server, che fa da **porta d\'ingresso**: lì si fa l\'accesso, e da lì passano le chiamate a tutti gli altri servizi.',
+            'Un **proxy** controlla chi chiama, aggiunge le chiavi dell\'app e del server e, se la richiesta porta dei file, li salva prima su S3 e passa al servizio solo i loro dati. Così le app conoscono un indirizzo solo, e ogni servizio sa sempre chi lo sta chiamando.',
+          ),
+        },
+        en: {
+          label: 'architecture',
+          title: 'A single door',
+          text: paras(
+            'The web apps and the mobile app talk to one server only, which acts as the **front door**: users sign in there, and every call to the other services goes through it.',
+            'A **proxy** checks who is calling, adds the app and server keys and, when the request carries files, stores them on S3 first and passes the service only their details. This way the apps know a single address, and every service always knows who is calling it.',
+          ),
+        },
+        ro: {
+          label: 'arhitectură',
+          title: 'O singură ușă',
+          text: paras(
+            'Aplicațiile web și aplicația mobilă vorbesc cu un singur server, care face pe **ușa de intrare**: acolo se face autentificarea, și prin el trec apelurile către toate celelalte servicii.',
+            'Un **proxy** verifică cine apelează, adaugă cheile aplicației și ale serverului și, dacă cererea conține fișiere, le salvează mai întâi pe S3 și trimite serviciului doar datele lor. Așa aplicațiile cunosc o singură adresă, iar fiecare serviciu știe mereu cine îl apelează.',
+          ),
+        },
+      }),
+      // the diagrams have text in them: one image per language; in legacy, where images aren't shown, a list says the same
+      section('block_gallery', {engines: 'native'}, {
+        it: {
+          label: 'microservizi',
+          title: 'Servizi che lavorano insieme',
+          captions: 'Tutto passa dal core: le app fanno lì il login, e da lì si arriva agli altri servizi. Lo IAM non fa il login: dice al core e all\'app chi può entrare dove.',
+          localized_images: files('cs-fintech-microservizi-it.png'),
+        },
+        en: {
+          label: 'microservices',
+          title: 'Services working together',
+          captions: 'Everything goes through the core: the apps sign in there, and from there they reach the other services. IAM doesn\'t handle sign-in: it tells the core and the app who can go where.',
+          localized_images: files('cs-fintech-microservizi-en.png'),
+        },
+        ro: {
+          label: 'microservicii',
+          title: 'Servicii care lucrează împreună',
+          captions: 'Totul trece prin core: aplicațiile se autentifică acolo, iar de acolo se ajunge la celelalte servicii. IAM nu face autentificarea: spune core-ului și aplicației cine unde poate intra.',
+          localized_images: files('cs-fintech-microservizi-ro.png'),
+        },
+      }),
+      section('block_gallery', {engines: 'legacy'}, {
+        it: {
+          label: 'microservizi',
+          title: 'Servizi che lavorano insieme',
+          text: 'Tutto passa dal core: le app fanno lì il login, e da lì si arriva agli altri servizi. Lo IAM non fa il login: dice al core e all\'app chi può entrare dove.',
+          items: lines(
+            'L\'area riservata web e l\'app mobile parlano solo con il core: login unico, utenti, proxy.',
+            'Dal core si arriva al backend dell\'app, con i suoi dati; ai file, cioè i moduli PDF; alle code, in tutte e due le direzioni; alle notifiche, con news e avvisi.',
+            'Lo IAM dà ruoli e permessi al core e al backend dell\'app; non fa il login.',
+            'L\'app di controllo accessi parla con le notifiche.',
+          ),
+        },
+        en: {
+          label: 'microservices',
+          title: 'Services working together',
+          text: 'Everything goes through the core: the apps sign in there, and from there they reach the other services. IAM doesn\'t handle sign-in: it tells the core and the app who can go where.',
+          items: lines(
+            'The web client area and the mobile app talk only to the core: single sign-in, users, proxy.',
+            'From the core you reach the app backend, with its data; the files, that is the PDF forms; the queues, in both directions; the notifications, with news and alerts.',
+            'IAM gives roles and permissions to the core and the app backend; it doesn\'t handle sign-in.',
+            'The access control app talks to the notifications.',
+          ),
+        },
+        ro: {
+          label: 'microservicii',
+          title: 'Servicii care lucrează împreună',
+          text: 'Totul trece prin core: aplicațiile se autentifică acolo, iar de acolo se ajunge la celelalte servicii. IAM nu face autentificarea: spune core-ului și aplicației cine unde poate intra.',
+          items: lines(
+            'Zona rezervată web și aplicația mobilă vorbesc doar cu core-ul: autentificare unică, utilizatori, proxy.',
+            'Din core se ajunge la backend-ul aplicației, cu datele lui; la fișiere, adică formularele PDF; la cozi, în ambele direcții; la notificări, cu știri și avertizări.',
+            'IAM dă roluri și permisiuni core-ului și backend-ului aplicației; nu face autentificarea.',
+            'Aplicația de control al accesului vorbește cu notificările.',
+          ),
+        },
+      }),
+      section('block_gallery', {engines: 'native'}, {
+        it: {
+          label: 'come si parlano',
+          title: 'Node e Laravel sulla stessa coda',
+          items: lines(
+            'I server in Node scrivono i lavori direttamente nella coda di Laravel, nel suo formato: un lavoro creato da Node lo esegue un microservizio Laravel.',
+            'Un pianificatore lancia a orario i lavori periodici, come i calcoli di fine mese, chiamando i servizi con utenti dedicati; se qualcosa va storto, il lavoro resta tra i falliti, da riprovare.',
+            'Le notifiche passano tutte da un servizio solo: ogni app le mette in coda, e lui le salva con destinatari e letture e le manda in app, come push o per email.',
+            'I dati sono su MongoDB, condivisi tra i servizi; MySQL per le code, Postmark per le email e la firma dei contratti online.',
+          ),
+          captions: 'Un lavoro nasce in Node, passa dalla coda di Laravel e lo fa un endpoint, scritto nel catalogo.',
+          localized_images: files('cs-fintech-code-it.png'),
+        },
+        en: {
+          label: 'how they talk',
+          title: 'Node and Laravel on the same queue',
+          items: lines(
+            'The Node servers write jobs straight into the Laravel queue, in its own format: a job created by Node is run by a Laravel microservice.',
+            'A scheduler runs the periodic jobs on time, such as the month-end calculations, calling the services with dedicated users; if something goes wrong, the job stays among the failed ones, to be retried.',
+            'All notifications go through one service: every app puts them in the queue, and it stores them with recipients and reads and sends them in-app, as push or by email.',
+            'Data is on MongoDB, shared between the services; MySQL for the queues, Postmark for emails and online contract signing.',
+          ),
+          captions: 'A job starts in Node, goes through the Laravel queue and is done by an endpoint, written in the catalogue.',
+          localized_images: files('cs-fintech-code-en.png'),
+        },
+        ro: {
+          label: 'cum comunică',
+          title: 'Node și Laravel pe aceeași coadă',
+          items: lines(
+            'Serverele Node scriu sarcinile direct în coada Laravel, în formatul ei: o sarcină creată de Node este executată de un microserviciu Laravel.',
+            'Un planificator pornește la oră fixă sarcinile periodice, ca calculele de la sfârșitul lunii, apelând serviciile cu utilizatori dedicați; dacă ceva nu merge, sarcina rămâne printre cele eșuate, de reluat.',
+            'Toate notificările trec printr-un singur serviciu: fiecare aplicație le pune în coadă, iar el le salvează cu destinatarii și citirile și le trimite în aplicație, ca push sau pe email.',
+            'Datele sunt pe MongoDB, comune serviciilor; MySQL pentru cozi, Postmark pentru emailuri și semnarea online a contractelor.',
+          ),
+          captions: 'O sarcină pornește din Node, trece prin coada Laravel și este făcută de un endpoint, scris în catalog.',
+          localized_images: files('cs-fintech-code-ro.png'),
+        },
+      }),
+      section('block_gallery', {engines: 'legacy'}, {
+        it: {
+          label: 'come si parlano',
+          title: 'Node e Laravel sulla stessa coda',
+          text: 'Un lavoro nasce in Node, passa dalla coda di Laravel e lo fa un endpoint, scritto nel catalogo.',
+          items: lines(
+            'Il core e il backend dell\'app, in Node, e il pianificatore, in Laravel, mettono i lavori nella coda: la tabella jobs, in MySQL, nel formato di Laravel.',
+            'Il worker Laravel prende il lavoro e legge nel catalogo indirizzo, metodo e chiavi.',
+            'Chiama l\'endpoint del servizio, che fa il lavoro vero.',
+            'L\'esito va tra i risultati, con richiesta e risposta salvate, o tra i falliti, che dal pannello tornano in coda.',
+            'I server in Node scrivono i lavori direttamente nella coda di Laravel, nel suo formato: un lavoro creato da Node lo esegue un microservizio Laravel.',
+            'Un pianificatore lancia a orario i lavori periodici, come i calcoli di fine mese, chiamando i servizi con utenti dedicati; se qualcosa va storto, il lavoro resta tra i falliti, da riprovare.',
+            'Le notifiche passano tutte da un servizio solo: ogni app le mette in coda, e lui le salva con destinatari e letture e le manda in app, come push o per email.',
+            'I dati sono su MongoDB, condivisi tra i servizi; MySQL per le code, Postmark per le email e la firma dei contratti online.',
+          ),
+        },
+        en: {
+          label: 'how they talk',
+          title: 'Node and Laravel on the same queue',
+          text: 'A job starts in Node, goes through the Laravel queue and is done by an endpoint, written in the catalogue.',
+          items: lines(
+            'The core and the app backend, in Node, and the scheduler, in Laravel, put jobs in the queue: the jobs table, in MySQL, in Laravel\'s format.',
+            'The Laravel worker picks up the job and reads address, method and keys in the catalogue.',
+            'It calls the service\'s endpoint, which does the actual work.',
+            'The outcome goes to the results, with request and response saved, or to the failed jobs, which go back in the queue from the panel.',
+            'The Node servers write jobs straight into the Laravel queue, in its own format: a job created by Node is run by a Laravel microservice.',
+            'A scheduler runs the periodic jobs on time, such as the month-end calculations, calling the services with dedicated users; if something goes wrong, the job stays among the failed ones, to be retried.',
+            'All notifications go through one service: every app puts them in the queue, and it stores them with recipients and reads and sends them in-app, as push or by email.',
+            'Data is on MongoDB, shared between the services; MySQL for the queues, Postmark for emails and online contract signing.',
+          ),
+        },
+        ro: {
+          label: 'cum comunică',
+          title: 'Node și Laravel pe aceeași coadă',
+          text: 'O sarcină pornește din Node, trece prin coada Laravel și este făcută de un endpoint, scris în catalog.',
+          items: lines(
+            'Core-ul și backend-ul aplicației, în Node, și planificatorul, în Laravel, pun sarcinile în coadă: tabelul jobs, în MySQL, în formatul Laravel.',
+            'Worker-ul Laravel preia sarcina și citește în catalog adresa, metoda și cheile.',
+            'Apelează endpoint-ul serviciului, care face munca propriu-zisă.',
+            'Rezultatul ajunge printre rezultate, cu cererea și răspunsul salvate, sau printre cele eșuate, care din panou revin în coadă.',
+            'Serverele Node scriu sarcinile direct în coada Laravel, în formatul ei: o sarcină creată de Node este executată de un microserviciu Laravel.',
+            'Un planificator pornește la oră fixă sarcinile periodice, ca calculele de la sfârșitul lunii, apelând serviciile cu utilizatori dedicați; dacă ceva nu merge, sarcina rămâne printre cele eșuate, de reluat.',
+            'Toate notificările trec printr-un singur serviciu: fiecare aplicație le pune în coadă, iar el le salvează cu destinatarii și citirile și le trimite în aplicație, ca push sau pe email.',
+            'Datele sunt pe MongoDB, comune serviciilor; MySQL pentru cozi, Postmark pentru emailuri și semnarea online a contractelor.',
           ),
         },
       }),
       section('block_list', {}, {
         it: {
           label: 'infrastruttura',
-          title: 'Servizi che lavorano insieme',
+          title: 'Dai server agli store',
           items: lines(
-            'I server necessari alle applicazioni, gestiti da me.',
-            'Microservizi collegati tra loro: centro notifiche, gestione delle code, identità e accessi, file.',
+            'I server gestiti da me: all\'inizio quelli in Node su Heroku, poi tutto spostato su droplet DigitalOcean gestiti con Laravel Forge.',
+            'I database su MongoDB Atlas e i backup su Amazon S3.',
+            'L\'app mobile pubblicata sull\'App Store e su Google Play.',
           ),
         },
         en: {
           label: 'infrastructure',
-          title: 'Services working together',
+          title: 'From servers to stores',
           items: lines(
-            'The servers the applications need, managed by me.',
-            'Connected microservices: notification centre, queue management, identity and access, files.',
+            'The servers, managed by me: at first the Node ones on Heroku, then everything moved to DigitalOcean droplets managed with Laravel Forge.',
+            'The databases on MongoDB Atlas and the backups on Amazon S3.',
+            'The mobile app published on the App Store and Google Play.',
           ),
         },
         ro: {
           label: 'infrastructură',
-          title: 'Servicii care lucrează împreună',
+          title: 'De la servere la magazine',
           items: lines(
-            'Serverele necesare aplicațiilor, gestionate de mine.',
-            'Microservicii conectate între ele: centru de notificări, gestionarea cozilor, identitate și acces, fișiere.',
+            'Serverele, gestionate de mine: la început cele Node pe Heroku, apoi totul mutat pe droplet-uri DigitalOcean gestionate cu Laravel Forge.',
+            'Bazele de date pe MongoDB Atlas și backup-urile pe Amazon S3.',
+            'Aplicația mobilă publicată în App Store și Google Play.',
           ),
         },
       }),
