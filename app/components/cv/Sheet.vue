@@ -14,8 +14,8 @@ defineProps<{data: CvData}>()
     <aside data-cv-side class="float-left mr-[10mm] -ml-[14mm] flex h-[297mm] w-[74mm] flex-col gap-[5mm] overflow-hidden bg-paper-side px-[8mm] py-[11mm]">
       <div>
         <div class="relative mx-auto size-[34mm] overflow-hidden rounded-full bg-paper-line/40">
-          <!-- head and shoulders: the crop chosen on the mockups -->
-          <img src="/imgs/me-transparent.webp" alt="" class="absolute top-[3%] left-[-31%] w-[160%] max-w-none">
+          <!-- head and shoulders, the crop chosen on the mockups; a 640px copy keeps the PDF light -->
+          <img src="/imgs/me-cv.webp" alt="" class="absolute top-[3%] left-[-31%] w-[160%] max-w-none">
         </div>
         <h1 class="m-0 mt-[5mm] font-mono text-[16pt] leading-[1.1] font-bold">
           {{ data.name }}<span class="text-accent">_</span>
@@ -55,7 +55,7 @@ defineProps<{data: CvData}>()
         <ul class="m-0 flex list-none flex-col gap-[1.8mm] p-0 text-[8pt]">
           <li v-for="item in data.education" :key="item.id">
             <b class="block font-semibold">{{ item.title }}</b>
-            <span class="text-dim">{{ institutionOf(item) }}<template v-if="item.place">, {{ item.place }}</template> · <span class="font-mono text-[7pt]">{{ periodOf(item, $t('about.now')) }}</span></span>
+            <span class="text-dim">{{ institutionOf(item) }}<template v-if="item.place">, {{ item.place }}</template> · <span class="font-mono text-[7pt] whitespace-nowrap">{{ periodOf(item, $t('about.now')) }}</span></span>
           </li>
         </ul>
       </section>
