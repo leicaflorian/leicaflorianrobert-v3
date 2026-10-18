@@ -113,7 +113,7 @@ onMounted(async () => {
             <span class="shrink-0 font-mono text-[7.5pt] text-dim">{{ periodOf(exp, $t('about.now')) }}</span>
           </div>
           <p class="m-0 font-mono text-[8pt] text-accent-ink">{{ exp.role }}</p>
-          <p v-if="exp.description" class="m-0 mt-[0.8mm] text-dim">{{ exp.description }}</p>
+          <p v-if="exp.description" class="m-0 mt-[0.8mm] text-[8pt] leading-[1.45] text-dim">{{ exp.description }}</p>
         </div>
       </section>
     </div>
