@@ -57,7 +57,7 @@ const merge = (...parts) => tr(parts.reduce((acc, part) => {
 }, {}))
 
 const project = (slug, url, extra, ...translations) => ({
-  status: 'published', slug, url, kind: 'direct', featured: false, on_home: false, case_study: false, typographic: false, mockup: 'none', ...extra,
+  status: 'published', slug, url, kind: 'direct', featured: false, on_home: false, case_study: false, typographic: false, logo_plate: false, mockup: 'none', ...extra,
   translations: merge(...translations),
 })
 
@@ -68,11 +68,11 @@ const PROJECTS = [
     note('20+ server, deploy automatici, zero disservizi in 2 anni e mezzo', '20+ servers, automated deploys, no outages in two and a half years', '20+ servere, deploy-uri automate, zero întreruperi în doi ani și jumătate')),
   project('xpulire', 'https://www.xpulire.com/', {case_study: true, on_home: true}, name('xPulire'),
     note('Trasloco IT completo in un giorno, senza fermare la produzione', 'A complete IT move in one day, without stopping production', 'Mutarea IT completă într-o zi, fără oprirea producției')),
-  project('imanpack', 'https://www.imanpack.it/', {case_study: true, on_home: true}, name('Imanpack'),
+  project('imanpack', 'https://www.imanpack.it/', {case_study: true, on_home: true, logo_plate: true}, name('Imanpack'),
     note('Dal CMS a Mailchimp in automatico, newsletter bilingui senza lavoro a mano', 'From the CMS to Mailchimp automatically: bilingual newsletters with no manual work', 'Din CMS în Mailchimp automat: newslettere bilingve fără muncă manuală')),
   project('steelfuture', 'https://steelfuture.com/', {case_study: true}, name('Steel Future'),
     note('Gestionale PHP 5 portato su Git, con deploy automatico a ogni push', 'PHP 5 management software brought under Git, with automatic deploys on every push', 'Software de gestiune PHP 5 adus în Git, cu deploy automat la fiecare push')),
-  project('v2', 'https://leicaflorianrobert.dev', {kind: 'personal', branch: 'main', year: 2023, case_study: true}, name('My website V2')),
+  project('v2', 'https://leicaflorianrobert.dev', {kind: 'personal', branch: 'main', year: 2023, case_study: true, logo_plate: true}, name('My website V2')),
   // co-founded, so mine rather than a client's; no longer operating, and its site is gone: no link, not featured
   project('wab', '', {kind: 'personal', year: 2023, typographic: true}, name('Web Artisan Bros'),
     note('Software house co-fondata nel 2023', 'Software house I co-founded in 2023', 'Software house co-fondată în 2023')),
@@ -97,7 +97,7 @@ const PROJECTS = [
   project('enigma', 'https://leicaflorian.github.io/enigma_machine', {kind: 'personal', typographic: true}, name('Enigma'),
     note('Macchina Enigma', 'Enigma machine', 'Mașina Enigma')),
   project('fold', 'https://leicaflorian.github.io/fold_my_paper', {kind: 'personal', typographic: true}, name('Fold my paper')),
-  project('v1', 'https://v1.leicaflorianrobert.dev', {kind: 'personal', branch: 'main', year: 2018, case_study: true}, name('My website V1')),
+  project('v1', 'https://v1.leicaflorianrobert.dev', {kind: 'personal', branch: 'main', year: 2018, case_study: true, logo_plate: true}, name('My website V1')),
   // the client is never named: no name, no link
   project('fintech', '', {case_study: true},
     {it: {name: 'Piattaforma per investimenti'}, en: {name: 'Investment platform'}, ro: {name: 'Platformă de investiții'}},
@@ -2182,9 +2182,18 @@ const PROJECT_IMAGES = {
   tailwab: 'project-tailwab.png',
 }
 
-// The logo in the typographic cover of a project without an image, uploaded where it has none.
+// The logo in a project's cover, from the Branding notes of its vault folder,
+// uploaded where the project has none. Dark ones get `logo_plate` in PROJECTS.
 const PROJECT_LOGOS = {
+  v3: 'logo-v3.png',
+  v2: 'logo-v2.png',
+  v1: 'logo-v1.png',
   imanpack: 'logo-imanpack.png',
+  slides: 'logo-slides.png',
+  nosponsor: 'logo-nosponsor.png',
+  familymanager: 'logo-familymanager.png',
+  tailwab: 'logo-tailwab.png',
+  tvit: 'logo-tvit.png',
 }
 
 // --- loading -----------------------------------------------------------------------------
