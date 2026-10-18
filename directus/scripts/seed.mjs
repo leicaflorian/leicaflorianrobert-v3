@@ -2348,6 +2348,7 @@ const PROJECT_LOGOS = {
   v2: 'logo-v2.png',
   v1: 'logo-v1.png',
   imanpack: 'logo-imanpack.png',
+  tfp: 'logo-tfp.png',
   xpulire: 'logo-xpulire.png',
   steelfuture: 'logo-steelfuture.png',
   slides: 'logo-slides.png',
