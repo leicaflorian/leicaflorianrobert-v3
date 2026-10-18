@@ -25,6 +25,23 @@
   .header { width: 1120px; aspect-ratio: 16 / 9; }
   .card { aspect-ratio: 16 / 9; }
 
+  /* the Home's selected works as a bento: the first project large, the next two stacked beside it */
+  .bento { width: 1120px; display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+  .work { display: flex; flex-direction: column; overflow: hidden; border-radius: 16px; border: 1px solid var(--line-card); background: var(--surface); }
+  .work .cover-box { aspect-ratio: 16 / 9; }
+  .work.big { grid-row: span 2; }
+  .work.big .cover-box { aspect-ratio: auto; flex: 1; min-height: 0; }
+  .work-body { padding: 22px 28px; display: grid; gap: 8px; }
+  .work.big .work-body { padding: 26px 32px; }
+  /* the name takes the room left and wraps; the link always stays on the right */
+  .work-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .work-head h3 { margin: 0; font-size: 17px; font-weight: 700; }
+  .work.big .work-head h3 { font-size: 22px; }
+  .work-head span { flex: none; white-space: nowrap; font-size: 12px; }
+  .arrow { color: var(--accent); }
+  .work-body p { margin: 0; font-size: 13px; line-height: 1.5; color: var(--muted); }
+  @media (max-width: 860px) { .bento { width: auto; grid-template-columns: 1fr; } .work.big { grid-row: auto; } .work.big .cover-box { aspect-ratio: 16 / 9; flex: none; } }
+
   .cover {
     container-type: size; position: relative; width: 100%; height: 100%; overflow: hidden;
     background:
@@ -34,7 +51,7 @@
   /* the cover can't measure itself: the padding is on a box inside it */
   .inner { display: flex; flex-direction: column; height: 100%; padding: 9cqh 9% 0; }
   .no-shot .inner { justify-content: center; padding-top: 0; }
-  .windowed .inner { padding-top: 14cqw; } /* as wide as the space left of the window */
+  .windowed .inner { padding-top: min(14cqw, 56px); } /* as wide as the space left of the window, 56px at most */
   .windowed .type + .shot { margin-top: calc(2.4cqw + 8px); }
   .windowed .shot:first-child { margin-top: 0; }
   .type { flex: none; }
@@ -45,7 +62,7 @@
   .foot { margin: 1.8cqw 0 0; font-size: max(9px, 1.8cqw); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
   /* the window: right under the text, whatever its length, cut by the bottom edge */
-  /* a screenshot shorter than the space left is stretched to the edge, anchored at the top */
+  /* a screenshot shorter than the space left is stretched to the edge, anchored at the top left */
   .shot { flex: 1 0 auto; display: flex; margin: 4.5cqw 6% 0; }
   .shot .window { flex: 1; display: flex; flex-direction: column; }
   /* small covers (cards): no year and stack, a smaller gap */
@@ -61,7 +78,7 @@
   .dot { width: 1cqw; height: 1cqw; min-width: 4px; min-height: 4px; border-radius: 50%; background: var(--gutter); }
   .url { margin-left: 1.2cqw; max-width: 50%; height: 2cqw; min-height: 8px; border-radius: 99px; background: var(--bg); color: var(--dim);
          font-size: max(6px, 1.1cqw); display: flex; align-items: center; padding: 0 1cqw; white-space: nowrap; overflow: hidden; }
-  .window img { display: block; width: 100%; flex: 1 0 auto; object-fit: cover; object-position: top; }
+  .window img { display: block; width: 100%; flex: 1 0 auto; object-fit: cover; object-position: left top; }
 
   /* the logo, bottom left: centred on the window's left edge (left: 14%), whatever its size */
   /* over the screenshot: a tile of the same height for every logo, as wide as the logo up to a limit, with a light border */
@@ -118,6 +135,9 @@
 <h2>// case study header (1120 px) · My website V3</h2>
 <div class="frame header" data-p="v3"></div>
 
+<h2>// Home · lavori selezionati, bento (1120 px)</h2>
+<div class="bento" id="bento"></div>
+
 <h2>// cards (340 px)</h2>
 <div class="grid" id="cards"></div>
 
@@ -128,12 +148,14 @@
     v2: {name: 'My website V2', type: 'Portfolio personale', foot: '2023 · Laravel, Livewire, Tailwind, MySQL', url: 'leicaflorianrobert.dev', shot: 'project-v2.jpg', logo: 'logo-v2.png', plate: true},
     v1: {name: 'My website V1', type: 'Portfolio personale', foot: '2018 · Vue, TypeScript, Bootstrap, EmailJS', url: 'v1.leicaflorianrobert.dev', shot: 'project-v1.png', logo: 'logo-v1.png', plate: true},
     slides: {name: 'Slides.com Companion', type: 'Estensione browser', foot: '2021 · TypeScript, Vue, WXT', url: 'chromewebstore.google.com', shot: 'project-slides.png', logo: 'logo-slides.png'},
-    nosponsor: {name: 'NoSponsor', type: 'Estensione browser', foot: '2026 · TypeScript, WXT, Chrome Extensions', url: 'chromewebstore.google.com', shot: 'project-nosponsor.png', logo: 'logo-nosponsor.png'},
+    nosponsor: {kind: 'personale', note: 'Estensione Chrome, sul Chrome Web Store', name: 'NoSponsor', type: 'Estensione browser', foot: '2026 · TypeScript, WXT, Chrome Extensions', url: 'chromewebstore.google.com', shot: 'project-nosponsor.png', logo: 'logo-nosponsor.png'},
     familymanager: {name: 'Family Manager', type: 'Progetto personale, privato', foot: '2026 · Directus, Vue, Go, Claude e Gemini', url: '', shot: 'project-familymanager.png', logo: 'logo-familymanager.png'},
     tailwab: {name: 'TailWab', type: 'Strumento web', foot: '2024 · Nuxt, Tailwind, FormKit, Shiki', url: 'tailwab.leicaflorianrobert.dev', shot: 'project-tailwab.png', logo: 'logo-tailwab.png'},
     imanpack: {name: 'Imanpack', type: 'Automazione newsletter', foot: '2023 · Laravel, Vue, MJML, Microsoft SQL Server', url: 'imanpack.it', shot: 'project-imanpack.png', logo: 'logo-imanpack.png', plate: true},
     steelfuture: {name: 'Steel Future', type: 'Gestionale aziendale', foot: '2023 · PHP 5, Git, GitHub', url: 'steelfuture.com', shot: 'project-steelfuture.png', logo: 'logo-steelfuture.png', plate: true},
-    fintech: {name: 'Piattaforma per investimenti', type: 'Piattaforma web e mobile', foot: '2020 · Node.js, AdonisJS, Nuxt, Vue, Ionic', visual: 'banking'},
+    tfp: {name: 'The Full Project', type: 'Web agency', foot: '2023 · Laravel, Statamic, Vue, Nuxt, Directus', url: 'thefullproject.it', shot: 'project-tfp.png', logo: 'logo-tfp.png',
+      kind: 'cliente', note: '20+ server, deploy automatici, zero disservizi in 2 anni e mezzo'},
+    fintech: {kind: 'cliente', note: "Due web app, un'app mobile e un'area clienti come in una banca online", name: 'Piattaforma per investimenti', type: 'Piattaforma web e mobile', foot: '2020 · Node.js, AdonisJS, Nuxt, Vue, Ionic', visual: 'banking'},
     boolean: {name: 'Boolean CLI', type: 'Strumento a riga di comando', foot: '2022 · TypeScript, Node.js, npm, GitHub CLI'},
   }
   const FILES = '../directus/seed-files/'
@@ -211,6 +233,15 @@
     </div>`
   }
   document.querySelector('[data-p="v3"]').innerHTML = cover(P.v3)
+  const work = (p, big) => `
+    <div class="work ${big ? 'big' : ''}">
+      <div class="cover-box">${cover(p)}</div>
+      <div class="work-body">
+        <div class="work-head"><h3>${p.name}</h3><span class="arrow">case study →</span></div>
+        <p>${p.note}</p>
+      </div>
+    </div>`
+  document.getElementById('bento').innerHTML = work(P.tfp, true) + work(P.fintech) + work(P.nosponsor)
   document.getElementById('cards').innerHTML = Object.keys(P)
     .map(k => `<div class="frame card">${cover(P[k])}</div>`).join('')
 </script>

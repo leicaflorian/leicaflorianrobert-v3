@@ -19,6 +19,8 @@ const featured = computed(() => props.block.show === 'archive' ? [] : projects.v
 const cards = computed(() => props.block.show === 'home'
   ? projects.value.filter(p => p.on_home && !p.featured)
   : props.block.show === 'archive' ? projects.value.filter(p => !p.featured) : [])
+/** In Home, three or more cards make a bento: the first one large, the next two stacked beside it. */
+const bento = computed(() => props.block.show === 'home' && cards.value.length >= 3)
 const groups = computed(() => props.block.show === 'grouped' ? groupByCategory(projects.value) : [])
 </script>
 
@@ -46,13 +48,15 @@ const groups = computed(() => props.block.show === 'grouped' ? groupByCategory(p
         v-if="cards.length"
         v-reveal.stagger
         class="grid gap-6"
-        :class="block.show === 'home' ? 'mt-6 grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))]' : 'grid-cols-[repeat(auto-fill,minmax(min(100%,320px),1fr))]'"
+        :class="block.show !== 'home' ? 'grid-cols-[repeat(auto-fill,minmax(min(100%,320px),1fr))]' : bento ? 'mt-6 grid-cols-[2fr_1fr] max-[860px]:grid-cols-1' : 'mt-6 grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))]'"
       >
         <ProjectCard
-          v-for="project in cards"
+          v-for="(project, i) in cards"
           :key="project.id"
           :project="project"
           :variant="block.show === 'home' ? 'compact' : 'archive'"
+          :large="bento && i === 0"
+          :class="bento && i === 0 && 'row-span-2 max-[860px]:row-auto'"
         />
       </div>
       <dl v-if="groups.length" v-reveal.stagger class="m-0 grid gap-8">
