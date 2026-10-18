@@ -1976,9 +1976,9 @@ const CASE_STUDIES = {
   xpulire: {
     year: 2025,
     translations: {
-      it: {intro: 'Il trasloco dell\'infrastruttura IT di un\'azienda di attrezzature industriali per la pulizia: dalla rete improvvisata della vecchia sede a una rete progettata, cablata e documentata, senza fermare un giorno di lavoro.', role: 'IT e infrastruttura di rete', type: 'Infrastruttura di rete', stack: 'Cablaggio strutturato, rack, switch PoE, Wi-Fi, VoIP, UPS'},
-      en: {intro: 'Moving the IT infrastructure of a company selling industrial cleaning equipment: from the makeshift network of the old premises to a network that is designed, cabled and documented, without stopping a single working day.', role: 'IT and network infrastructure', type: 'Network infrastructure', stack: 'Structured cabling, rack, PoE switches, Wi-Fi, VoIP, UPS'},
-      ro: {intro: 'Mutarea infrastructurii IT a unei firme care vinde echipamente industriale de curățenie: de la rețeaua improvizată din vechiul sediu la o rețea proiectată, cablată și documentată, fără să oprească nicio zi de lucru.', role: 'IT și infrastructură de rețea', type: 'Infrastructură de rețea', stack: 'Cablare structurată, rack, switch-uri PoE, Wi-Fi, VoIP, UPS'},
+      it: {intro: 'Il trasloco dell\'infrastruttura IT di un\'azienda di attrezzature industriali per la pulizia: dalla rete improvvisata della vecchia sede a una rete progettata, cablata e documentata, senza fermare un giorno di lavoro.', role: 'IT e infrastruttura di rete', type: 'Infrastruttura di rete', stack: 'Cablaggio Cat6, rack, switch PoE e access point Wi-Fi 6 TP-Link, VLAN, VoIP, UPS Eaton'},
+      en: {intro: 'Moving the IT infrastructure of a company selling industrial cleaning equipment: from the makeshift network of the old premises to a network that is designed, cabled and documented, without stopping a single working day.', role: 'IT and network infrastructure', type: 'Network infrastructure', stack: 'Cat6 cabling, rack, TP-Link PoE switches and Wi-Fi 6 access points, VLANs, VoIP, Eaton UPS'},
+      ro: {intro: 'Mutarea infrastructurii IT a unei firme care vinde echipamente industriale de curățenie: de la rețeaua improvizată din vechiul sediu la o rețea proiectată, cablată și documentată, fără să oprească nicio zi de lucru.', role: 'IT și infrastructură de rețea', type: 'Infrastructură de rețea', stack: 'Cablare Cat6, rack, switch-uri PoE și access point-uri Wi-Fi 6 TP-Link, VLAN, VoIP, UPS Eaton'},
     },
     sections: [
       section('block_text', {}, {
@@ -2013,9 +2013,9 @@ const CASE_STUDIES = {
           title: 'Un trasloco in un giorno',
           items: lines(
             'Sopralluogo nella nuova sede e obiettivi definiti insieme all\'azienda.',
-            'Schema della rete e preventivo.',
+            'Una relazione tecnica con schema di rete e preventivo: i componenti, le attività, il collaudo e la documentazione da consegnare.',
             'Tutto il materiale acquistato prima di iniziare.',
-            'Il lavoro in un giorno non lavorativo, per non fermare la produzione.',
+            'Il lavoro preparato in anticipo, e il passaggio alla nuova rete fatto in un giorno non lavorativo, per non fermare la produzione.',
           ),
         },
         en: {
@@ -2023,9 +2023,9 @@ const CASE_STUDIES = {
           title: 'A move in one day',
           items: lines(
             'A site survey of the new premises and goals set together with the company.',
-            'Network diagram and quote.',
+            'A technical report with a network diagram and a quote: the components, the tasks, the testing and the documentation to hand over.',
             'All the equipment bought before starting.',
-            'The work done on a non-working day, so production never stopped.',
+            'The work prepared in advance, and the switch to the new network done on a non-working day, so production never stopped.',
           ),
         },
         ro: {
@@ -2033,50 +2033,134 @@ const CASE_STUDIES = {
           title: 'O mutare într-o zi',
           items: lines(
             'Inspecția noului sediu și obiective stabilite împreună cu firma.',
-            'Schema rețelei și oferta de preț.',
+            'Un raport tehnic cu schema rețelei și oferta de preț: componentele, activitățile, testarea și documentația de predat.',
             'Tot materialul cumpărat înainte de a începe.',
-            'Lucrarea făcută într-o zi nelucrătoare, ca să nu se oprească producția.',
+            'Lucrarea pregătită din timp, iar trecerea la noua rețea făcută într-o zi nelucrătoare, ca să nu se oprească producția.',
           ),
         },
       }),
-      section('block_gallery', {}, {
+      section('block_gallery', {images: files('cs-xpulire-schema.png')}, {
         it: {
           label: 'la nuova rete',
           title: 'Tutto parte dal rack',
           text: paras(
-            'Al centro un **rack** con gruppo di continuità, switch core **PoE** da 24 porte e patch panel. Da lì partono i collegamenti verso gli uffici, ognuno con il suo switch, verso la stampante e verso due **access point**: uno negli uffici e uno nel magazzino.',
-            'Ogni cavo è etichettato, e la rete è documentata.',
+            'Al centro un **rack** a muro con l\'anta in vetro. Dall\'alto: il modem, il **patch panel** Cat6A da 24 porte, lo switch **TP-Link** da 28 porte con **24 porte PoE+**, il **gruppo di continuità Eaton** e due ciabatte, una sotto UPS e una generale. Accanto, il vecchio server, rimasto per i programmi legacy.',
+            'Dal rack partono dieci cavi **Cat6**:',
           ),
-          captions: lines('schema della rete', 'il rack'),
+          items: lines(
+            '**Open space**: due postazioni, la stampante multifunzione e un access point.',
+            '**Ufficio 1** e **Ufficio 2**: una postazione ciascuno.',
+            '**Magazzino** e **officina**: una postazione ciascuno, e il secondo access point.',
+            'L\'**antenna sul tetto**.',
+          ),
+          captions: 'Lo schema di progetto: in rosso i cavi PoE degli access point. In opera si sono aggiunti l\'officina e l\'antenna sul tetto',
         },
         en: {
           label: 'the new network',
           title: 'It all starts from the rack',
           text: paras(
-            'At the centre, a **rack** with a UPS, a 24-port **PoE** core switch and a patch panel. From there, the links go out to the offices, each with its own switch, to the printer and to two **access points**: one in the offices and one in the warehouse.',
-            'Every cable is labelled, and the network is documented.',
+            'At the centre, a wall-mounted **rack** with a glass door. From the top: the modem, a 24-port Cat6A **patch panel**, a 28-port **TP-Link** switch with **24 PoE+ ports**, an **Eaton UPS** and two power strips, one on the UPS and one on mains. Next to it, the old server, kept for the legacy programs.',
+            'Ten **Cat6** cables run from the rack:',
           ),
-          captions: lines('network diagram', 'the rack'),
+          items: lines(
+            '**Open space**: two workstations, the multifunction printer and an access point.',
+            '**Office 1** and **Office 2**: one workstation each.',
+            '**Warehouse** and **workshop**: one workstation each, and the second access point.',
+            'The **rooftop antenna**.',
+          ),
+          captions: 'The project diagram: in red, the PoE cables of the access points. During the work the workshop and the rooftop antenna were added',
         },
         ro: {
           label: 'noua rețea',
           title: 'Totul pornește din rack',
           text: paras(
-            'În centru, un **rack** cu UPS, un switch core **PoE** cu 24 de porturi și un patch panel. De acolo pleacă legăturile spre birouri, fiecare cu switch-ul lui, spre imprimantă și spre două **access point**-uri: unul în birouri și unul în depozit.',
-            'Fiecare cablu este etichetat, iar rețeaua este documentată.',
+            'În centru, un **rack** de perete cu ușă de sticlă. De sus în jos: modemul, un **patch panel** Cat6A cu 24 de porturi, un switch **TP-Link** cu 28 de porturi, dintre care **24 PoE+**, un **UPS Eaton** și două prelungitoare, unul pe UPS și unul general. Alături, vechiul server, păstrat pentru programele legacy.',
+            'Din rack pleacă zece cabluri **Cat6**:',
           ),
-          captions: lines('schema rețelei', 'rack-ul'),
+          items: lines(
+            '**Open space**: două stații de lucru, imprimanta multifuncțională și un access point.',
+            '**Biroul 1** și **Biroul 2**: câte o stație de lucru.',
+            '**Depozitul** și **atelierul**: câte o stație de lucru și al doilea access point.',
+            '**Antena de pe acoperiș**.',
+          ),
+          captions: 'Schema proiectului: cu roșu, cablurile PoE ale access point-urilor. La execuție s-au adăugat atelierul și antena de pe acoperiș',
         },
       }),
-      section('block_list', {}, {
+      section('block_gallery', {images: files('cs-xpulire-etichette-uffici.jpg', 'cs-xpulire-etichette-magazzino.jpg', 'cs-xpulire-rack.jpg')}, {
+        it: {
+          label: 'wi-fi e reti',
+          title: 'Tre reti, un solo switch',
+          text: paras(
+            'Ogni postazione d\'ufficio ha uno switch TP-Link da 8 porte sulla scrivania, per il PC e gli altri dispositivi. I due **access point** TP-Link **EAP610**, **Wi-Fi 6** dual band, prendono la corrente dallo stesso cavo di rete (**PoE**): niente alimentatori sparsi.',
+            'Ogni cavo è etichettato con la sua destinazione, e la rete è documentata.',
+            'Tre reti separate, con le **VLAN** sullo switch:',
+          ),
+          items: lines(
+            'la **LAN cablata**, per le postazioni fisse e il server;',
+            'un **Wi-Fi interno**, per i PC e i terminali di magazzino e officina;',
+            'un **Wi-Fi ospiti**, per chi viene da fuori e per i dispositivi non aziendali, che non vede la rete aziendale.',
+          ),
+          captions: lines(
+            'Le etichette dietro il patch panel: open space e uffici',
+            'Magazzino, officina e antenna sul tetto',
+            'Il rack finito: modem, switch PoE, patch panel, gruppo di continuità e ciabatte',
+          ),
+        },
+        en: {
+          label: 'wi-fi and networks',
+          title: 'Three networks, one switch',
+          text: paras(
+            'Every office workstation has an 8-port TP-Link switch on the desk, for the PC and the other devices. The two TP-Link **EAP610** dual-band **Wi-Fi 6** **access points** draw power from the network cable itself (**PoE**): no power adapters lying around.',
+            'Every cable is labelled with its destination, and the network is documented.',
+            'Three separate networks, with **VLANs** on the switch:',
+          ),
+          items: lines(
+            'the **wired LAN**, for the fixed workstations and the server;',
+            'an **internal Wi-Fi**, for the PCs and the terminals in the warehouse and workshop;',
+            'a **guest Wi-Fi**, for visitors and non-company devices, which can\'t see the company network.',
+          ),
+          captions: lines(
+            'The labels behind the patch panel: open space and offices',
+            'Warehouse, workshop and rooftop antenna',
+            'The finished rack: modem, PoE switch, patch panel, UPS and power strips',
+          ),
+        },
+        ro: {
+          label: 'wi-fi și rețele',
+          title: 'Trei rețele, un singur switch',
+          text: paras(
+            'Fiecare stație de lucru din birou are pe masă un switch TP-Link cu 8 porturi, pentru PC și celelalte dispozitive. Cele două **access point**-uri TP-Link **EAP610**, **Wi-Fi 6** dual band, se alimentează prin același cablu de rețea (**PoE**): fără alimentatoare împrăștiate.',
+            'Fiecare cablu este etichetat cu destinația lui, iar rețeaua este documentată.',
+            'Trei rețele separate, cu **VLAN**-uri pe switch:',
+          ),
+          items: lines(
+            '**LAN-ul cablat**, pentru stațiile fixe și server;',
+            'un **Wi-Fi intern**, pentru PC-uri și terminalele din depozit și atelier;',
+            'un **Wi-Fi pentru oaspeți**, pentru cei din afară și pentru dispozitivele care nu sunt ale firmei, care nu vede rețeaua firmei.',
+          ),
+          captions: lines(
+            'Etichetele din spatele patch panel-ului: open space și birouri',
+            'Depozitul, atelierul și antena de pe acoperiș',
+            'Rack-ul terminat: modem, switch PoE, patch panel, UPS și prelungitoare',
+          ),
+        },
+      }),
+      section('block_gallery', {images: files('cs-xpulire-rack-lavori.jpg', 'cs-xpulire-rack-montaggio.jpg', 'cs-xpulire-locale.jpg')}, {
         it: {
           label: 'messa in opera',
           title: 'Pronti a lavorare il giorno dopo',
           items: lines(
             'Cablaggio, rack, switch e access point installati e collegati.',
             'Ogni postazione configurata.',
-            'Il vecchio server reinstallato, per le attività che ne hanno ancora bisogno.',
+            'Il vecchio server reinstallato accanto al rack, per i programmi legacy che ne hanno ancora bisogno.',
             'Gruppo di continuità e telefoni IP configurati.',
+            'Collaudo: rete cablata e Wi-Fi, accesso a internet, e una prova del gruppo di continuità staccando la corrente.',
+            'Documentazione consegnata all\'azienda: lo schema di rete aggiornato, le etichette su cavi e porte, le credenziali e i parametri di accesso.',
+          ),
+          captions: lines(
+            'Il rack durante il lavoro, con i cavi da attestare sul patch panel',
+            'A metà montaggio, prima del gruppo di continuità e dell\'anta',
+            'Il locale tecnico finito: i cavi in due fasci lungo il muro, e il vecchio server',
           ),
         },
         en: {
@@ -2085,8 +2169,15 @@ const CASE_STUDIES = {
           items: lines(
             'Cabling, rack, switches and access points installed and connected.',
             'Every workstation set up.',
-            'The old server reinstalled, for the tasks that still need it.',
+            'The old server reinstalled next to the rack, for the legacy programs that still need it.',
             'UPS and IP phones configured.',
+            'Testing: wired network and Wi-Fi, internet access, and a UPS test by cutting the power.',
+            'Documentation handed over to the company: the updated network diagram, the labels on cables and ports, the credentials and access settings.',
+          ),
+          captions: lines(
+            'The rack during the work, with the cables still to be terminated on the patch panel',
+            'Halfway through, before the UPS and the door',
+            'The finished technical room: the cables in two bundles along the wall, and the old server',
           ),
         },
         ro: {
@@ -2095,41 +2186,57 @@ const CASE_STUDIES = {
           items: lines(
             'Cablare, rack, switch-uri și access point-uri instalate și conectate.',
             'Fiecare stație de lucru configurată.',
-            'Vechiul server reinstalat, pentru activitățile care încă au nevoie de el.',
+            'Vechiul server reinstalat lângă rack, pentru programele legacy care încă au nevoie de el.',
             'UPS-ul și telefoanele IP configurate.',
+            'Testare: rețeaua cablată și Wi-Fi-ul, accesul la internet și o probă a UPS-ului, cu curentul tăiat.',
+            'Documentația predată firmei: schema actualizată a rețelei, etichetele de pe cabluri și porturi, credențialele și parametrii de acces.',
+          ),
+          captions: lines(
+            'Rack-ul în timpul lucrării, cu cablurile de terminat pe patch panel',
+            'La jumătatea montajului, înainte de UPS și de ușă',
+            'Camera tehnică terminată: cablurile în două mănunchiuri de-a lungul peretelui și vechiul server',
           ),
         },
       }),
-      section('block_list', {}, {
+      section('block_gallery', {images: files('cs-xpulire-postazione.jpg')}, {
         it: {
           label: 'risultati',
           title: 'Una rete che si capisce',
           items: lines(
             'Una struttura chiara, con tecnologia moderna.',
-            'Sicurezza migliorata.',
+            'Sicurezza migliorata: gli ospiti hanno la loro rete, separata da quella aziendale.',
             'Wi-Fi in ogni angolo, anche nel magazzino.',
+            'Cavi in ordine, dal rack fino alle scrivanie.',
             'Manutenzione semplice: tutto documentato ed etichettato.',
+            'Le password non si perdono più: credenziali e parametri di accesso sono consegnati all\'azienda insieme allo schema.',
           ),
+          captions: 'Una postazione, con i cavi fissati lungo la scrivania invece che a terra',
         },
         en: {
           label: 'results',
           title: 'A network that makes sense',
           items: lines(
             'A clear structure, with modern technology.',
-            'Improved security.',
+            'Improved security: guests have their own network, separate from the company one.',
             'Wi-Fi in every corner, warehouse included.',
+            'Tidy cables, from the rack to the desks.',
             'Easy maintenance: everything documented and labelled.',
+            'Passwords don\'t get lost any more: credentials and access settings are handed over to the company together with the diagram.',
           ),
+          captions: 'A workstation, with the cables fixed along the desk instead of on the floor',
         },
         ro: {
           label: 'rezultate',
           title: 'O rețea care se înțelege',
           items: lines(
             'O structură clară, cu tehnologie modernă.',
-            'Securitate îmbunătățită.',
+            'Securitate îmbunătățită: oaspeții au rețeaua lor, separată de cea a firmei.',
             'Wi-Fi în fiecare colț, inclusiv în depozit.',
+            'Cabluri în ordine, de la rack până la birouri.',
             'Mentenanță simplă: totul documentat și etichetat.',
+            'Parolele nu se mai pierd: credențialele și parametrii de acces sunt predate firmei împreună cu schema.',
           ),
+          captions: 'O stație de lucru, cu cablurile fixate de-a lungul biroului în loc să stea pe jos',
         },
       }),
       NEXT_STEP,
