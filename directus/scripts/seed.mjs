@@ -2331,6 +2331,7 @@ const PROJECT_IMAGES = {
   xpulire: 'project-xpulire.png',
   imanpack: 'project-imanpack.png',
   steelfuture: 'project-steelfuture.png',
+  biologica: 'project-biologica.png',
   v1: 'project-v1.png',
   v2: 'project-v2.jpg',
   slides: 'project-slides.png',
