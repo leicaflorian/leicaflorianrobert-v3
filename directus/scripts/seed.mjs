@@ -57,7 +57,7 @@ const merge = (...parts) => tr(parts.reduce((acc, part) => {
 }, {}))
 
 const project = (slug, url, extra, ...translations) => ({
-  status: 'published', slug, url, kind: 'direct', featured: false, on_home: false, case_study: false, typographic: false, logo_plate: false, mockup: 'none', ...extra,
+  status: 'published', slug, url, kind: 'direct', featured: false, on_home: false, case_study: false, typographic: false, logo_plate: false, visual: null, mockup: 'none', ...extra,
   translations: merge(...translations),
 })
 
@@ -99,7 +99,7 @@ const PROJECTS = [
   project('fold', 'https://leicaflorian.github.io/fold_my_paper', {kind: 'personal', typographic: true}, name('Fold my paper')),
   project('v1', 'https://v1.leicaflorianrobert.dev', {kind: 'personal', branch: 'main', year: 2018, case_study: true, logo_plate: true}, name('My website V1')),
   // the client is never named: no name, no link
-  project('fintech', '', {case_study: true},
+  project('fintech', '', {case_study: true, visual: 'banking'},
     {it: {name: 'Piattaforma per investimenti'}, en: {name: 'Investment platform'}, ro: {name: 'Platformă de investiții'}},
     note('Due web app, un\'app mobile e un\'area clienti come in una banca online', 'Two web apps, a mobile app and a client area like online banking', 'Două aplicații web, o aplicație mobilă și o zonă pentru clienți ca într-un internet banking')),
   project('fib', 'https://leicaflorian.github.io/fibonacci_counter/', {kind: 'personal', typographic: true}, name('Fibonacci Counter')),

@@ -124,6 +124,7 @@ const COLLECTIONS = [
       boolean('typographic', 'Copertina tipografica (nome, tipo e anno) al posto dello screenshot: per i progetti senza immagine è sempre così'),
       image('logo', 'Logo del progetto o del cliente, nella copertina: in basso a sinistra sullo screenshot, o sopra il nome'),
       boolean('logo_plate', 'Logo su un riquadro bianco: per i loghi scuri, fatti per le pagine bianche'),
+      choice('visual', 'Illustrazione disegnata nel sito al posto dello screenshot, per i progetti che non si possono mostrare', [['banking', 'Area clienti (banca online)']], null),
       integer('year', 'Anno: nei case study e per l\'ordine del grafo nella pagina Progetti'),
       image('cover', 'Case study: immagine grande sotto il titolo; se vuota, lo screenshot'),
     ],

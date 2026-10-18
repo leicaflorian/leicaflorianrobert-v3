@@ -27,6 +27,8 @@ export interface Site {
 }
 
 export type Mockup = 'laptop' | 'phone' | 'none'
+/** An illustration drawn in code that takes the screenshot's place, for a project that can't be shown. */
+export type ProjectVisual = 'banking'
 /** Who the project was for: a client of mine, a client of an agency I worked for (never named), or myself. */
 export type ProjectKind = 'direct' | 'agency' | 'personal'
 /** The branch of a project in the Projects graph: main holds the versions of this site, client is shown as prod, lab as dev. */
@@ -54,6 +56,8 @@ export interface Project {
   logo: FileId
   /** Put the logo on a white plate: it's dark, made for white pages. */
   logo_plate: boolean
+  /** Drawn in the browser window instead of a screenshot. */
+  visual: ProjectVisual | null
   year: number | null
   cover: FileId
   // translated

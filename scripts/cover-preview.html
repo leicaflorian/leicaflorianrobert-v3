@@ -15,7 +15,7 @@
   :root {
     --bg: #111113; --bg-deep: #0C0C0E; --surface: #18181B; --surface-raised: #1C1C20;
     --line-card: #26262B; --line-control: #2C2C31; --gutter: #3A3A40;
-    --ink: #EDEBE6; --muted: #A3A09A; --dim: #6A675F; --accent: #FF5B14; --plate: #FFFFFF; --line-tile: #FFFFFF29; 
+    --ink: #EDEBE6; --muted: #A3A09A; --dim: #6A675F; --accent: #FF5B14; --accent-light: #FF8A52; --surface-hover: #222226; --green: #9FD36B; --plate: #FFFFFF; --line-tile: #FFFFFF29; 
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'JetBrains Mono', monospace; padding: 40px; }
@@ -31,20 +31,22 @@
       radial-gradient(circle at 85% 110%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 55%),
       linear-gradient(160deg, var(--surface), var(--bg) 60%, var(--bg-deep));
   }
-  .type { position: absolute; left: 9%; right: 9%; top: 9%; }
-  .no-shot .type { top: 50%; transform: translateY(-50%); }
+  /* the cover can't measure itself: the padding is on a box inside it */
+  .inner { display: flex; flex-direction: column; height: 100%; padding: 9cqh 9% 0; }
+  .no-shot .inner { justify-content: center; padding-top: 0; }
+  .type { flex: none; }
   .kicker { margin: 0 0 1.6cqw; font-size: max(9px, 1.7cqw); color: var(--accent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .name { margin: 0; font-size: 6.4cqw; font-weight: 800; line-height: 1.02; letter-spacing: -0.03em; }
   .no-shot .name { font-size: 8cqw; }
   .name::after { content: ''; display: inline-block; height: 0.1em; width: 0.5em; margin-left: 0.12em; background: var(--accent); }
   .foot { margin: 1.8cqw 0 0; font-size: max(9px, 1.8cqw); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-  /* the window: centred, starting under the text, cut by the bottom edge */
-  .shot { position: absolute; left: 14%; right: 14%; top: 38%; }
-  /* small covers (cards): no year and stack, the window moves up to keep the same gap */
+  /* the window: right under the text, whatever its length, cut by the bottom edge */
+  .shot { flex: none; margin: 4.5cqw 6% 0; }
+  /* small covers (cards): no year and stack, a smaller gap */
   @container (max-width: 600px) {
     .foot { display: none; }
-    .shot { top: 33%; }
+    .shot { margin-top: 3.5cqw; }
   }
   .window {
     overflow: hidden; background: var(--bg-deep);
@@ -69,6 +71,43 @@
   .logo.plate { background: var(--plate); border-radius: max(6px, 1cqw); padding: max(6px, 1.4cqw) max(9px, 2cqw); }
   .logo.plate img { display: block; max-height: max(28px, 6cqw); max-width: max(110px, 22cqw); width: auto; height: auto; }
   .no-shot .logo { display: inline-block; margin-bottom: 3cqw; }
+
+  /* the `banking` visual (ProjectVisualBankingScreen and ...Phone) */
+  .app { display: grid; grid-template-columns: 13% 1fr; aspect-ratio: 16 / 10; background: var(--bg); }
+  .side { background: var(--surface); border-right: 1px solid var(--line-control); padding: 2.4cqw 1.6cqw; display: flex; flex-direction: column; gap: 1.6cqw; }
+  .brand { width: 2.6cqw; height: 2.6cqw; border-radius: 0.7cqw; background: var(--gutter); margin-bottom: 1cqw; }
+  .nav { display: flex; align-items: center; gap: 0.8cqw; }
+  .nav i { width: 1.4cqw; height: 1.4cqw; border-radius: 0.4cqw; background: var(--gutter); flex: none; }
+  .nav b { height: 0.8cqw; border-radius: 99px; background: var(--line-control); flex: 1; }
+  .nav.on i { background: var(--accent); } .nav.on b { background: var(--muted); opacity: .6; }
+  .main { padding: 2.4cqw 2.6cqw; display: grid; grid-template-columns: 1.7fr 1fr; grid-template-rows: auto 1fr; gap: 1.6cqw; }
+  .panel { background: var(--surface); border: 1px solid var(--line-card); border-radius: 1cqw; padding: 1.6cqw; }
+  .label { height: 0.8cqw; width: 30%; border-radius: 99px; background: var(--line-control); }
+  .amount { margin-top: 1cqw; font-size: 3.2cqw; font-weight: 800; letter-spacing: -0.02em; }
+  .amount small { font-size: 0.5em; color: var(--muted); font-weight: 500; }
+  .delta { display: inline-block; margin-top: 0.6cqw; font-size: 1.2cqw; color: var(--green); }
+  .chart { margin-top: 1.2cqw; width: 100%; height: auto; display: block; }
+  .donut { display: flex; align-items: center; gap: 1.4cqw; }
+  .legend { flex: 1; display: grid; gap: 0.9cqw; }
+  .legend div { display: flex; align-items: center; gap: 0.6cqw; }
+  .legend i { width: 0.9cqw; height: 0.9cqw; border-radius: 50%; flex: none; }
+  .legend b { height: 0.7cqw; border-radius: 99px; background: var(--line-control); flex: 1; }
+  .moves { grid-column: 1 / -1; display: grid; gap: 1cqw; }
+  .move { display: flex; align-items: center; gap: 1.2cqw; }
+  .move i { width: 2.2cqw; height: 2.2cqw; border-radius: 50%; background: var(--surface-hover); flex: none; }
+  .move b { height: 0.8cqw; border-radius: 99px; background: var(--line-control); }
+  .move span { margin-left: auto; font-size: 1.2cqw; color: var(--muted); }
+  .move span.in { color: var(--green); }
+
+  /* the phone, over the window's bottom right corner */
+  .phone { position: absolute; z-index: 2; right: 9%; bottom: -6cqh; width: 17cqw; aspect-ratio: 9 / 18.5; border-radius: 2.6cqw; border: 0.6cqw solid #232327;
+           background: var(--bg); box-shadow: 0 2cqw 6cqw rgba(0,0,0,.6); padding: 2.2cqw 1.4cqw; display: flex; flex-direction: column; gap: 1.2cqw; }
+  .phone .notch { position: absolute; top: 0.8cqw; left: 50%; width: 30%; height: 1cqw; border-radius: 99px; background: #232327; transform: translateX(-50%); }
+  .phone .amount { font-size: 2.2cqw; margin-top: 1.4cqw; }
+  .phone .tile { background: var(--surface); border: 1px solid var(--line-card); border-radius: 0.9cqw; padding: 1cqw; display: grid; gap: 0.7cqw; }
+  .phone .tile b { height: 0.6cqw; border-radius: 99px; background: var(--line-control); }
+  .phone .buy { margin-top: auto; height: 3cqw; border-radius: 99px; background: var(--accent); display: flex; align-items: center; justify-content: center; }
+  .phone .buy b { width: 40%; height: 0.6cqw; border-radius: 99px; background: rgba(255,255,255,.75); }
 </style>
 </head>
 <body>
@@ -79,7 +118,7 @@
 <div class="grid" id="cards"></div>
 
 <script>
-  // the projects with files in seed-files; `plate` is the project's logo_plate
+  // the projects with files in seed-files; `plate` is the project's logo_plate, `visual` its illustration
   const P = {
     v3: {name: 'My website V3', type: 'Portfolio personale', foot: '2026 · Nuxt, Tailwind, Directus', url: 'leicaflorianrobert.dev', shot: 'project-v3.png', logo: 'logo-v3.png'},
     v2: {name: 'My website V2', type: 'Portfolio personale', foot: '2023 · Laravel, Livewire, Tailwind, MySQL', url: 'leicaflorianrobert.dev', shot: 'project-v2.jpg', logo: 'logo-v2.png', plate: true},
@@ -88,24 +127,84 @@
     nosponsor: {name: 'NoSponsor', type: 'Estensione browser', foot: '2026 · TypeScript, WXT, Chrome Extensions', url: 'chromewebstore.google.com', shot: 'project-nosponsor.png', logo: 'logo-nosponsor.png'},
     familymanager: {name: 'Family Manager', type: 'Progetto personale, privato', foot: '2026 · Directus, Vue, Go, Claude e Gemini', url: '', shot: 'project-familymanager.png', logo: 'logo-familymanager.png'},
     tailwab: {name: 'TailWab', type: 'Strumento web', foot: '2024 · Nuxt, Tailwind, FormKit, Shiki', url: 'tailwab.leicaflorianrobert.dev', shot: 'project-tailwab.png', logo: 'logo-tailwab.png'},
-    imanpack: {name: 'Imanpack', type: 'Automazione newsletter', foot: '2023 · Laravel, Vue, MJML, Microsoft SQL Server', logo: 'logo-imanpack.png', plate: true},
-    steelfuture: {name: 'Steel Future', type: 'Gestionale aziendale', foot: '2023 · PHP 5, Git, GitHub'},
+    imanpack: {name: 'Imanpack', type: 'Automazione newsletter', foot: '2023 · Laravel, Vue, MJML, Microsoft SQL Server', url: 'imanpack.it', shot: 'project-imanpack.png', logo: 'logo-imanpack.png', plate: true},
+    steelfuture: {name: 'Steel Future', type: 'Gestionale aziendale', foot: '2023 · PHP 5, Git, GitHub', url: 'steelfuture.com', shot: 'project-steelfuture.png', logo: 'logo-steelfuture.png', plate: true},
+    fintech: {name: 'Piattaforma per investimenti', type: 'Piattaforma web e mobile', foot: '2020 · Node.js, AdonisJS, Nuxt, Vue, Ionic', visual: 'banking'},
+    boolean: {name: 'Boolean CLI', type: 'Strumento a riga di comando', foot: '2022 · TypeScript, Node.js, npm, GitHub CLI'},
   }
   const FILES = '../directus/seed-files/'
   const logo = p => p.logo ? `<div class="${p.shot ? 'shot-logo' : 'logo'} ${p.plate ? 'plate' : 'icon'}"><img src="${FILES}${p.logo}" alt=""></div>` : ''
-  const cover = p => `
-    <div class="cover ${p.shot ? '' : 'no-shot'}">
+  const BANKING = {screen: `
+      <div class="app">
+        <div class="side">
+          <div class="brand"></div>
+          <div class="nav on"><i></i><b></b></div>
+          <div class="nav"><i></i><b></b></div>
+          <div class="nav"><i></i><b></b></div>
+          <div class="nav"><i></i><b></b></div>
+        </div>
+        <div class="main">
+          <div class="panel">
+            <div class="label"></div>
+            <div class="amount">€ 128.450<small>,00</small></div>
+            <div class="delta">▲ 4,2%</div>
+            <svg class="chart" viewBox="0 0 300 80" preserveAspectRatio="none">
+              <defs><linearGradient id="fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#FF5B14" stop-opacity=".35"/><stop offset="1" stop-color="#FF5B14" stop-opacity="0"/></linearGradient></defs>
+              <path d="M0 62 L25 58 L50 64 L75 50 L100 54 L125 40 L150 44 L175 32 L200 36 L225 22 L250 26 L275 14 L300 10 L300 80 L0 80 Z" fill="url(#fill)"/>
+              <path d="M0 62 L25 58 L50 64 L75 50 L100 54 L125 40 L150 44 L175 32 L200 36 L225 22 L250 26 L275 14 L300 10" fill="none" stroke="#FF5B14" stroke-width="2.5" vector-effect="non-scaling-stroke"/>
+            </svg>
+          </div>
+          <div class="panel">
+            <div class="label"></div>
+            <div class="donut" style="margin-top: 1.4cqw">
+              <svg viewBox="0 0 42 42" style="width: 9cqw; flex: none">
+                <circle cx="21" cy="21" r="15.9" fill="none" stroke="#2C2C31" stroke-width="6"/>
+                <circle cx="21" cy="21" r="15.9" fill="none" stroke="#FF5B14" stroke-width="6" stroke-dasharray="48 52" stroke-dashoffset="25"/>
+                <circle cx="21" cy="21" r="15.9" fill="none" stroke="#FF8A52" stroke-width="6" stroke-dasharray="28 72" stroke-dashoffset="77"/>
+                <circle cx="21" cy="21" r="15.9" fill="none" stroke="#A3A09A" stroke-width="6" stroke-dasharray="16 84" stroke-dashoffset="49"/>
+              </svg>
+              <div class="legend">
+                <div><i style="background:#FF5B14"></i><b></b></div>
+                <div><i style="background:#FF8A52"></i><b></b></div>
+                <div><i style="background:#A3A09A"></i><b></b></div>
+              </div>
+            </div>
+          </div>
+          <div class="panel moves">
+            <div class="move"><i></i><b style="width: 22%"></b><span class="in">+ € 2.500</span></div>
+            <div class="move"><i></i><b style="width: 30%"></b><span class="in">+ € 340</span></div>
+            <div class="move"><i></i><b style="width: 18%"></b><span>− € 1.200</span></div>
+          </div>
+        </div>
+      </div>
+`, phone: `
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="label" style="width: 50%"></div>
+      <div class="amount">€ 5.000</div>
+      <div class="tile"><b style="width: 70%"></b><b style="width: 45%"></b></div>
+      <div class="tile"><b style="width: 60%"></b><b style="width: 35%"></b></div>
+      <div class="buy"><b></b></div>
+    </div>
+`}
+  const cover = p => {
+    const windowed = p.shot || p.visual
+    return `
+    <div class="cover ${windowed ? '' : 'no-shot'}"><div class="inner">
       <div class="type">
-        ${p.shot ? '' : logo(p)}
+        ${windowed ? '' : logo(p)}
         <p class="kicker">// ${p.type}</p>
         <p class="name">${p.name}</p>
         <p class="foot">${p.foot}</p>
       </div>
-      ${p.shot ? logo(p) : ''}
-      ${p.shot ? `<div class="shot"><div class="window">
-        <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>${p.url ? `<span class="url">${p.url}</span>` : ''}</div>
-        <img src="${FILES}${p.shot}" alt=""></div></div>` : ''}
+      ${windowed ? `<div class="shot"><div class="window">
+        <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>${p.url && !p.visual ? `<span class="url">${p.url}</span>` : ''}</div>
+        ${p.visual === 'banking' ? BANKING.screen : `<img src="${FILES}${p.shot}" alt="">`}</div></div>` : ''}
+    </div>
+    ${p.shot && !p.visual ? logo(p) : ''}
+    ${p.visual === 'banking' ? BANKING.phone : ''}
     </div>`
+  }
   document.querySelector('[data-p="v3"]').innerHTML = cover(P.v3)
   document.getElementById('cards').innerHTML = Object.keys(P)
     .map(k => `<div class="frame card">${cover(P[k])}</div>`).join('')
