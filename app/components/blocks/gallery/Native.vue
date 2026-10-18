@@ -27,7 +27,7 @@ const slots = computed(() => {
         <span class="text-accent">›</span> <span v-html="highlight(line)"/>
       </li>
     </ul>
-    <div class="mt-3 grid grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-5">
+    <div v-if="slots.length" class="mt-3 grid grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-5">
       <div v-for="(slot, i) in slots" :key="i" class="flex flex-col gap-2.5">
         <!-- a single image is a wide one (a diagram, desktop and phone together): shown whole, at its own shape -->
         <div class="overflow-hidden rounded-xl border border-line-card" :class="slots.length > 1 ? 'aspect-4/3' : slot.image ? '' : 'aspect-16/10'">
