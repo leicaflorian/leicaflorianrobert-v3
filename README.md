@@ -71,7 +71,7 @@ i18n/locales/             interface texts (menu, labels, buttons) in it, en, ro
 directus/
   docker-compose.yml      Directus and PostgreSQL locally
   scripts/                setup, seed, screenshots
-  seed-files/             images the seed uploads (project images, case study screenshots)
+  seed-files/             images the seed uploads (project images and logos, case study screenshots)
   extensions/contact-endpoint   POST /contact: reCAPTCHA v3 and saving to `messages`
   snapshot.yaml           the Directus schema
 design/                   the Claude Design export, for reference only
