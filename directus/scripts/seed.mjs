@@ -2170,7 +2170,7 @@ const CASE_STUDIES = {
   },
 }
 
-// The image of a project (its card, and the case study cover when there's no `cover`):
+// The image of a project (its card and, for a case study, the cover when there's no `cover`):
 // a file in seed-files, uploaded only where the project has none.
 const PROJECT_IMAGES = {
   v1: 'project-v1.png',
@@ -2179,6 +2179,7 @@ const PROJECT_IMAGES = {
   nosponsor: 'project-nosponsor.png',
   familymanager: 'project-familymanager.png',
   tailwab: 'project-tailwab.png',
+  wab: 'project-wab.png',
 }
 
 // --- loading -----------------------------------------------------------------------------
