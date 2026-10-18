@@ -68,7 +68,7 @@ const PROJECTS = [
   project('v3', 'https://leicaflorianrobert.dev', {kind: 'personal', branch: 'main', case_study: true}, name('My website V3'),
     note('Versione attuale del sito', 'Current version of this site', 'Versiunea actuală a site-ului')),
   project('tfp', 'https://thefullproject.it/', {case_study: true, on_home: true}, name('The Full Project'),
-    note('20+ server, deploy automatici, zero disservizi in 2 anni e mezzo', '20+ servers, automated deploys, no outages in two and a half years', '20+ servere, deploy-uri automate, zero întreruperi în doi ani și jumătate')),
+    note('20+ server, deploy automatici, zero disservizi', '20+ servers, automated deploys, no outages', '20+ servere, deploy-uri automate, zero întreruperi')),
   project('xpulire', 'https://www.xpulire.com/', {case_study: true, logo_plate: true}, name('xPulire'),
     note('Trasloco IT completo in un giorno, senza fermare la produzione', 'A complete IT move in one day, without stopping production', 'Mutarea IT completă într-o zi, fără oprirea producției')),
   project('imanpack', 'https://www.imanpack.it/', {case_study: true, logo_plate: true}, name('Imanpack'),
@@ -768,9 +768,9 @@ const CASE_STUDIES = {
   tfp: {
     year: 2023,
     translations: {
-      it: {intro: 'Due anni e mezzo in una web agency da CTO e sviluppatore: siti, web app ed e-commerce, e l\'infrastruttura che li porta online e li tiene in piedi.', role: 'CTO, sviluppo e IT', type: 'Web agency', stack: 'Laravel, Statamic, Vue, Nuxt, Directus, Docker, DigitalOcean'},
-      en: {intro: 'Two and a half years at a web agency as CTO and developer: websites, web apps and e-commerce, and the infrastructure that takes them online and keeps them up.', role: 'CTO, development and IT', type: 'Web agency', stack: 'Laravel, Statamic, Vue, Nuxt, Directus, Docker, DigitalOcean'},
-      ro: {intro: 'Doi ani și jumătate într-o agenție web ca CTO și dezvoltator: site-uri, aplicații web și e-commerce, plus infrastructura care le pune online și le ține în funcțiune.', role: 'CTO, dezvoltare și IT', type: 'Agenție web', stack: 'Laravel, Statamic, Vue, Nuxt, Directus, Docker, DigitalOcean'},
+      it: {intro: 'CTO, sviluppatore e IT in una web agency: siti, web app ed e-commerce, e l\'infrastruttura che li porta online e li tiene in piedi.', role: 'CTO, sviluppo e IT', type: 'Web agency', stack: 'Laravel, Statamic, Vue, Nuxt, Directus, Shopify, Ionic, Docker, DigitalOcean', award: 'Compasso d\'Oro Internazionale 2025, con GeneraliAct4Green'},
+      en: {intro: 'CTO, developer and IT at a web agency: websites, web apps and e-commerce, and the infrastructure that takes them online and keeps them up.', role: 'CTO, development and IT', type: 'Web agency', stack: 'Laravel, Statamic, Vue, Nuxt, Directus, Shopify, Ionic, Docker, DigitalOcean', award: 'International Compasso d\'Oro 2025, with GeneraliAct4Green'},
+      ro: {intro: 'CTO, dezvoltator și IT într-o agenție web: site-uri, aplicații web și e-commerce, plus infrastructura care le pune online și le ține în funcțiune.', role: 'CTO, dezvoltare și IT', type: 'Agenție web', stack: 'Laravel, Statamic, Vue, Nuxt, Directus, Shopify, Ionic, Docker, DigitalOcean', award: 'Compasso d\'Oro Internațional 2025, cu GeneraliAct4Green'},
     },
     sections: [
       section('block_text', {}, {
@@ -778,7 +778,7 @@ const CASE_STUDIES = {
           label: 'punto di partenza',
           title: 'Tutto a mano',
           text: paras(
-            'Quando sono arrivato i siti erano quasi tutti in WordPress, su pochi server, e si pubblicavano a mano: file trasferiti via FTP, un rilascio alla volta.',
+            'Quando sono arrivato i siti erano quasi tutti in WordPress, su pochi server di cui si erano perse anche chiavi e permessi, e si pubblicavano a mano: file trasferiti via FTP, un rilascio alla volta.',
             'La gestione dei server è passata poi a un\'azienda esterna, ma col tempo si è visto che così non era gestibile. Alla fine l\'agenzia l\'ha affidata **interamente a me**.',
           ),
         },
@@ -786,7 +786,7 @@ const CASE_STUDIES = {
           label: 'starting point',
           title: 'Everything by hand',
           text: paras(
-            'When I arrived, the sites were almost all WordPress, on a handful of servers, and were published by hand: files uploaded over FTP, one release at a time.',
+            'When I arrived, the sites were almost all WordPress, on a handful of servers whose keys and permissions had even been lost, and were published by hand: files uploaded over FTP, one release at a time.',
             'Server management then moved to an outside company, but over time it became clear this wasn\'t manageable. In the end the agency handed it **entirely to me**.',
           ),
         },
@@ -794,8 +794,57 @@ const CASE_STUDIES = {
           label: 'punct de plecare',
           title: 'Totul de mână',
           text: paras(
-            'Când am ajuns, site-urile erau aproape toate în WordPress, pe câteva servere, și se publicau de mână: fișiere transferate prin FTP, câte o lansare pe rând.',
+            'Când am ajuns, site-urile erau aproape toate în WordPress, pe câteva servere ale căror chei și permisiuni se pierduseră, și se publicau de mână: fișiere transferate prin FTP, câte o lansare pe rând.',
             'Gestionarea serverelor a trecut apoi la o firmă externă, dar cu timpul s-a văzut că așa nu se putea gestiona. În final agenția mi-a încredințat-o **în întregime mie**.',
+          ),
+        },
+      }),
+      section('block_gallery', {images: files('cs-tfp-volersi.png')}, {
+        it: {
+          label: 'il primo progetto',
+          title: 'Partenza in corsa',
+          text: 'Mi hanno chiamato per un\'urgenza: la piattaforma di **Volersi Benessere** andava sviluppata da zero e consegnata in tempo. Ad agosto e settembre, insieme a un partner, l\'abbiamo costruita con **Laravel** e **Statamic**, e consegnata nei tempi.',
+          captions: 'La piattaforma su desktop e su telefono, l\'area personale e il negozio',
+        },
+        en: {
+          label: 'the first project',
+          title: 'A running start',
+          text: 'They called me for an emergency: the **Volersi Benessere** platform had to be built from scratch and delivered on time. In August and September, together with a partner, we built it with **Laravel** and **Statamic**, and delivered it on schedule.',
+          captions: 'The platform on desktop and phone, the personal area and the shop',
+        },
+        ro: {
+          label: 'primul proiect',
+          title: 'Plecare din mers',
+          text: 'M-au chemat pentru o urgență: platforma **Volersi Benessere** trebuia dezvoltată de la zero și livrată la timp. În august și septembrie, împreună cu un partener, am construit-o cu **Laravel** și **Statamic** și am livrat-o în termen.',
+          captions: 'Platforma pe desktop și pe telefon, zona personală și magazinul',
+        },
+      }),
+      section('block_text', {}, {
+        it: {
+          label: 'metodo',
+          title: 'Un modello per tutti i siti',
+          text: paras(
+            'Statamic è diventato la base anche di altri siti, come **Alpha Omega**, **Mipharm** e **Doppel**.',
+            'Poi sono passato a **Nuxt** e **Directus**, e ne ho fatto uno standard: due **modelli di partenza**, uno per il CMS e uno per il frontend, con la stessa struttura, gli stessi script e gli stessi pacchetti. Ogni sito nuovo parte da una base comune invece che da zero: meno tempo per cominciare, più tempo per il progetto.',
+            'Con questo sistema abbiamo rifatto alcuni siti del **gruppo Qubit**, di cui The Full Project fa parte: tra gli altri **Qubit**, **GPF** e **Carmi e Ubertis**.',
+          ),
+        },
+        en: {
+          label: 'method',
+          title: 'One template for every site',
+          text: paras(
+            'Statamic also became the base of other sites, such as **Alpha Omega**, **Mipharm** and **Doppel**.',
+            'Then I moved to **Nuxt** and **Directus**, and turned them into a standard: two **starter templates**, one for the CMS and one for the frontend, with the same structure, the same scripts and the same packages. Every new site starts from a shared base instead of from scratch: less time to get going, more time for the project.',
+            'With this system we rebuilt several sites of the **Qubit group**, which The Full Project belongs to: among them **Qubit**, **GPF** and **Carmi e Ubertis**.',
+          ),
+        },
+        ro: {
+          label: 'metodă',
+          title: 'Un model pentru toate site-urile',
+          text: paras(
+            'Statamic a devenit baza și pentru alte site-uri, precum **Alpha Omega**, **Mipharm** și **Doppel**.',
+            'Apoi am trecut la **Nuxt** și **Directus** și am făcut din ele un standard: două **modele de pornire**, unul pentru CMS și unul pentru frontend, cu aceeași structură, aceleași scripturi și aceleași pachete. Fiecare site nou pornește de la o bază comună în loc de la zero: mai puțin timp pentru început, mai mult timp pentru proiect.',
+            'Cu acest sistem am refăcut câteva site-uri ale **grupului Qubit**, din care face parte The Full Project: printre altele **Qubit**, **GPF** și **Carmi e Ubertis**.',
           ),
         },
       }),
@@ -804,10 +853,13 @@ const CASE_STUDIES = {
           label: 'sviluppo',
           title: 'Cosa ho sviluppato',
           items: lines(
-            'Siti web, dallo sviluppo alla messa online.',
+            'Siti web, partendo da un Figma, allo sviluppo e alla messa online.',
+            'Animazioni su misura in ogni sito, scritte per il progetto e non prese da un tema.',
+            'Tutti i siti 100% responsive, dal telefono al grande schermo.',
             'Web app su misura.',
             'PWA, installabili sul telefono come un\'app.',
-            'E-commerce.',
+            'E-commerce, fatti su misura o con Shopify dietro le quinte.',
+            'Pannelli di gestione su misura per i clienti.',
             'Laravel e Statamic sul backend, Vue e Nuxt sul frontend, Directus come CMS headless.',
           ),
         },
@@ -815,10 +867,13 @@ const CASE_STUDIES = {
           label: 'development',
           title: 'What I built',
           items: lines(
-            'Websites, from development to going live.',
+            'Websites, from a Figma design to development and going live.',
+            'Custom animations on every site, written for the project rather than taken from a theme.',
+            'Every site 100% responsive, from the phone to the big screen.',
             'Custom web apps.',
             'PWAs, installable on the phone like an app.',
-            'E-commerce.',
+            'E-commerce, custom-built or with Shopify behind the scenes.',
+            'Custom admin panels for clients.',
             'Laravel and Statamic on the backend, Vue and Nuxt on the frontend, Directus as a headless CMS.',
           ),
         },
@@ -826,53 +881,218 @@ const CASE_STUDIES = {
           label: 'dezvoltare',
           title: 'Ce am dezvoltat',
           items: lines(
-            'Site-uri web, de la dezvoltare la publicare.',
+            'Site-uri web, de la un design în Figma la dezvoltare și publicare.',
+            'Animații pe măsură în fiecare site, scrise pentru proiect și nu luate dintr-o temă.',
+            'Toate site-urile 100% responsive, de pe telefon până pe ecranul mare.',
             'Aplicații web pe măsură.',
             'PWA, care se instalează pe telefon ca o aplicație.',
-            'E-commerce.',
+            'E-commerce, făcut pe măsură sau cu Shopify în culise.',
+            'Panouri de administrare pe măsură pentru clienți.',
             'Laravel și Statamic pe backend, Vue și Nuxt pe frontend, Directus ca CMS headless.',
           ),
+        },
+      }),
+      section('block_gallery', {images: files('cs-tfp-kilocal.png')}, {
+        it: {
+          label: 'rifacimento',
+          title: 'Kilocal, da capo',
+          text: paras(
+            'Il sito di **Kilocal** rifatto da zero con Nuxt e Directus, portando sulla nuova piattaforma anche i clienti di quella vecchia.',
+            'Con il nuovo piano Kilocal sono arrivate funzioni nuove, tra cui le **video guide**, che si aggiornano in base a quanto l\'utente ha già visto. Poi il **negozio** e, più tardi, l\'**app**.',
+          ),
+          captions: 'Il sito su desktop e su telefono, la dashboard del percorso e il negozio',
+        },
+        en: {
+          label: 'rebuild',
+          title: 'Kilocal, from scratch',
+          text: paras(
+            'The **Kilocal** website rebuilt from scratch with Nuxt and Directus, bringing the customers of the old platform over to the new one.',
+            'The new Kilocal plan brought new features, including **video guides** that update based on how much the user has already watched. Then the **shop** and, later, the **app**.',
+          ),
+          captions: 'The site on desktop and phone, the programme dashboard and the shop',
+        },
+        ro: {
+          label: 'refacere',
+          title: 'Kilocal, de la capăt',
+          text: paras(
+            'Site-ul **Kilocal** refăcut de la zero cu Nuxt și Directus, aducând pe noua platformă și clienții celei vechi.',
+            'Odată cu noul plan Kilocal au venit funcții noi, printre care **ghidurile video**, care se actualizează în funcție de cât a văzut deja utilizatorul. Apoi **magazinul** și, mai târziu, **aplicația**.',
+          ),
+          captions: 'Site-ul pe desktop și pe telefon, dashboard-ul programului și magazinul',
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'e-commerce',
+          title: 'Due negozi, due strade',
+          items: lines(
+            '**Kilocal**: un negozio fatto interamente da noi, su misura.',
+            '**Volersi Benessere**: dietro le quinte c\'è **Shopify**, con le sue API, ma l\'interfaccia è nostra.',
+          ),
+        },
+        en: {
+          label: 'e-commerce',
+          title: 'Two shops, two roads',
+          items: lines(
+            '**Kilocal**: a shop built entirely by us, tailor-made.',
+            '**Volersi Benessere**: **Shopify** runs behind the scenes, through its APIs, but the interface is ours.',
+          ),
+        },
+        ro: {
+          label: 'e-commerce',
+          title: 'Două magazine, două drumuri',
+          items: lines(
+            '**Kilocal**: un magazin făcut în întregime de noi, pe măsură.',
+            '**Volersi Benessere**: în culise este **Shopify**, prin API-urile lui, dar interfața este a noastră.',
+          ),
+        },
+      }),
+      section('block_gallery', {images: files('cs-tfp-iresales.png')}, {
+        it: {
+          label: 'integrazione',
+          title: 'Gli immobili di iResales',
+          text: 'Per **iResales**, un\'azienda immobiliare, un sistema che raccoglie gli immobili da **immobiliare.it** e dal loro software interno, li carica in **Directus** e li mostra sul sito.',
+          captions: 'Il sito di iResales su desktop e su telefono',
+        },
+        en: {
+          label: 'integration',
+          title: 'The properties of iResales',
+          text: 'For **iResales**, a real estate company, a system that collects the properties from **immobiliare.it** and from their in-house software, loads them into **Directus** and shows them on the website.',
+          captions: 'The iResales website on desktop and phone',
+        },
+        ro: {
+          label: 'integrare',
+          title: 'Imobilele iResales',
+          text: 'Pentru **iResales**, o firmă imobiliară, un sistem care adună imobilele de pe **immobiliare.it** și din software-ul lor intern, le încarcă în **Directus** și le afișează pe site.',
+          captions: 'Site-ul iResales pe desktop și pe telefon',
+        },
+      }),
+      section('block_gallery', {images: files('cs-tfp-oasi.png')}, {
+        it: {
+          label: 'esempio',
+          title: 'Oasi Gregorina, prima, durante e dopo la visita',
+          text: 'Per l\'**Oasi Gregorina** non solo un sito, ma tutto quello che accompagna la visita, collegato allo stesso CMS:',
+          items: lines(
+            'il **sito**, accessibile di **livello AA** e responsive;',
+            'la **prenotazione online**: gestione giornaliera delle persone, limite di entrate, gruppi, email di conferma e promemoria;',
+            'un **memory game** sul sito;',
+            'una pagina per il **totem** dell\'oasi, con il monitoraggio degli impollinatori e il selfie ricordo;',
+            'una pagina pensata per **tablet**, dove lasciare un messaggio o un disegno sull\'oasi;',
+            'una **PWA** che i visitatori usano durante la visita per scattare foto e raccontare la propria esperienza.',
+          ),
+          captions: 'Il sito, il memory game, il totem e la PWA',
+        },
+        en: {
+          label: 'example',
+          title: 'Oasi Gregorina, before, during and after the visit',
+          text: 'For **Oasi Gregorina**, not just a website but everything that goes with the visit, connected to the same CMS:',
+          items: lines(
+            'the **website**, **AA-level** accessible and responsive;',
+            '**online booking**: daily visitor management, entry limits, groups, confirmation and reminder emails;',
+            'a **memory game** on the website;',
+            'a page for the oasis **totem**, with pollinator monitoring and a souvenir selfie;',
+            'a page designed for **tablets**, to leave a message or a drawing about the oasis;',
+            'a **PWA** that visitors use during the visit to take photos and tell their own experience.',
+          ),
+          captions: 'The website, the memory game, the totem and the PWA',
+        },
+        ro: {
+          label: 'exemplu',
+          title: 'Oasi Gregorina, înainte, în timpul și după vizită',
+          text: 'Pentru **Oasi Gregorina** nu doar un site, ci tot ce însoțește vizita, legat de același CMS:',
+          items: lines(
+            '**site-ul**, accesibil la **nivelul AA** și responsive;',
+            '**rezervarea online**: gestionarea zilnică a vizitatorilor, limita de intrări, grupuri, e-mailuri de confirmare și de reamintire;',
+            'un **memory game** pe site;',
+            'o pagină pentru **totemul** oazei, cu monitorizarea polenizatorilor și selfie-ul de amintire;',
+            'o pagină gândită pentru **tabletă**, unde se poate lăsa un mesaj sau un desen despre oază;',
+            'o **PWA** pe care vizitatorii o folosesc în timpul vizitei ca să facă fotografii și să-și povestească experiența.',
+          ),
+          captions: 'Site-ul, memory game-ul, totemul și PWA-ul',
+        },
+      }),
+      section('block_gallery', {images: files('cs-tfp-compasso.jpg')}, {
+        it: {
+          label: 'premio',
+          title: 'Compasso d\'Oro Internazionale',
+          text: paras(
+            'Con **GeneraliAct4Green**, il programma di sostenibilità di Generali di cui fa parte l\'Oasi Gregorina, Generali ha vinto per la prima volta il **Compasso d\'Oro Internazionale**, consegnato al Padiglione Italia di **Expo 2025 Osaka**.',
+            'Il progetto è nato nel gruppo Qubit: la ricerca di mercato di Gpf, la marca e l\'identità visiva di Carmi e Ubertis, e l\'**ecosistema digitale** di The Full Project, che ho sviluppato io.',
+            'Il premio riconosce una piattaforma digitale diventata uno spazio di sensibilizzazione e coinvolgimento verso un futuro più sostenibile e inclusivo. Dietro ci sono scelte precise:',
+          ),
+          items: lines(
+            '**accessibilità** pensata fin dall\'inizio, non aggiunta alla fine;',
+            'codice e contenuti ottimizzati per consumare meno, e la **dark mode** per ridurre ancora i consumi;',
+            'i dati dei **sensori** installati nelle aree naturali, per seguire i progetti di sostenibilità.',
+          ),
+          captions: 'La consegna del premio a Osaka; sullo schermo, tra i nomi del progetto, **anche il mio**. Fonte: comunicato stampa di Generali',
+        },
+        en: {
+          label: 'award',
+          title: 'International Compasso d\'Oro',
+          text: paras(
+            'With **GeneraliAct4Green**, Generali\'s sustainability programme that Oasi Gregorina is part of, Generali won the **International Compasso d\'Oro** for the first time, presented at the Italy Pavilion of **Expo 2025 Osaka**.',
+            'The project was born within the Qubit group: the market research by Gpf, the brand and visual identity by Carmi e Ubertis, and the **digital ecosystem** by The Full Project, which I developed.',
+            'The award recognises a digital platform that became a space for awareness and engagement towards a more sustainable and inclusive future. Behind it are precise choices:',
+          ),
+          items: lines(
+            '**accessibility** designed in from the start, not added at the end;',
+            'code and content optimised to use less energy, and **dark mode** to cut consumption further;',
+            'data from **sensors** installed in the natural areas, to follow the sustainability projects.',
+          ),
+          captions: 'The award ceremony in Osaka; on the screen, among the names of the project, **mine too**. Source: Generali press release',
+        },
+        ro: {
+          label: 'premiu',
+          title: 'Compasso d\'Oro Internațional',
+          text: paras(
+            'Cu **GeneraliAct4Green**, programul de sustenabilitate al Generali din care face parte Oasi Gregorina, Generali a câștigat pentru prima dată **Compasso d\'Oro Internațional**, decernat la Pavilionul Italiei de la **Expo 2025 Osaka**.',
+            'Proiectul s-a născut în grupul Qubit: cercetarea de piață a Gpf, marca și identitatea vizuală a Carmi e Ubertis și **ecosistemul digital** al The Full Project, pe care l-am dezvoltat eu.',
+            'Premiul recunoaște o platformă digitală devenită un spațiu de sensibilizare și implicare pentru un viitor mai sustenabil și mai incluziv. În spate sunt alegeri precise:',
+          ),
+          items: lines(
+            '**accesibilitate** gândită de la început, nu adăugată la final;',
+            'cod și conținut optimizate ca să consume mai puțin, și **dark mode** pentru a reduce și mai mult consumul;',
+            'datele de la **senzorii** instalați în zonele naturale, pentru a urmări proiectele de sustenabilitate.',
+          ),
+          captions: 'Decernarea premiului la Osaka; pe ecran, printre numele proiectului, **și al meu**. Sursa: comunicatul de presă Generali',
         },
       }),
       section('block_gallery', {}, {
         it: {
           label: 'infrastruttura',
           title: 'Oltre 20 server, un solo metodo',
-          text: paras(
-            'Più di 20 server, tutti droplet su **DigitalOcean**. **Laravel Forge** e **Cleavr** ne gestiscono configurazione e deploy: nessun server configurato a mano, ognuno costruito allo stesso modo.',
-            'I progetti **Directus** e **Laravel** girano in container **Docker**.',
-          ),
+          text: 'Più di 20 server, tutti droplet su **DigitalOcean**. **Laravel Forge** e **Cleavr** ne gestiscono configurazione e deploy: nessun server configurato a mano, ognuno costruito allo stesso modo.',
           captions: lines('schema dell\'infrastruttura', 'Laravel Forge', 'Cleavr'),
         },
         en: {
           label: 'infrastructure',
           title: 'Over 20 servers, one method',
-          text: paras(
-            'More than 20 servers, all droplets on **DigitalOcean**. **Laravel Forge** and **Cleavr** handle their configuration and deploys: no server set up by hand, each one built the same way.',
-            'The **Directus** and **Laravel** projects run in **Docker** containers.',
-          ),
+          text: 'More than 20 servers, all droplets on **DigitalOcean**. **Laravel Forge** and **Cleavr** handle their configuration and deploys: no server set up by hand, each one built the same way.',
           captions: lines('infrastructure diagram', 'Laravel Forge', 'Cleavr'),
         },
         ro: {
           label: 'infrastructură',
           title: 'Peste 20 de servere, o singură metodă',
-          text: paras(
-            'Peste 20 de servere, toate droplet-uri pe **DigitalOcean**. **Laravel Forge** și **Cleavr** se ocupă de configurare și de deploy: niciun server configurat de mână, fiecare construit la fel.',
-            'Proiectele **Directus** și **Laravel** rulează în containere **Docker**.',
-          ),
+          text: 'Peste 20 de servere, toate droplet-uri pe **DigitalOcean**. **Laravel Forge** și **Cleavr** se ocupă de configurare și de deploy: niciun server configurat de mână, fiecare construit la fel.',
           captions: lines('schema infrastructurii', 'Laravel Forge', 'Cleavr'),
         },
       }),
-      section('block_list', {}, {
+      // the diagram has text in it: one image per language
+      section('block_gallery', {}, {
         it: {
           label: 'pipeline',
           title: 'Dal push alla produzione',
           items: lines(
             'Un push su git avvia il deploy: niente FTP, niente passaggi a mano.',
             'Il branch decide dove va: server di staging/test o produzione.',
+            'Ogni progetto ha il suo ambiente di prova, su un sottodominio dell\'agenzia, dove le modifiche si vedono prima di andare online.',
+            'Script per portare schema del CMS, file caricati e database tra il computer, la prova e la produzione: si lavora sempre su dati veri.',
             'Deploy senza interruzioni: il sito resta online mentre si aggiorna.',
             'DNS, certificati SSL, email, backup e monitoraggio: tutto seguito da me.',
           ),
+          captions: 'Il percorso di un rilascio, dal branch al droplet',
+          localized_images: files('cs-tfp-deploy-it.png'),
         },
         en: {
           label: 'pipeline',
@@ -880,9 +1100,13 @@ const CASE_STUDIES = {
           items: lines(
             'A git push starts the deploy: no FTP, no manual steps.',
             'The branch decides where it goes: staging/test servers or production.',
+            'Every project has its own test environment, on an agency subdomain, where changes can be seen before they go live.',
+            'Scripts to move the CMS schema, uploaded files and database between my computer, testing and production: work always happens on real data.',
             'Zero-downtime deploys: the site stays online while it updates.',
             'DNS, SSL certificates, email, backups and monitoring: all handled by me.',
           ),
+          captions: 'The path of a release, from the branch to the droplet',
+          localized_images: files('cs-tfp-deploy-en.png'),
         },
         ro: {
           label: 'pipeline',
@@ -890,9 +1114,13 @@ const CASE_STUDIES = {
           items: lines(
             'Un push pe git pornește deploy-ul: fără FTP, fără pași manuali.',
             'Branch-ul decide unde ajunge: servere de staging/test sau producție.',
+            'Fiecare proiect are mediul lui de test, pe un subdomeniu al agenției, unde modificările se văd înainte de a ajunge online.',
+            'Scripturi care mută schema CMS-ului, fișierele încărcate și baza de date între calculator, test și producție: se lucrează mereu pe date reale.',
             'Deploy fără întreruperi: site-ul rămâne online cât se actualizează.',
             'DNS, certificate SSL, email, backup și monitorizare: toate gestionate de mine.',
           ),
+          captions: 'Drumul unei lansări, de la branch la droplet',
+          localized_images: files('cs-tfp-deploy-ro.png'),
         },
       }),
       section('block_list', {}, {
@@ -900,8 +1128,8 @@ const CASE_STUDIES = {
           label: 'risultati',
           title: 'Un\'agenzia autonoma',
           items: lines(
-            'Siti pubblicati più velocemente e con più qualità.',
-            'Nessun disservizio in due anni e mezzo.',
+            'Siti creati e pubblicati più velocemente e con più qualità.',
+            'Nessun disservizio.',
             'Costi dei server prevedibili.',
             'Nessuna dipendenza da aziende esterne: dall\'idea allo sviluppo alla pubblicazione, tutto interno.',
             'Più progetti gestiti insieme, e sempre più complessi.',
@@ -911,8 +1139,8 @@ const CASE_STUDIES = {
           label: 'results',
           title: 'A self-sufficient agency',
           items: lines(
-            'Sites published faster and with higher quality.',
-            'No outages in two and a half years.',
+            'Sites built and published faster and with higher quality.',
+            'No outages.',
             'Predictable server costs.',
             'No reliance on outside companies: from idea to development to launch, all in-house.',
             'More projects handled at once, and increasingly complex ones.',
@@ -922,8 +1150,8 @@ const CASE_STUDIES = {
           label: 'rezultate',
           title: 'O agenție autonomă',
           items: lines(
-            'Site-uri publicate mai repede și cu o calitate mai bună.',
-            'Nicio întrerupere a serviciului în doi ani și jumătate.',
+            'Site-uri create și publicate mai repede și cu o calitate mai bună.',
+            'Nicio întrerupere a serviciului.',
             'Costuri previzibile pentru servere.',
             'Nicio dependență de firme externe: de la idee la dezvoltare și publicare, totul intern.',
             'Mai multe proiecte gestionate în paralel, tot mai complexe.',
