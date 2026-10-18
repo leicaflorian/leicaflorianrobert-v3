@@ -879,11 +879,11 @@ const CASE_STUDIES = {
     ],
   },
   imanpack: {
-    year: 2024,
+    year: 2023,
     translations: {
-      it: {intro: 'Un sistema di newsletter in Laravel che collega il CMS proprietario in .NET di Imanpack a Mailchimp: i dati inseriti nel CMS diventano newsletter, create e programmate in automatico.', role: 'Sviluppo e integrazione', type: 'Automazione newsletter', stack: 'Laravel, .NET, Microsoft SQL Server, Mailchimp API'},
-      en: {intro: 'A Laravel newsletter system that connects Imanpack\'s proprietary .NET CMS to Mailchimp: the data entered in the CMS becomes newsletters, created and scheduled automatically.', role: 'Development and integration', type: 'Newsletter automation', stack: 'Laravel, .NET, Microsoft SQL Server, Mailchimp API'},
-      ro: {intro: 'Un sistem de newslettere în Laravel care leagă CMS-ul proprietar .NET al Imanpack de Mailchimp: datele introduse în CMS devin newslettere, create și programate automat.', role: 'Dezvoltare și integrare', type: 'Automatizare newsletter', stack: 'Laravel, .NET, Microsoft SQL Server, Mailchimp API'},
+      it: {intro: 'Un sistema in Laravel che collega il CMS proprietario in .NET di Imanpack a Mailchimp: le newsletter preparate nel CMS diventano campagne bilingui, create e inviate o programmate in automatico, con un pannello per seguirne lo stato.', role: 'Sviluppo e integrazione', type: 'Automazione newsletter', stack: 'Laravel, Vue, MJML, Microsoft SQL Server, Mailchimp API'},
+      en: {intro: 'A Laravel system that connects Imanpack\'s proprietary .NET CMS to Mailchimp: the newsletters prepared in the CMS become bilingual campaigns, created and sent or scheduled automatically, with a dashboard to follow their status.', role: 'Development and integration', type: 'Newsletter automation', stack: 'Laravel, Vue, MJML, Microsoft SQL Server, Mailchimp API'},
+      ro: {intro: 'Un sistem în Laravel care leagă CMS-ul proprietar .NET al Imanpack de Mailchimp: newsletterele pregătite în CMS devin campanii bilingve, create și trimise sau programate automat, cu un panou pentru a le urmări starea.', role: 'Dezvoltare și integrare', type: 'Automatizare newsletter', stack: 'Laravel, Vue, MJML, Microsoft SQL Server, Mailchimp API'},
     },
     sections: [
       section('block_text', {}, {
@@ -891,24 +891,24 @@ const CASE_STUDIES = {
           label: 'punto di partenza',
           title: 'Due sistemi che non si parlavano',
           text: paras(
-            'Imanpack gestisce i suoi contenuti con un **CMS proprietario** scritto in .NET, su database Microsoft. Le newsletter invece passano da **Mailchimp**.',
-            'L\'obiettivo: far nascere le newsletter direttamente dai dati inseriti nel CMS, senza ricopiarli a mano.',
+            'Imanpack gestisce i suoi contenuti con un **CMS proprietario** scritto in .NET, su Microsoft SQL Server. Le newsletter invece passano da **Mailchimp**.',
+            'L\'obiettivo: far nascere le newsletter direttamente dai dati inseriti nel CMS, senza ricopiarli a mano e senza aprire Mailchimp.',
           ),
         },
         en: {
           label: 'starting point',
           title: 'Two systems that didn\'t talk',
           text: paras(
-            'Imanpack manages its content with a **proprietary CMS** written in .NET, on a Microsoft database. Newsletters, instead, go through **Mailchimp**.',
-            'The goal: build the newsletters straight from the data entered in the CMS, without copying it over by hand.',
+            'Imanpack manages its content with a **proprietary CMS** written in .NET, on Microsoft SQL Server. Newsletters, instead, go through **Mailchimp**.',
+            'The goal: build the newsletters straight from the data entered in the CMS, without copying it over by hand and without opening Mailchimp.',
           ),
         },
         ro: {
           label: 'punct de plecare',
           title: 'Două sisteme care nu comunicau',
           text: paras(
-            'Imanpack își gestionează conținutul cu un **CMS proprietar** scris în .NET, pe o bază de date Microsoft. Newsletterele, în schimb, trec prin **Mailchimp**.',
-            'Obiectivul: newsletterele să pornească direct din datele introduse în CMS, fără a le copia de mână.',
+            'Imanpack își gestionează conținutul cu un **CMS proprietar** scris în .NET, pe Microsoft SQL Server. Newsletterele, în schimb, trec prin **Mailchimp**.',
+            'Obiectivul: newsletterele să pornească direct din datele introduse în CMS, fără a le copia de mână și fără a deschide Mailchimp.',
           ),
         },
       }),
@@ -917,30 +917,85 @@ const CASE_STUDIES = {
           label: 'come funziona',
           title: 'Dal CMS alla casella di posta',
           items: lines(
-            'Nel CMS si inseriscono i dati, che finiscono nel database Microsoft.',
-            'Un hook avvisa il sistema in Laravel a ogni nuovo inserimento.',
-            'Laravel legge i dati e crea la newsletter su Mailchimp tramite le sue API.',
-            'La newsletter viene pubblicata o programmata secondo le configurazioni impostate nel CMS.',
+            'Il CMS scrive la newsletter in una tabella del suo database: oggetto, lista, data di invio, testi, allegati, video. È l\'unico punto di contatto tra i due sistemi, che non si chiamano mai a vicenda.',
+            'Ogni minuto Laravel cerca le newsletter nuove nella tabella.',
+            'Costruisce l\'email da un modello MJML e la carica su Mailchimp.',
+            'Crea la campagna sulla lista scelta nel CMS e la invia subito o la programma alla data indicata.',
+            'Quando Mailchimp spedisce, un webhook lo comunica a Laravel, che segna la newsletter come inviata con l\'ora esatta.',
           ),
         },
         en: {
           label: 'how it works',
           title: 'From the CMS to the inbox',
           items: lines(
-            'Data is entered in the CMS and stored in the Microsoft database.',
-            'A hook notifies the Laravel system of every new entry.',
-            'Laravel reads the data and creates the newsletter on Mailchimp through its API.',
-            'The newsletter is published or scheduled according to the settings in the CMS.',
+            'The CMS writes the newsletter into a table of its database: subject, list, send date, texts, attachments, video. It\'s the only point of contact between the two systems, which never call each other.',
+            'Every minute Laravel looks for new newsletters in the table.',
+            'It builds the email from an MJML template and uploads it to Mailchimp.',
+            'It creates the campaign on the list chosen in the CMS and sends it right away or schedules it for the given date.',
+            'When Mailchimp sends it, a webhook tells Laravel, which marks the newsletter as sent with the exact time.',
           ),
         },
         ro: {
           label: 'cum funcționează',
           title: 'Din CMS în căsuța de e-mail',
           items: lines(
-            'În CMS se introduc datele, care ajung în baza de date Microsoft.',
-            'Un hook anunță sistemul Laravel la fiecare înregistrare nouă.',
-            'Laravel citește datele și creează newsletterul în Mailchimp prin API-ul său.',
-            'Newsletterul este publicat sau programat după configurările din CMS.',
+            'CMS-ul scrie newsletterul într-un tabel al bazei sale de date: subiect, listă, data trimiterii, texte, atașamente, video. Este singurul punct de contact dintre cele două sisteme, care nu se apelează niciodată unul pe altul.',
+            'În fiecare minut Laravel caută newsletterele noi în tabel.',
+            'Construiește e-mailul dintr-un șablon MJML și îl încarcă în Mailchimp.',
+            'Creează campania pe lista aleasă în CMS și o trimite imediat sau o programează la data indicată.',
+            'Când Mailchimp îl trimite, un webhook îl anunță pe Laravel, care marchează newsletterul ca trimis, cu ora exactă.',
+          ),
+        },
+      }),
+      section('block_text', {}, {
+        it: {
+          label: 'errori',
+          title: 'Quando qualcosa va storto',
+          text: paras(
+            'Se la lista non esiste o Mailchimp rifiuta la campagna, la newsletter passa in errore con il suo messaggio, e il sistema cancella quello che aveva appena creato su Mailchimp: il tentativo successivo riparte pulito. Riprova da solo ogni minuto, **fino a tre volte**.',
+            'Un **pannello** mostra lo stato di ogni newsletter, il messaggio d\'errore e l\'**anteprima** esatta dell\'email, con un pulsante per **rigenerarla** dopo aver corretto i dati nel CMS. Una campagna già spedita non parte mai una seconda volta.',
+          ),
+        },
+        en: {
+          label: 'errors',
+          title: 'When something goes wrong',
+          text: paras(
+            'If the list doesn\'t exist or Mailchimp rejects the campaign, the newsletter goes into error with its message, and the system deletes what it had just created on Mailchimp: the next attempt starts clean. It retries on its own every minute, **up to three times**.',
+            'A **dashboard** shows the status of every newsletter, the error message and an exact **preview** of the email, with a button to **regenerate** it after fixing the data in the CMS. A campaign already sent never goes out a second time.',
+          ),
+        },
+        ro: {
+          label: 'erori',
+          title: 'Când ceva nu merge',
+          text: paras(
+            'Dacă lista nu există sau Mailchimp refuză campania, newsletterul trece în eroare cu mesajul său, iar sistemul șterge ce tocmai crease în Mailchimp: următoarea încercare pornește curat. Reîncearcă singur în fiecare minut, **de cel mult trei ori**.',
+            'Un **panou** arată starea fiecărui newsletter, mesajul de eroare și **previzualizarea** exactă a e-mailului, cu un buton pentru a-l **regenera** după corectarea datelor în CMS. O campanie deja trimisă nu pleacă niciodată a doua oară.',
+          ),
+        },
+      }),
+      section('block_text', {}, {
+        it: {
+          label: 'la newsletter',
+          title: 'Due lingue, una sola email',
+          text: paras(
+            'Ogni newsletter è **bilingue**: l\'inglese a sinistra, l\'italiano a destra, dalla stessa riga del CMS. Il modello è scritto in **MJML**, che lo trasforma in un HTML adatto ai client di posta.',
+            'Allegati con il pulsante di download, video YouTube e immagini compaiono solo se nel CMS c\'è il dato. Il piè di pagina, con la privacy e la disiscrizione, lo compila Mailchimp per ogni destinatario.',
+          ),
+        },
+        en: {
+          label: 'the newsletter',
+          title: 'Two languages, one email',
+          text: paras(
+            'Every newsletter is **bilingual**: English on the left, Italian on the right, from the same CMS row. The template is written in **MJML**, which turns it into HTML fit for email clients.',
+            'Attachments with a download button, YouTube videos and images appear only if the CMS has them. The footer, with the privacy notice and the unsubscribe link, is filled in by Mailchimp for each recipient.',
+          ),
+        },
+        ro: {
+          label: 'newsletterul',
+          title: 'Două limbi, un singur e-mail',
+          text: paras(
+            'Fiecare newsletter este **bilingv**: engleza în stânga, italiana în dreapta, din același rând al CMS-ului. Șablonul este scris în **MJML**, care îl transformă într-un HTML potrivit pentru clienții de e-mail.',
+            'Atașamentele cu butonul de descărcare, videoclipurile YouTube și imaginile apar doar dacă datele sunt în CMS. Subsolul, cu nota de confidențialitate și dezabonarea, îl completează Mailchimp pentru fiecare destinatar.',
           ),
         },
       }),
@@ -949,30 +1004,30 @@ const CASE_STUDIES = {
           label: 'risultati',
           title: 'Dati nel CMS, il resto in automatico',
           items: lines(
-            'Clienti contattati in modo più automatico e più pulito.',
-            'Rispettate le richieste di iscrizione alla newsletter degli utenti.',
+            'Niente più lavoro a mano su Mailchimp: chi prepara la newsletter lavora solo nel CMS.',
             'Newsletter bilingui, per raggiungere anche i clienti internazionali.',
-            'Niente più lavoro a mano su Mailchimp: basta inserire i dati nel CMS, al resto pensa il sistema.',
+            'Invio subito o programmato, e lo stato di ogni newsletter sempre sotto controllo nel pannello.',
+            'Iscrizioni e cancellazioni dal sito di Imanpack collegate direttamente alla lista di Mailchimp, senza doppioni.',
           ),
         },
         en: {
           label: 'results',
           title: 'Data in the CMS, the rest automatic',
           items: lines(
-            'Customers reached in a more automated, cleaner way.',
-            'Users\' newsletter sign-up requests respected.',
+            'No more manual work on Mailchimp: whoever prepares the newsletter works only in the CMS.',
             'Bilingual newsletters, to reach international customers too.',
-            'No more manual work on Mailchimp: just enter the data in the CMS, the system takes care of the rest.',
+            'Sent right away or scheduled, with the status of every newsletter always in view on the dashboard.',
+            'Sign-ups and unsubscribes from the Imanpack website wired straight to the Mailchimp list, with no duplicates.',
           ),
         },
         ro: {
           label: 'rezultate',
           title: 'Datele în CMS, restul automat',
           items: lines(
-            'Clienți contactați într-un mod mai automat și mai curat.',
-            'Cererile utilizatorilor de abonare la newsletter respectate.',
+            'Fără muncă manuală în Mailchimp: cine pregătește newsletterul lucrează doar în CMS.',
             'Newslettere bilingve, pentru a ajunge și la clienții internaționali.',
-            'Fără muncă manuală în Mailchimp: ajunge să introduci datele în CMS, de rest se ocupă sistemul.',
+            'Trimitere imediată sau programată, cu starea fiecărui newsletter mereu vizibilă în panou.',
+            'Abonările și dezabonările de pe site-ul Imanpack legate direct de lista din Mailchimp, fără duplicate.',
           ),
         },
       }),
