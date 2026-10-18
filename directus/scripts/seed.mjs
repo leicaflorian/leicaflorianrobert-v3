@@ -57,7 +57,7 @@ const merge = (...parts) => tr(parts.reduce((acc, part) => {
 }, {}))
 
 const project = (slug, url, extra, ...translations) => ({
-  status: 'published', slug, url, kind: 'direct', featured: false, on_home: false, case_study: false, mockup: 'none', ...extra,
+  status: 'published', slug, url, kind: 'direct', featured: false, on_home: false, case_study: false, typographic: false, mockup: 'none', ...extra,
   translations: merge(...translations),
 })
 
@@ -74,7 +74,7 @@ const PROJECTS = [
     note('Gestionale PHP 5 portato su Git, con deploy automatico a ogni push', 'PHP 5 management software brought under Git, with automatic deploys on every push', 'Software de gestiune PHP 5 adus în Git, cu deploy automat la fiecare push')),
   project('v2', 'https://leicaflorianrobert.dev', {kind: 'personal', branch: 'main', year: 2023, case_study: true}, name('My website V2')),
   // co-founded, so mine rather than a client's; no longer operating, and its site is gone: no link, not featured
-  project('wab', '', {kind: 'personal', year: 2023}, name('Web Artisan Bros'),
+  project('wab', '', {kind: 'personal', year: 2023, typographic: true}, name('Web Artisan Bros'),
     note('Software house co-fondata nel 2023', 'Software house I co-founded in 2023', 'Software house co-fondată în 2023')),
   project('slides', 'https://chromewebstore.google.com/detail/slidescom-companion/bciknjamldhnbbckmgbchmkdcalngnco', {kind: 'personal', case_study: true}, name('Slides.com Companion'),
     note('Estensione Chrome ed Edge', 'Chrome and Edge extension', 'Extensie Chrome și Edge')),
@@ -94,15 +94,15 @@ const PROJECTS = [
     note('Tipografia e spaziature fluide per Tailwind', 'Fluid typography and spacing for Tailwind', 'Tipografie și spațieri fluide pentru Tailwind')),
   project('pimpmycrud', 'https://packagist.org/packages/leicaflorian/pimp_my_crud', {kind: 'personal'}, name('Pimp My CRUD'),
     note('Pacchetto Laravel che genera i CRUD', 'Laravel package that generates CRUDs', 'Pachet Laravel care generează CRUD-uri')),
-  project('enigma', 'https://leicaflorian.github.io/enigma_machine', {kind: 'personal'}, name('Enigma'),
+  project('enigma', 'https://leicaflorian.github.io/enigma_machine', {kind: 'personal', typographic: true}, name('Enigma'),
     note('Macchina Enigma', 'Enigma machine', 'Mașina Enigma')),
-  project('fold', 'https://leicaflorian.github.io/fold_my_paper', {kind: 'personal'}, name('Fold my paper')),
+  project('fold', 'https://leicaflorian.github.io/fold_my_paper', {kind: 'personal', typographic: true}, name('Fold my paper')),
   project('v1', 'https://v1.leicaflorianrobert.dev', {kind: 'personal', branch: 'main', year: 2018, case_study: true}, name('My website V1')),
   // the client is never named: no name, no link
   project('fintech', '', {case_study: true},
     {it: {name: 'Piattaforma per investimenti'}, en: {name: 'Investment platform'}, ro: {name: 'Platformă de investiții'}},
     note('Due web app, un\'app mobile e un\'area clienti come in una banca online', 'Two web apps, a mobile app and a client area like online banking', 'Două aplicații web, o aplicație mobilă și o zonă pentru clienți ca într-un internet banking')),
-  project('fib', 'https://leicaflorian.github.io/fibonacci_counter/', {kind: 'personal'}, name('Fibonacci Counter')),
+  project('fib', 'https://leicaflorian.github.io/fibonacci_counter/', {kind: 'personal', typographic: true}, name('Fibonacci Counter')),
   // client work done through an agency, which is never named
   project('agrigento', 'https://agrigento2025.org', {kind: 'agency', category: 'initiative'}, name('Agrigento 2025')),
   project('alfaomega', 'https://alfaomega.it', {kind: 'agency', category: 'corporate'}, name('Alfa Omega')),
@@ -2173,13 +2173,13 @@ const CASE_STUDIES = {
 // The image of a project (its card and, for a case study, the cover when there's no `cover`):
 // a file in seed-files, uploaded only where the project has none.
 const PROJECT_IMAGES = {
+  v3: 'project-v3.png',
   v1: 'project-v1.png',
   v2: 'project-v2.jpg',
   slides: 'project-slides.png',
   nosponsor: 'project-nosponsor.png',
   familymanager: 'project-familymanager.png',
   tailwab: 'project-tailwab.png',
-  wab: 'project-wab.png',
 }
 
 // --- loading -----------------------------------------------------------------------------
