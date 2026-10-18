@@ -34,7 +34,7 @@ const facts = computed(() => [
     </div>
     <div class="page pb-40">
       <div class="aspect-video overflow-hidden rounded-2xl">
-        <UiMediaImage :id="project.cover ?? project.image" :alt="project.name" :width="1600"/>
+        <ProjectCover :project="project" :image="project.cover" :width="1600"/>
       </div>
     </div>
   </section>

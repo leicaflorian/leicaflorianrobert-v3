@@ -15,7 +15,7 @@ const subtitle = computed(() => props.project.subtitle || hostOf(props.project.u
     <div v-if="project.mockup === 'laptop'" class="m-auto w-full max-w-[620px]">
       <div class="overflow-hidden rounded-[12px_12px_4px_4px] border-10 border-b-14 border-[#232327] bg-black shadow-[0_24px_60px_rgb(0_0_0/0.5)]">
         <div class="aspect-16/10">
-          <UiMediaImage :id="project.image" :alt="project.name" :width="1240"/>
+          <ProjectCover :project="project" :width="1240"/>
         </div>
       </div>
       <div class="-mx-[6%] h-3 rounded-b-[14px] bg-[linear-gradient(#2E2E33,#1C1C1F)]"/>
@@ -24,7 +24,7 @@ const subtitle = computed(() => props.project.subtitle || hostOf(props.project.u
     <div v-else class="flex flex-1 items-center justify-center">
       <div class="w-[200px] overflow-hidden rounded-[34px] border-8 border-[#232327] bg-black shadow-[0_24px_60px_rgb(0_0_0/0.5)]">
         <div class="aspect-[9/19.5]">
-          <UiMediaImage :id="project.image" :alt="project.name" :width="400"/>
+          <ProjectCover :project="project" :width="400"/>
         </div>
       </div>
     </div>

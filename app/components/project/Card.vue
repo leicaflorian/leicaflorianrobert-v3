@@ -18,7 +18,7 @@ withDefaults(defineProps<{
     :class="variant === 'archive' ? 'hover:-translate-y-1.5' : 'hover:-translate-y-1'"
   >
     <div :class="variant === 'archive' ? 'h-[220px] shrink-0' : 'aspect-video'">
-      <UiMediaImage :id="project.image" :alt="project.name" :width="720"/>
+      <ProjectCover :project="project" :width="720"/>
     </div>
 
     <div v-if="variant === 'archive'" class="flex flex-1 flex-col gap-2 px-7 py-6">
