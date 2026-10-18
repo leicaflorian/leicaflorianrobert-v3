@@ -31,7 +31,6 @@ const linkOf = useProjectLink()
       <template v-else>{{ project.name }}</template>{{ ' ' }}
       <b v-if="project.case_study">[{{ $t('projects.caseStudy') }}]</b>
       <template v-else-if="project.url">[{{ $t('projects.external') }}]</template>
-      ({{ $t(`projects.kind.${project.kind}`) }})
       <template v-if="project.note"> — <i>{{ project.note }}</i></template>
     </li>
   </component>

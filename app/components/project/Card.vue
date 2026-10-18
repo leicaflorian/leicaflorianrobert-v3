@@ -26,14 +26,14 @@ withDefaults(defineProps<{
     <div v-if="variant === 'archive'" class="flex flex-1 flex-col gap-2 px-7 py-6">
       <div class="flex items-center justify-between gap-3">
         <h3 class="m-0 text-[17px] font-bold">{{ project.name }}</h3>
-        <ProjectArrow :project="project"/>
+        <ProjectArrow :project="project" badged/>
       </div>
       <p v-if="project.note" class="m-0 text-[13px] text-muted">{{ project.note }}</p>
       <div class="mt-auto flex items-center justify-between gap-3 pt-2">
         <p class="m-0 truncate text-xs text-dim">
           {{ hostOf(project.url) }}
         </p>
-        <ProjectBadge :kind="project.kind"/>
+        <ProjectBadge :project="project"/>
       </div>
     </div>
 
