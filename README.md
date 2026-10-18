@@ -108,11 +108,38 @@ Site (`.env`):
 | --- | --- |
 | `NUXT_PUBLIC_DIRECTUS_URL` | The Directus URL: content at generation time, images and form in the browser |
 | `NUXT_PUBLIC_RECAPTCHA_SITE_KEY` | The reCAPTCHA v3 public key; if empty, the form is sent without it |
+| `NUXT_PUBLIC_SITE_URL` | The site's own URL, shown as the website in the CV; defaults to `https://leicaflorianrobert.dev` |
 
-Directus (`directus/.env`, see `directus/.env.example`): `SECRET`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `RECAPTCHA_SECRET`, `RECAPTCHA_MIN_SCORE`, `CONTACT_EMAIL_TO`, `DEPLOY_WEBHOOK_URL`, `EMAIL_*`.
+Directus (`directus/.env`, see `directus/.env.example`): `SECRET`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `RECAPTCHA_SECRET`, `RECAPTCHA_MIN_SCORE`, `CONTACT_EMAIL_TO`, `DEPLOY_WEBHOOK_URL`, `DEPLOY_WEBHOOK_TOKEN`, `EMAIL_*`.
 
 The schema has over 25 collections, the limit without a license: activate the Directus license from the admin panel (it asks for it once the limit is reached) before running `directus:setup` or applying the snapshot.
 
 ## Deployment
 
-The site is static. When content changes in Directus, the «Ricostruisci il sito» (rebuild the site) flow calls `DEPLOY_WEBHOOK_URL` (the Coolify deploy webhook), which regenerates and publishes the site. The build needs Chromium for the CV PDFs: `npx playwright install --with-deps chromium` before `npm run generate`.
+Production runs on Coolify, as two apps in the `Personali` project. For now they are on temporary `sslip.io` domains; `leicaflorianrobert.dev` still serves the V2.
+
+| Coolify app | Build | Files | Domain |
+| --- | --- | --- | --- |
+| `leicaflorianrobert-v3` (the site) | Dockerfile, port 80 | `Dockerfile`, `nginx.conf`, `.dockerignore` | `https://v3.164.90.206.43.sslip.io` |
+| `leicaflorianrobert-v3-directus` | Docker Compose, base directory `/directus` | `directus/docker-compose.prod.yml`, `directus/Dockerfile` | `https://cms-v3.164.90.206.43.sslip.io` |
+
+**The site** is built in two stages: `node:22-bookworm-slim` runs `npm ci`, `npx playwright install --with-deps chromium` and `npm run generate` (pages and the three CV PDFs), then `nginx:1.29-alpine` serves `.output/public` (`try_files $uri $uri/index.html`, Nuxt's `404.html`, `/_nuxt/` cached for a year, gzip). Directus must be up and filled in when the site builds. Build-time variables (set as build variables in Coolify): `NUXT_PUBLIC_DIRECTUS_URL`, `NUXT_PUBLIC_SITE_URL`, `NUXT_PUBLIC_RECAPTCHA_SITE_KEY`. The i18n `baseUrl` in `nuxt.config.ts` is hardcoded to `https://leicaflorianrobert.dev`.
+
+**Directus** is `postgres:17-alpine` (volume `database`) plus `directus/directus:12.5.0` with `directus/extensions` copied in (volume `uploads` for the files). The compose uses Coolify's generated values: `SERVICE_FQDN_DIRECTUS_8055` (domain and port), `PUBLIC_URL` from `SERVICE_URL_DIRECTUS`, `SECRET` from `SERVICE_BASE64_64_SECRET`, `ADMIN_PASSWORD` from `SERVICE_PASSWORD_ADMIN`, the database password from `SERVICE_PASSWORD_POSTGRES`. Set in Coolify: `ADMIN_EMAIL`, `CORS_ORIGIN` (the site's domains, comma-separated), `RECAPTCHA_SECRET`, `RECAPTCHA_MIN_SCORE`, `CONTACT_EMAIL_TO`, `DEPLOY_WEBHOOK_URL`, `DEPLOY_WEBHOOK_TOKEN`, `EMAIL_*` (`EMAIL_TRANSPORT` defaults to `sendmail`; the `EMAIL_SMTP_*` variables are ready). The healthcheck is `/server/ping`: in Directus 12 `/server/health` answers 403 to anonymous requests, the container turns unhealthy and the proxy doesn't route it.
+
+**Push to deploy**: a GitHub webhook (push only) to Coolify's `/webhooks/source/github/events/manual` rebuilds both apps on every push to `main`; builds run one at a time.
+
+**Rebuild on content change**: the «Ricostruisci il sito» flow sends `POST {{DEPLOY_WEBHOOK_URL}}` with `Authorization: Bearer {{DEPLOY_WEBHOOK_TOKEN}}`. `DEPLOY_WEBHOOK_URL` is `https://<coolify>/api/v1/deploy?uuid=<site app uuid>`; `DEPLOY_WEBHOOK_TOKEN` is a Coolify API token with the `deploy` permission only. Both are in `FLOWS_ENV_ALLOW_LIST`.
+
+**A new Directus**: deploy it, activate the license in the panel, then run setup and seed from your machine against it:
+
+```bash
+export DIRECTUS_URL=https://cms-v3.164.90.206.43.sslip.io
+export ADMIN_EMAIL=...        # the production admin
+export ADMIN_PASSWORD=...     # SERVICE_PASSWORD_ADMIN in Coolify
+npm run directus:setup
+npm run directus:seed
+```
+
+Then deploy the site: a site build against an empty Directus fails.
+
