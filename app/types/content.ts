@@ -48,6 +48,8 @@ export interface Project {
   on_home: boolean
   mockup: Mockup
   image: FileId
+  /** Show the typographic cover instead of `image` (it's shown anyway when there is no image). */
+  typographic: boolean
   year: number | null
   cover: FileId
   // translated
