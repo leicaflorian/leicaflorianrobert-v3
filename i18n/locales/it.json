@@ -187,12 +187,14 @@
       "year": "anno",
       "type": "tipo",
       "stack": "stack",
+      "award": "premio",
       "link": "link"
     },
     "legacy": {
       "back": "<< Torna ai progetti",
       "title": "{name} — case study",
       "facts": "Ruolo: {role}. Anno: {year}.",
+      "award": "Premio: {award}.",
       "link": "Sito:",
       "notice": "Stai vedendo questo case study con il motore Legacy. Per vederlo come è stato progettato, attiva il rendering nativo qui sotto."
     }

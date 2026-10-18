@@ -70,6 +70,7 @@ export interface Project {
   role: string | null
   type: string | null
   stack: string | null
+  award: string | null
 }
 
 /** A project with its case study sections. */
@@ -199,11 +200,14 @@ export interface BlockText extends BlockBase {
 }
 
 export interface BlockGallery extends BlockBase {
+  /** The images of the current language (`localized_images`) when it has them, the shared ones otherwise. */
   images: FileId[]
   // translated
   label: string | null
   title: string | null
   text: string | null
+  /** A list between the text and the images, one item per line. */
+  items: string | null
   /** One per line, in the order of the images. */
   captions: string | null
 }

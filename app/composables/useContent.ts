@@ -111,6 +111,8 @@ const SECTION_FIELDS = [
   ...BLOCK_COLLECTIONS.flatMap(c => [`sections.item:${c}.*`, `sections.item:${c}.translations.*`]),
   'sections.item:block_gallery.images.directus_files_id',
   'sections.item:block_gallery.images.sort',
+  'sections.item:block_gallery.translations.localized_images.directus_files_id',
+  'sections.item:block_gallery.translations.localized_images.sort',
 ]
 
 interface RawSection {
@@ -123,17 +125,30 @@ interface RawSection {
 
 const bySort = (a: {sort?: unknown}, b: {sort?: unknown}) => Number(a.sort ?? 0) - Number(b.sort ?? 0)
 
-/** The sections in order, translated; a gallery's images become a list of file ids. */
+type FileRow = {directus_files_id: FileId, sort: number | null}
+
+const fileIds = (rows: unknown) => [...((rows ?? []) as FileRow[])].sort(bySort).map(row => row.directus_files_id)
+
+/**
+ * A gallery's images as file ids: those of the language (a diagram with text in it), then the
+ * Italian ones, then the shared ones.
+ */
+function galleryImages(item: RawItem, locale: string): FileId[] {
+  const localized = (code: string) => fileIds(item.translations?.find(t => t.languages_code === code)?.localized_images)
+  for (const images of [localized(locale), localized(FALLBACK_LOCALE)]) {
+    if (images.length) return images
+  }
+  return fileIds(item.images)
+}
+
+/** The sections in order, translated, with each gallery's images. */
 function translateSections(raw: unknown, locale: string): Section[] {
   return ((raw ?? []) as RawSection[])
     .filter(section => section.item && typeof section.item === 'object')
     .sort(bySort)
     .map(({id, collection, item}) => {
-      const block = translateItem<Record<string, unknown>>(item!, locale)
-      if (collection === 'block_gallery') {
-        const images = (item!.images ?? []) as {directus_files_id: FileId, sort: number | null}[]
-        block.images = [...images].sort(bySort).map(image => image.directus_files_id)
-      }
+      const {localized_images: _localized, ...block} = translateItem<Record<string, unknown>>(item!, locale)
+      if (collection === 'block_gallery') block.images = galleryImages(item!, locale)
       return {id, collection, item: block} as unknown as Section
     })
 }

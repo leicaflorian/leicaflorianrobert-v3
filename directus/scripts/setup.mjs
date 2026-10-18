@@ -137,6 +137,7 @@ const COLLECTIONS = [
       string('role', 'Case study: ruolo', {width: 'half'}),
       string('type', 'Case study: tipo di progetto', {width: 'half'}),
       string('stack', 'Case study: tecnologie, facoltativo'),
+      string('award', 'Case study: un premio, facoltativo'),
     ],
   },
   {
@@ -276,6 +277,7 @@ const BLOCKS = [
       label('Etichetta piccola, facoltativa'),
       title('Titolo, facoltativo'),
       text('text', 'Testo sopra le immagini, facoltativo'),
+      text('items', 'Un elenco tra il testo e le immagini, un punto per riga, facoltativo'),
       text('captions', 'Le didascalie, una per riga, nell\'ordine delle immagini'),
     ],
   }),
@@ -361,6 +363,8 @@ const WITH_SECTIONS = ['pages', 'projects']
 
 /** The junction between a gallery block and its images. */
 const GALLERY_FILES = 'block_gallery_files'
+/** The images of a gallery in one language (a diagram with text), in place of the shared ones. */
+const GALLERY_LOCALIZED_FILES = 'block_gallery_translations_files'
 
 /** Collections from earlier schemas, removed by setup. */
 const OBSOLETE = ['page_home', 'page_about', 'page_projects', 'page_contact', 'page_case_study']
@@ -385,6 +389,7 @@ const CONTENT_COLLECTIONS = [
     .flatMap(c => c.translations.length ? [c.collection, `${c.collection}_translations`] : [c.collection]),
   ...WITH_SECTIONS.map(c => `${c}_sections`),
   GALLERY_FILES,
+  GALLERY_LOCALIZED_FILES,
 ]
 
 // --- creation ----------------------------------------------------------------------------
@@ -585,6 +590,41 @@ async function createGalleryImages() {
   console.log('+ block_gallery.images')
 }
 
+/**
+ * The gallery translations' `localized_images` field: the images of one language, for the ones
+ * with text in them (a diagram), shown in place of `images`.
+ */
+async function createGalleryLocalizedImages() {
+  if ((await fieldNames('block_gallery_translations')).has('localized_images')) return
+
+  await api('POST', '/collections', {
+    collection: GALLERY_LOCALIZED_FILES,
+    meta: {hidden: true, icon: 'import_export'},
+    schema: {},
+    fields: [
+      id(),
+      {field: 'block_gallery_translations_id', type: 'integer', meta: {hidden: true}, schema: {}},
+      {field: 'directus_files_id', type: 'uuid', meta: {hidden: true}, schema: {}},
+      sort(),
+    ],
+  })
+  await api('POST', '/fields/block_gallery_translations', {
+    field: 'localized_images', type: 'alias',
+    meta: {special: ['files'], interface: 'files', note: 'Facoltativo: le immagini in questa lingua (uno schema con del testo), al posto di quelle comuni'},
+  })
+  await api('POST', '/relations', {
+    collection: GALLERY_LOCALIZED_FILES, field: 'directus_files_id', related_collection: 'directus_files',
+    meta: {junction_field: 'block_gallery_translations_id'},
+    schema: {on_delete: 'CASCADE'},
+  })
+  await api('POST', '/relations', {
+    collection: GALLERY_LOCALIZED_FILES, field: 'block_gallery_translations_id', related_collection: 'block_gallery_translations',
+    meta: {one_field: 'localized_images', junction_field: 'directus_files_id', sort_field: 'sort'},
+    schema: {on_delete: 'CASCADE'},
+  })
+  console.log('+ block_gallery_translations.localized_images')
+}
+
 /** Creates the folders and moves each collection into its place: the only meta setup keeps in sync. */
 async function groupCollections() {
   const placement = new Map()
@@ -598,6 +638,7 @@ async function groupCollections() {
   }
   for (const parent of WITH_SECTIONS) placement.set(`${parent}_sections`, {group: parent, sort: 2})
   placement.set(GALLERY_FILES, {group: 'block_gallery', sort: 2})
+  placement.set(GALLERY_LOCALIZED_FILES, {group: 'block_gallery', sort: 3})
 
   for (const folder of FOLDERS) {
     if (await exists(folder.collection)) continue
@@ -747,6 +788,7 @@ await removeObsolete()
 for (const def of [...COLLECTIONS, ...BLOCKS]) await createCollection(def)
 for (const parent of WITH_SECTIONS) await createSections(parent)
 await createGalleryImages()
+await createGalleryLocalizedImages()
 await groupCollections()
 await grantPublicRead()
 await createFlows()

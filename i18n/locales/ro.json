@@ -187,12 +187,14 @@
       "year": "an",
       "type": "tip",
       "stack": "stack",
+      "award": "premiu",
       "link": "link"
     },
     "legacy": {
       "back": "<< Înapoi la proiecte",
       "title": "{name} — studiu de caz",
       "facts": "Rol: {role}. An: {year}.",
+      "award": "Premiu: {award}.",
       "link": "Site:",
       "notice": "Vezi acest studiu de caz cu motorul Legacy. Pentru a-l vedea așa cum a fost proiectat, activează randarea nativă mai jos."
     }

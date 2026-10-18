@@ -11,6 +11,7 @@ const facts = computed(() => [
   {label: t('caseStudy.facts.year'), value: props.project.year},
   {label: t('caseStudy.facts.type'), value: props.project.type},
   {label: t('caseStudy.facts.stack'), value: props.project.stack},
+  {label: t('caseStudy.facts.award'), value: props.project.award},
 ].filter(fact => fact.value))
 </script>
 

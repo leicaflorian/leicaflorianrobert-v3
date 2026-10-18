@@ -2451,11 +2451,21 @@ async function galleryImages(images) {
   return ids.map((id, i) => ({directus_files_id: id, sort: i + 1}))
 }
 
+/** A block's translations, with the images of each language (`localized_images`) uploaded. */
+async function localizedImages(translations) {
+  const out = []
+  for (const row of translations) {
+    out.push(row.localized_images ? {...row, localized_images: await galleryImages(row.localized_images)} : row)
+  }
+  return out
+}
+
 /** Sections in the given order, with their files uploaded. */
 async function sorted(sections) {
   const out = []
   for (const [i, {item, ...section}] of sections.entries()) {
-    out.push({...section, sort: i + 1, item: {...item, ...(item.images ? {images: await galleryImages(item.images)} : {})}})
+    const images = item.images ? {images: await galleryImages(item.images)} : {}
+    out.push({...section, sort: i + 1, item: {...item, ...images, translations: await localizedImages(item.translations)}})
   }
   return out
 }
