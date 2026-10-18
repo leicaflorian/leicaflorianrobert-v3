@@ -29,8 +29,8 @@ const slots = computed(() => {
     </ul>
     <div class="mt-3 grid grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-5">
       <div v-for="(slot, i) in slots" :key="i" class="flex flex-col gap-2.5">
-        <!-- a single image is a wide one (a diagram, desktop and phone together): it keeps its shape -->
-        <div class="overflow-hidden rounded-xl border border-line-card" :class="slots.length === 1 ? 'aspect-16/10' : 'aspect-4/3'">
+        <!-- a single image is a wide one (a diagram, desktop and phone together): shown whole, at its own shape -->
+        <div class="overflow-hidden rounded-xl border border-line-card" :class="slots.length > 1 ? 'aspect-4/3' : slot.image ? '' : 'aspect-16/10'">
           <UiMediaImage :id="slot.image" :alt="plain(slot.caption)" :width="slots.length === 1 ? 1200 : 800" class="object-left-top"/>
         </div>
         <span class="text-xs text-subtle" v-html="highlight(slot.caption, 'text-accent')"/>
