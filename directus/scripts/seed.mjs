@@ -1300,9 +1300,9 @@ const CASE_STUDIES = {
   slides: {
     year: 2021,
     translations: {
-      it: {intro: 'Un\'estensione per Chrome ed Edge che aggiunge a Slides.com, gratis, qualche funzione che manca: a partire dal download di qualsiasi presentazione in PDF.', role: 'Ideazione e sviluppo', type: 'Estensione browser', stack: 'TypeScript, Vue, Chrome Extensions API'},
-      en: {intro: 'A Chrome and Edge extension that adds a few missing features to Slides.com, for free: starting with downloading any presentation as a PDF.', role: 'Concept and development', type: 'Browser extension', stack: 'TypeScript, Vue, Chrome Extensions API'},
-      ro: {intro: 'O extensie pentru Chrome și Edge care adaugă gratuit în Slides.com câteva funcții care lipsesc: începând cu descărcarea oricărei prezentări în PDF.', role: 'Concepție și dezvoltare', type: 'Extensie de browser', stack: 'TypeScript, Vue, Chrome Extensions API'},
+      it: {intro: 'Un\'estensione per Chrome ed Edge che aggiunge a Slides.com, gratis, le funzioni che mancano senza abbonamento: il download di qualsiasi presentazione in PDF, la vista relatore e le note del relatore.', role: 'Ideazione e sviluppo', type: 'Estensione browser', stack: 'TypeScript, Vue, WXT'},
+      en: {intro: 'A Chrome and Edge extension that adds to Slides.com, for free, the features missing without a subscription: downloading any presentation as a PDF, the speaker view and speaker notes.', role: 'Concept and development', type: 'Browser extension', stack: 'TypeScript, Vue, WXT'},
+      ro: {intro: 'O extensie pentru Chrome și Edge care adaugă gratuit în Slides.com funcțiile care lipsesc fără abonament: descărcarea oricărei prezentări în PDF, vizualizarea pentru prezentator și notițele prezentatorului.', role: 'Concepție și dezvoltare', type: 'Extensie de browser', stack: 'TypeScript, Vue, WXT'},
     },
     sections: [
       section('block_text', {}, {
@@ -1360,6 +1360,38 @@ const CASE_STUDIES = {
             'PDF-ul se creează cu comanda de tipărire a browserului, fără servicii externe.',
             'Un popup în Vue și un script în fundal, totul scris în TypeScript.',
             'Funcționează pe Chrome și Edge și este publicată în Chrome Web Store.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'per chi presenta',
+          title: 'Vista e note del relatore',
+          items: lines(
+            'Una barra a scomparsa sul bordo delle slide, con tre pulsanti: Print, Speaker e Notes.',
+            'La vista relatore, che Slides.com senza abbonamento non offre: la slide di adesso, quella dopo, le note e il tempo, in una finestra da tenere sul proprio schermo. Usa quella di Reveal.js, su cui è costruito Slides.com.',
+            'Le note del relatore di ogni slide, scritte nell\'estensione e salvate da sole mentre si scrive: compaiono subito nella vista relatore.',
+            'Riscritta su WXT, con i test: le note sono nell\'ultima versione, su GitHub, in attesa di arrivare sullo store.',
+          ),
+        },
+        en: {
+          label: 'for presenters',
+          title: 'Speaker view and notes',
+          items: lines(
+            'A sliding bar on the edge of the slides, with three buttons: Print, Speaker and Notes.',
+            'The speaker view, which Slides.com doesn\'t offer without a subscription: the current slide, the next one, the notes and the time, in a window to keep on your own screen. It uses the one from Reveal.js, which Slides.com is built on.',
+            'Speaker notes for every slide, written in the extension and saved as you type: they show up right away in the speaker view.',
+            'Rebuilt on WXT, with tests: the notes are in the latest version, on GitHub, waiting to reach the store.',
+          ),
+        },
+        ro: {
+          label: 'pentru prezentatori',
+          title: 'Vizualizarea și notițele prezentatorului',
+          items: lines(
+            'O bară care apare pe marginea slide-urilor, cu trei butoane: Print, Speaker și Notes.',
+            'Vizualizarea pentru prezentator, pe care Slides.com nu o oferă fără abonament: slide-ul curent, cel următor, notițele și timpul, într-o fereastră de ținut pe propriul ecran. Folosește vizualizarea din Reveal.js, pe care este construit Slides.com.',
+            'Notițele prezentatorului pentru fiecare slide, scrise în extensie și salvate singure în timp ce scrii: apar imediat în vizualizarea pentru prezentator.',
+            'Refăcută pe WXT, cu teste: notițele sunt în ultima versiune, pe GitHub, și urmează să ajungă în store.',
           ),
         },
       }),
