@@ -71,7 +71,7 @@ try {
       continue
     }
 
-    // the checks a broken page would fail: print nothing rather than a wrong CV
+    // the checks a broken page would fail: print nothing rather than a wrong or cut-off CV
     const sheet = await page.evaluate(() => {
       const side = document.querySelector('[data-cv-side]')
       return {
@@ -93,11 +93,17 @@ try {
       fail(`${locale}: the CV is not on white paper (html background ${sheet.background})`)
       continue
     }
-    if (sheet.overflow > 0) console.warn(`! ${locale}: the grey column overflows the first page by ${sheet.overflow}px`)
+    if (sheet.overflow > 0) {
+      fail(`${locale}: the grey column overflows the page by ${sheet.overflow}px (its end would be cut off)`)
+      continue
+    }
 
     const pdf = await page.pdf({preferCSSPageSize: true, printBackground: true})
     const pages = pdf.toString('latin1').match(/\/Type\s*\/Page[^s]/g)?.length ?? 0
-    if (pages > MAX_PAGES) console.warn(`! ${locale}: the CV runs to ${pages} pages, not ${MAX_PAGES}`)
+    if (pages > MAX_PAGES) {
+      fail(`${locale}: the CV runs to ${pages} pages, not ${MAX_PAGES}`)
+      continue
+    }
 
     await writeFile(join(ROOT, CV_FILE(locale)), pdf)
     console.log(`✓ ${CV_FILE(locale)} · ${pages} pages`)
