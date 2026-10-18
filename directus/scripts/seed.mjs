@@ -87,6 +87,9 @@ const PROJECTS = [
     note('Estensione Chrome, sul Chrome Web Store', 'Chrome extension, on the Chrome Web Store', 'Extensie Chrome, în Chrome Web Store')),
   project('booleancli', 'https://www.npmjs.com/package/boolean-cli', {kind: 'personal', case_study: true}, name('Boolean CLI'),
     note('CLI per docenti e tutor, su npm', 'CLI for teachers and tutors, on npm', 'CLI pentru profesori și tutori, pe npm')),
+  // a private family archive: no link
+  project('familymanager', '', {kind: 'personal', case_study: true}, name('Family Manager'),
+    note('Documenti, scadenze e conti di famiglia, letti dall\'AI', 'Family documents, deadlines and accounts, read by AI', 'Documente, termene și conturi de familie, citite de AI')),
   project('pimpmycrud', 'https://packagist.org/packages/leicaflorian/pimp_my_crud', {kind: 'personal'}, name('Pimp My CRUD'),
     note('Pacchetto Laravel che genera i CRUD', 'Laravel package that generates CRUDs', 'Pachet Laravel care generează CRUD-uri')),
   project('enigma', 'https://leicaflorian.github.io/enigma_machine', {kind: 'personal'}, name('Enigma'),
@@ -1776,6 +1779,107 @@ const CASE_STUDIES = {
             'Securitate îmbunătățită.',
             'Wi-Fi în fiecare colț, inclusiv în depozit.',
             'Mentenanță simplă: totul documentat și etichetat.',
+          ),
+        },
+      }),
+      NEXT_STEP,
+    ],
+  },
+  familymanager: {
+    year: 2026,
+    translations: {
+      it: {intro: 'L\'archivio digitale della mia famiglia: documenti, contratti, scadenze e conti in un posto solo, al posto delle cartelle sparse su Google Drive. Un progetto privato, costruito su Directus, che legge i documenti con l\'AI.', role: 'Ideazione e sviluppo', type: 'Progetto personale, privato', stack: 'Directus, Vue, Go, Claude e Gemini, Docker'},
+      en: {intro: 'My family\'s digital archive: documents, contracts, deadlines and accounts in one place, instead of folders scattered across Google Drive. A private project, built on Directus, that reads documents with AI.', role: 'Concept and development', type: 'Personal project, private', stack: 'Directus, Vue, Go, Claude and Gemini, Docker'},
+      ro: {intro: 'Arhiva digitală a familiei mele: documente, contracte, termene și conturi într-un singur loc, în locul dosarelor împrăștiate pe Google Drive. Un proiect privat, construit pe Directus, care citește documentele cu AI.', role: 'Concepție și dezvoltare', type: 'Proiect personal, privat', stack: 'Directus, Vue, Go, Claude și Gemini, Docker'},
+    },
+    sections: [
+      section('block_text', {}, {
+        it: {
+          label: 'idea',
+          title: 'Etichette, non cartelle',
+          text: paras(
+            'Su Drive ogni documento vive in **una sola cartella**, quindi bisogna scegliere: la polizza dell\'auto va in "Auto" o in "Assicurazioni"? In Family Manager ogni cosa ha **etichette e collegamenti**, e la si ritrova da qualunque lato la si cerchi.',
+            'Tutto si regge su persone, enti e documenti, divisi in dieci aree della vita familiare, dalla casa alla salute. Ogni cosa esiste una volta sola, e le cose vecchie non finiscono in una cartella "Scadute": cambiano stato.',
+          ),
+        },
+        en: {
+          label: 'idea',
+          title: 'Tags, not folders',
+          text: paras(
+            'On Drive every document lives in **a single folder**, so you have to choose: does the car insurance go in "Car" or in "Insurance"? In Family Manager everything has **tags and links**, and you find it from whichever side you look.',
+            'It all rests on people, organisations and documents, split into ten areas of family life, from the home to health. Everything exists only once, and old things don\'t end up in an "Expired" folder: they change status.',
+          ),
+        },
+        ro: {
+          label: 'idee',
+          title: 'Etichete, nu dosare',
+          text: paras(
+            'Pe Drive fiecare document stă într-un **singur dosar**, așa că trebuie să alegi: asigurarea mașinii merge la „Mașină" sau la „Asigurări"? În Family Manager fiecare lucru are **etichete și legături** și îl găsești din orice parte l-ai căuta.',
+            'Totul se sprijină pe persoane, instituții și documente, împărțite în zece domenii ale vieții de familie, de la casă la sănătate. Fiecare lucru există o singură dată, iar lucrurile vechi nu ajung într-un dosar „Expirate": își schimbă starea.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'come funziona',
+          title: 'Il documento si compila da solo',
+          items: lines(
+            'Caricando una bolletta, una busta paga o un referto, l\'AI (Claude o Gemini) lo legge e compila la scheda: propone, non salva, e riempie solo i campi vuoti.',
+            'L\'AI legge, il codice collega: il POD, la targa, il numero di polizza o l\'IBAN trovano la scheda giusta con una ricerca esatta, non con il modello.',
+            'Tanti file insieme si importano in un colpo: letti, controllati accanto al PDF e smistati nella cartella giusta, con un nome leggibile.',
+            'Le bollette inoltrate a un indirizzo email della famiglia arrivano da sole tra i file da importare.',
+          ),
+        },
+        en: {
+          label: 'how it works',
+          title: 'The document fills itself in',
+          items: lines(
+            'Upload a bill, a payslip or a medical report and the AI (Claude or Gemini) reads it and fills in the form: it suggests, it doesn\'t save, and it only fills empty fields.',
+            'The AI reads, the code links: the meter number, the plate, the policy number or the IBAN find the right record with an exact lookup, not with the model.',
+            'Many files are imported in one go: read, checked next to the PDF and sorted into the right folder, with a readable name.',
+            'Bills forwarded to a family email address arrive on their own among the files to import.',
+          ),
+        },
+        ro: {
+          label: 'cum funcționează',
+          title: 'Documentul se completează singur',
+          items: lines(
+            'Încarci o factură, un fluturaș de salariu sau un rezultat medical, iar AI-ul (Claude sau Gemini) îl citește și completează fișa: propune, nu salvează și completează doar câmpurile goale.',
+            'AI-ul citește, codul face legăturile: codul locului de consum, numărul de înmatriculare, numărul poliței sau IBAN-ul găsesc fișa potrivită printr-o căutare exactă, nu prin model.',
+            'Multe fișiere se importă dintr-odată: citite, verificate lângă PDF și puse în dosarul potrivit, cu un nume ușor de citit.',
+            'Facturile trimise mai departe la o adresă de email a familiei ajung singure printre fișierele de importat.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'dalla carta',
+          title: 'Telefono, scanner e calendario',
+          items: lines(
+            'Family Scan: una pagina per il telefono, da installare come un\'app, per fotografare un documento, ritagliarlo e raddrizzarlo.',
+            'Family Manager Agent: un programma in Go, per Mac e Windows, che comanda lo scanner di casa per la pagina Scansiona. Non manda niente a nessuno, e il codice è pubblico su GitHub.',
+            'L\'Agenda con cosa scade e quando, e i promemoria aperti in Google Calendar, con un calendario da sottoscrivere.',
+            'In produzione su un server gestito con Coolify, con un backup ogni notte.',
+          ),
+        },
+        en: {
+          label: 'from paper',
+          title: 'Phone, scanner and calendar',
+          items: lines(
+            'Family Scan: a page for the phone, installable like an app, to photograph a document, crop it and straighten it.',
+            'Family Manager Agent: a Go program for Mac and Windows that drives the home scanner for the Scan page. It sends nothing to anyone, and its code is public on GitHub.',
+            'The Agenda with what is due and when, and the open reminders in Google Calendar, as a calendar to subscribe to.',
+            'In production on a server managed with Coolify, with a backup every night.',
+          ),
+        },
+        ro: {
+          label: 'de pe hârtie',
+          title: 'Telefon, scanner și calendar',
+          items: lines(
+            'Family Scan: o pagină pentru telefon, care se instalează ca o aplicație, pentru a fotografia un document, a-l decupa și a-l îndrepta.',
+            'Family Manager Agent: un program în Go, pentru Mac și Windows, care comandă scannerul de acasă pentru pagina de scanare. Nu trimite nimic nimănui, iar codul este public pe GitHub.',
+            'Agenda cu ce expiră și când, și mementourile deschise în Google Calendar, ca un calendar la care te abonezi.',
+            'În producție pe un server administrat cu Coolify, cu o copie de rezervă în fiecare noapte.',
           ),
         },
       }),
