@@ -73,8 +73,8 @@ const PROJECTS = [
   project('steelfuture', 'https://steelfuture.com/', {case_study: true}, name('Steel Future'),
     note('Gestionale PHP 5 portato su Git, con deploy automatico a ogni push', 'PHP 5 management software brought under Git, with automatic deploys on every push', 'Software de gestiune PHP 5 adus în Git, cu deploy automat la fiecare push')),
   project('v2', 'https://leicaflorianrobert.dev', {kind: 'personal', branch: 'main', year: 2023, case_study: true, logo_plate: true}, name('My website V2')),
-  // co-founded, so mine rather than a client's; no longer operating, and its site is gone: no link, not featured
-  project('wab', '', {kind: 'personal', year: 2023, typographic: true}, name('Web Artisan Bros'),
+  // co-founded, so mine rather than a client's; no longer operating, its site is online as an archive
+  project('wab', 'https://wab.leicaflorianrobert.dev', {kind: 'personal', year: 2023, case_study: true}, name('Web Artisan Bros'),
     note('Software house co-fondata nel 2023', 'Software house I co-founded in 2023', 'Software house co-fondată în 2023')),
   project('slides', 'https://chromewebstore.google.com/detail/slidescom-companion/bciknjamldhnbbckmgbchmkdcalngnco', {kind: 'personal', case_study: true}, name('Slides.com Companion'),
     note('Estensione Chrome ed Edge', 'Chrome and Edge extension', 'Extensie Chrome și Edge')),
@@ -2168,6 +2168,159 @@ const CASE_STUDIES = {
       NEXT_STEP,
     ],
   },
+  wab: {
+    year: 2023,
+    translations: {
+      it: {intro: 'La software house che ho co-fondato nel 2023: siti, software e app su misura per piccole aziende, fatti con un metodo «artigianale». Oggi il suo sito è online come archivio.', role: 'Co-fondatore e CTO', type: 'Software house', stack: 'Laravel, Livewire, Bootstrap, MySQL'},
+      en: {intro: 'The software house I co-founded in 2023: custom websites, software and apps for small businesses, built with a "craftsman\'s" method. Today its website is online as an archive.', role: 'Co-founder and CTO', type: 'Software house', stack: 'Laravel, Livewire, Bootstrap, MySQL'},
+      ro: {intro: 'Software house-ul pe care l-am co-fondat în 2023: site-uri, software și aplicații pe măsură pentru firme mici, făcute cu o metodă „artizanală”. Astăzi site-ul lui este online ca arhivă.', role: 'Co-fondator și CTO', type: 'Software house', stack: 'Laravel, Livewire, Bootstrap, MySQL'},
+    },
+    sections: [
+      section('block_text', {}, {
+        it: {
+          label: 'punto di partenza',
+          title: 'Una bottega digitale',
+          text: paras(
+            'Nel 2023 ho fondato **Web Artisan Bros** con Marius Leica: una piccola software house di prodotti digitali su misura. L\'idea era già nel nome: ogni progetto fatto **a mano**, su misura, come in una bottega.',
+            'Marius era il CEO, io il **CTO**: sceglievo lo stack, sviluppavo frontend e backend, seguivo ogni progetto dall\'analisi al lancio e parlavo direttamente con i clienti.',
+          ),
+        },
+        en: {
+          label: 'starting point',
+          title: 'A digital workshop',
+          text: paras(
+            'In 2023 I founded **Web Artisan Bros** with Marius Leica: a small software house building custom digital products. The idea was already in the name: every project made **by hand**, to measure, like in a workshop.',
+            'Marius was the CEO, I was the **CTO**: I chose the stack, built frontend and backend, followed every project from analysis to launch and talked directly with clients.',
+          ),
+        },
+        ro: {
+          label: 'punct de plecare',
+          title: 'Un atelier digital',
+          text: paras(
+            'În 2023 am fondat **Web Artisan Bros** împreună cu Marius Leica: un mic software house de produse digitale pe măsură. Ideea era deja în nume: fiecare proiect făcut **de mână**, pe măsură, ca într-un atelier.',
+            'Marius era CEO, eu eram **CTO**: alegeam stack-ul, dezvoltam frontend și backend, urmăream fiecare proiect de la analiză la lansare și vorbeam direct cu clienții.',
+          ),
+        },
+      }),
+      section('block_gallery', {images: files('cs-wab-bozzetti.png', 'cs-wab-varianti.png', 'cs-wab-biglietto.png', 'cs-wab-social.png')}, {
+        it: {
+          label: 'marchio',
+          title: 'Tre lettere, un solo segno',
+          text: paras(
+            'Il logo è nato a gennaio 2023, insieme alla software house. Dai primi bozzetti a tratto sottile si è arrivati a un monogramma più deciso: **W, A e B intrecciate**, con l\'ultima asta della W che diventa la gamba della A e la traversa della A che prosegue nel tratto centrale della B.',
+            'Intorno, un marchio piccolo e coerente: quattro colori (**giallo**, bordeaux, crema e un grigio quasi nero), il logo in quattro varianti, quadrato e tondo, e due segni che tornano sul sito, sui biglietti da visita e sui social: il **quadrato ruotato** e il nastro giallo a zig-zag sotto le parole importanti.',
+          ),
+          captions: lines('i **primi bozzetti**', 'quattro colori, **quadrato e tondo**', 'il **biglietto da visita**: il QR salva il contatto', 'l\'immagine per i **social**'),
+        },
+        en: {
+          label: 'brand',
+          title: 'Three letters, one mark',
+          text: paras(
+            'The logo was born in January 2023, together with the software house. From the first thin-line sketches it became a bolder monogram: **W, A and B interlaced**, with the last stroke of the W turning into the leg of the A and the crossbar of the A running on into the middle stroke of the B.',
+            'Around it, a small and consistent brand: four colours (**yellow**, burgundy, cream and an almost-black grey), the logo in four variants, square and round, and two marks that come back on the website, the business cards and social media: the **tilted square** and the yellow zigzag ribbon under the key words.',
+          ),
+          captions: lines('the **first sketches**', 'four colours, **square and round**', 'the **business card**: the QR saves the contact', 'the **social media** image'),
+        },
+        ro: {
+          label: 'brand',
+          title: 'Trei litere, un singur semn',
+          text: paras(
+            'Logoul s-a născut în ianuarie 2023, odată cu software house-ul. De la primele schițe cu linie subțire s-a ajuns la o monogramă mai hotărâtă: **W, A și B împletite**, cu ultima linie a lui W care devine piciorul lui A și bara lui A care continuă în linia din mijloc a lui B.',
+            'În jur, un brand mic și coerent: patru culori (**galben**, bordo, crem și un gri aproape negru), logoul în patru variante, pătrat și rotund, și două semne care revin pe site, pe cărțile de vizită și pe rețelele sociale: **pătratul rotit** și panglica galbenă în zigzag sub cuvintele importante.',
+          ),
+          captions: lines('**primele schițe**', 'patru culori, **pătrat și rotund**', '**cartea de vizită**: codul QR salvează contactul', 'imaginea pentru **rețelele sociale**'),
+        },
+      }),
+      section('block_text', {}, {
+        it: {
+          label: 'il sito',
+          title: 'Un\'insegna al neon',
+          text: paras(
+            'Il sito doveva somigliare alla bottega: scuro, con il **giallo** del logo e le insegne **al neon** che si accendono lettera per lettera quando arrivano sullo schermo.',
+            'Ogni sezione ha il suo tema, scuro, chiaro o giallo, e passando da una pagina all\'altra il sito **non si ricarica**: cambia solo il contenuto, con un\'animazione se la pagina tarda.',
+          ),
+        },
+        en: {
+          label: 'the website',
+          title: 'A neon sign',
+          text: paras(
+            'The website had to look like the workshop: dark, with the **yellow** of the logo and **neon** signs that light up letter by letter as they reach the screen.',
+            'Each section has its own theme, dark, light or yellow, and moving from page to page the site **doesn\'t reload**: only the content changes, with an animation if the page is slow.',
+          ),
+        },
+        ro: {
+          label: 'site-ul',
+          title: 'O firmă cu neon',
+          text: paras(
+            'Site-ul trebuia să semene cu atelierul: întunecat, cu **galbenul** logoului și firme **cu neon** care se aprind literă cu literă când ajung pe ecran.',
+            'Fiecare secțiune are tema ei, întunecată, deschisă sau galbenă, iar trecând de la o pagină la alta site-ul **nu se reîncarcă**: se schimbă doar conținutul, cu o animație dacă pagina întârzie.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'dietro le quinte',
+          title: 'Un pannello per tutto',
+          items: lines(
+            'Tre lingue, italiano, inglese e romeno, ognuna sul suo sottodominio e con gli indirizzi delle pagine tradotti.',
+            'I testi stanno nel database: un comando trova da solo quelli nuovi nel codice, e si traducono dal pannello.',
+            'QR code dinamici, con colori e logo: la destinazione si cambia anche dopo la stampa.',
+            'I biglietti da visita digitali dei soci, con il contatto da salvare in rubrica.',
+            'Le richieste dal modulo dei contatti, con l\'email di conferma a chi scrive e l\'avviso ai soci.',
+          ),
+        },
+        en: {
+          label: 'behind the scenes',
+          title: 'One panel for everything',
+          items: lines(
+            'Three languages, Italian, English and Romanian, each on its own subdomain and with translated page addresses.',
+            'The texts live in the database: a command finds the new ones in the code by itself, and they\'re translated from the panel.',
+            'Dynamic QR codes, with colours and logo: the destination can change even after printing.',
+            'The partners\' digital business cards, with the contact to save to the address book.',
+            'Requests from the contact form, with a confirmation email to the sender and a notice to the partners.',
+          ),
+        },
+        ro: {
+          label: 'în culise',
+          title: 'Un panou pentru toate',
+          items: lines(
+            'Trei limbi, italiană, engleză și română, fiecare pe subdomeniul ei și cu adresele paginilor traduse.',
+            'Textele stau în baza de date: o comandă le găsește singură pe cele noi din cod, iar traducerea se face din panou.',
+            'Coduri QR dinamice, cu culori și logo: destinația se poate schimba și după tipărire.',
+            'Cărțile de vizită digitale ale asociaților, cu contactul de salvat în agendă.',
+            'Cererile din formularul de contact, cu email de confirmare pentru cine scrie și o notificare pentru asociați.',
+          ),
+        },
+      }),
+      section('block_text', {}, {
+        it: {
+          label: 'oggi',
+          title: 'Online come archivio',
+          text: paras(
+            'Web Artisan Bros ha lavorato fino al 2025, e dalla software house sono nati anche strumenti open source come **TailWab**.',
+            'Nel 2026 ho portato il sito in **Docker**, sul mio server: il modulo dei contatti è spento, ma tutto il resto è online come archivio, nelle tre lingue.',
+          ),
+        },
+        en: {
+          label: 'today',
+          title: 'Online as an archive',
+          text: paras(
+            'Web Artisan Bros worked until 2025, and the software house also gave birth to open source tools like **TailWab**.',
+            'In 2026 I moved the site to **Docker**, on my own server: the contact form is off, but everything else is online as an archive, in all three languages.',
+          ),
+        },
+        ro: {
+          label: 'astăzi',
+          title: 'Online ca arhivă',
+          text: paras(
+            'Web Artisan Bros a funcționat până în 2025, iar din software house s-au născut și instrumente open source precum **TailWab**.',
+            'În 2026 am mutat site-ul în **Docker**, pe serverul meu: formularul de contact este oprit, dar tot restul este online ca arhivă, în toate cele trei limbi.',
+          ),
+        },
+      }),
+      NEXT_STEP,
+    ],
+  },
 }
 
 // The image of a project (its card and, for a case study, the cover when there's no `cover`):
@@ -2182,6 +2335,7 @@ const PROJECT_IMAGES = {
   familymanager: 'project-familymanager.png',
   tailwab: 'project-tailwab.png',
   tvit: 'project-tvit.png',
+  wab: 'project-wab.png',
 }
 
 // The logo in a project's cover, from the Branding notes of its vault folder,
@@ -2191,11 +2345,13 @@ const PROJECT_LOGOS = {
   v2: 'logo-v2.png',
   v1: 'logo-v1.png',
   imanpack: 'logo-imanpack.png',
+  xpulire: 'logo-xpulire.png',
   slides: 'logo-slides.png',
   nosponsor: 'logo-nosponsor.png',
   familymanager: 'logo-familymanager.png',
   tailwab: 'logo-tailwab.png',
   tvit: 'logo-tvit.png',
+  wab: 'logo-wab.png',
 }
 
 // --- loading -----------------------------------------------------------------------------
