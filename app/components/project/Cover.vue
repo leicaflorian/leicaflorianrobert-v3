@@ -35,16 +35,17 @@ const footer = computed(() => [props.project.year, props.project.stack].filter(B
     :aria-label="project.name"
     class="relative flex size-full flex-col justify-center overflow-hidden bg-[radial-gradient(circle_at_85%_110%,color-mix(in_srgb,var(--color-accent)_22%,transparent),transparent_55%),linear-gradient(160deg,var(--color-surface),var(--color-bg)_60%,var(--color-bg-deep))] px-[9%] font-mono [container-type:size]"
   >
-    <!-- over the screenshot: the same rounded tile for every logo, filled by it edge to edge (logo files
-         are cropped to their drawing), centred on the window's left edge, its light border keeping dark
-         logos off the dark background; dark logos made for white pages get a white tile. A fixed size:
-         with only a width the tile would grow to the image -->
+    <!-- over the screenshot: a rounded tile of the same height for every logo, as wide as the logo up to a
+         limit (square icons stay square), filled by it (logo files are cropped to their drawing), centred on
+         the window's left edge, its light border keeping dark logos off the dark background. Dark logos made
+         for white pages get a white tile, with a small margin so wide wordmarks don't touch its corners.
+         A wide tile moves left by 12cqw at most, so in a card it doesn't leave the cover -->
     <div
       v-if="project.logo && shot"
-      class="absolute bottom-[7cqh] left-[14%] z-1 size-[max(46px,9cqw)] -translate-x-1/2 overflow-hidden rounded-[22%] border border-line-tile drop-shadow-[0_1.2cqw_2.4cqw_rgb(0_0_0/0.55)]"
-      :class="project.logo_plate ? 'bg-plate' : 'bg-surface-raised'"
+      class="absolute bottom-[7cqh] left-[14%] z-1 flex h-[max(46px,9cqw)] min-w-[max(46px,9cqw)] max-w-[max(130px,26cqw)] translate-x-[calc(-1*min(50%,12cqw))] items-center justify-center overflow-hidden rounded-[max(10px,2cqw)] border border-line-tile drop-shadow-[0_1.2cqw_2.4cqw_rgb(0_0_0/0.55)]"
+      :class="project.logo_plate ? 'bg-plate p-[max(5px,1cqw)]' : 'bg-surface-raised'"
     >
-      <NuxtImg :src="project.logo" alt="" :width="480" loading="lazy" class="block size-full object-contain"/>
+      <NuxtImg :src="project.logo" alt="" :width="480" loading="lazy" class="block h-full w-auto max-w-full object-contain"/>
     </div>
     <div
       v-else-if="project.logo"
