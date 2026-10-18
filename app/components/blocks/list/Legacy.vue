@@ -7,6 +7,6 @@ defineProps<{block: BlockList}>()
 <template>
   <BlocksLegacyHeading>{{ block.title }}</BlocksLegacyHeading>
   <ul class="m-0 list-disc pl-[22px]">
-    <li v-for="(line, i) in lines(block.items)" :key="i">{{ line }}</li>
+    <li v-for="(line, i) in lines(block.items)" :key="i">{{ plain(line) }}</li>
   </ul>
 </template>
