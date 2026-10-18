@@ -72,7 +72,7 @@ const PROJECTS = [
     note('Dal CMS a Mailchimp in automatico, newsletter bilingui senza lavoro a mano', 'From the CMS to Mailchimp automatically: bilingual newsletters with no manual work', 'Din CMS în Mailchimp automat: newslettere bilingve fără muncă manuală')),
   project('steelfuture', 'https://steelfuture.com/', {case_study: true}, name('Steel Future'),
     note('Gestionale PHP 5 portato su Git, con deploy automatico a ogni push', 'PHP 5 management software brought under Git, with automatic deploys on every push', 'Software de gestiune PHP 5 adus în Git, cu deploy automat la fiecare push')),
-  project('v2', 'https://leicaflorianrobert.dev', {kind: 'personal', branch: 'main', year: 2023}, name('My website V2')),
+  project('v2', 'https://leicaflorianrobert.dev', {kind: 'personal', branch: 'main', year: 2023, case_study: true}, name('My website V2')),
   // co-founded, so mine rather than a client's; no longer operating, and its site is gone: no link, not featured
   project('wab', '', {kind: 'personal', year: 2023}, name('Web Artisan Bros'),
     note('Software house co-fondata nel 2023', 'Software house I co-founded in 2023', 'Software house co-fondată în 2023')),
@@ -97,7 +97,7 @@ const PROJECTS = [
   project('enigma', 'https://leicaflorian.github.io/enigma_machine', {kind: 'personal'}, name('Enigma'),
     note('Macchina Enigma', 'Enigma machine', 'Mașina Enigma')),
   project('fold', 'https://leicaflorian.github.io/fold_my_paper', {kind: 'personal'}, name('Fold my paper')),
-  project('v1', 'https://v1.leicaflorianrobert.dev', {kind: 'personal', branch: 'main', year: 2018}, name('My website V1')),
+  project('v1', 'https://v1.leicaflorianrobert.dev', {kind: 'personal', branch: 'main', year: 2018, case_study: true}, name('My website V1')),
   // the client is never named: no name, no link
   project('fintech', '', {case_study: true},
     {it: {name: 'Piattaforma per investimenti'}, en: {name: 'Investment platform'}, ro: {name: 'Platformă de investiții'}},
@@ -1951,6 +1951,147 @@ const CASE_STUDIES = {
             'Lățimea minimă și maximă, factorul de scală și mobile first: fiecare schimbare reface tabelul, iar fiecare rând se poate corecta de mână.',
             'Codul de copiat: variabile CSS, un bloc @theme pentru Tailwind v4 sau configurația pentru v3.',
             'Totul în browser, fără backend, cu fonturile servite chiar de site. Codul generat este fixat de teste.',
+          ),
+        },
+      }),
+      NEXT_STEP,
+    ],
+  },
+  v1: {
+    year: 2018,
+    translations: {
+      it: {intro: 'La prima versione del mio sito: una single page application in Vue, con il logo che si disegna da solo e le sezioni che scorrono di lato. Oggi è online come archivio.', role: 'Design e sviluppo', type: 'Portfolio personale', stack: 'Vue, TypeScript, Bootstrap, EmailJS'},
+      en: {intro: 'The first version of my website: a Vue single page application, with a logo that draws itself and sections that slide sideways. Today it\'s online as an archive.', role: 'Design and development', type: 'Personal portfolio', stack: 'Vue, TypeScript, Bootstrap, EmailJS'},
+      ro: {intro: 'Prima versiune a site-ului meu: o single page application în Vue, cu logoul care se desenează singur și secțiunile care alunecă în lateral. Astăzi este online ca arhivă.', role: 'Design și dezvoltare', type: 'Portofoliu personal', stack: 'Vue, TypeScript, Bootstrap, EmailJS'},
+    },
+    sections: [
+      section('block_text', {}, {
+        it: {
+          label: 'idea',
+          title: 'Un sito tutto animato',
+          text: paras(
+            'Volevo un sito che si facesse ricordare. All\'apertura lo sfondo si riempie di colore a ogni clic, il **logo si disegna da solo**, tratto per tratto, e le iniziali L F R si allungano nel nome intero.',
+            'Poi, girando la rotella, le quattro sezioni scorrono **in orizzontale**: chi sono, servizi, competenze e progetti, contatti.',
+          ),
+        },
+        en: {
+          label: 'idea',
+          title: 'A fully animated site',
+          text: paras(
+            'I wanted a site people would remember. On opening, the background fills with colour at every click, the **logo draws itself**, stroke by stroke, and the initials L F R stretch into the full name.',
+            'Then, turning the scroll wheel, the four sections slide **horizontally**: about me, services, skills and projects, contact.',
+          ),
+        },
+        ro: {
+          label: 'idee',
+          title: 'Un site complet animat',
+          text: paras(
+            'Voiam un site care să rămână în minte. La deschidere, fundalul se umple de culoare la fiecare clic, **logoul se desenează singur**, linie cu linie, iar inițialele L F R se lungesc în numele întreg.',
+            'Apoi, rotind rotița mouse-ului, cele patru secțiuni alunecă **pe orizontală**: despre mine, servicii, competențe și proiecte, contact.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'come funziona',
+          title: 'Solo file statici',
+          items: lines(
+            'Una single page application in Vue con TypeScript, senza server e senza database.',
+            'Le animazioni con anime.js, AOS e vanilla-tilt, e lo scorrimento con il dito sul telefono.',
+            'Il form dei contatti manda le email con EmailJS, direttamente dal browser.',
+            'Nel 2026 la build è passata da Vue CLI a Vite, per tenerla online come archivio.',
+          ),
+        },
+        en: {
+          label: 'how it works',
+          title: 'Static files only',
+          items: lines(
+            'A Vue single page application with TypeScript, with no server and no database.',
+            'Animations with anime.js, AOS and vanilla-tilt, and swiping on the phone.',
+            'The contact form sends emails with EmailJS, straight from the browser.',
+            'In 2026 the build moved from Vue CLI to Vite, to keep it online as an archive.',
+          ),
+        },
+        ro: {
+          label: 'cum funcționează',
+          title: 'Doar fișiere statice',
+          items: lines(
+            'O single page application în Vue cu TypeScript, fără server și fără bază de date.',
+            'Animațiile cu anime.js, AOS și vanilla-tilt, și derularea cu degetul pe telefon.',
+            'Formularul de contact trimite emailurile cu EmailJS, direct din browser.',
+            'În 2026 build-ul a trecut de la Vue CLI la Vite, ca să rămână online ca arhivă.',
+          ),
+        },
+      }),
+      NEXT_STEP,
+    ],
+  },
+  v2: {
+    year: 2023,
+    translations: {
+      it: {intro: 'La seconda versione del mio sito: un\'applicazione Laravel con il suo pannello di amministrazione, per aggiornare progetti ed esperienze senza toccare il codice.', role: 'Design e sviluppo', type: 'Portfolio personale', stack: 'Laravel, Livewire, Tailwind, MySQL'},
+      en: {intro: 'The second version of my website: a Laravel application with its own admin panel, to update projects and experience without touching the code.', role: 'Design and development', type: 'Personal portfolio', stack: 'Laravel, Livewire, Tailwind, MySQL'},
+      ro: {intro: 'A doua versiune a site-ului meu: o aplicație Laravel cu propriul panou de administrare, pentru a actualiza proiectele și experiențele fără să ating codul.', role: 'Design și dezvoltare', type: 'Portofoliu personal', stack: 'Laravel, Livewire, Tailwind, MySQL'},
+    },
+    sections: [
+      section('block_text', {}, {
+        it: {
+          label: 'idea',
+          title: 'Contenuti senza toccare il codice',
+          text: paras(
+            'Nella prima versione ogni progetto nuovo voleva dire modificare il codice e pubblicare di nuovo. La v2 è nata per questo: progetti ed esperienze stanno in un **database**, si gestiscono da un **pannello di amministrazione** e compaiono subito sul sito.',
+            'Tre pagine, Home, Su di me e Progetti, con una **linea del tempo** delle esperienze, anno per anno, e gli anni di esperienza ({years}) contati da soli.',
+          ),
+        },
+        en: {
+          label: 'idea',
+          title: 'Content without touching the code',
+          text: paras(
+            'In the first version every new project meant changing the code and publishing again. V2 was born for this: projects and experience live in a **database**, are managed from an **admin panel** and show up on the site right away.',
+            'Three pages, Home, About me and Projects, with a **timeline** of my experience, year by year, and the years of experience ({years}) counted automatically.',
+          ),
+        },
+        ro: {
+          label: 'idee',
+          title: 'Conținut fără să ating codul',
+          text: paras(
+            'În prima versiune, fiecare proiect nou însemna să modific codul și să public din nou. V2 s-a născut pentru asta: proiectele și experiențele stau într-o **bază de date**, se gestionează dintr-un **panou de administrare** și apar imediat pe site.',
+            'Trei pagini, Acasă, Despre mine și Proiecte, cu o **linie a timpului** a experiențelor, an cu an, și anii de experiență ({years}) numărați automat.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'come funziona',
+          title: 'Un\'applicazione Laravel',
+          items: lines(
+            'Laravel 10 con pagine Blade e qualche componente Livewire; Sass, Tailwind e Bootstrap compilati da Vite.',
+            'Un solo account, quello dell\'amministratore, per gestire progetti, esperienze e messaggi ricevuti.',
+            'Il form dei contatti salva il messaggio e manda le email dal server, via SMTP con Mailgun, protetto da reCAPTCHA.',
+            'Le immagini dei progetti con Pimp My CRUD, il mio pacchetto Laravel, e la sitemap generata da sola.',
+            'Oggi gira in Docker su un server gestito con Coolify.',
+          ),
+        },
+        en: {
+          label: 'how it works',
+          title: 'A Laravel application',
+          items: lines(
+            'Laravel 10 with Blade pages and a few Livewire components; Sass, Tailwind and Bootstrap built by Vite.',
+            'A single account, the admin\'s, to manage projects, experience and incoming messages.',
+            'The contact form saves the message and sends emails from the server, via SMTP with Mailgun, protected by reCAPTCHA.',
+            'Project images with Pimp My CRUD, my Laravel package, and a sitemap generated automatically.',
+            'Today it runs in Docker on a server managed with Coolify.',
+          ),
+        },
+        ro: {
+          label: 'cum funcționează',
+          title: 'O aplicație Laravel',
+          items: lines(
+            'Laravel 10 cu pagini Blade și câteva componente Livewire; Sass, Tailwind și Bootstrap compilate de Vite.',
+            'Un singur cont, al administratorului, pentru a gestiona proiectele, experiențele și mesajele primite.',
+            'Formularul de contact salvează mesajul și trimite emailurile de pe server, prin SMTP cu Mailgun, protejat de reCAPTCHA.',
+            'Imaginile proiectelor cu Pimp My CRUD, pachetul meu Laravel, și un sitemap generat automat.',
+            'Astăzi rulează în Docker pe un server administrat cu Coolify.',
           ),
         },
       }),
