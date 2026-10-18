@@ -1,8 +1,9 @@
 <!--
   A project's picture, drawn in code: type, name and year · stack at the top and, when the
-  project has a screenshot (and isn't marked `typographic`), the screenshot below in a
-  browser window cut by the bottom edge, with the logo in a tile over its bottom left corner.
-  Without a screenshot the text is centred, with the logo above it. Being text, the cover
+  project has a screenshot (and isn't marked `typographic`) or an illustration (`visual`, for a
+  project that can't be shown), right under the text a browser window with it, cut by the
+  bottom edge, with the logo in a tile over its bottom left corner (or, for the illustration,
+  its phone over the bottom right). Without either the text is centred, with the logo above it. Being text, the cover
   follows the language, and it scales with its box (container query units; the box always
   has its own size), from a card, where year and stack are left out, to the case study
   header. A device mockup (`bare`) or a case study `cover` gets the image alone.
@@ -22,6 +23,8 @@ const props = defineProps<{
 const {t} = useI18n()
 
 const shot = computed(() => props.project.typographic ? null : props.project.image)
+/** What fills the browser window: the illustration wins, being there for a project that can't be shown. */
+const windowed = computed(() => Boolean(props.project.visual || shot.value))
 const src = computed(() => props.image ?? (props.bare ? shot.value : null))
 const kicker = computed(() => props.project.type ?? t(`projects.kind.${props.project.kind}`))
 const footer = computed(() => [props.project.year, props.project.stack].filter(Boolean).join(' · ') || hostOf(props.project.url))
@@ -33,7 +36,8 @@ const footer = computed(() => [props.project.year, props.project.stack].filter(B
     v-else
     role="img"
     :aria-label="project.name"
-    class="relative flex size-full flex-col justify-center overflow-hidden bg-[radial-gradient(circle_at_85%_110%,color-mix(in_srgb,var(--color-accent)_22%,transparent),transparent_55%),linear-gradient(160deg,var(--color-surface),var(--color-bg)_60%,var(--color-bg-deep))] px-[9%] font-mono [container-type:size]"
+    class="relative flex size-full flex-col overflow-hidden bg-[radial-gradient(circle_at_85%_110%,color-mix(in_srgb,var(--color-accent)_22%,transparent),transparent_55%),linear-gradient(160deg,var(--color-surface),var(--color-bg)_60%,var(--color-bg-deep))] px-[9%] font-mono [container-type:size]"
+    :class="!windowed && 'justify-center'"
   >
     <!-- over the screenshot: a rounded tile of the same height for every logo, as wide as the logo up to a
          limit (square icons stay square), filled by it (logo files are cropped to their drawing), centred on
@@ -41,7 +45,7 @@ const footer = computed(() => [props.project.year, props.project.stack].filter(B
          for white pages get a white tile, with a small margin so wide wordmarks don't touch its corners.
          A wide tile moves left by 12cqw at most, so in a card it doesn't leave the cover -->
     <div
-      v-if="project.logo && shot"
+      v-if="project.logo && shot && !project.visual"
       class="absolute bottom-[7cqh] left-[14%] z-1 flex h-[max(46px,9cqw)] min-w-[max(46px,9cqw)] max-w-[max(130px,26cqw)] translate-x-[calc(-1*min(50%,12cqw))] items-center justify-center overflow-hidden rounded-[max(10px,2cqw)] border border-line-tile drop-shadow-[0_1.2cqw_2.4cqw_rgb(0_0_0/0.55)]"
       :class="project.logo_plate ? 'bg-plate p-[max(5px,1cqw)]' : 'bg-surface-raised'"
     >
@@ -62,28 +66,31 @@ const footer = computed(() => [props.project.year, props.project.stack].filter(B
       />
     </div>
 
-    <!-- the box can't measure itself: with a screenshot the text is placed at the top here -->
-    <div :class="shot && 'absolute inset-x-[9%] top-[9%]'">
-      <p class="m-0 truncate text-accent" :class="shot ? 'mb-[1.6cqw] text-[max(9px,1.7cqw)]' : 'mb-[2.4cqw] text-[max(10px,1.9cqw)]'">// {{ kicker }}</p>
-      <p class="m-0 font-extrabold leading-[1.02] tracking-[-0.03em] text-balance text-ink" :class="shot ? 'text-[6.4cqw]' : 'text-[8cqw]'">
+    <ProjectVisualBankingPhone v-if="project.visual === 'banking'" class="absolute bottom-[-6cqh] right-[9%] z-1"/>
+
+    <!-- the box can't measure itself: with a window the top margin is on this box, in its units -->
+    <div :class="windowed && 'flex-none pt-[9cqh]'">
+      <p class="m-0 truncate text-accent" :class="windowed ? 'mb-[1.6cqw] text-[max(9px,1.7cqw)]' : 'mb-[2.4cqw] text-[max(10px,1.9cqw)]'">// {{ kicker }}</p>
+      <p class="m-0 font-extrabold leading-[1.02] tracking-[-0.03em] text-balance text-ink" :class="windowed ? 'text-[6.4cqw]' : 'text-[8cqw]'">
         {{ project.name }}<span aria-hidden="true" class="ml-[0.12em] inline-block h-[0.1em] w-[0.5em] bg-accent align-baseline"/>
       </p>
       <p
         v-if="footer"
         class="m-0 truncate text-muted @max-[600px]:hidden"
-        :class="shot ? 'mt-[1.8cqw] text-[max(9px,1.8cqw)]' : 'mt-[3cqw] text-[max(10px,2.1cqw)]'"
+        :class="windowed ? 'mt-[1.8cqw] text-[max(9px,1.8cqw)]' : 'mt-[3cqw] text-[max(10px,2.1cqw)]'"
       >
         {{ footer }}
       </p>
     </div>
 
-    <!-- just under year · stack; in cards, without that line, just under the name -->
-    <div v-if="shot" class="absolute inset-x-[14%] top-[38%] overflow-hidden rounded-t-[1.4cqw] border border-b-0 border-line-control bg-bg-deep shadow-[0_-2cqw_6cqw_rgb(0_0_0/0.45)] @max-[600px]:top-[33%]">
+    <!-- right under the text, whatever its length (a long name takes two lines), cut by the cover's bottom edge -->
+    <div v-if="windowed" class="mx-[6%] mt-[4.5cqw] flex-none overflow-hidden rounded-t-[1.4cqw] border border-b-0 border-line-control bg-bg-deep shadow-[0_-2cqw_6cqw_rgb(0_0_0/0.45)] @max-[600px]:mt-[3.5cqw]">
       <div class="flex h-[max(12px,3.4cqw)] items-center gap-[0.7cqw] border-b border-line-control bg-surface-raised px-[1.4cqw]">
         <span v-for="dot in 3" :key="dot" class="size-[max(4px,1cqw)] shrink-0 rounded-full bg-gutter"/>
-        <span v-if="project.url" class="ml-[1.2cqw] max-w-1/2 truncate rounded-full bg-bg px-[1cqw] text-[max(6px,1.1cqw)] leading-[max(8px,2cqw)] text-dim">{{ hostOf(project.url) }}</span>
+        <span v-if="project.url && !project.visual" class="ml-[1.2cqw] max-w-1/2 truncate rounded-full bg-bg px-[1cqw] text-[max(6px,1.1cqw)] leading-[max(8px,2cqw)] text-dim">{{ hostOf(project.url) }}</span>
       </div>
-      <NuxtImg :src="shot" alt="" :width="width" loading="lazy" class="block h-auto w-full"/>
+      <ProjectVisualBankingScreen v-if="project.visual === 'banking'"/>
+      <NuxtImg v-else-if="shot" :src="shot" alt="" :width="width" loading="lazy" class="block h-auto w-full"/>
     </div>
   </div>
 </template>
