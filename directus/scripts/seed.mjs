@@ -81,7 +81,7 @@ const PROJECTS = [
   project('tvit', 'https://tvit.leicaflorianrobert.dev/channels', {kind: 'personal', on_home: true, case_study: true}, name('TvIt'),
     note('65 stelle su GitHub, lista e guida TV che si aggiornano da sole', '65 stars on GitHub, a list and TV guide that update themselves', '65 de stele pe GitHub, listă și ghid TV care se actualizează singure')),
   // the site is no longer the one I built: the link goes to its code
-  project('biologica', 'https://github.com/leicaflorian/biologioca_disinfestazioni', {}, name('Biologica Disinfestazioni'),
+  project('biologica', 'https://github.com/leicaflorian/biologioca_disinfestazioni', {logo_plate: true}, name('Biologica Disinfestazioni'),
     note('Sito web — il codice su GitHub', 'Website — the code on GitHub', 'Site web — codul pe GitHub')),
   project('nosponsor', 'https://chromewebstore.google.com/detail/nlbdnpodndocljlpajidbahbdomalbea', {kind: 'personal', case_study: true}, name('NoSponsor'),
     note('Estensione Chrome, sul Chrome Web Store', 'Chrome extension, on the Chrome Web Store', 'Extensie Chrome, în Chrome Web Store')),
@@ -2352,6 +2352,7 @@ const PROJECT_LOGOS = {
   tfp: 'logo-tfp.png',
   xpulire: 'logo-xpulire.png',
   steelfuture: 'logo-steelfuture.png',
+  biologica: 'logo-biologica.png',
   slides: 'logo-slides.png',
   nosponsor: 'logo-nosponsor.png',
   familymanager: 'logo-familymanager.png',
