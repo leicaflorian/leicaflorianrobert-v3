@@ -40,6 +40,9 @@
     --color-accent-light: #FF8A52;
     --color-accent-deep: #22150E;
 
+    /* the plate behind a client's logo made for white pages */
+    --color-plate: #FFFFFF;
+
     /* "syntax highlighting" */
     --color-code-string: #9FD36B;
     --color-code-number: #7CC4FA;
