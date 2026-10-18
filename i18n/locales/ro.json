@@ -186,12 +186,14 @@
       "role": "rol",
       "year": "an",
       "type": "tip",
-      "stack": "stack"
+      "stack": "stack",
+      "link": "link"
     },
     "legacy": {
       "back": "<< Înapoi la proiecte",
       "title": "{name} — studiu de caz",
       "facts": "Rol: {role}. An: {year}.",
+      "link": "Site:",
       "notice": "Vezi acest studiu de caz cu motorul Legacy. Pentru a-l vedea așa cum a fost proiectat, activează randarea nativă mai jos."
     }
   },

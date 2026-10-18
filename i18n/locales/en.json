@@ -186,12 +186,14 @@
       "role": "role",
       "year": "year",
       "type": "type",
-      "stack": "stack"
+      "stack": "stack",
+      "link": "link"
     },
     "legacy": {
       "back": "<< Back to projects",
       "title": "{name} — case study",
       "facts": "Role: {role}. Year: {year}.",
+      "link": "Website:",
       "notice": "You are viewing this case study with the Legacy engine. To see it as it was designed, enable native rendering below."
     }
   },
