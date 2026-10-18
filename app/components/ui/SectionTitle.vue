@@ -1,4 +1,4 @@
-<!-- Section title with the cursor blinking at the end. -->
+<!-- Section title, typed in, with the cursor blinking at the end. -->
 <script setup lang="ts">
 withDefaults(defineProps<{
   as?: string
@@ -7,12 +7,11 @@ withDefaults(defineProps<{
 </script>
 
 <template>
-  <component
-    :is="as"
+  <UiTyped
+    :as="as"
     class="m-0 font-extrabold tracking-[-0.03em]"
     :class="size === 'section' ? 'text-[clamp(28px,4vw,44px)] leading-[1.05]' : 'text-[clamp(26px,3.4vw,38px)] leading-[1.1]'"
   >
     <slot/>
-    <UiBlinkCursor/>
-  </component>
+  </UiTyped>
 </template>

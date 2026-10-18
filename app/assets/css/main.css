@@ -205,6 +205,11 @@
     }
 }
 
+/* The part of a title not typed yet (useTypewriter): there, but not painted. */
+::highlight(type-pending) {
+    color: transparent;
+}
+
 @layer base {
     html {
         background: var(--color-bg);
