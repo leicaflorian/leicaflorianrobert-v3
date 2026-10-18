@@ -3,7 +3,7 @@
   without, they span the whole page (three in a row: a wide one and two narrow).
 -->
 <script setup lang="ts">
-import type {BlockGallery} from '~/types/content'
+import type {BlockGallery, FileId} from '~/types/content'
 
 const props = defineProps<{
   block: BlockGallery
@@ -17,6 +17,13 @@ const slots = computed(() => {
   const count = Math.max(props.block.images.length, captions.length)
   return Array.from({length: count}, (_, i) => ({image: props.block.images[i] ?? null, caption: captions[i] ?? ''}))
 })
+
+/** The images that exist, opened large on click; `open` is the index among them. */
+const zoomable = computed(() => slots.value.flatMap(slot => slot.image ? [{id: slot.image, caption: slot.caption}] : []))
+const open = ref<number | null>(null)
+function zoom(image: FileId) {
+  open.value = zoomable.value.findIndex(item => item.id === image)
+}
 </script>
 
 <template>
@@ -31,7 +38,10 @@ const slots = computed(() => {
       <div v-for="(slot, i) in slots" :key="i" class="flex flex-col gap-2.5">
         <!-- a single image is a wide one (a diagram, desktop and phone together): shown whole, at its own shape -->
         <div class="overflow-hidden rounded-xl border border-line-card" :class="slots.length > 1 ? 'aspect-4/3' : slot.image ? '' : 'aspect-16/10'">
-          <UiMediaImage :id="slot.image" :alt="plain(slot.caption)" :width="slots.length === 1 ? 1200 : 800" class="object-left-top"/>
+          <button v-if="slot.image" type="button" :aria-label="$t('lightbox.open')" class="block size-full cursor-zoom-in" @click="zoom(slot.image)">
+            <UiMediaImage :id="slot.image" :alt="plain(slot.caption)" :width="slots.length === 1 ? 1200 : 800" class="object-left-top"/>
+          </button>
+          <UiMediaImage v-else :id="slot.image" :alt="plain(slot.caption)" :width="800"/>
         </div>
         <span class="text-xs text-subtle" v-html="highlight(slot.caption, 'text-accent')"/>
       </div>
@@ -47,8 +57,13 @@ const slots = computed(() => {
         : 'grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))]'"
     >
       <div v-for="(slot, i) in slots" :key="i" class="h-[340px] overflow-hidden rounded-2xl">
-        <UiMediaImage :id="slot.image" :alt="plain(slot.caption)" :width="900"/>
+        <button v-if="slot.image" type="button" :aria-label="$t('lightbox.open')" class="block size-full cursor-zoom-in" @click="zoom(slot.image)">
+          <UiMediaImage :id="slot.image" :alt="plain(slot.caption)" :width="900"/>
+        </button>
+        <UiMediaImage v-else :id="slot.image" :alt="plain(slot.caption)" :width="900"/>
       </div>
     </div>
   </section>
+
+  <UiLightbox v-model="open" :images="zoomable"/>
 </template>

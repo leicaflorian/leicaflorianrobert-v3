@@ -117,6 +117,19 @@
     60% { transform: translate(-4px, 1px); clip-path: inset(30% 0 40% 0) }
     80% { transform: translate(3px, 0); clip-path: inset(70% 0 5% 0) }
 }
+/* The image popup (ui/Lightbox.vue): it fades in and out, the image grows into place, and
+   another image slides in from the side of the arrow pressed (--lightbox-dir: 1 or -1). */
+@media (prefers-reduced-motion: no-preference) {
+    .lightbox[open] { animation: lightbox-in .25s ease-out }
+    .lightbox[open] .lightbox-stage { animation: lightbox-grow .4s var(--ease-spring) }
+    .lightbox.lightbox-closing { animation: lightbox-out .2s ease-in forwards }
+    .lightbox-image-enter-active, .lightbox-image-leave-active { transition: opacity .2s ease, translate .2s ease }
+    .lightbox-image-enter-from { opacity: 0; translate: calc(var(--lightbox-dir) * 48px) 0 }
+    .lightbox-image-leave-to { opacity: 0; translate: calc(var(--lightbox-dir) * -48px) 0 }
+}
+@keyframes lightbox-in { from { opacity: 0 } }
+@keyframes lightbox-out { to { opacity: 0 } }
+@keyframes lightbox-grow { from { scale: .94 } }
 /* The Stack easter egg (blocks/stack/Tag.vue): on click the box shakes and the name splits in two colours. */
 @media (prefers-reduced-motion: no-preference) {
     .tech-glitch { animation: tech-glitch .42s steps(1) }

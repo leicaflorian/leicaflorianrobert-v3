@@ -179,6 +179,12 @@
       "vat": "P. Iva: {vat} — REA: {rea} — SDI: {sdi}"
     }
   },
+  "lightbox": {
+    "open": "Apri l'immagine",
+    "close": "chiudi",
+    "previous": "Immagine precedente",
+    "next": "Immagine successiva"
+  },
   "caseStudy": {
     "back": "← ./progetti",
     "comment": "// case study",

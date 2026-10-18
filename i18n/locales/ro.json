@@ -179,6 +179,12 @@
       "vat": "P. IVA: {vat} — REA: {rea} — SDI: {sdi}"
     }
   },
+  "lightbox": {
+    "open": "Deschide imaginea",
+    "close": "închide",
+    "previous": "Imaginea anterioară",
+    "next": "Imaginea următoare"
+  },
   "caseStudy": {
     "back": "← ./proiecte",
     "comment": "// studiu de caz",
