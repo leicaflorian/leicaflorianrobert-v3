@@ -45,7 +45,7 @@
     "sent": "Ricevuto! Ti rispondo entro 1–2 giorni lavorativi.",
     "error": "Non sono riuscito a inviare il messaggio. Riprova, oppure scrivimi via email.",
     "recaptcha": "Questo sito è protetto da reCAPTCHA. Si applicano la Privacy Policy e i Termini di servizio di Google.",
-    "privacy": "Inviando il modulo accetti l'{link}.",
+    "privacy": "Uso i tuoi dati solo per risponderti: i dettagli sono nell'{link}.",
     "privacyLink": "informativa privacy",
     "legacy": {
       "name": "Nome:",
