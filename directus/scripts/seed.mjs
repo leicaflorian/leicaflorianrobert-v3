@@ -1164,9 +1164,9 @@ const CASE_STUDIES = {
   imanpack: {
     year: 2023,
     translations: {
-      it: {intro: 'Un sistema in Laravel che collega il CMS proprietario in .NET di Imanpack a Mailchimp: le newsletter preparate nel CMS diventano campagne bilingui, create e inviate o programmate in automatico, con un pannello per seguirne lo stato.', role: 'Sviluppo e integrazione', type: 'Automazione newsletter', stack: 'Laravel, Vue, MJML, Microsoft SQL Server, Mailchimp API'},
-      en: {intro: 'A Laravel system that connects Imanpack\'s proprietary .NET CMS to Mailchimp: the newsletters prepared in the CMS become bilingual campaigns, created and sent or scheduled automatically, with a dashboard to follow their status.', role: 'Development and integration', type: 'Newsletter automation', stack: 'Laravel, Vue, MJML, Microsoft SQL Server, Mailchimp API'},
-      ro: {intro: 'Un sistem în Laravel care leagă CMS-ul proprietar .NET al Imanpack de Mailchimp: newsletterele pregătite în CMS devin campanii bilingve, create și trimise sau programate automat, cu un panou pentru a le urmări starea.', role: 'Dezvoltare și integrare', type: 'Automatizare newsletter', stack: 'Laravel, Vue, MJML, Microsoft SQL Server, Mailchimp API'},
+      it: {intro: 'Un sistema in Laravel che collega il CMS proprietario in .NET di Imanpack a Mailchimp: le newsletter preparate nel CMS diventano campagne bilingui, create e inviate o programmate in automatico, con un pannello per seguirne lo stato.', role: 'Sviluppo, integrazione e server', type: 'Automazione newsletter', stack: 'Laravel, Vue, MJML, Microsoft SQL Server, Mailchimp API, PHP, Windows Server'},
+      en: {intro: 'A Laravel system that connects Imanpack\'s proprietary .NET CMS to Mailchimp: the newsletters prepared in the CMS become bilingual campaigns, created and sent or scheduled automatically, with a dashboard to follow their status.', role: 'Development, integration and server', type: 'Newsletter automation', stack: 'Laravel, Vue, MJML, Microsoft SQL Server, Mailchimp API, PHP, Windows Server'},
+      ro: {intro: 'Un sistem în Laravel care leagă CMS-ul proprietar .NET al Imanpack de Mailchimp: newsletterele pregătite în CMS devin campanii bilingve, create și trimise sau programate automat, cu un panou pentru a le urmări starea.', role: 'Dezvoltare, integrare și server', type: 'Automatizare newsletter', stack: 'Laravel, Vue, MJML, Microsoft SQL Server, Mailchimp API, PHP, Windows Server'},
     },
     sections: [
       section('block_text', {}, {
@@ -1279,6 +1279,38 @@ const CASE_STUDIES = {
           text: paras(
             'Fiecare newsletter este **bilingv**: engleza în stânga, italiana în dreapta, din același rând al CMS-ului. Șablonul este scris în **MJML**, care îl transformă într-un HTML potrivit pentru clienții de e-mail.',
             'Atașamentele cu butonul de descărcare, videoclipurile YouTube și imaginile apar doar dacă datele sunt în CMS. Subsolul, cu nota de confidențialitate și dezabonarea, îl completează Mailchimp pentru fiecare destinatar.',
+          ),
+        },
+      }),
+      section('block_list', {}, {
+        it: {
+          label: 'infrastruttura',
+          title: 'Sul server del cliente',
+          items: lines(
+            'Il sistema gira sul server Windows di Imanpack, accanto al CMS: Windows Server configurato da me per esporre l\'applicazione su una porta dedicata.',
+            'PHP installato e messo a punto sul server.',
+            'L\'avvio delle attività pianificate, compreso il deploy automatico: un\'attività controlla se ci sono aggiornamenti e li scarica con git pull.',
+            'Laravel e il CMS condividono lo stesso database SQL Server: ogni minuto Laravel controlla la tabella delle newsletter e reagisce quando cambia.',
+          ),
+        },
+        en: {
+          label: 'infrastructure',
+          title: 'On the client\'s server',
+          items: lines(
+            'The system runs on Imanpack\'s Windows server, next to the CMS: Windows Server configured by me to expose the application on a dedicated port.',
+            'PHP installed and tuned on the server.',
+            'Scheduled tasks set up, automatic deploys included: a task checks for updates and pulls them with git pull.',
+            'Laravel and the CMS share the same SQL Server database: every minute Laravel checks the newsletter table and reacts when it changes.',
+          ),
+        },
+        ro: {
+          label: 'infrastructură',
+          title: 'Pe serverul clientului',
+          items: lines(
+            'Sistemul rulează pe serverul Windows al Imanpack, lângă CMS: Windows Server configurat de mine pentru a expune aplicația pe un port dedicat.',
+            'PHP instalat și reglat pe server.',
+            'Pornirea activităților programate, inclusiv deploy-ul automat: o activitate verifică dacă există actualizări și le descarcă cu git pull.',
+            'Laravel și CMS-ul folosesc aceeași bază de date SQL Server: în fiecare minut Laravel verifică tabelul newsletterelor și reacționează când se schimbă.',
           ),
         },
       }),
