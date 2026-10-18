@@ -13,7 +13,7 @@ defineProps<{
         <UiSectionLabel v-if="label">{{ label }}</UiSectionLabel>
         <UiSectionTitle v-if="title" size="sub">{{ title }}</UiSectionTitle>
       </div>
-      <div class="flex flex-col gap-5 text-base leading-[1.85] text-ink-soft">
+      <div v-reveal.stagger class="flex flex-col gap-5 text-base leading-[1.85] text-ink-soft">
         <slot/>
       </div>
     </div>

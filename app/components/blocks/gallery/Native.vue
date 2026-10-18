@@ -34,6 +34,7 @@ const slots = computed(() => {
 
   <section v-else>
     <div
+      v-reveal.stagger
       class="page grid gap-6 pb-40 max-[860px]:pb-24"
       :class="slots.length === 3
         ? 'grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)] max-[860px]:grid-cols-2 max-[860px]:[&>*:first-child]:col-span-2'

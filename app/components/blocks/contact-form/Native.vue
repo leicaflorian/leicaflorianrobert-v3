@@ -15,10 +15,10 @@ defineProps<{
       <div>
         <UiSectionLabel v-if="label">{{ label }}</UiSectionLabel>
         <UiSectionTitle class="mb-4">{{ block.title }}</UiSectionTitle>
-        <p v-if="block.text" class="m-0 max-w-[520px] font-sans text-base leading-[1.7] text-muted">{{ block.text }}</p>
-        <ContactForm class="mt-11"/>
+        <p v-if="block.text" v-reveal class="m-0 max-w-[520px] font-sans text-base leading-[1.7] text-muted">{{ block.text }}</p>
+        <ContactForm v-reveal class="mt-11"/>
       </div>
-      <div class="sticky top-24 flex min-w-0 flex-col gap-10 max-[860px]:static">
+      <div v-reveal.stagger class="sticky top-24 flex min-w-0 flex-col gap-10 max-[860px]:static">
         <ContactBrief/>
         <div v-if="block.steps">
           <h3 v-if="block.steps_title" class="m-0 mb-5 text-lg font-bold text-ink">{{ block.steps_title }}</h3>

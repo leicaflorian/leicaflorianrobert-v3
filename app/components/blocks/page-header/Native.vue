@@ -27,8 +27,8 @@ const workStatus = props.block.variant === 'contact' ? useWorkStatus() : null
       <div>
         <UiSectionLabel v-if="label">{{ label }}</UiSectionLabel>
         <UiPageTitle size="lg">{{ block.title }}</UiPageTitle>
-        <p class="m-0 mt-8 max-w-[520px] text-[15px] leading-[1.8] text-muted">{{ block.intro }}</p>
-        <div v-if="stats" class="mt-12 flex flex-wrap gap-12">
+        <p v-reveal class="m-0 mt-8 max-w-[520px] text-[15px] leading-[1.8] text-muted">{{ block.intro }}</p>
+        <div v-if="stats" v-reveal.stagger class="mt-12 flex flex-wrap gap-12">
           <div>
             <p class="m-0 text-[56px] font-extrabold leading-none tracking-[-0.04em] text-accent">{{ stats.years }}</p>
             <p class="m-0 mt-2.5 text-xs text-subtle">{{ $t('about.years') }}</p>
@@ -39,7 +39,7 @@ const workStatus = props.block.variant === 'contact' ? useWorkStatus() : null
           </div>
         </div>
       </div>
-      <div class="relative">
+      <div v-reveal class="relative">
         <div class="absolute inset-[20%_10%_10%_10%] rounded-full bg-accent opacity-[0.14] blur-[110px]"/>
         <div class="relative overflow-hidden rounded-2xl border border-line-card bg-bg-deep/92">
           <div class="flex items-center gap-1.5 border-b border-line bg-surface px-4 py-3 text-xs text-subtle">
@@ -67,7 +67,7 @@ const workStatus = props.block.variant === 'contact' ? useWorkStatus() : null
           <p v-for="(paragraph, i) in paragraphs(block.intro)" :key="i" class="m-0">{{ paragraph }}</p>
         </div>
       </div>
-      <ProjectGraph :projects="projects"/>
+      <ProjectGraph v-reveal :projects="projects"/>
     </div>
   </section>
 
@@ -84,7 +84,7 @@ const workStatus = props.block.variant === 'contact' ? useWorkStatus() : null
           class="mt-5 inline-block break-all border-b-2 border-accent pb-1.5 text-[clamp(16px,2vw,22px)] font-bold text-ink hover:text-accent"
         >{{ site.email }} ↗</a>
       </div>
-      <div class="min-w-0 overflow-hidden rounded-2xl border border-line-card bg-bg-deep">
+      <div v-reveal class="min-w-0 overflow-hidden rounded-2xl border border-line-card bg-bg-deep">
         <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5 border-b border-line bg-surface px-4 py-3 text-xs text-subtle">
           <span class="flex min-w-0 items-center gap-1.5">
             <span v-for="i in 3" :key="i" class="size-[9px] shrink-0 rounded-full bg-gutter"/>

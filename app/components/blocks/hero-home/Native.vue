@@ -45,8 +45,8 @@ function onLeave() {
         <UiPageTitle size="lg">
           {{ block.title }} <span class="text-accent">{{ block.title_accent }}</span>
         </UiPageTitle>
-        <p class="m-0 mt-8 max-w-[480px] text-[15px] leading-[1.8] text-muted">{{ block.text }}</p>
-        <div class="mt-11 flex flex-wrap gap-3">
+        <p v-reveal class="m-0 mt-8 max-w-[480px] text-[15px] leading-[1.8] text-muted">{{ block.text }}</p>
+        <div v-reveal class="mt-11 flex flex-wrap gap-3">
           <UiButton to="contact" glow>{{ $t('common.contactMe') }}</UiButton>
           <UiButton to="projects" variant="secondary">{{ $t('home.seeProjects') }}</UiButton>
         </div>

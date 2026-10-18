@@ -29,6 +29,7 @@ const widgets = computed(() => (Object.keys(WIDGETS) as Widget[]).filter(w => pr
         <UiSectionTitle>{{ block.title }}</UiSectionTitle>
       </div>
       <div
+        v-reveal.stagger
         class="grid gap-6"
         :class="widgets.length === 3
           ? 'grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)] max-[860px]:grid-cols-2 max-[860px]:[&>*:first-child]:col-span-2 max-[560px]:grid-cols-1 max-[560px]:[&>*:first-child]:col-span-1'

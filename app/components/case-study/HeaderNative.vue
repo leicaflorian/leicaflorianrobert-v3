@@ -20,8 +20,8 @@ const facts = computed(() => [
       <NuxtLink :to="pageLink('projects')" class="inline-flex text-[13px] text-subtle hover:text-accent">{{ $t('caseStudy.back') }}</NuxtLink>
       <p class="m-0 mb-4 mt-12 text-[13px] text-accent">{{ $t('caseStudy.comment') }}</p>
       <UiPageTitle>{{ project.name }}</UiPageTitle>
-      <p v-if="project.intro" class="m-0 mt-8 max-w-[640px] text-[17px] leading-[1.8] text-muted">{{ project.intro }}</p>
-      <div v-if="facts.length || project.url" class="mt-14 grid grid-cols-[repeat(auto-fit,minmax(min(100%,180px),1fr))] gap-px overflow-hidden rounded-[14px] border border-line-card bg-line-card">
+      <p v-if="project.intro" v-reveal class="m-0 mt-8 max-w-[640px] text-[17px] leading-[1.8] text-muted">{{ project.intro }}</p>
+      <div v-if="facts.length || project.url" v-reveal class="mt-14 grid grid-cols-[repeat(auto-fit,minmax(min(100%,180px),1fr))] gap-px overflow-hidden rounded-[14px] border border-line-card bg-line-card">
         <div v-for="fact in facts" :key="fact.label" class="bg-surface px-6 py-5">
           <p class="m-0 mb-1.5 text-xs text-dim">{{ fact.label }}</p>
           <p class="m-0 text-sm">{{ fact.value }}</p>
@@ -33,7 +33,7 @@ const facts = computed(() => [
       </div>
     </div>
     <div class="page pb-40">
-      <div class="aspect-video overflow-hidden rounded-2xl">
+      <div v-reveal class="aspect-video overflow-hidden rounded-2xl">
         <ProjectCover :project="project" :image="project.cover" :width="1600"/>
       </div>
     </div>

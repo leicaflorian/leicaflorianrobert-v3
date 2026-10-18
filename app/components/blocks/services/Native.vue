@@ -15,8 +15,8 @@ const services = await useCollection<Service>('services')
     <div class="page section-y">
       <UiSectionLabel v-if="label">{{ label }}</UiSectionLabel>
       <UiSectionTitle class="mb-4">{{ block.title }}</UiSectionTitle>
-      <p v-if="block.text" class="m-0 max-w-[640px] text-[15px] leading-[1.8] text-muted">{{ block.text }}</p>
-      <ServiceGuide :services="services" class="mt-14"/>
+      <p v-if="block.text" v-reveal class="m-0 max-w-[640px] text-[15px] leading-[1.8] text-muted">{{ block.text }}</p>
+      <ServiceGuide v-reveal :services="services" class="mt-14"/>
     </div>
   </section>
 </template>

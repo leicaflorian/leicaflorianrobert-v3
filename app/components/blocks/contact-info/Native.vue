@@ -19,7 +19,7 @@ const cardTitle = 'm-0 text-xs font-medium text-accent'
     <div class="page section-y">
       <UiSectionLabel v-if="label">{{ label }}</UiSectionLabel>
       <UiSectionTitle v-if="block.title" class="mb-14">{{ block.title }}</UiSectionTitle>
-      <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-6">
+      <div v-reveal.stagger class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-6">
         <div :class="card">
           <h3 :class="cardTitle">{{ $t('contact.contacts') }}</h3>
           <div class="flex flex-col gap-1.5">

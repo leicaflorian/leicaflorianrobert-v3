@@ -26,7 +26,7 @@ const groups = computed(() => props.block.show === 'grouped' ? groupByCategory(p
   <section v-if="block.show === 'featured' && !block.title" class="border-t border-line">
     <div class="page pt-30">
       <p v-if="label" class="m-0 mb-10 text-[13px] text-accent">{{ label }}</p>
-      <ProjectFeaturedGrid :projects="featured"/>
+      <ProjectFeaturedGrid v-reveal :projects="featured"/>
     </div>
   </section>
 
@@ -41,9 +41,10 @@ const groups = computed(() => props.block.show === 'grouped' ? groupByCategory(p
           {{ $t('common.allProjects') }} →
         </NuxtLink>
       </div>
-      <ProjectFeaturedGrid v-if="featured.length" :projects="featured"/>
+      <ProjectFeaturedGrid v-if="featured.length" v-reveal :projects="featured"/>
       <div
         v-if="cards.length"
+        v-reveal.stagger
         class="grid gap-6"
         :class="block.show === 'home' ? 'mt-6 grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))]' : 'grid-cols-[repeat(auto-fill,minmax(min(100%,320px),1fr))]'"
       >
@@ -54,7 +55,7 @@ const groups = computed(() => props.block.show === 'grouped' ? groupByCategory(p
           :variant="block.show === 'home' ? 'compact' : 'archive'"
         />
       </div>
-      <dl v-if="groups.length" class="m-0 grid gap-8">
+      <dl v-if="groups.length" v-reveal.stagger class="m-0 grid gap-8">
         <div
           v-for="group in groups"
           :key="group.category"

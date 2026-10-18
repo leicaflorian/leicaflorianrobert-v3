@@ -24,11 +24,11 @@ const yearInView = useYearInView(list, () => bar.value?.$el)
           <UiSectionLabel v-if="label">{{ label }}</UiSectionLabel>
           <UiSectionTitle>{{ block.title }}</UiSectionTitle>
         </div>
-        <p v-if="block.text" class="m-0 self-end text-[15px] leading-[1.8] text-muted">{{ block.text }}</p>
+        <p v-if="block.text" v-reveal class="m-0 self-end text-[15px] leading-[1.8] text-muted">{{ block.text }}</p>
       </div>
       <!-- sticky under the site header while the list scrolls by -->
       <ExperienceTimeline ref="bar" :experiences="experiences" :active="yearInView" class="sticky top-16 z-30 mb-6 bg-bg/90 pt-10 pb-6 backdrop-blur-md max-[860px]:hidden"/>
-      <div ref="list" class="border-t border-line-card">
+      <div ref="list" v-reveal.stagger class="border-t border-line-card">
         <component
           :is="exp.link ? 'a' : 'div'"
           v-for="exp in timeline"

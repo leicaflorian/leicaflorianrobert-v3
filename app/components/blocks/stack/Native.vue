@@ -16,7 +16,7 @@ const groups = computed(() => groupTechnologies(technologies.value))
     <div class="page section-y">
       <UiSectionLabel v-if="label">{{ label }}</UiSectionLabel>
       <UiSectionTitle class="mb-14">{{ block.title }}</UiSectionTitle>
-      <div class="flex flex-col gap-10">
+      <div v-reveal.stagger class="flex flex-col gap-10">
         <div v-for="{group, items} in groups" :key="group">
           <p class="m-0 mb-4 text-[13px] text-subtle lowercase">// {{ $t(`about.stack.${group}`) }}</p>
           <div class="flex flex-wrap gap-3">
