@@ -704,7 +704,11 @@ async function createFlows() {
       },
       {
         key: 'deploy', name: 'Deploy', type: 'request',
-        options: {method: 'POST', url: '{{$env.DEPLOY_WEBHOOK_URL}}'},
+        // Coolify's deploy API wants its token (DEPLOY_WEBHOOK_TOKEN)
+        options: {
+          method: 'POST', url: '{{$env.DEPLOY_WEBHOOK_URL}}',
+          headers: [{header: 'Authorization', value: 'Bearer {{$env.DEPLOY_WEBHOOK_TOKEN}}'}],
+        },
       },
     ],
   })
