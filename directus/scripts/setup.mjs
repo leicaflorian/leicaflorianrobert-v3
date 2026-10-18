@@ -84,6 +84,7 @@ const COLLECTIONS = [
       string('role', 'Nella hero della Home: «// Nome — Sviluppatore Web & Mobile»'),
       string('profession', 'In modalità legacy: «Professione: …»'),
       text('tagline', 'La presentazione nel footer ({years} = anni di esperienza, dal 2009)'),
+      text('cv_profile', 'Il profilo del CV, qualche frase ({years} = anni di esperienza); se vuoto, l\'introduzione della testata di Chi sono'),
     ],
   },
   {

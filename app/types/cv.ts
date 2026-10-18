@@ -4,7 +4,7 @@ import type {Education, Experience, SpokenLanguage} from '~/types/content'
 export interface CvData {
   name: string
   role: string
-  /** The About intro (the site tagline if it's missing); paragraphs separated by a blank line. */
+  /** The site's `cv_profile`, else the About intro, else the tagline; paragraphs separated by a blank line. */
   profile: string
   email: string
   website: string

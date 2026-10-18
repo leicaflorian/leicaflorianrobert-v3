@@ -24,6 +24,8 @@ export interface Site {
   role: string
   profession: string
   tagline: string
+  /** The CV profile, a few sentences; empty to use the About header intro. */
+  cv_profile: string | null
 }
 
 export type Mockup = 'laptop' | 'phone' | 'none'

@@ -17,8 +17,9 @@ export async function useCvData() {
     useCollection<SpokenLanguage>('spoken_languages'),
   ])
 
-  /** The intro of the About header, in the first person: the site tagline if it's missing. */
+  /** The CV's own profile; else the About header intro, in the first person; else the site tagline. */
   const profile = computed(() => {
+    if (site.value.cv_profile) return site.value.cv_profile
     const header = pages.value.find(page => page.key === 'about')?.sections
       .find(section => section.collection === 'block_page_header')?.item as BlockPageHeader | undefined
     return header?.intro || site.value.tagline
