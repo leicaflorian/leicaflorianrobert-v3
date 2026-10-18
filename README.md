@@ -58,7 +58,7 @@ app/
     blocks/               one folder per block type, each with Native.vue and Legacy.vue; Renderer.vue
     case-study/           the top of a case study (the project's own fields)
     site/                 header, footer, logo, language, boot overlay
-    ui/                   the small pieces: titles with cursor, labels, buttons, images, ASCII portrait
+    ui/                   the small pieces: typed titles with cursor, labels, buttons, images, ASCII portrait
     project/ service/ contact/ legacy/            cards, covers and their illustrations, service illustrations, form and project.json, links
     widget/               the animated widgets (editor, lesson, neofetch) of the Widget block
   composables/
@@ -66,6 +66,8 @@ app/
     useContent.ts         reads from Directus, with the current language's translation (falling back to Italian)
     usePageLink.ts        links to pages by key, the menu, project links
     useContactForm.ts     the form's draft (shared by both engines) and sending it to /contact
+    useTypewriter.ts      native titles typed in as they come into view (UiTyped)
+  plugins/reveal.ts       v-reveal: native paragraphs and cards fade in as they come into view
   utils/brief.ts          the form's project brief options (type, budget, timeline)
   assets/css/main.css     the design's colors and fonts as Tailwind tokens
 i18n/locales/             interface texts (menu, labels, buttons) in it, en, ro
@@ -91,6 +93,8 @@ design/                   the Claude Design export, for reference only
 **Languages.** Every collection with texts has its own `<name>_translations` in Directus. The site downloads all translations and shows the current language's one; an empty field falls back to Italian.
 
 **Modes.** The generated site is always in legacy mode, so the HTML is the same for everyone and complete for search engines. In the browser, after loading, it switches to the saved mode; a script in the page head hides the legacy page from visitors who chose native, to avoid a flash.
+
+**Native entrance animations.** In native, titles type themselves in and paragraphs and cards fade in, once, the first time they come into view; legacy stays static. Page and section titles get it through `UiPageTitle` / `UiSectionTitle`, which render `UiTyped` (`useTypewriter`); for any other title use `<UiTyped as="h2">`. For text and cards add the `v-reveal` directive (`app/plugins/reveal.ts`), or `v-reveal.stagger` on a container to reveal its direct children one after the other. Use them in new native blocks. Both wait for the engine boot to end and are off with `prefers-reduced-motion`.
 
 ## Environment variables
 
