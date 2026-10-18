@@ -19,6 +19,7 @@ const label = computed(() => props.block.label?.replace('{n}', String(projects?.
 const coordinates = `${mapPin.lat.toFixed(2)}°N ${mapPin.lon.toFixed(2)}°E`
 const place = computed(() => `${site.value.city} (${site.value.province})`)
 const workStatus = props.block.variant === 'contact' ? useWorkStatus() : null
+const cvLink = useCvLink()
 </script>
 
 <template>
@@ -38,6 +39,9 @@ const workStatus = props.block.variant === 'contact' ? useWorkStatus() : null
             <p class="m-0 mt-2.5 text-xs text-subtle">{{ $t('about.tech') }}</p>
           </div>
         </div>
+        <UiButton v-if="block.cv_button" v-reveal :href="cvLink" download variant="secondary" class="mt-12">
+          <UiDownloadIcon/>{{ $t('cv.download') }}
+        </UiButton>
       </div>
       <div v-reveal class="relative">
         <div class="absolute inset-[20%_10%_10%_10%] rounded-full bg-accent opacity-[0.14] blur-[110px]"/>
