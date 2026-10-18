@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="it">
+<!--
+  Preview of the project covers (ProjectCover, app/components/project/Cover.vue) with the
+  files in directus/seed-files: to try the layout or a new project's screenshot and logo
+  before loading them into Directus. Open this file in the browser, no server needed;
+  to try a project, add it to P (files are looked up in ../directus/seed-files/).
+  ProjectCover is the real thing: when it changes, change this page too.
+-->
+<head>
+<meta charset="utf-8">
+<title>Cover preview</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #111113; --bg-deep: #0C0C0E; --surface: #18181B; --surface-raised: #1C1C20;
+    --line-card: #26262B; --line-control: #2C2C31; --gutter: #3A3A40;
+    --ink: #EDEBE6; --muted: #A3A09A; --dim: #6A675F; --accent: #FF5B14; --plate: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'JetBrains Mono', monospace; padding: 40px; }
+  h2 { font-size: 13px; color: var(--accent); font-weight: 400; margin: 48px 0 16px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 340px); gap: 24px; }
+  .frame { overflow: hidden; border-radius: 16px; border: 1px solid var(--line-card); }
+  .header { width: 1120px; aspect-ratio: 16 / 9; }
+  .card { aspect-ratio: 16 / 9; }
+
+  .cover {
+    container-type: size; position: relative; width: 100%; height: 100%; overflow: hidden;
+    background:
+      radial-gradient(circle at 85% 110%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 55%),
+      linear-gradient(160deg, var(--surface), var(--bg) 60%, var(--bg-deep));
+  }
+  .type { position: absolute; left: 9%; right: 9%; top: 9%; }
+  .no-shot .type { top: 50%; transform: translateY(-50%); }
+  .kicker { margin: 0 0 1.6cqw; font-size: max(9px, 1.7cqw); color: var(--accent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .name { margin: 0; font-size: 6.4cqw; font-weight: 800; line-height: 1.02; letter-spacing: -0.03em; }
+  .no-shot .name { font-size: 8cqw; }
+  .name::after { content: ''; display: inline-block; height: 0.1em; width: 0.5em; margin-left: 0.12em; background: var(--accent); }
+  .foot { margin: 1.8cqw 0 0; font-size: max(9px, 1.8cqw); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  /* the window: centred, starting under the text, cut by the bottom edge */
+  .shot { position: absolute; left: 14%; right: 14%; top: 47%; }
+  /* small covers (cards): no year and stack, the window moves up to keep the same gap */
+  @container (max-width: 600px) {
+    .foot { display: none; }
+    .shot { top: 40%; }
+  }
+  .window {
+    overflow: hidden; background: var(--bg-deep);
+    border: 1px solid var(--line-control); border-bottom: 0; border-radius: 1.4cqw 1.4cqw 0 0;
+    box-shadow: 0 -2cqw 6cqw rgba(0, 0, 0, .45);
+  }
+  .bar { display: flex; align-items: center; gap: 0.7cqw; height: 3.4cqw; min-height: 12px; padding: 0 1.4cqw; background: var(--surface-raised); border-bottom: 1px solid var(--line-control); }
+  .dot { width: 1cqw; height: 1cqw; min-width: 4px; min-height: 4px; border-radius: 50%; background: var(--gutter); }
+  .url { margin-left: 1.2cqw; max-width: 50%; height: 2cqw; min-height: 8px; border-radius: 99px; background: var(--bg); color: var(--dim);
+         font-size: max(6px, 1.1cqw); display: flex; align-items: center; padding: 0 1cqw; white-space: nowrap; overflow: hidden; }
+  .window img { display: block; width: 100%; }
+
+  /* the logo, bottom left: centred on the window's left edge (left: 14%), whatever its size */
+  .logo { position: absolute; z-index: 1; left: 14%; bottom: 7cqh; transform: translateX(-50%); filter: drop-shadow(0 1.2cqw 2.4cqw rgba(0, 0, 0, .55)); }
+  .logo.icon img { display: block; width: max(46px, 9cqw); height: auto; }
+  /* a dark logo made for white pages (logo_plate), on a white plate */
+  .logo.plate { background: var(--plate); border-radius: max(6px, 1cqw); padding: max(6px, 1.4cqw) max(9px, 2cqw); }
+  .logo.plate img { display: block; max-height: max(28px, 6cqw); max-width: max(110px, 22cqw); width: auto; height: auto; }
+  /* no screenshot: the plate goes above the type, as today */
+  .no-shot .logo { position: static; transform: none; display: inline-block; margin-bottom: 3cqw; }
+</style>
+</head>
+<body>
+<h2>// case study header (1120 px) · My website V3</h2>
+<div class="frame header" data-p="v3"></div>
+
+<h2>// cards (340 px)</h2>
+<div class="grid" id="cards"></div>
+
+<script>
+  // the projects with files in seed-files; `plate` is the project's logo_plate
+  const P = {
+    v3: {name: 'My website V3', type: 'Portfolio personale', foot: '2026 · Nuxt, Tailwind, Directus', url: 'leicaflorianrobert.dev', shot: 'project-v3.png', logo: 'logo-v3.png'},
+    v2: {name: 'My website V2', type: 'Portfolio personale', foot: '2023 · Laravel, Livewire, Tailwind, MySQL', url: 'leicaflorianrobert.dev', shot: 'project-v2.jpg', logo: 'logo-v2.png', plate: true},
+    v1: {name: 'My website V1', type: 'Portfolio personale', foot: '2018 · Vue, TypeScript, Bootstrap, EmailJS', url: 'v1.leicaflorianrobert.dev', shot: 'project-v1.png', logo: 'logo-v1.png', plate: true},
+    slides: {name: 'Slides.com Companion', type: 'Estensione browser', foot: '2021 · TypeScript, Vue, WXT', url: 'chromewebstore.google.com', shot: 'project-slides.png', logo: 'logo-slides.png'},
+    nosponsor: {name: 'NoSponsor', type: 'Estensione browser', foot: '2026 · TypeScript, WXT, Chrome Extensions', url: 'chromewebstore.google.com', shot: 'project-nosponsor.png', logo: 'logo-nosponsor.png'},
+    familymanager: {name: 'Family Manager', type: 'Progetto personale, privato', foot: '2026 · Directus, Vue, Go, Claude e Gemini', url: '', shot: 'project-familymanager.png', logo: 'logo-familymanager.png'},
+    tailwab: {name: 'TailWab', type: 'Strumento web', foot: '2024 · Nuxt, Tailwind, FormKit, Shiki', url: 'tailwab.leicaflorianrobert.dev', shot: 'project-tailwab.png', logo: 'logo-tailwab.png'},
+    imanpack: {name: 'Imanpack', type: 'Automazione newsletter', foot: '2023 · Laravel, Vue, MJML, Microsoft SQL Server', logo: 'logo-imanpack.png', plate: true},
+    steelfuture: {name: 'Steel Future', type: 'Gestionale aziendale', foot: '2023 · PHP 5, Git, GitHub'},
+  }
+  const FILES = '../directus/seed-files/'
+  const logo = p => p.logo ? `<div class="logo ${p.plate ? 'plate' : 'icon'}"><img src="${FILES}${p.logo}" alt=""></div>` : ''
+  const cover = p => `
+    <div class="cover ${p.shot ? '' : 'no-shot'}">
+      <div class="type">
+        ${p.shot ? '' : logo(p)}
+        <p class="kicker">// ${p.type}</p>
+        <p class="name">${p.name}</p>
+        <p class="foot">${p.foot}</p>
+      </div>
+      ${p.shot ? logo(p) : ''}
+      ${p.shot ? `<div class="shot"><div class="window">
+        <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>${p.url ? `<span class="url">${p.url}</span>` : ''}</div>
+        <img src="${FILES}${p.shot}" alt=""></div></div>` : ''}
+    </div>`
+  document.querySelector('[data-p="v3"]').innerHTML = cover(P.v3)
+  document.getElementById('cards').innerHTML = Object.keys(P)
+    .map(k => `<div class="frame card">${cover(P[k])}</div>`).join('')
+</script>
+</body>
+</html>

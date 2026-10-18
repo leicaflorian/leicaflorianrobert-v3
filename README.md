@@ -44,6 +44,7 @@ The Directus admin panel is at http://localhost:8055, with the credentials from 
 | `npm run directus:seed` | Loads the design's content. Doesn't touch what's already filled in |
 | `npm run directus:snapshot` | Saves the schema to `directus/snapshot.yaml` |
 | `node directus/scripts/screenshots.mjs` | Screenshots of project websites that have no image, uploaded to Directus (`--all` to redo them all); typographic projects are skipped |
+| `scripts/cover-preview.html` | Open in the browser: the project covers drawn with the files in `directus/seed-files`, to try a new project's screenshot and logo before loading them. Keep it in step with `ProjectCover` |
 
 ## How it's built
 
