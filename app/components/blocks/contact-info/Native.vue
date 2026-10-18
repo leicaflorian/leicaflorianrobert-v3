@@ -9,6 +9,7 @@ defineProps<{
 }>()
 
 const site = await useSingleton<Site>('site')
+const cvLink = useCvLink()
 
 const card = 'flex flex-col gap-5 rounded-2xl border border-line-card bg-surface p-8'
 const cardTitle = 'm-0 text-xs font-medium text-accent'
@@ -30,6 +31,9 @@ const cardTitle = 'm-0 text-xs font-medium text-accent'
             <span class="text-xs text-dim">{{ $t('contact.pec') }}</span>
             <a :href="`mailto:${site.pec}`" class="text-sm text-ink hover:text-accent">{{ site.pec }}</a>
           </div>
+          <UiButton v-if="block.cv_button" :href="cvLink" download variant="secondary" class="self-start">
+            <UiDownloadIcon/>{{ $t('cv.download') }}
+          </UiButton>
         </div>
 
         <div :class="card">

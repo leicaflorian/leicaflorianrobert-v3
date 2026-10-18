@@ -5,6 +5,7 @@ const props = defineProps<{block: BlockPageHeader}>()
 
 const site = await useSingleton<Site>('site')
 const stats = props.block.variant === 'about' ? await useAboutStats() : null
+const cvLink = useCvLink()
 </script>
 
 <template>
@@ -19,6 +20,7 @@ const stats = props.block.variant === 'about' ? await useAboutStats() : null
     <div>
       <p v-for="(paragraph, i) in paragraphs(block.intro)" :key="i" class="m-0 mb-3">{{ paragraph }}</p>
       <p v-if="stats" class="m-0 mb-3">{{ $t('about.legacy.years') }} <b>{{ stats.years }}</b></p>
+      <p v-if="block.cv_button" class="m-0 mb-3"><LegacyLink :href="cvLink" download>{{ $t('cv.legacy.download') }}</LegacyLink></p>
     </div>
   </div>
   <p v-for="(paragraph, i) in paragraphs(block.intro)" v-else :key="i" class="m-0 mb-3">{{ paragraph }}</p>

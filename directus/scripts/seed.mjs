@@ -32,16 +32,19 @@ const SINGLETONS = {
         role: 'Sviluppatore Web & Mobile',
         profession: 'Sviluppatore Web & Mobile',
         tagline: 'Sviluppatore Web & Mobile. Da {years} anni trasformo idee in prodotti digitali.',
+        cv_profile: 'Sviluppatore full stack da {years} anni: ho cominciato da autodidatta e oggi porto siti, app e piattaforme SaaS dall\'idea al server, curando architettura, interfacce e infrastruttura. Sono stato CTO di un\'agenzia e docente principale di un corso Full Stack, dove ho formato decine di studenti. Lavoro soprattutto con TypeScript, Vue e Nuxt, Laravel e Directus. Resto curioso: sperimento nuove tecnologie, AI compresa, e cerco sempre il modo più semplice e solido per risolvere un problema.',
       },
       en: {
         role: 'Web & Mobile Developer',
         profession: 'Web & Mobile Developer',
         tagline: 'Web & Mobile Developer. For {years} years I have been turning ideas into digital products.',
+        cv_profile: 'Full stack developer for {years} years: I started out self-taught and today I take websites, apps and SaaS platforms from idea to server, looking after architecture, interfaces and infrastructure. I have been the CTO of an agency and the lead teacher of a Full Stack course, where I trained dozens of students. I work mostly with TypeScript, Vue and Nuxt, Laravel and Directus. I stay curious: I experiment with new technologies, AI included, and always look for the simplest, most solid way to solve a problem.',
       },
       ro: {
         role: 'Dezvoltator Web & Mobile',
         profession: 'Dezvoltator Web & Mobile',
         tagline: 'Dezvoltator Web & Mobile. De {years} ani transform idei în produse digitale.',
+        cv_profile: 'Dezvoltator full stack de {years} ani: am început ca autodidact, iar astăzi duc site-uri, aplicații și platforme SaaS de la idee la server, ocupându-mă de arhitectură, interfețe și infrastructură. Am fost CTO-ul unei agenții și profesorul principal al unui curs Full Stack, unde am format zeci de studenți. Lucrez mai ales cu TypeScript, Vue și Nuxt, Laravel și Directus. Rămân curios: experimentez tehnologii noi, inclusiv AI, și caut mereu cea mai simplă și solidă cale de a rezolva o problemă.',
       },
     }),
   },
@@ -204,6 +207,48 @@ const EXPERIENCES = [
   }),
 ]
 
+/**
+ * A school or course in the CV, built like an experience: the years are the start or
+ * `[start, end]`, the title is `{it, en, ro}`, and an institution that is a description
+ * rather than a name ("Self-taught") gets its translations as `label`.
+ */
+const education = (institution, place, years, title, label = null) => {
+  const [year, end = null] = [years].flat()
+  return {
+    institution, place, year, end_year: end,
+    translations: tr(Object.fromEntries(Object.entries(title).map(([locale, value]) => [
+      locale, {institution_label: label?.[locale] ?? null, title: value},
+    ]))),
+  }
+}
+
+const EDUCATION = [
+  education('IPSSAR «P. Artusi»', 'Recoaro Terme', [2005, 2009], {
+    it: 'Qualifica di Operatore Sala-Bar',
+    en: 'Food and Beverage Service Qualification',
+    ro: 'Calificare de Operator Sală-Bar',
+  }),
+  education('Self-taught', null, [2009, 2020], {
+    it: 'Programmazione e sviluppo web',
+    en: 'Programming and web development',
+    ro: 'Programare și dezvoltare web',
+  }, {it: 'Autodidatta', en: 'Self-taught', ro: 'Autodidact'}),
+  education('Lezioni-online', 'Online', 2017, {
+    it: 'HTML5 e JavaScript Frameworks Specialist',
+    en: 'HTML5 and JavaScript Frameworks Specialist',
+    ro: 'HTML5 și JavaScript Frameworks Specialist',
+  }),
+  education('We Train Italy', 'Online', 2017, {it: 'SEO Specialist', en: 'SEO Specialist', ro: 'SEO Specialist'}),
+]
+
+const spoken = (code, it, en, ro) => ({code, translations: tr({it, en, ro})})
+
+const SPOKEN_LANGUAGES = [
+  spoken('it', {name: 'Italiano', level: 'madrelingua'}, {name: 'Italian', level: 'native'}, {name: 'Italiană', level: 'nativ'}),
+  spoken('ro', {name: 'Rumeno', level: 'madrelingua'}, {name: 'Romanian', level: 'native'}, {name: 'Română', level: 'nativ'}),
+  spoken('en', {name: 'Inglese', level: 'avanzato'}, {name: 'English', level: 'advanced'}, {name: 'Engleză', level: 'avansat'}),
+]
+
 const service = (icon, it, en, ro) => ({icon, translations: tr({it, en, ro})})
 
 const SERVICES = [
@@ -316,7 +361,7 @@ const PAGES = [
       ro: {slug: 'despre-mine', title: 'Despre mine', description: 'Sunt Leica Florian Robert, dezvoltator Web & Mobile: dezvolt full stack, proiectez interfețe (UI și UX) și predau tehnologii web.'},
     }),
     sections: [
-      section('block_page_header', {variant: 'about'}, {
+      section('block_page_header', {variant: 'about', cv_button: true}, {
         it: {label: '// su di me', title: 'Ciao, piacere', intro: 'Sono Leica Florian Robert, sviluppatore Web & Mobile: sviluppo full stack, progetto interfacce (UI e UX) e insegno tecnologie web. Sono un grande appassionato d\'informatica e di tecnologia.'},
         en: {label: '// about me', title: 'Hi, nice to meet you', intro: 'I\'m Leica Florian Robert, a Web & Mobile Developer: I build full stack, design interfaces (UI and UX) and teach web technologies. I\'m a big fan of computing and technology.'},
         ro: {label: '// despre mine', title: 'Salut, încântat de cunoștință', intro: 'Sunt Leica Florian Robert, dezvoltator Web & Mobile: dezvolt full stack, proiectez interfețe (UI și UX) și predau tehnologii web. Sunt un mare pasionat de informatică și tehnologie.'},
@@ -447,13 +492,13 @@ const PAGES = [
         en: {title: 'Contact', intro: 'Tell me what you have in mind, even if it\'s just a rough idea. No commitment.'},
         ro: {title: 'Contact', intro: 'Povestește-mi ce ai în minte, chiar dacă e doar o idee schițată. Fără niciun angajament.'},
       }),
-      section('block_contact_info', {engines: 'legacy'}, same({})),
+      section('block_contact_info', {engines: 'legacy', cv_button: true}, same({})),
       section('block_contact_form', {}, {
         it: {label: 'scrivimi', title: 'Parliamone', steps_title: 'Come funziona', steps: lines('Mi scrivi (anche due righe vanno bene)', 'Ti rispondo entro 1–2 giorni lavorativi e, se serve, ci sentiamo in una call di 30 minuti', 'Ti mando una proposta chiara: tempi, costi, cosa è incluso')},
         en: {label: 'write to me', title: 'Let\'s talk', steps_title: 'How it works', steps: lines('You write to me (two lines are enough)', 'I reply within 1–2 working days and, if needed, we have a 30-minute call', 'I send you a clear proposal: timing, costs, what\'s included')},
         ro: {label: 'scrie-mi', title: 'Hai să vorbim', steps_title: 'Cum funcționează', steps: lines('Îmi scrii (sunt de ajuns două rânduri)', 'Îți răspund în 1–2 zile lucrătoare și, dacă e nevoie, vorbim într-un call de 30 de minute', 'Îți trimit o propunere clară: termene, costuri, ce este inclus')},
       }),
-      section('block_contact_info', {engines: 'native'}, {
+      section('block_contact_info', {engines: 'native', cv_button: true}, {
         it: {label: 'recapiti', title: 'Dove trovarmi'},
         en: {label: 'details', title: 'Where to find me'},
         ro: {label: 'date de contact', title: 'Unde mă găsești'},
@@ -480,24 +525,29 @@ const PAGES = [
         ro: {title: 'Operatorul de date', text: 'Operatorul este **Leica Florian Robert**, întreprindere individuală cu sediul în Schio (VI), Italia, cod TVA 04329800249. Pentru orice întrebare despre datele tale, scrie-mi la info@leicaflorianrobert.dev.'},
       }),
       section('block_text', {}, {
-        it: {title: 'Quali dati raccolgo', text: paras('Dal modulo di contatto: nome, indirizzo email e messaggio e, se li scegli, tipo di progetto, budget e tempistiche, oltre alla lingua della pagina da cui scrivi.', 'Non ti chiedo dati particolari (sulla salute, giudiziari e simili): ti chiedo di non inserirli nel messaggio.')},
-        en: {title: 'What data I collect', text: paras('From the contact form: name, email address and message and, if you pick them, project type, budget and timing, plus the language of the page you write from.', 'I don\'t ask for special categories of data (health, criminal records and the like): please don\'t put them in the message.')},
-        ro: {title: 'Ce date colectez', text: paras('Din formularul de contact: numele, adresa de email și mesajul și, dacă le alegi, tipul de proiect, bugetul și termenele, plus limba paginii din care scrii.', 'Nu îți cer date speciale (despre sănătate, cazier și altele asemenea): te rog să nu le scrii în mesaj.')},
+        it: {title: 'Quali dati raccolgo', text: paras('Dal modulo di contatto: nome, indirizzo email e messaggio e, se li scegli, tipo di progetto, budget e tempistiche, oltre alla lingua della pagina da cui scrivi. Nome, email e messaggio servono per risponderti: senza, non posso farlo; il resto è facoltativo.', 'Come ogni sito, il server registra inoltre nei log tecnici l\'indirizzo IP e i dati delle richieste, solo per farlo funzionare e tenerlo sicuro.', 'Non ti chiedo dati particolari (sulla salute, giudiziari e simili): ti chiedo di non inserirli nel messaggio.')},
+        en: {title: 'What data I collect', text: paras('From the contact form: name, email address and message and, if you pick them, project type, budget and timing, plus the language of the page you write from. I need your name, email and message to reply to you: without them I can\'t; the rest is optional.', 'Like any website, the server also records the IP address and the details of each request in its technical logs, only to keep the site running and secure.', 'I don\'t ask for special categories of data (health, criminal records and the like): please don\'t put them in the message.')},
+        ro: {title: 'Ce date colectez', text: paras('Din formularul de contact: numele, adresa de email și mesajul și, dacă le alegi, tipul de proiect, bugetul și termenele, plus limba paginii din care scrii. Numele, emailul și mesajul îmi trebuie ca să-ți răspund: fără ele nu pot; restul este opțional.', 'Ca orice site, serverul înregistrează în plus în jurnalele tehnice adresa IP și datele cererilor, doar ca să funcționeze și să rămână sigur.', 'Nu îți cer date speciale (despre sănătate, cazier și altele asemenea): te rog să nu le scrii în mesaj.')},
       }),
       section('block_text', {}, {
-        it: {title: 'Perché li uso', text: paras('Solo per risponderti e, se ne nasce una collaborazione, per prepararti una proposta. La base giuridica è l\'esecuzione di misure precontrattuali richieste da te (art. 6, par. 1, lett. b del GDPR).', 'Non uso i dati per newsletter o marketing, e non li vendo né li cedo a terzi.')},
-        en: {title: 'Why I use it', text: paras('Only to reply to you and, if we end up working together, to prepare a proposal. The legal basis is taking steps at your request before entering into a contract (Art. 6(1)(b) GDPR).', 'I don\'t use the data for newsletters or marketing, and I don\'t sell or pass it on to third parties.')},
-        ro: {title: 'De ce le folosesc', text: paras('Doar ca să-ți răspund și, dacă ajungem să colaborăm, ca să-ți pregătesc o propunere. Temeiul legal este efectuarea unor demersuri la cererea ta înainte de încheierea unui contract (art. 6 alin. (1) lit. b din GDPR).', 'Nu folosesc datele pentru newslettere sau marketing și nu le vând și nu le transmit terților.')},
+        it: {title: 'Perché li uso', text: paras('Solo per risponderti e, se ne nasce una collaborazione, per prepararti una proposta. La base giuridica è l\'esecuzione di misure precontrattuali richieste da te (art. 6, par. 1, lett. b del GDPR); per i log tecnici è il mio legittimo interesse a tenere il sito sicuro (art. 6, par. 1, lett. f).', 'Non uso i dati per newsletter o marketing, e non li vendo né li comunico a terzi, salvo i fornitori tecnici indicati più sotto.')},
+        en: {title: 'Why I use it', text: paras('Only to reply to you and, if we end up working together, to prepare a proposal. The legal basis is taking steps at your request before entering into a contract (Art. 6(1)(b) GDPR); for the technical logs, it\'s my legitimate interest in keeping the site secure (Art. 6(1)(f)).', 'I don\'t use the data for newsletters or marketing, and I don\'t sell it or pass it on to third parties, apart from the technical providers listed below.')},
+        ro: {title: 'De ce le folosesc', text: paras('Doar ca să-ți răspund și, dacă ajungem să colaborăm, ca să-ți pregătesc o propunere. Temeiul legal este efectuarea unor demersuri la cererea ta înainte de încheierea unui contract (art. 6 alin. (1) lit. b din GDPR); pentru jurnalele tehnice este interesul meu legitim de a ține site-ul în siguranță (art. 6 alin. (1) lit. f).', 'Nu folosesc datele pentru newslettere sau marketing, nu le vând și nu le transmit terților, în afară de furnizorii tehnici de mai jos.')},
       }),
       section('block_text', {}, {
-        it: {title: 'Dove sono e per quanto tempo', text: 'Il messaggio viene salvato nel sistema che gestisce i contenuti del sito e mi arriva per email. Lo conservo per il tempo necessario a gestire la richiesta, e comunque non oltre 24 mesi dall\'ultimo contatto; se nasce un rapporto di lavoro, valgono i tempi di conservazione previsti dalla legge per i documenti fiscali.'},
-        en: {title: 'Where it is and for how long', text: 'The message is saved in the system that manages the site\'s content and reaches me by email. I keep it as long as needed to handle the request, and in any case no longer than 24 months after our last contact; if we end up working together, the retention periods required by law for tax records apply.'},
-        ro: {title: 'Unde sunt și cât timp', text: 'Mesajul este salvat în sistemul care gestionează conținutul site-ului și îmi ajunge pe email. Îl păstrez cât timp e nevoie pentru a gestiona cererea și, oricum, nu mai mult de 24 de luni de la ultimul contact; dacă ajungem să colaborăm, se aplică termenele de păstrare prevăzute de lege pentru documentele fiscale.'},
+        it: {title: 'Dove sono e per quanto tempo', text: 'Il messaggio viene salvato nel sistema che gestisce i contenuti del sito e mi arriva per email. Lo conservo per il tempo necessario a gestire la richiesta, e comunque non oltre 24 mesi dall\'ultimo contatto; se nasce un rapporto di lavoro, valgono i tempi di conservazione previsti dalla legge per i documenti fiscali. I log tecnici vengono cancellati dopo poco tempo.'},
+        en: {title: 'Where it is and for how long', text: 'The message is saved in the system that manages the site\'s content and reaches me by email. I keep it as long as needed to handle the request, and in any case no longer than 24 months after our last contact; if we end up working together, the retention periods required by law for tax records apply. The technical logs are deleted after a short time.'},
+        ro: {title: 'Unde sunt și cât timp', text: 'Mesajul este salvat în sistemul care gestionează conținutul site-ului și îmi ajunge pe email. Îl păstrez cât timp e nevoie pentru a gestiona cererea și, oricum, nu mai mult de 24 de luni de la ultimul contact; dacă ajungem să colaborăm, se aplică termenele de păstrare prevăzute de lege pentru documentele fiscale. Jurnalele tehnice se șterg după scurt timp.'},
       }),
       section('block_text', {}, {
-        it: {title: 'Protezione dallo spam', text: 'Per proteggere il modulo dallo spam uso **Google reCAPTCHA v3**, che analizza alcune informazioni sul dispositivo e sull\'uso della pagina e può impostare dei cookie. Questi dati sono trattati da Google secondo la propria informativa (policies.google.com/privacy) e possono essere trasferiti fuori dall\'Unione europea.'},
-        en: {title: 'Spam protection', text: 'To protect the form from spam I use **Google reCAPTCHA v3**, which analyses some information about the device and how the page is used, and may set cookies. This data is processed by Google under its own policy (policies.google.com/privacy) and may be transferred outside the European Union.'},
-        ro: {title: 'Protecția împotriva spamului', text: 'Ca să protejez formularul de spam folosesc **Google reCAPTCHA v3**, care analizează unele informații despre dispozitiv și despre folosirea paginii și poate seta cookie-uri. Aceste date sunt prelucrate de Google conform propriei politici (policies.google.com/privacy) și pot fi transferate în afara Uniunii Europene.'},
+        it: {title: 'Chi li tratta per me', text: paras('Il sito e il sistema che salva i messaggi sono ospitati da **DigitalOcean** su un server ad Amsterdam, nei Paesi Bassi. DigitalOcean è un\'azienda statunitense: i dati restano nell\'Unione europea, ma un eventuale accesso dagli Stati Uniti è coperto dalle clausole contrattuali standard e dal Data Privacy Framework.', 'La posta elettronica, con cui mi arrivano i messaggi, è gestita da **Hostinger**.', 'Entrambi trattano i dati solo per conto mio, come responsabili del trattamento (art. 28 del GDPR).')},
+        en: {title: 'Who processes it for me', text: paras('The site and the system that saves the messages are hosted by **DigitalOcean** on a server in Amsterdam, the Netherlands. DigitalOcean is a US company: the data stays in the European Union, but any access from the United States is covered by the standard contractual clauses and the Data Privacy Framework.', 'The email, through which the messages reach me, is handled by **Hostinger**.', 'Both process the data only on my behalf, as processors (Art. 28 GDPR).')},
+        ro: {title: 'Cine le prelucrează pentru mine', text: paras('Site-ul și sistemul care salvează mesajele sunt găzduite de **DigitalOcean** pe un server din Amsterdam, Țările de Jos. DigitalOcean este o companie americană: datele rămân în Uniunea Europeană, dar un eventual acces din Statele Unite este acoperit de clauzele contractuale standard și de Data Privacy Framework.', 'Emailul, prin care îmi ajung mesajele, este gestionat de **Hostinger**.', 'Amândoi prelucrează datele doar în numele meu, ca persoane împuternicite (art. 28 din GDPR).')},
+      }),
+      section('block_text', {}, {
+        it: {title: 'Protezione dallo spam', text: paras('Per proteggere il modulo dallo spam, nella pagina che lo contiene uso **Google reCAPTCHA v3**, che analizza alcune informazioni sul dispositivo e sull\'uso della pagina e può impostare dei cookie. La base giuridica è il mio legittimo interesse a tenere il modulo libero dallo spam (art. 6, par. 1, lett. f del GDPR).', 'Questi dati sono trattati da Google secondo la propria informativa (policies.google.com/privacy) e possono essere trasferiti negli Stati Uniti, sulla base del Data Privacy Framework.')},
+        en: {title: 'Spam protection', text: paras('To protect the form from spam, on the page that contains it I use **Google reCAPTCHA v3**, which analyses some information about the device and how the page is used, and may set cookies. The legal basis is my legitimate interest in keeping the form free of spam (Art. 6(1)(f) GDPR).', 'This data is processed by Google under its own policy (policies.google.com/privacy) and may be transferred to the United States, under the Data Privacy Framework.')},
+        ro: {title: 'Protecția împotriva spamului', text: paras('Ca să protejez formularul de spam, pe pagina care îl conține folosesc **Google reCAPTCHA v3**, care analizează unele informații despre dispozitiv și despre folosirea paginii și poate seta cookie-uri. Temeiul legal este interesul meu legitim de a feri formularul de spam (art. 6 alin. (1) lit. f din GDPR).', 'Aceste date sunt prelucrate de Google conform propriei politici (policies.google.com/privacy) și pot fi transferate în Statele Unite, în baza Data Privacy Framework.')},
       }),
       section('block_text', {}, {
         it: {title: 'Cookie e preferenze', text: 'Il sito non usa cookie di profilazione né strumenti di statistica. Salva nel tuo browser solo la scelta tra la versione legacy e quella nativa, per ricordarla alla prossima visita.'},
@@ -507,7 +557,12 @@ const PAGES = [
       section('block_text', {}, {
         it: {title: 'I tuoi diritti', text: paras('Puoi chiedermi in ogni momento di accedere ai tuoi dati, correggerli, cancellarli, limitarne il trattamento, opporti al trattamento o riceverli in un formato leggibile (artt. 15–22 del GDPR), scrivendo all\'email qui sopra.', 'Se ritieni che il trattamento non sia corretto, puoi presentare reclamo al Garante per la protezione dei dati personali (garanteprivacy.it).')},
         en: {title: 'Your rights', text: paras('You can ask me at any time to access, correct or delete your data, restrict or object to its processing, or receive it in a readable format (Art. 15–22 GDPR), by writing to the email above.', 'If you believe the processing isn\'t lawful, you can lodge a complaint with the Italian data protection authority, the Garante per la protezione dei dati personali (garanteprivacy.it).')},
-        ro: {title: 'Drepturile tale', text: paras('Îmi poți cere oricând să îți accesez, corectez sau șterg datele, să le restricționez prelucrarea, să te opui prelucrării sau să le primești într-un format ușor de citit (art. 15–22 din GDPR), scriindu-mi la adresa de email de mai sus.', 'Dacă crezi că prelucrarea nu este corectă, poți depune o plângere la autoritatea italiană pentru protecția datelor, Garante per la protezione dei dati personali (garanteprivacy.it).')},
+        ro: {title: 'Drepturile tale', text: paras('Îmi poți cere oricând să ai acces la datele tale, să le corectez sau să le șterg, să le restricționez prelucrarea, să te opui prelucrării sau să le primești într-un format ușor de citit (art. 15–22 din GDPR), scriindu-mi la adresa de email de mai sus.', 'Dacă crezi că prelucrarea nu este corectă, poți depune o plângere la autoritatea italiană pentru protecția datelor, Garante per la protezione dei dati personali (garanteprivacy.it).')},
+      }),
+      section('block_text', {}, {
+        it: {title: 'Modifiche', text: 'Se cambia il modo in cui tratto i dati, aggiorno questa pagina. Ultimo aggiornamento: 18 ottobre 2026.'},
+        en: {title: 'Changes', text: 'If the way I handle data changes, I update this page. Last updated: 18 October 2026.'},
+        ro: {title: 'Modificări', text: 'Dacă se schimbă felul în care prelucrez datele, actualizez această pagină. Ultima actualizare: 18 octombrie 2026.'},
       }),
     ],
   },
@@ -2486,6 +2541,8 @@ await seedGalleryFiles()
 await seedProjectFiles('image', PROJECT_IMAGES)
 await seedProjectFiles('logo', PROJECT_LOGOS)
 await seedCollection('experiences', EXPERIENCES, 'company')
+await seedCollection('education', EDUCATION, 'institution')
+await seedCollection('spoken_languages', SPOKEN_LANGUAGES, 'code')
 await seedCollection('services', SERVICES, 'icon')
 await seedCollection('technologies', TECHNOLOGIES, 'name')
 console.log('Content loaded.')

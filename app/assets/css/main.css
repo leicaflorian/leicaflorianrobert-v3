@@ -67,6 +67,13 @@
     --color-legacy-inset: #808080;
     --color-legacy-note: #555555;
 
+    /* the printed CV: paper, not screen (the secondary text is --color-dim) */
+    --color-paper: #FFFFFF;
+    --color-paper-side: #F3F1EC;      /* the warm grey column */
+    --color-paper-ink: #1A1A1D;
+    --color-paper-line: #DDD9D0;
+    --color-accent-ink: #D9480B;      /* orange text on paper: the accent is too light there */
+
     /* motion */
     --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
 
@@ -281,4 +288,25 @@
     html.engine-native-pending [data-engine="legacy"] {
         visibility: hidden;
     }
+}
+
+/* The CV (pages/cv.vue) is an A4 sheet, printed to PDF by scripts/cv-pdf.mjs. A named page,
+   so printing the rest of the site is untouched. The first page has no margin, so the grey
+   column reaches the edges; the next ones get it above and below. */
+@page cv {
+    size: A4;
+    margin: 14mm 0;
+}
+
+@page cv:first {
+    margin: 0;
+}
+
+html.cv-sheet {
+    background: var(--color-paper);
+    color-scheme: light;
+}
+
+html.cv-sheet body {
+    page: cv;
 }

@@ -84,6 +84,7 @@ const COLLECTIONS = [
       string('role', 'Nella hero della Home: «// Nome — Sviluppatore Web & Mobile»'),
       string('profession', 'In modalità legacy: «Professione: …»'),
       text('tagline', 'La presentazione nel footer ({years} = anni di esperienza, dal 2009)'),
+      text('cv_profile', 'Il profilo del CV, qualche frase ({years} = anni di esperienza); se vuoto, l\'introduzione della testata di Chi sono'),
     ],
   },
   {
@@ -157,6 +158,35 @@ const COLLECTIONS = [
     ],
   },
   {
+    collection: 'education',
+    icon: 'school',
+    note: 'La formazione del CV, dalla più vecchia alla più recente.',
+    display: '{{institution}}',
+    fields: [
+      integer('year', 'Anno di inizio; vuoto se non si mostra'),
+      integer('end_year', 'Anno di fine; vuoto se è lo stesso dell\'inizio'),
+      string('institution', 'Scuola o ente', {width: 'half'}),
+      string('place', 'Città, oppure «Online»', {width: 'half'}),
+    ],
+    translations: [
+      string('institution_label', 'L\'ente in questa lingua, se va tradotto (es. «Autodidatta»); se vuoto, il campo Scuola o ente'),
+      string('title', 'Titolo o corso'),
+    ],
+  },
+  {
+    collection: 'spoken_languages',
+    icon: 'translate',
+    note: 'Le lingue che parlo, nel CV.',
+    display: '{{code}}',
+    fields: [
+      string('code', 'Codice ISO della lingua: it, ro, en', {width: 'half'}),
+    ],
+    translations: [
+      string('name', 'La lingua'),
+      string('level', 'Il livello: «madrelingua», «avanzato»…'),
+    ],
+  },
+  {
     collection: 'services',
     icon: 'design_services',
     note: 'I servizi della Home.',
@@ -222,6 +252,7 @@ const BLOCKS = [
     note: 'La testata di una pagina: etichetta, titolo grande e introduzione.',
     fields: [
       choice('variant', 'Gli elementi in più', [['plain', 'Nessuno'], ['about', 'Ritratto ASCII e numeri (Chi sono)'], ['projects', 'Numero di progetti (Progetti)'], ['contact', 'Disponibilità ed email (Contatti)']], 'plain'),
+      boolean('cv_button', 'Mostra il pulsante «Scarica CV»'),
     ],
     translations: [
       label('Etichetta sopra il titolo: «// su di me». {n} diventa il numero di progetti'),
@@ -318,6 +349,9 @@ const BLOCKS = [
   block('block_contact_info', {
     icon: 'contact_page',
     note: 'Contatti, social e dati aziendali (dai dati del sito).',
+    fields: [
+      boolean('cv_button', 'Mostra il pulsante «Scarica CV»'),
+    ],
     translations: [label(), title()],
   }),
 ]
@@ -340,7 +374,7 @@ const OBSOLETE_FIELDS = [['block_page_header', 'image'], ['block_contact_form', 
  */
 const FOLDERS = [
   {collection: 'website', icon: 'language', note: 'Il sito: impostazioni, pagine e lingue.', children: ['site', 'pages', 'languages']},
-  {collection: 'portfolio', icon: 'work', note: 'Progetti, esperienze, servizi e tecnologie, mostrati dai blocchi.', children: ['projects', 'experiences', 'services', 'technologies']},
+  {collection: 'portfolio', icon: 'work', note: 'Progetti, esperienze, formazione, lingue, servizi e tecnologie, mostrati dai blocchi e nel CV.', children: ['projects', 'experiences', 'education', 'spoken_languages', 'services', 'technologies']},
   {collection: 'blocks', icon: 'view_agenda', note: 'I tipi di blocco con cui si compongono pagine e progetti.', hidden: true, children: BLOCKS.map(b => b.collection)},
 ]
 

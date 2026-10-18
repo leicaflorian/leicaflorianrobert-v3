@@ -294,5 +294,25 @@
       },
       "footer": "tu decidi · l'AI esegue · tu verifichi"
     }
+  },
+  "cv": {
+    "title": "Curriculum vitae",
+    "profile": "profilo",
+    "experience": "esperienza",
+    "stack": "stack",
+    "languages": "lingue",
+    "education": "formazione",
+    "contacts": "contatti",
+    "latest": "ultime {n} esperienze",
+    "consent": "Autorizzo il trattamento dei miei dati personali presenti nel CV ai sensi del Decreto Legislativo 196/2003, coordinato con il Decreto Legislativo 101/2018, e dell’art. 13 del GDPR (Regolamento UE 2016/679).",
+    "contact": {
+      "email": "email",
+      "website": "sito",
+      "city": "città"
+    },
+    "download": "Scarica il CV",
+    "legacy": {
+      "download": "Scarica il mio curriculum (PDF)"
+    }
   }
 }
