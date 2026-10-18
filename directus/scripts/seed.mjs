@@ -2180,6 +2180,7 @@ const PROJECT_IMAGES = {
   nosponsor: 'project-nosponsor.png',
   familymanager: 'project-familymanager.png',
   tailwab: 'project-tailwab.png',
+  tvit: 'project-tvit.png',
 }
 
 // The logo in a project's cover, from the Branding notes of its vault folder,
