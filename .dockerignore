@@ -1,0 +1,13 @@
+.git
+.idea
+.nuxt
+.output
+.data
+.superpowers
+.worktrees
+dist
+node_modules
+design
+directus
+.env
+.env.*
