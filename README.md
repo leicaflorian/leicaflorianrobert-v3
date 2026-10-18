@@ -84,6 +84,8 @@ design/                   the Claude Design export, for reference only
 
 **A new block type** needs: the collection in `BLOCKS` in `directus/scripts/setup.mjs` (setup also adds it to the types allowed in `sections`), its interface in `app/types/content.ts` (and in `Blocks`), its name in `BLOCK_COLLECTIONS` in `useContent.ts`, and `components/blocks/<name>/Native.vue` and `Legacy.vue`, registered in `components/blocks/Renderer.vue`. If the block reads other content (a collection, like the projects), add the composable to `BLOCK_DATA` in the Renderer too.
 
+**Replacing a project image.** Replace the file in `directus/seed-files/` (the seed never overwrites a filled-in field) and the file's content in Directus with `PATCH /files/<id>`, so the id and every reference stay the same. Directus serves assets with `Cache-Control: public, max-age=2592000`: a browser that already loaded the old image keeps showing it for up to 30 days, or until its cache is cleared.
+
 **Languages.** Every collection with texts has its own `<name>_translations` in Directus. The site downloads all translations and shows the current language's one; an empty field falls back to Italian.
 
 **Modes.** The generated site is always in legacy mode, so the HTML is the same for everyone and complete for search engines. In the browser, after loading, it switches to the saved mode; a script in the page head hides the legacy page from visitors who chose native, to avoid a flash.
