@@ -7,7 +7,7 @@
 import {ENGINE_STORAGE_KEY} from '~/composables/useEngine'
 
 /** When the dialog opens. */
-const NUDGE_DELAY_MS = 5000
+const NUDGE_DELAY_MS = 8000
 /** The pause between two glitches is random, within these bounds. */
 const GLITCH_MIN_MS = 1500
 const GLITCH_MAX_MS = 4000
