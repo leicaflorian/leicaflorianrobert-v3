@@ -23,9 +23,27 @@ if (!page && !caseStudy?.value) {
 // optional: on a 404 the template can still render once before the error page
 const sections = computed(() => (caseStudy?.value ?? pages.value.find(p => p.id === page?.id))?.sections)
 
+const title = () => caseStudy?.value?.name ?? page!.seo_title ?? page!.title
+const description = () => caseStudy?.value?.intro ?? page!.description
+// A case study falls back to its cover, then its screenshot (not a phone one: cropped to
+// 1200×630 it's a thin slice); every page to the site's /og.png, set in app.vue.
+const project = caseStudy?.value
+const ogImageId = project
+  ? project.og_image ?? project.cover ?? (project.mockup === 'phone' ? null : project.image)
+  : page!.og_image
+const {directusUrl} = useRuntimeConfig().public
+
 useSeoMeta({
-  title: () => caseStudy?.value?.name ?? page!.seo_title ?? page!.title,
-  description: () => caseStudy?.value?.intro ?? page!.description,
+  title,
+  description,
+  ogTitle: () => fullTitle(title()),
+  ogDescription: description,
+  ogType: project ? 'article' : 'website',
+  ...ogImageId && {
+    // JPEG, which every social network reads; `fit=cover` crops to the card's size
+    ogImage: `${directusUrl}/assets/${ogImageId}?width=${OG_IMAGE_SIZE.width}&height=${OG_IMAGE_SIZE.height}&fit=cover&format=jpg`,
+    ogImageAlt: title,
+  },
 })
 
 // The language switcher leads to the same page with the slug of the other language.
