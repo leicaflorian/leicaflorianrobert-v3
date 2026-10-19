@@ -54,7 +54,7 @@ The Directus admin panel is at http://localhost:8055, with the credentials from 
 app/
   app.vue                 the current mode's layout and the boot overlay
   layouts/native.vue      header, footer
-  layouts/legacy.vue      the '90s hypertext and the «Attiva Rendering Nativo» button
+  layouts/legacy.vue      the '90s hypertext, the «Attiva Rendering Nativo» button and the first-visit nudge
   pages/[...slug].vue     the only route: finds the page (or case study) whose slug matches the path
   components/
     blocks/               one folder per block type, each with Native.vue and Legacy.vue; Renderer.vue
@@ -96,7 +96,7 @@ design/                   the Claude Design export, for reference only
 
 **Languages.** Every collection with texts has its own `<name>_translations` in Directus. The site downloads all translations and shows the current language's one; an empty field falls back to Italian.
 
-**Modes.** The generated site is always in legacy mode, so the HTML is the same for everyone and complete for search engines. In the browser, after loading, it switches to the saved mode; a script in the page head hides the legacy page from visitors who chose native, to avoid a flash.
+**Modes.** The generated site is always in legacy mode, so the HTML is the same for everyone and complete for search engines. In the browser, after loading, it switches to the saved mode; a script in the page head hides the legacy page from visitors who chose native, to avoid a flash. A first visit (no mode saved yet) gets a nudge (`components/legacy/Nudge.vue`): the legacy page glitches at random intervals (not with `prefers-reduced-motion`) and after 5 seconds a '90s dialog offers native. Either answer is saved as the mode, so it never comes back; to see it again, clear `lfr-engine` from `localStorage` (note that `?engine=` saves the mode too).
 
 **Sitemap and robots.** After `nuxt generate`, `scripts/seo-files.mjs` reads the generated pages and writes `sitemap.xml` (each page at its canonical URL, with its translations as `hreflang` links; `noindex` pages such as the CV are left out) and `robots.txt`, which points to it. Both use the i18n `baseUrl`, the address of the canonical links. They exist only in the generated site, not in `npm run dev`.
 
