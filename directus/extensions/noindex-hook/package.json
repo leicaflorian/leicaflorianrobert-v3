@@ -1,0 +1,13 @@
+{
+  "name": "noindex-hook",
+  "description": "X-Robots-Tag: noindex, nofollow on every response: the CMS must stay out of search engines.",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "directus:extension": {
+    "type": "hook",
+    "path": "dist/index.js",
+    "source": "dist/index.js",
+    "host": "^12.0.0"
+  }
+}

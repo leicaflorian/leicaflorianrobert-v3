@@ -48,6 +48,8 @@ services:
       EMAIL_SMTP_PORT: ${EMAIL_SMTP_PORT:-2525}
       EMAIL_SMTP_USER: ${EMAIL_SMTP_USER:-}
       EMAIL_SMTP_PASSWORD: ${EMAIL_SMTP_PASSWORD:-}
+      # crawlers may read it, to see the noindex header (extensions/noindex-hook)
+      ROBOTS_TXT: "User-agent: *\nAllow: /\n"
       # the variables flows can read with {{ $env.NAME }}
       FLOWS_ENV_ALLOW_LIST: DEPLOY_WEBHOOK_URL,DEPLOY_WEBHOOK_TOKEN,CONTACT_EMAIL_TO
     healthcheck:
