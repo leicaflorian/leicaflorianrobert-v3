@@ -42,7 +42,7 @@ The Directus admin panel is at http://localhost:8055, with the credentials from 
 | `npm run typecheck` | Type checking |
 | `npm run lint` / `lint:fix` | ESLint (code and formatting); `lint:fix` fixes what it can |
 | `npm run directus:up` / `directus:down` | Starts / stops Directus in Docker |
-| `npm run directus:setup` | Creates collections, translations, public read permissions and flows. Safe to re-run: skips what already exists |
+| `npm run directus:setup` | Creates collections, translations, public read permissions and flows, and removes obsolete ones. Safe to re-run: skips what already exists |
 | `npm run directus:seed` | Loads the design's content. Doesn't touch what's already filled in |
 | `npm run directus:snapshot` | Saves the schema to `directus/snapshot.yaml` |
 | `node directus/scripts/screenshots.mjs` | Screenshots of project websites that have no image, uploaded to Directus (`--all` to redo them all); typographic projects are skipped |
@@ -79,6 +79,7 @@ directus/
   seed-files/             images the seed uploads (project images and logos, case study screenshots)
   extensions/contact-endpoint   POST /contact: reCAPTCHA v3 and saving to `messages`
   extensions/noindex-hook       X-Robots-Tag: noindex, nofollow on every response
+  extensions/rebuild-hook       rebuilds the site after content changes, one deploy per round of edits
   snapshot.yaml           the Directus schema
 design/                   the Claude Design export, for reference only
 ```
@@ -132,7 +133,7 @@ Production runs on Coolify, as two apps in the `Personali` project. The V2 is ar
 
 **Push to deploy**: a GitHub webhook (push only) to Coolify's `/webhooks/source/github/events/manual` rebuilds both apps on every push to `main`; builds run one at a time.
 
-**Rebuild on content change**: the «Ricostruisci il sito» flow sends `POST {{DEPLOY_WEBHOOK_URL}}` with `Authorization: Bearer {{DEPLOY_WEBHOOK_TOKEN}}`. `DEPLOY_WEBHOOK_URL` is `https://<coolify>/api/v1/deploy?uuid=<site app uuid>&force=true`: without `force`, Coolify finds an image already built for that commit and only restarts it; `DEPLOY_WEBHOOK_TOKEN` is a Coolify API token with the `deploy` permission only. Both are in `FLOWS_ENV_ALLOW_LIST`. A push rebuilds Directus too, and the site build can start while it's still restarting: the `Dockerfile` runs `scripts/wait-directus.mjs` (up to five minutes on `/server/ping`) before `npm run generate`.
+**Rebuild on content change**: the `rebuild-hook` extension sends `POST DEPLOY_WEBHOOK_URL` with `Authorization: Bearer DEPLOY_WEBHOOK_TOKEN`, 30 seconds after the last change to any collection except `messages`. One save touches several collections (a project and its translations, a page and its blocks): a flow, which fires once per collection, started one deploy for each; `setup` removes the old «Ricostruisci il sito» flow. `DEPLOY_WEBHOOK_URL` is `https://<coolify>/api/v1/deploy?uuid=<site app uuid>&force=true`: without `force`, Coolify finds an image already built for that commit and only restarts it; `DEPLOY_WEBHOOK_TOKEN` is a Coolify API token with the `deploy` permission only. A push rebuilds Directus too, and the site build can start while it's still restarting: the `Dockerfile` runs `scripts/wait-directus.mjs` (up to five minutes on `/server/ping`) before `npm run generate`.
 
 **A new Directus**: deploy it, activate the license in the panel, then run setup and seed from your machine against it:
 

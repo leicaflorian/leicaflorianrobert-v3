@@ -39,8 +39,8 @@ services:
       CORS_ENABLED: "true"
       CORS_ORIGIN: http://localhost:3000
       EXTENSIONS_AUTO_RELOAD: "true"
-      # the variables flows can read with {{ $env.NAME }}
-      FLOWS_ENV_ALLOW_LIST: DEPLOY_WEBHOOK_URL,DEPLOY_WEBHOOK_TOKEN,CONTACT_EMAIL_TO
+      # the variables flows can read with {{ $env.NAME }}; the deploy webhook is read by extensions/rebuild-hook
+      FLOWS_ENV_ALLOW_LIST: CONTACT_EMAIL_TO
 
 volumes:
   database:

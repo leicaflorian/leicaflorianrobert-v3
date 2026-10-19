@@ -372,6 +372,9 @@ const OBSOLETE = ['page_home', 'page_about', 'page_projects', 'page_contact', 'p
 /** Fields from earlier schemas, removed by setup: `[collection, field]`. */
 const OBSOLETE_FIELDS = [['block_page_header', 'image'], ['block_contact_form', 'image']]
 
+/** Flows replaced by an extension, removed by setup. */
+const OBSOLETE_FLOWS = ['Ricostruisci il sito']
+
 /**
  * The folders of the Data Model and of the content menu, in order. Collections left out stay at
  * the root, after the folders; junctions (translations, sections, gallery files) go under their parent.
@@ -661,6 +664,12 @@ async function groupCollections() {
 
 /** Removes the collections (with their translations) and fields of earlier schemas. */
 async function removeObsolete() {
+  for (const name of OBSOLETE_FLOWS) {
+    const [flow] = await api('GET', `/flows?filter[name][_eq]=${encodeURIComponent(name)}&fields=id`)
+    if (!flow) continue
+    await api('DELETE', `/flows/${flow.id}`)
+    console.log(`- flow «${name}»`)
+  }
   for (const collection of OBSOLETE.flatMap(c => [`${c}_translations`, c])) {
     if (!await exists(collection)) continue
     await api('DELETE', `/collections/${collection}`)
@@ -733,27 +742,6 @@ async function createFlow({name, description, icon, options, operations}) {
 }
 
 async function createFlows() {
-  await createFlow({
-    name: 'Ricostruisci il sito',
-    description: 'Quando cambia un contenuto chiama il webhook di deploy (DEPLOY_WEBHOOK_URL), che rigenera il sito statico.',
-    icon: 'published_with_changes',
-    options: {type: 'action', scope: ['items.create', 'items.update', 'items.delete'], collections: CONTENT_COLLECTIONS},
-    operations: [
-      {
-        key: 'webhook_configurato', name: 'Webhook configurato?', type: 'condition',
-        options: {filter: {$env: {DEPLOY_WEBHOOK_URL: {_nempty: true}}}},
-      },
-      {
-        key: 'deploy', name: 'Deploy', type: 'request',
-        // Coolify's deploy API wants its token (DEPLOY_WEBHOOK_TOKEN)
-        options: {
-          method: 'POST', url: '{{$env.DEPLOY_WEBHOOK_URL}}',
-          headers: [{header: 'Authorization', value: 'Bearer {{$env.DEPLOY_WEBHOOK_TOKEN}}'}],
-        },
-      },
-    ],
-  })
-
   await createFlow({
     name: 'Email per un nuovo messaggio',
     description: 'Manda a CONTACT_EMAIL_TO ogni messaggio arrivato dal form di contatto.',
