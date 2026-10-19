@@ -12,7 +12,14 @@
     "experiment": "È un esperimento: il sito come sarebbe stato negli anni '90. Per vedere quello vero, premi il pulsante in fondo alla pagina.",
     "profession": "Professione: {profession}",
     "toNative": ["detach DOM tree", "init wgpu device", "compile shaders", "render {'@'}120fps"],
-    "toLegacy": ["drop GPU context", "restore document.body", "load Times New Roman", "ready"]
+    "toLegacy": ["drop GPU context", "restore document.body", "load Times New Roman", "ready"],
+    "nudge": {
+      "title": "Rendering nativo disponibile",
+      "text": "Stai guardando la versione anni '90 del sito, e questo motore comincia a dare segni di cedimento. Vuoi passare alla versione moderna?",
+      "hint": "Puoi farlo in qualsiasi momento con il pulsante in fondo alla pagina.",
+      "accept": "▶ Passa a Native",
+      "decline": "Resto in legacy"
+    }
   },
   "lang": {
     "label": "Lingua"

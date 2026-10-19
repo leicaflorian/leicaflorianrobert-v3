@@ -12,7 +12,14 @@
     "experiment": "E un experiment: site-ul așa cum ar fi arătat în anii '90. Ca să-l vezi pe cel adevărat, apasă butonul de la sfârșitul paginii.",
     "profession": "Profesie: {profession}",
     "toNative": ["detach DOM tree", "init wgpu device", "compile shaders", "render {'@'}120fps"],
-    "toLegacy": ["drop GPU context", "restore document.body", "load Times New Roman", "ready"]
+    "toLegacy": ["drop GPU context", "restore document.body", "load Times New Roman", "ready"],
+    "nudge": {
+      "title": "Randare nativă disponibilă",
+      "text": "Te uiți la versiunea din anii '90 a site-ului, iar acest motor începe să cedeze. Vrei să treci la versiunea modernă?",
+      "hint": "Poți face asta oricând cu butonul din josul paginii.",
+      "accept": "▶ Treci la Native",
+      "decline": "Rămân pe legacy"
+    }
   },
   "lang": {
     "label": "Limbă"

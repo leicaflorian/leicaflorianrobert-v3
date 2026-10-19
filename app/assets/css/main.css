@@ -66,6 +66,9 @@
     --color-legacy-frame: #EEEEEE;
     --color-legacy-inset: #808080;
     --color-legacy-note: #555555;
+    --color-legacy-title: #000080;        /* the title bar of a '90s window */
+    --color-legacy-glitch-red: #FF0033;   /* the RGB split of the first-visit glitch */
+    --color-legacy-glitch-cyan: #00E5FF;
 
     /* the printed CV: paper, not screen (the secondary text is --color-dim) */
     --color-paper: #FFFFFF;
@@ -159,6 +162,23 @@
     100% { transform: none; clip-path: inset(0 0 100% 0) }
 }
 /* The visuals in place of images: progress bar, lines appearing. */
+/* The first-visit glitch of legacy mode (legacy/Nudge.vue): the page jumps and splits in red and cyan. */
+@media (prefers-reduced-motion: no-preference) {
+    .legacy-glitch { animation: legacy-glitch .26s steps(1) }
+}
+@keyframes legacy-glitch {
+    0%, 100% { transform: none; filter: none }
+    15% {
+        transform: translate(-6px, 2px) skewX(-4deg);
+        filter: drop-shadow(-3px 0 var(--color-legacy-glitch-red)) drop-shadow(3px 0 var(--color-legacy-glitch-cyan));
+    }
+    35% { transform: translate(5px, -2px); filter: invert(1) }
+    55% {
+        transform: translate(-3px, 0) skewX(3deg);
+        filter: drop-shadow(4px 0 var(--color-legacy-glitch-red)) drop-shadow(-4px 0 var(--color-legacy-glitch-cyan));
+    }
+    75% { transform: translate(2px, 1px); clip-path: inset(20% 0 35% 0) }
+}
 @keyframes bar-fill {
     0% { width: 8% }
     70%, 100% { width: 86% }

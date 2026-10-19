@@ -9,11 +9,13 @@ const [site] = await Promise.all([useSingleton<Site>('site'), usePages()])
 const {toggle} = useEngine()
 const menu = useMenu()
 const pageLink = usePageLink()
+/** Set by LegacyNudge while the page glitches on a first visit. */
+const glitch = ref(false)
 </script>
 
 <template>
   <div data-engine="legacy" class="min-h-screen bg-white scheme-light font-legacy text-[17px] leading-normal text-black">
-    <div class="mx-auto max-w-[880px] px-6 pb-12 pt-8">
+    <div class="mx-auto max-w-[880px] px-6 pb-12 pt-8" :class="{'legacy-glitch': glitch}">
       <h1 class="m-0 mb-1.5 text-[34px] font-bold">{{ site.name }}</h1>
       <p class="m-0 mb-3.5">{{ $t('engine.profession', {profession: site.profession}) }}</p>
       <!-- legacy is what a first visit shows: say it's on purpose, so nobody takes it for a broken site -->
@@ -40,5 +42,6 @@ const pageLink = usePageLink()
         <p class="m-0 text-sm"><LegacyLink :href="pageLink('privacy')">{{ $t('footer.privacy') }}</LegacyLink></p>
       </div>
     </div>
+    <LegacyNudge v-model="glitch"/>
   </div>
 </template>
