@@ -18,7 +18,9 @@
       "text": "Te uiți la versiunea din anii '90 a site-ului, iar acest motor începe să cedeze. Vrei să treci la versiunea modernă?",
       "hint": "Poți face asta oricând cu butonul din josul paginii.",
       "accept": "▶ Treci la Native",
-      "decline": "Rămân pe legacy"
+      "decline": "Rămân pe legacy",
+      "glitchOn": "↺ Pornește glitch-ul",
+      "glitchOff": "■ Oprește glitch-ul"
     }
   },
   "lang": {

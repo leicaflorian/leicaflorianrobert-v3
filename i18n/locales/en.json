@@ -18,7 +18,9 @@
       "text": "You're looking at the '90s version of the site, and this engine is starting to crack. Do you want to switch to the modern one?",
       "hint": "You can do it at any time with the button at the bottom of the page.",
       "accept": "▶ Switch to Native",
-      "decline": "Stay on legacy"
+      "decline": "Stay on legacy",
+      "glitchOn": "↺ Turn the glitch on",
+      "glitchOff": "■ Turn the glitch off"
     }
   },
   "lang": {

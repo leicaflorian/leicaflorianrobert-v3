@@ -1,7 +1,8 @@
 <!--
   On a first visit the legacy page glitches every few seconds, and after a while a '90s
   dialog invites the visitor to switch to native. Either answer is saved as the engine choice
-  (useEngine), so the nudge never comes back. Client only: the generated HTML doesn't change.
+  (useEngine), so the nudge never comes back, unless the visitor turns the glitch back on
+  (`toggle`, the button at the bottom of the layout). Client only: the generated HTML doesn't change.
 -->
 <script setup lang="ts">
 import {ENGINE_STORAGE_KEY} from '~/composables/useEngine'
@@ -20,6 +21,9 @@ const glitch = defineModel<boolean>({default: false})
 const {set, toggle} = useEngine()
 const dialog = useTemplateRef<HTMLDialogElement>('dialog')
 const timers: ReturnType<typeof setTimeout>[] = []
+/** Glitches or dialog in progress. */
+const running = ref(false)
+const mounted = ref(false)
 
 /** The visitor already chose a mode, here or with the engine button. */
 function decided() {
@@ -34,6 +38,7 @@ function stop() {
   timers.forEach(clearTimeout)
   timers.length = 0
   glitch.value = false
+  running.value = false
 }
 
 function scheduleGlitch() {
@@ -54,15 +59,41 @@ function choose(native: boolean) {
   else set('legacy')
 }
 
-onMounted(() => {
-  if (decided()) return
+function start() {
+  running.value = true
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) scheduleGlitch()
   timers.push(setTimeout(() => {
     if (decided()) return stop()
     dialog.value?.showModal()
   }, NUDGE_DELAY_MS))
+}
+
+/**
+ * Off: like answering «stay on legacy». On: forgets the saved mode and runs the nudge
+ * again, as on a first visit.
+ */
+function toggleGlitch() {
+  if (running.value) return choose(false)
+  try {
+    localStorage.removeItem(ENGINE_STORAGE_KEY)
+  } catch {
+    // without storage nothing was saved anyway
+  }
+  start()
+}
+
+onMounted(() => {
+  mounted.value = true
+  if (!decided()) start()
 })
 onBeforeUnmount(stop)
+
+defineExpose({
+  toggle: toggleGlitch,
+  running: readonly(running),
+  /** The layout shows the glitch button only on the client, where the state is known. */
+  mounted: readonly(mounted),
+})
 </script>
 
 <template>

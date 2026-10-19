@@ -18,7 +18,9 @@
       "text": "Stai guardando la versione anni '90 del sito, e questo motore comincia a dare segni di cedimento. Vuoi passare alla versione moderna?",
       "hint": "Puoi farlo in qualsiasi momento con il pulsante in fondo alla pagina.",
       "accept": "▶ Passa a Native",
-      "decline": "Resto in legacy"
+      "decline": "Resto in legacy",
+      "glitchOn": "↺ Attiva il glitch",
+      "glitchOff": "■ Disattiva il glitch"
     }
   },
   "lang": {

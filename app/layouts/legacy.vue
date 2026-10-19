@@ -11,6 +11,7 @@ const menu = useMenu()
 const pageLink = usePageLink()
 /** Set by LegacyNudge while the page glitches on a first visit. */
 const glitch = ref(false)
+const nudge = useTemplateRef('nudge')
 </script>
 
 <template>
@@ -38,10 +39,18 @@ const glitch = ref(false)
         >
           {{ $t('engine.activate') }}
         </button>
+        <button
+          v-if="nudge?.mounted"
+          type="button"
+          class="cursor-pointer border-2 border-legacy-light border-r-legacy-shadow border-b-legacy-shadow bg-legacy-face px-3 py-1 font-legacy-mono text-xs text-black active:border-legacy-shadow active:border-r-legacy-light active:border-b-legacy-light"
+          @click="nudge.toggle()"
+        >
+          {{ $t(nudge.running ? 'engine.nudge.glitchOff' : 'engine.nudge.glitchOn') }}
+        </button>
         <p class="m-0 text-sm text-legacy-note">{{ $t('engine.optimized') }}</p>
         <p class="m-0 text-sm"><LegacyLink :href="pageLink('privacy')">{{ $t('footer.privacy') }}</LegacyLink></p>
       </div>
     </div>
-    <LegacyNudge v-model="glitch"/>
+    <LegacyNudge ref="nudge" v-model="glitch"/>
   </div>
 </template>
