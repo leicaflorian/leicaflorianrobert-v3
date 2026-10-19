@@ -372,7 +372,8 @@ const OBSOLETE = ['page_home', 'page_about', 'page_projects', 'page_contact', 'p
 /** Fields from earlier schemas, removed by setup: `[collection, field]`. */
 const OBSOLETE_FIELDS = [['block_page_header', 'image'], ['block_contact_form', 'image']]
 
-/** Flows replaced by an extension, removed by setup. */
+/** Flows from earlier setups, removed by setup. */
+// the automatic rebuild, once per saved collection: replaced by the «Pubblica il sito» button
 const OBSOLETE_FLOWS = ['Ricostruisci il sito']
 
 /**
@@ -705,7 +706,7 @@ async function grantPublicRead() {
   }
 }
 
-async function createFlow({name, description, icon, options, operations}) {
+async function createFlow({name, description, icon, trigger = 'event', options, operations}) {
   const [existing] = await api('GET', `/flows?filter[name][_eq]=${encodeURIComponent(name)}`)
   if (existing) {
     // new collections must trigger the flow too
@@ -726,7 +727,7 @@ async function createFlow({name, description, icon, options, operations}) {
   }
 
   const flow = await api('POST', '/flows', {
-    name, description, icon, status: 'active', trigger: 'event', accountability: 'all', options,
+    name, description, icon, status: 'active', trigger, accountability: 'all', options,
   })
 
   // operations are created from the last one, since each points to the next (`resolve`)
@@ -742,6 +743,36 @@ async function createFlow({name, description, icon, options, operations}) {
 }
 
 async function createFlows() {
+  // A button, not a rebuild on every change: a round of edits ends with one deploy, when the
+  // editor says so. It shows in the sidebar of the main collections, with no item to select.
+  await createFlow({
+    name: 'Pubblica il sito',
+    description: 'Ricostruisce il sito con i contenuti attuali: si lancia a mano, quando le modifiche sono finite. Chiama il webhook di deploy (DEPLOY_WEBHOOK_URL).',
+    icon: 'rocket_launch',
+    trigger: 'manual',
+    options: {
+      collections: COLLECTIONS.map(c => c.collection).filter(c => c !== 'messages'),
+      location: 'both',
+      requireSelection: false,
+      requireConfirmation: true,
+      confirmationDescription: 'Il sito verrà ricostruito con i contenuti attuali. Ci vogliono alcuni minuti; intanto resta online la versione di prima.',
+    },
+    operations: [
+      {
+        key: 'webhook_configurato', name: 'Webhook configurato?', type: 'condition',
+        options: {filter: {$env: {DEPLOY_WEBHOOK_URL: {_nempty: true}}}},
+      },
+      {
+        key: 'deploy', name: 'Deploy', type: 'request',
+        // Coolify's deploy API wants its token (DEPLOY_WEBHOOK_TOKEN)
+        options: {
+          method: 'POST', url: '{{$env.DEPLOY_WEBHOOK_URL}}',
+          headers: [{header: 'Authorization', value: 'Bearer {{$env.DEPLOY_WEBHOOK_TOKEN}}'}],
+        },
+      },
+    ],
+  })
+
   await createFlow({
     name: 'Email per un nuovo messaggio',
     description: 'Manda a CONTACT_EMAIL_TO ogni messaggio arrivato dal form di contatto.',
