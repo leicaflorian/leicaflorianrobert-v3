@@ -13,11 +13,8 @@ COPY . .
 ARG NUXT_PUBLIC_DIRECTUS_URL
 ARG NUXT_PUBLIC_RECAPTCHA_SITE_KEY
 ARG NUXT_PUBLIC_SITE_URL
-# A content change rebuilds the same commit: without this the generate layer would come from
-# Docker's cache, with the old content. The random string (public in Directus) changes on every
-# build, so only the layers above stay cached.
-ADD ${NUXT_PUBLIC_DIRECTUS_URL}/utils/random/string?length=32 /tmp/cache-bust
-RUN npm run generate
+# a push restarts Directus too: wait for it before reading the content
+RUN node scripts/wait-directus.mjs && npm run generate
 
 FROM nginx:1.29-alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
