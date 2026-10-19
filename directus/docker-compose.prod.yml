@@ -44,5 +44,33 @@ services:
       timeout: 5s
       retries: 10
 
+  # Backup of the uploaded files, which Coolify doesn't back up (it does only databases): at start
+  # and then every 24 hours, the originals (not the `__` resized copies, which Directus redoes)
+  # go to the Space. Files deleted or replaced in Directus are kept in deleted/<date>.
+  # SPACES_KEY and SPACES_SECRET: a Spaces access key, set in Coolify.
+  uploads-backup:
+    image: rclone/rclone:1.68.2
+    volumes:
+      - uploads:/uploads:ro
+    environment:
+      RCLONE_CONFIG_SPACE_TYPE: s3
+      RCLONE_CONFIG_SPACE_PROVIDER: DigitalOcean
+      RCLONE_CONFIG_SPACE_ENDPOINT: ams3.digitaloceanspaces.com
+      RCLONE_CONFIG_SPACE_ACCESS_KEY_ID: ${SPACES_KEY:-}
+      RCLONE_CONFIG_SPACE_SECRET_ACCESS_KEY: ${SPACES_SECRET:-}
+      TARGET: ${UPLOADS_BACKUP_TARGET:-space:family-manager/backups/directus-v3/uploads}
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        while true; do
+          if [ -z "$$RCLONE_CONFIG_SPACE_ACCESS_KEY_ID" ]; then
+            echo "uploads backup: SPACES_KEY is not set"
+          else
+            rclone sync /uploads "$$TARGET/current" --exclude "*__*" --backup-dir "$$TARGET/deleted/$$(date +%F)" --stats-one-line -v \
+              && echo "uploads backup: done $$(date)" || echo "uploads backup: FAILED $$(date)"
+          fi
+          sleep 86400
+        done
+
 volumes:
   uploads:
