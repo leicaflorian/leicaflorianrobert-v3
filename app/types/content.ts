@@ -62,6 +62,8 @@ export interface Project {
   visual: ProjectVisual | null
   year: number | null
   cover: FileId
+  /** The case study's preview in social cards; if empty, `cover`, then `image`. */
+  og_image: FileId
   // translated
   name: string
   note: string | null
@@ -152,6 +154,8 @@ export interface Page {
   key: string
   in_menu: boolean
   children: PageChildren
+  /** The preview in social cards; if empty, the site's `/og.png`. */
+  og_image: FileId
   sections: Section[]
   // translated
   /** The path without the leading slash; empty for the home page. */

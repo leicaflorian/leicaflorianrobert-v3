@@ -96,6 +96,7 @@ const COLLECTIONS = [
       string('key', 'Nome per il codice, da non cambiare: home, about, projects, contact', {width: 'half', required: true}),
       boolean('in_menu', 'Nel menu', true),
       choice('children', 'Le pagine di dettaglio sotto questa: /progetti/<slug> apre il case study', [['none', 'Nessuna'], ['projects', 'Case study dei progetti']], 'none'),
+      image('og_image', 'Anteprima nei social e nelle chat (1200×630); se vuota, l\'immagine del sito'),
     ],
     translations: [
       string('slug', 'Percorso, senza / iniziale: «chi-sono». Vuoto per la Home'),
@@ -128,6 +129,7 @@ const COLLECTIONS = [
       choice('visual', 'Illustrazione disegnata nel sito al posto dello screenshot, per i progetti che non si possono mostrare', [['banking', 'Area clienti (banca online)']], null),
       integer('year', 'Anno: nei case study e per l\'ordine del grafo nella pagina Progetti'),
       image('cover', 'Case study: immagine grande sotto il titolo; se vuota, lo screenshot'),
+      image('og_image', 'Case study: anteprima nei social e nelle chat (1200×630); se vuota, la copertina, poi lo screenshot'),
     ],
     translations: [
       string('name', 'Nome'),

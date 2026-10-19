@@ -9325,6 +9325,49 @@ fields:
       validation: null
       validation_message: null
       width: full
+  - collection: pages
+    field: og_image
+    type: uuid
+    meta:
+      collection: pages
+      conditions: null
+      display: null
+      display_options: null
+      field: og_image
+      group: null
+      hidden: false
+      interface: file-image
+      note: >-
+        Anteprima nei social e nelle chat (1200×630); se vuota, l'immagine del
+        sito
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 8
+      special:
+        - file
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: og_image
+      table: pages
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_files
+      foreign_key_column: id
   - collection: pages_sections
     field: id
     type: integer
@@ -10674,6 +10717,49 @@ fields:
       has_auto_increment: false
       foreign_key_table: null
       foreign_key_column: null
+  - collection: projects
+    field: og_image
+    type: uuid
+    meta:
+      collection: projects
+      conditions: null
+      display: null
+      display_options: null
+      field: og_image
+      group: null
+      hidden: false
+      interface: file-image
+      note: >-
+        Case study: anteprima nei social e nelle chat (1200×630); se vuota, la
+        copertina, poi lo screenshot
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 22
+      special:
+        - file
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: og_image
+      table: projects
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_files
+      foreign_key_column: id
   - collection: projects_sections
     field: id
     type: integer
@@ -13930,6 +14016,27 @@ relations:
       constraint_name: experiences_translations_languages_code_foreign
       on_update: NO ACTION
       on_delete: SET NULL
+  - collection: pages
+    field: og_image
+    related_collection: directus_files
+    meta:
+      junction_field: null
+      many_collection: pages
+      many_field: og_image
+      one_allowed_collections: null
+      one_collection: directus_files
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: pages
+      column: og_image
+      foreign_key_table: directus_files
+      foreign_key_column: id
+      constraint_name: pages_og_image_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
   - collection: pages_sections
     field: item
     related_collection: null
@@ -14081,6 +14188,27 @@ relations:
       foreign_key_table: directus_files
       foreign_key_column: id
       constraint_name: projects_logo_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: projects
+    field: og_image
+    related_collection: directus_files
+    meta:
+      junction_field: null
+      many_collection: projects
+      many_field: og_image
+      one_allowed_collections: null
+      one_collection: directus_files
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: projects
+      column: og_image
+      foreign_key_table: directus_files
+      foreign_key_column: id
+      constraint_name: projects_og_image_foreign
       on_update: NO ACTION
       on_delete: SET NULL
   - collection: projects_sections
