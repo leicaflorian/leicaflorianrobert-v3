@@ -37,7 +37,7 @@ The Directus admin panel is at http://localhost:8055, with the credentials from 
 | Command | What it does |
 | --- | --- |
 | `npm run dev` | The site in development |
-| `npm run generate` | The static site in `.output/public` (Directus must be reachable: content is read at build time), then the CV PDFs (`scripts/cv-pdf.mjs`) |
+| `npm run generate` | The static site in `.output/public` (Directus must be reachable: content is read at build time), then `sitemap.xml` and `robots.txt` (`scripts/seo-files.mjs`) and the CV PDFs (`scripts/cv-pdf.mjs`) |
 | `npm run cv:pdf` | Prints the CV PDFs again from an existing `.output/public` |
 | `npm run typecheck` | Type checking |
 | `npm run lint` / `lint:fix` | ESLint (code and formatting); `lint:fix` fixes what it can |
@@ -97,6 +97,8 @@ design/                   the Claude Design export, for reference only
 **Languages.** Every collection with texts has its own `<name>_translations` in Directus. The site downloads all translations and shows the current language's one; an empty field falls back to Italian.
 
 **Modes.** The generated site is always in legacy mode, so the HTML is the same for everyone and complete for search engines. In the browser, after loading, it switches to the saved mode; a script in the page head hides the legacy page from visitors who chose native, to avoid a flash.
+
+**Sitemap and robots.** After `nuxt generate`, `scripts/seo-files.mjs` reads the generated pages and writes `sitemap.xml` (each page at its canonical URL, with its translations as `hreflang` links; `noindex` pages such as the CV are left out) and `robots.txt`, which points to it. Both use the i18n `baseUrl`, the address of the canonical links. They exist only in the generated site, not in `npm run dev`.
 
 **Native entrance animations.** In native, titles type themselves in and paragraphs and cards fade in, once, the first time they come into view; legacy stays static. Page and section titles get it through `UiPageTitle` / `UiSectionTitle`, which render `UiTyped` (`useTypewriter`); for any other title use `<UiTyped as="h2">`. For text and cards add the `v-reveal` directive (`app/plugins/reveal.ts`), or `v-reveal.stagger` on a container to reveal its direct children one after the other. Use them in new native blocks. Both wait for the engine boot to end and are off with `prefers-reduced-motion`.
 

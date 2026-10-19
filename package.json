@@ -5,7 +5,7 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "generate": "nuxt generate && node scripts/cv-pdf.mjs",
+    "generate": "nuxt generate && node scripts/seo-files.mjs && node scripts/cv-pdf.mjs",
     "cv:pdf": "node scripts/cv-pdf.mjs",
     "preview": "nuxt preview",
     "directus:up": "docker compose -f directus/docker-compose.yml up -d",
