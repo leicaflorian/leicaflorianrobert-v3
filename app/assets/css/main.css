@@ -161,7 +161,6 @@
     75% { transform: translateX(2px); clip-path: inset(75% 0 0 0) }
     100% { transform: none; clip-path: inset(0 0 100% 0) }
 }
-/* The visuals in place of images: progress bar, lines appearing. */
 /* The first-visit glitch of legacy mode (legacy/Nudge.vue): the page jumps and splits in red and cyan. */
 @media (prefers-reduced-motion: no-preference) {
     .legacy-glitch { animation: legacy-glitch .26s steps(1) }
@@ -179,6 +178,7 @@
     }
     75% { transform: translate(2px, 1px); clip-path: inset(20% 0 35% 0) }
 }
+/* The visuals in place of images: progress bar, lines appearing. */
 @keyframes bar-fill {
     0% { width: 8% }
     70%, 100% { width: 86% }
