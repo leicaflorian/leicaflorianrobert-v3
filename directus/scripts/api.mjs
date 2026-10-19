@@ -62,3 +62,13 @@ export async function waitForDirectus(seconds = 120) {
   }
   throw new Error(`Directus is not responding at ${DIRECTUS_URL}`)
 }
+
+const MIME_TYPES = {png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', webp: 'image/webp', svg: 'image/svg+xml', gif: 'image/gif'}
+
+/**
+ * The media type of a file, from its extension. Uploads need it: without it Directus stores
+ * `application/octet-stream`, serves the file as a download and doesn't resize or convert it.
+ */
+export function mimeType(name) {
+  return MIME_TYPES[name.split('.').pop().toLowerCase()] ?? 'application/octet-stream'
+}

@@ -5,7 +5,7 @@
 //   node directus/scripts/seed.mjs
 
 import {readFile} from 'node:fs/promises'
-import {api, authToken, DIRECTUS_URL, waitForDirectus} from './api.mjs'
+import {api, authToken, DIRECTUS_URL, mimeType, waitForDirectus} from './api.mjs'
 
 /** From `{it: {...}, en: {...}}` to Directus translation rows. */
 const tr = byLocale => Object.entries(byLocale).map(([languages_code, fields]) => ({languages_code, ...fields}))
@@ -3192,7 +3192,7 @@ async function upload(name) {
 
   const form = new FormData()
   form.append('title', name.replace(/\.\w+$/, ''))
-  form.append('file', new Blob([await readFile(new URL(`../seed-files/${name}`, import.meta.url))]), name)
+  form.append('file', new Blob([await readFile(new URL(`../seed-files/${name}`, import.meta.url))], {type: mimeType(name)}), name)
   const response = await fetch(`${DIRECTUS_URL}/files`, {
     method: 'POST',
     headers: {Authorization: `Bearer ${await authToken()}`},
