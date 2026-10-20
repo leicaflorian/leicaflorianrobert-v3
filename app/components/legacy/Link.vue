@@ -1,6 +1,9 @@
-<!-- A "'90s" link: blue and underlined; purple if it points to the current page. -->
+<!--
+  A "'90s" link: blue and underlined; purple if it points to the current page.
+  Links to other sites open in a new tab, as in native.
+-->
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   /** A page key (`home`, `about`…): the link points to the current language's version. */
   to?: string
   href?: string
@@ -8,6 +11,7 @@ defineProps<{
 }>()
 
 const pageLink = usePageLink()
+const external = computed(() => /^https?:\/\//.test(props.href ?? ''))
 </script>
 
 <template>
@@ -19,7 +23,13 @@ const pageLink = usePageLink()
   >
     <slot/>
   </NuxtLink>
-  <a v-else :href="href" class="text-legacy-link underline hover:text-legacy-link hover:underline">
+  <a
+    v-else
+    :href="href"
+    :target="external ? '_blank' : undefined"
+    :rel="external ? 'noopener' : undefined"
+    class="text-legacy-link underline hover:text-legacy-link hover:underline"
+  >
     <slot/>
   </a>
 </template>
