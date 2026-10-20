@@ -72,6 +72,7 @@ app/
     useTypewriter.ts      native titles typed in as they come into view (UiTyped)
   plugins/reveal.ts       v-reveal: native paragraphs and cards fade in as they come into view
   utils/brief.ts          the form's project brief options (type, budget, timeline)
+  utils/recaptcha.ts      the Google links of the reCAPTCHA notice under both forms
   assets/css/main.css     the design's colors and fonts as Tailwind tokens
 i18n/locales/             interface texts (menu, labels, buttons) in it, en, ro
 directus/
@@ -113,10 +114,10 @@ Site (`.env`):
 | Variable | |
 | --- | --- |
 | `NUXT_PUBLIC_DIRECTUS_URL` | The Directus URL: content at generation time, images and form in the browser |
-| `NUXT_PUBLIC_RECAPTCHA_SITE_KEY` | The reCAPTCHA v3 public key; if empty, the form is sent without it |
+| `NUXT_PUBLIC_RECAPTCHA_SITE_KEY` | The reCAPTCHA v3 public key; if empty, the form is sent without it. Google's badge is hidden (`.grecaptcha-badge` in `main.css`, with `visibility`, not `display: none`, which stops reCAPTCHA), which Google allows only while both forms show the `form.recaptcha` notice with its links: keep it |
 | `NUXT_PUBLIC_SITE_URL` | The site's own URL, shown as the website in the CV; defaults to `https://leicaflorianrobert.dev` |
 
-Directus (`directus/.env`, see `directus/.env.example`): `SECRET`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `RECAPTCHA_SECRET`, `RECAPTCHA_MIN_SCORE`, `CONTACT_EMAIL_TO`, `DEPLOY_WEBHOOK_URL`, `DEPLOY_WEBHOOK_TOKEN`, `EMAIL_*`.
+Directus (`directus/.env`, see `directus/.env.example`): `SECRET`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `RECAPTCHA_SECRET` (if empty, `/contact` accepts every message without checking the token, and says nothing; a `POST` with a fake token answering 400 «reCAPTCHA verification failed.» shows the check is on), `RECAPTCHA_MIN_SCORE`, `CONTACT_EMAIL_TO`, `DEPLOY_WEBHOOK_URL`, `DEPLOY_WEBHOOK_TOKEN`, `EMAIL_*`.
 
 The schema has over 25 collections, the limit without a license: activate the Directus license from the admin panel (it asks for it once the limit is reached) before running `directus:setup` or applying the snapshot.
 
