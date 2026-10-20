@@ -290,6 +290,10 @@ html:is([data-engine-mode="native"], .engine-native-pending) .cky-preference-cen
     font-family: var(--font-mono) !important;
 }
 html:is([data-engine-mode="native"], .engine-native-pending) .cky-preference-center { overflow: hidden }
+/* the preferences sit in CookieYes's white, 6px-rounded .cky-modal: it would show at the corners */
+html[data-engine-mode] .cky-modal { background: transparent !important }
+html:is([data-engine-mode="native"], .engine-native-pending) .cky-modal { border-radius: 14px !important }
+html[data-engine-mode="legacy"]:not(.engine-native-pending) .cky-modal { border-radius: 0 !important }
 html:is([data-engine-mode="native"], .engine-native-pending) .cky-consent-bar *,
 html:is([data-engine-mode="native"], .engine-native-pending) .cky-preference-center * {
     border-color: var(--color-line-card) !important;
