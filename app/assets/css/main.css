@@ -72,7 +72,7 @@
     --color-legacy-crt: #000000;          /* the CRT tube: bezel, scan lines, vignette */
     --color-legacy-crt-glass: #1B1E21;    /* the tube switched off */
     --color-legacy-crt-beam: #DCEBFF;     /* the power-on beam */
-    --color-legacy-crt-glow: #5C8DFF;     /* its blue halo */
+    --color-legacy-crt-glow: #3F7FC4;     /* its blue halo */
     --color-legacy-crt-lamp: #FFC98A;     /* the warm lamp reflected on the glass */
 
     /* the printed CV: paper, not screen (the secondary text is --color-dim) */
@@ -216,31 +216,41 @@
     background:
         radial-gradient(ellipse 3% 1.8% at 50% 9%, color-mix(in srgb, var(--color-legacy-light) 45%, transparent), transparent),
         radial-gradient(ellipse 12% 5% at 50% 9%, color-mix(in srgb, var(--color-legacy-light) 8%, transparent), transparent),
-        radial-gradient(circle at 76% 76%, color-mix(in srgb, var(--color-legacy-crt-lamp) 75%, transparent), transparent 2.2vmin),
-        radial-gradient(ellipse 5% 8% at 76% 78%, color-mix(in srgb, var(--color-legacy-crt-lamp) 12%, transparent), transparent),
+        radial-gradient(circle at 76% 76%, color-mix(in srgb, var(--color-legacy-crt-lamp) 18%, transparent), transparent 2.2vmin),
+        radial-gradient(ellipse 5% 8% at 76% 78%, color-mix(in srgb, var(--color-legacy-crt-lamp) 4%, transparent), transparent),
         radial-gradient(circle at 86% 38%, color-mix(in srgb, var(--color-legacy-light) 14%, transparent), transparent .8vmin),
         radial-gradient(ellipse 60% 55% at 50% 45%, color-mix(in srgb, var(--color-legacy-light) 4%, transparent), transparent),
         radial-gradient(ellipse 60% 6% at 50% 0%, color-mix(in srgb, var(--color-legacy-light) 10%, transparent), transparent);
 }
-/* Whoever sits in front of the dark glass: only there, a dark ghost would grey the lit page. */
+/* Only on the dark glass: whoever sits in front of it (a dark ghost would grey the lit page)
+   and the lamp at full strength (on the lit page it is just a hint, above). */
 .legacy-crt-viewer {
     background:
+        radial-gradient(circle at 76% 76%, color-mix(in srgb, var(--color-legacy-crt-lamp) 70%, transparent), transparent 2.2vmin),
+        radial-gradient(ellipse 5% 8% at 76% 78%, color-mix(in srgb, var(--color-legacy-crt-lamp) 10%, transparent), transparent),
         radial-gradient(ellipse 4% 7% at 48% 30%, color-mix(in srgb, var(--color-legacy-crt) 35%, transparent), transparent),
         radial-gradient(ellipse 11% 38% at 48% 66%, color-mix(in srgb, var(--color-legacy-crt) 35%, transparent), transparent);
 }
 /* Power-on (legacy/Crt.vue and the layout): the glass stays dark for a moment, a dot lights up
-   in the middle, stretches into a line across the tube and thickens; then the glass fades and the
-   page itself opens out of the line, overexposed, and settles. `--crt-delay` (layout) holds it
-   back while the engine boot overlay still covers the page. Without motion there is no power-on. */
-.legacy-crt-power { display: none }
+   in the middle, stretches into a line across the tube and thickens; then the glass fades, the
+   beam opens into a grainy blue screen, like a channel not quite tuned, and the page comes out of
+   it overexposed and settles. `--crt-delay` (layout) holds it back while the engine boot overlay
+   still covers the page. Without motion there is no power-on. */
+.legacy-crt-boot { display: none }
 @media (prefers-reduced-motion: no-preference) {
-    .legacy-crt-power {
+    .legacy-crt-boot {
         display: block;
-        animation: legacy-crt-power 2.2s ease-in var(--crt-delay, 0s) both;
+        animation: legacy-crt-boot 2.2s var(--crt-delay, 0s) both;
     }
 
+    .legacy-crt-power { animation: legacy-crt-power 2.2s ease-in var(--crt-delay, 0s) both }
     .legacy-crt-beam { animation: legacy-crt-beam 2.2s ease-out var(--crt-delay, 0s) both }
     .legacy-crt-flare { animation: legacy-crt-flare 2.2s ease-out var(--crt-delay, 0s) both }
+    .legacy-crt-noise {
+        animation:
+            legacy-crt-noise 2.2s var(--crt-delay, 0s) both,
+            legacy-crt-static .24s steps(1) infinite;
+    }
 
     .legacy-crt-on {
         transform-origin: 50% 50vh;
@@ -250,9 +260,11 @@
 }
 .legacy-crt-beam {
     background: linear-gradient(transparent,
-        color-mix(in srgb, var(--color-legacy-crt-glow) 35%, transparent) 30%,
-        var(--color-legacy-crt-beam) 47%, var(--color-legacy-light) 50%, var(--color-legacy-crt-beam) 53%,
-        color-mix(in srgb, var(--color-legacy-crt-glow) 35%, transparent) 70%,
+        color-mix(in srgb, var(--color-legacy-crt-glow) 55%, transparent) 15%,
+        var(--color-legacy-crt-glow) 32%,
+        var(--color-legacy-crt-beam) 46%, var(--color-legacy-light) 50%, var(--color-legacy-crt-beam) 54%,
+        var(--color-legacy-crt-glow) 68%,
+        color-mix(in srgb, var(--color-legacy-crt-glow) 55%, transparent) 85%,
         transparent);
 }
 .legacy-crt-flare {
@@ -260,22 +272,45 @@
         color-mix(in srgb, var(--color-legacy-crt-beam) 60%, transparent) 25%,
         color-mix(in srgb, var(--color-legacy-crt-glow) 25%, transparent) 55%, transparent);
 }
+/* Static: grey noise laid over in `overlay`, so it lightens and darkens what is under it. */
+.legacy-crt-noise {
+    inset: -300px;
+    mix-blend-mode: overlay;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1.4 1.4 1.4 0 -1.6 1.4 1.4 1.4 0 -1.6 1.4 1.4 1.4 0 -1.6 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@keyframes legacy-crt-boot {
+    0%, 99% { visibility: visible }
+    100% { visibility: hidden }
+}
 @keyframes legacy-crt-power {
-    0%, 55% { opacity: 1; visibility: visible }
-    66%, 100% { opacity: 0; visibility: hidden }
+    0%, 55% { opacity: 1 }
+    64%, 100% { opacity: 0 }
 }
 @keyframes legacy-crt-beam {
     0%, 11% { transform: scale(0, .003); opacity: 0 }
     13% { transform: scale(.02, .003); opacity: 1 }
     32% { transform: scale(1, .003) }
     55% { transform: scale(1, .03) }
-    66%, 100% { transform: scale(1, .4); opacity: 0 }
+    70% { transform: scale(1, 2.6); opacity: .9 }
+    84%, 100% { transform: scale(1, 3); opacity: 0 }
 }
 @keyframes legacy-crt-flare {
     0%, 11% { transform: scale(0); opacity: 0 }
     15% { transform: scale(1); opacity: 1 }
     50% { opacity: .8 }
     62%, 100% { transform: scale(1.4); opacity: 0 }
+}
+@keyframes legacy-crt-noise {
+    0%, 20% { opacity: 0 }
+    55% { opacity: .35 }
+    70% { opacity: .7 }
+    88%, 100% { opacity: 0 }
+}
+@keyframes legacy-crt-static {
+    0% { translate: 0 0 }
+    25% { translate: -113px 61px }
+    50% { translate: 77px -141px }
+    75% { translate: -179px -37px }
 }
 /* The page: a bright line under the beam, then the picture opens and burns out to normal. */
 @keyframes legacy-crt-on {
