@@ -7,10 +7,13 @@ export default defineNuxtPlugin((nuxtApp) => {
   if (!useRuntimeConfig().public.cookieyesId) return
   const state = useConsentState()
 
-  function read() {
+  /** An update event carries the accepted categories itself: trusted over a store read. */
+  function read(event?: Event) {
+    const accepted = (event as CustomEvent<{accepted?: string[]} | undefined> | undefined)?.detail?.accepted
     const consent = window.getCkyConsent?.()
-    if (!consent) return
-    state.value = {ready: true, granted: consent.categories[RECAPTCHA_CONSENT_CATEGORY] === true}
+    if (!accepted && !consent) return
+    const granted = accepted ? accepted.includes(RECAPTCHA_CONSENT_CATEGORY) : consent!.categories[RECAPTCHA_CONSENT_CATEGORY] === true
+    state.value = {ready: true, granted}
   }
 
   // the hook fires again on every page change: listen once
