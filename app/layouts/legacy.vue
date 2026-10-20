@@ -6,22 +6,16 @@
 import type {Site} from '~/types/content'
 
 const [site] = await Promise.all([useSingleton<Site>('site'), usePages()])
-const {toggle, bootTarget} = useEngine()
+const {toggle} = useEngine()
 const menu = useMenu()
 const pageLink = usePageLink()
 /** Set by LegacyNudge while the page glitches on a first visit. */
 const glitch = ref(false)
 const nudge = useTemplateRef('nudge')
-/** Coming from native, the monitor switches on once the boot overlay starts fading out. */
-const crtDelay = bootTarget.value ? '.45s' : undefined
 </script>
 
 <template>
-  <div
-    data-engine="legacy"
-    class="legacy-crt legacy-crt-on min-h-screen bg-white scheme-light font-legacy text-[17px] leading-normal text-black"
-    :style="crtDelay && {'--crt-delay': crtDelay}"
-  >
+  <div data-engine="legacy" class="legacy-crt min-h-screen bg-white scheme-light font-legacy text-[17px] leading-normal text-black">
     <div class="mx-auto max-w-[880px] px-6 pb-12 pt-8" :class="{'legacy-glitch': glitch}">
       <h1 class="m-0 mb-1.5 text-[34px] font-bold">{{ site.name }}</h1>
       <p class="m-0 mb-3.5">{{ $t('engine.profession', {profession: site.profession}) }}</p>
