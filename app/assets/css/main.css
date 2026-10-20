@@ -73,6 +73,7 @@
     --color-legacy-crt-glass: #1B1E21;    /* the tube switched off */
     --color-legacy-crt-beam: #DCEBFF;     /* the power-on beam */
     --color-legacy-crt-glow: #5C8DFF;     /* its blue halo */
+    --color-legacy-crt-lamp: #FFC98A;     /* the warm lamp reflected on the glass */
 
     /* the printed CV: paper, not screen (the secondary text is --color-dim) */
     --color-paper: #FFFFFF;
@@ -207,18 +208,31 @@
         inset 0 0 12vmin color-mix(in srgb, var(--color-legacy-crt) 45%, transparent),
         inset 0 0 2px 1px color-mix(in srgb, var(--color-legacy-crt) 60%, transparent);
 }
-/* The glass reflects the room: a soft window in the upper left and a sheen along the top. */
+/* The room reflected on the glass: a ceiling light, a warm lamp, a faint spot, the bulge of
+   the tube. Lights only add (`screen`), so on the white page they wash out, as on a real CRT. */
 .legacy-crt-glare {
     border-radius: 3vmin / 4vmin;
+    mix-blend-mode: screen;
     background:
-        radial-gradient(ellipse 38% 26% at 20% 14%, color-mix(in srgb, var(--color-legacy-light) 22%, transparent), transparent 70%),
-        radial-gradient(ellipse 70% 10% at 50% 0%, color-mix(in srgb, var(--color-legacy-light) 14%, transparent), transparent),
-        linear-gradient(155deg, color-mix(in srgb, var(--color-legacy-light) 8%, transparent), transparent 40%);
+        radial-gradient(ellipse 3% 1.8% at 50% 9%, color-mix(in srgb, var(--color-legacy-light) 45%, transparent), transparent),
+        radial-gradient(ellipse 12% 5% at 50% 9%, color-mix(in srgb, var(--color-legacy-light) 8%, transparent), transparent),
+        radial-gradient(circle at 76% 76%, color-mix(in srgb, var(--color-legacy-crt-lamp) 75%, transparent), transparent 2.2vmin),
+        radial-gradient(ellipse 5% 8% at 76% 78%, color-mix(in srgb, var(--color-legacy-crt-lamp) 12%, transparent), transparent),
+        radial-gradient(circle at 86% 38%, color-mix(in srgb, var(--color-legacy-light) 14%, transparent), transparent .8vmin),
+        radial-gradient(ellipse 60% 55% at 50% 45%, color-mix(in srgb, var(--color-legacy-light) 4%, transparent), transparent),
+        radial-gradient(ellipse 60% 6% at 50% 0%, color-mix(in srgb, var(--color-legacy-light) 10%, transparent), transparent);
+}
+/* Whoever sits in front of the dark glass: only there, a dark ghost would grey the lit page. */
+.legacy-crt-viewer {
+    background:
+        radial-gradient(ellipse 4% 7% at 48% 30%, color-mix(in srgb, var(--color-legacy-crt) 35%, transparent), transparent),
+        radial-gradient(ellipse 11% 38% at 48% 66%, color-mix(in srgb, var(--color-legacy-crt) 35%, transparent), transparent);
 }
 /* Power-on (legacy/Crt.vue and the layout): the glass stays dark for a moment, a dot lights up
    in the middle, stretches into a line across the tube and thickens; then the glass fades and the
    page itself opens out of the line, overexposed, and settles. `--crt-delay` (layout) holds it
    back while the engine boot overlay still covers the page. Without motion there is no power-on. */
+.legacy-crt-power { display: none }
 @media (prefers-reduced-motion: no-preference) {
     .legacy-crt-power {
         display: block;

@@ -7,6 +7,7 @@
 <template>
   <div aria-hidden="true" class="pointer-events-none fixed inset-0 z-50 overflow-hidden">
     <div class="legacy-crt-power absolute inset-0 bg-legacy-crt-glass">
+      <div class="legacy-crt-viewer absolute inset-0"/>
       <div class="legacy-crt-beam absolute inset-0"/>
       <div class="legacy-crt-flare absolute left-1/2 top-1/2 -ml-[24vmin] -mt-[5vmin] h-[10vmin] w-[48vmin]"/>
     </div>
