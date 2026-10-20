@@ -9,7 +9,7 @@ const [site] = await Promise.all([useSingleton<Site>('site'), usePages()])
 const {toggle, bootTarget} = useEngine()
 const menu = useMenu()
 const pageLink = usePageLink()
-const consent = useRecaptchaConsent()
+const consent = useCookieConsent()
 /** Set by LegacyNudge while the page glitches on a first visit. */
 const glitch = ref(false)
 const nudge = useTemplateRef('nudge')

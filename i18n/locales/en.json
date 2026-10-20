@@ -57,13 +57,6 @@
     "recaptcha": "This site is protected by reCAPTCHA and the Google {privacy} and {terms} apply.",
     "recaptchaPrivacy": "Privacy Policy",
     "recaptchaTerms": "Terms of Service",
-    "consent": {
-      "text": "To write to me from here you need the Google reCAPTCHA cookie, which protects the form from spam.",
-      "accept": "Accept and write to me",
-      "manage": "Manage cookies",
-      "email": "Or email me at {email}.",
-      "legacyNote": "I know: in 1999 cookies already existed, but nobody asked for permission. Call it back to the future."
-    },
     "privacy": "I use your data only to reply to you: the details are in the {link}.",
     "privacyLink": "privacy policy",
     "legacy": {

@@ -4,7 +4,7 @@ import type {Site} from '~/types/content'
 defineProps<{site: Site}>()
 
 const pageLink = usePageLink()
-const consent = useRecaptchaConsent()
+const consent = useCookieConsent()
 
 const year = new Date().getFullYear()
 </script>

@@ -188,7 +188,7 @@
 .grecaptcha-badge {
     visibility: hidden;
 }
-/* The CookieYes banner and preferences (consent for reCAPTCHA), redrawn for the active mode:
+/* The CookieYes banner and preferences, redrawn for the active mode:
    CookieYes appends them outside the layout, so the mode comes from <html data-engine-mode>
    (app.vue). That stays legacy until the native boot ends, so while engine-native-pending is
    set (visitors who chose native) the native rules apply. It sets its panel colours as inline
