@@ -55,14 +55,14 @@ The Directus admin panel is at http://localhost:8055, with the credentials from 
 app/
   app.vue                 the current mode's layout and the boot overlay
   layouts/native.vue      header, footer
-  layouts/legacy.vue      the '90s hypertext, the «Attiva Rendering Nativo» button and the first-visit nudge
+  layouts/legacy.vue      the '90s hypertext, the «Attiva Rendering Nativo» button, the first-visit nudge and the CRT monitor
   pages/[...slug].vue     the only route: finds the page (or case study) whose slug matches the path
   components/
     blocks/               one folder per block type, each with Native.vue and Legacy.vue; Renderer.vue
     case-study/           the top of a case study (the project's own fields)
     site/                 header, footer, logo, language, boot overlay
     ui/                   the small pieces: typed titles with cursor, labels, buttons, images, ASCII portrait
-    project/ service/ contact/ legacy/            cards, covers and their illustrations, service illustrations, form and project.json, links
+    project/ service/ contact/ legacy/            cards, covers and their illustrations, service illustrations, form and project.json, links, nudge, CRT
     widget/               the animated widgets (editor, lesson, neofetch) of the Widget block
   composables/
     useEngine.ts          the legacy/native mode, saved in the browser
@@ -98,7 +98,7 @@ design/                   the Claude Design export, for reference only
 
 **Languages.** Every collection with texts has its own `<name>_translations` in Directus. The site downloads all translations and shows the current language's one; an empty field falls back to Italian.
 
-**Modes.** The generated site is always in legacy mode, so the HTML is the same for everyone and complete for search engines. In the browser, after loading, it switches to the saved mode; a script in the page head hides the legacy page from visitors who chose native, to avoid a flash. A first visit (no mode saved yet) gets a nudge (`components/legacy/Nudge.vue`): the legacy page glitches at random intervals (not with `prefers-reduced-motion`) and after 8 seconds a '90s dialog offers native. Either answer is saved as the mode, so it doesn't come back by itself (note that `?engine=` saves the mode too); the small button under the engine button turns the glitch off (like «stay on legacy») and on again (it forgets the saved mode and replays the nudge).
+**Modes.** The generated site is always in legacy mode, so the HTML is the same for everyone and complete for search engines. In the browser, after loading, it switches to the saved mode; a script in the page head hides the legacy page from visitors who chose native, to avoid a flash. A first visit (no mode saved yet) gets a nudge (`components/legacy/Nudge.vue`): the legacy page glitches at random intervals (not with `prefers-reduced-motion`) and after 8 seconds a '90s dialog offers native. Either answer is saved as the mode, so it doesn't come back by itself (note that `?engine=` saves the mode too); the small button under the engine button turns the glitch off (like «stay on legacy») and on again (it forgets the saved mode and replays the nudge). Legacy is always shown on a CRT monitor (`components/legacy/Crt.vue` plus the `legacy-crt*` classes in `main.css`): scan lines, a dark-cornered tube, a reflection on the glass, fringed text, and a CSS-only power-on when the legacy layout mounts: a layer over the page (dark glass, a dot, a line that opens into a blue-white screen, 2.2 s) fades out onto it, so the page itself never moves; `Crt.vue` delays it while the boot overlay fades when coming back from native. No power-on or flicker with `prefers-reduced-motion`.
 
 **Sitemap and robots.** After `nuxt generate`, `scripts/seo-files.mjs` reads the generated pages and writes `sitemap.xml` (each page at its canonical URL, with its translations as `hreflang` links; `noindex` pages such as the CV are left out) and `robots.txt`, which points to it. Both use the i18n `baseUrl`, the address of the canonical links. They exist only in the generated site, not in `npm run dev`.
 
