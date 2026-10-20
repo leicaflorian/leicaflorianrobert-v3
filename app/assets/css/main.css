@@ -215,11 +215,10 @@
         radial-gradient(ellipse 70% 10% at 50% 0%, color-mix(in srgb, var(--color-legacy-light) 14%, transparent), transparent),
         linear-gradient(155deg, color-mix(in srgb, var(--color-legacy-light) 8%, transparent), transparent 40%);
 }
-/* Power-on (legacy/Crt.vue): the glass stays dark for a moment, a dot lights up in the middle,
-   stretches into a line across the tube, the line thickens and opens into a blue-white screen
-   that fades onto the page. `--crt-delay` holds it back while the engine boot overlay still
-   covers the page. Without motion there is no power-on at all. */
-.legacy-crt-power { display: none }
+/* Power-on (legacy/Crt.vue and the layout): the glass stays dark for a moment, a dot lights up
+   in the middle, stretches into a line across the tube and thickens; then the glass fades and the
+   page itself opens out of the line, overexposed, and settles. `--crt-delay` (layout) holds it
+   back while the engine boot overlay still covers the page. Without motion there is no power-on. */
 @media (prefers-reduced-motion: no-preference) {
     .legacy-crt-power {
         display: block;
@@ -228,6 +227,11 @@
 
     .legacy-crt-beam { animation: legacy-crt-beam 2.2s ease-out var(--crt-delay, 0s) both }
     .legacy-crt-flare { animation: legacy-crt-flare 2.2s ease-out var(--crt-delay, 0s) both }
+
+    .legacy-crt-on {
+        transform-origin: 50% 50vh;
+        animation: legacy-crt-on 2.2s ease-out var(--crt-delay, 0s) backwards;
+    }
     .legacy-crt-lines { animation: legacy-crt-flicker .12s steps(2) infinite }
 }
 .legacy-crt-beam {
@@ -243,21 +247,28 @@
         color-mix(in srgb, var(--color-legacy-crt-glow) 25%, transparent) 55%, transparent);
 }
 @keyframes legacy-crt-power {
-    0%, 78% { opacity: 1; visibility: visible }
-    100% { opacity: 0; visibility: hidden }
+    0%, 55% { opacity: 1; visibility: visible }
+    66%, 100% { opacity: 0; visibility: hidden }
 }
 @keyframes legacy-crt-beam {
     0%, 11% { transform: scale(0, .003); opacity: 0 }
     13% { transform: scale(.02, .003); opacity: 1 }
     32% { transform: scale(1, .003) }
     55% { transform: scale(1, .03) }
-    78%, 100% { transform: scale(1, 2.8) }
+    66%, 100% { transform: scale(1, .4); opacity: 0 }
 }
 @keyframes legacy-crt-flare {
     0%, 11% { transform: scale(0); opacity: 0 }
     15% { transform: scale(1); opacity: 1 }
-    55% { opacity: .8 }
-    78%, 100% { transform: scale(1.4); opacity: 0 }
+    50% { opacity: .8 }
+    62%, 100% { transform: scale(1.4); opacity: 0 }
+}
+/* The page: a bright line under the beam, then the picture opens and burns out to normal. */
+@keyframes legacy-crt-on {
+    0%, 55% { transform: scale(1, .003); filter: brightness(30) }
+    72% { transform: scale(1, 1); filter: brightness(8) contrast(1.4) }
+    86% { transform: none; filter: brightness(1.8) }
+    100% { transform: none; filter: none }
 }
 @keyframes legacy-crt-flicker {
     from { opacity: 1 }
