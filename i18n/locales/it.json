@@ -60,7 +60,8 @@
     "consent": {
       "text": "Per scrivermi da qui serve il cookie di Google reCAPTCHA, che protegge il modulo dallo spam.",
       "manage": "Gestisci i cookie",
-      "email": "Oppure scrivimi a {email}."
+      "email": "Oppure scrivimi a {email}.",
+      "legacyNote": "Lo so: nel 1999 i cookie c'erano già, ma nessuno chiedeva il permesso. Questo è un ritorno al futuro."
     },
     "privacy": "Uso i tuoi dati solo per risponderti: i dettagli sono nell'{link}.",
     "privacyLink": "informativa privacy",

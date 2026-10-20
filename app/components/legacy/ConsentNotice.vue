@@ -22,5 +22,7 @@ const {ready, manage} = useRecaptchaConsent()
         <template #email><LegacyLink :href="`mailto:${site.email}`">{{ site.email }}</LegacyLink></template>
       </i18n-t>
     </p>
+    <!-- legacy only: the '90s had cookies, not consent banners -->
+    <p class="m-0 text-sm text-legacy-note"><i>{{ $t('form.consent.legacyNote') }}</i></p>
   </div>
 </template>
