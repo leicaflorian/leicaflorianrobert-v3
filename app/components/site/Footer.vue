@@ -4,6 +4,7 @@ import type {Site} from '~/types/content'
 defineProps<{site: Site}>()
 
 const pageLink = usePageLink()
+const consent = useRecaptchaConsent()
 
 const year = new Date().getFullYear()
 </script>
@@ -38,6 +39,10 @@ const year = new Date().getFullYear()
         <p class="m-0">
           {{ $t('footer.vat', {vat: site.vat}) }} ·
           <NuxtLink :to="pageLink('privacy')" class="text-faint hover:text-accent-light max-[860px]:inline-block max-[860px]:py-2">{{ $t('footer.privacy') }}</NuxtLink>
+          <template v-if="consent.ready.value">
+            ·
+            <button type="button" class="cursor-pointer border-0 bg-transparent p-0 font-[inherit] text-faint hover:text-accent-light max-[860px]:py-2" @click="consent.manage">{{ $t('footer.cookiePreferences') }}</button>
+          </template>
         </p>
       </div>
     </div>

@@ -9,6 +9,7 @@ const [site] = await Promise.all([useSingleton<Site>('site'), usePages()])
 const {toggle, bootTarget} = useEngine()
 const menu = useMenu()
 const pageLink = usePageLink()
+const consent = useRecaptchaConsent()
 /** Set by LegacyNudge while the page glitches on a first visit. */
 const glitch = ref(false)
 const nudge = useTemplateRef('nudge')
@@ -52,7 +53,13 @@ const crtDelay = bootTarget.value ? {'--crt-delay': '.45s'} : undefined
             {{ $t(nudge.running ? 'engine.nudge.glitchOff' : 'engine.nudge.glitchOn') }}
           </button>
           <p class="m-0 text-sm text-legacy-note">{{ $t('engine.optimized') }}</p>
-          <p class="m-0 text-sm"><LegacyLink :href="pageLink('privacy')">{{ $t('footer.privacy') }}</LegacyLink></p>
+          <p class="m-0 text-sm">
+            <LegacyLink :href="pageLink('privacy')">{{ $t('footer.privacy') }}</LegacyLink>
+            <template v-if="consent.ready.value">
+              |
+              <button type="button" class="cursor-pointer border-0 bg-transparent p-0 font-legacy text-sm text-legacy-link underline" @click="consent.manage">{{ $t('footer.cookiePreferences') }}</button>
+            </template>
+          </p>
         </div>
       </div>
     </div>
