@@ -240,7 +240,7 @@
 @media (prefers-reduced-motion: no-preference) {
     .legacy-crt-boot {
         display: block;
-        animation: legacy-crt-boot 2.2s var(--crt-delay, 0s) both;
+        animation: legacy-crt-boot 2.2s step-end var(--crt-delay, 0s) both;
     }
 
     .legacy-crt-power { animation: legacy-crt-power 2.2s ease-in var(--crt-delay, 0s) both }
@@ -278,9 +278,11 @@
     mix-blend-mode: overlay;
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1.4 1.4 1.4 0 -1.6 1.4 1.4 1.4 0 -1.6 1.4 1.4 1.4 0 -1.6 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
+/* Opacity, not visibility: a `visibility: visible` here would beat the `hidden` that keeps
+   the legacy page out of sight for visitors who chose native (engine-native-pending). */
 @keyframes legacy-crt-boot {
-    0%, 99% { visibility: visible }
-    100% { visibility: hidden }
+    0%, 99% { opacity: 1 }
+    100% { opacity: 0 }
 }
 @keyframes legacy-crt-power {
     0%, 55% { opacity: 1 }

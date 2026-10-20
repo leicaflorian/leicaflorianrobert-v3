@@ -30,20 +30,28 @@ export function useEngine() {
     }
   }
 
-  function toggle() {
-    if (bootTarget.value) return
-
-    const next: EngineMode = isLegacy.value ? 'native' : 'legacy'
+  /**
+   * Plays the boot overlay and switches to `next` under it. Resolves once the mode has
+   * switched (at once if a boot is already in progress). `scroll: false` keeps the scroll
+   * position, for the boot that opens the site in native mode.
+   */
+  function boot(next: EngineMode, {scroll = true} = {}) {
+    if (bootTarget.value) return Promise.resolve()
     bootTarget.value = next
 
     setTimeout(() => {
-      set(next)
-      window.scrollTo(0, 0)
-    }, BOOT_SWITCH_MS)
-    setTimeout(() => {
       bootTarget.value = null
     }, BOOT_TOTAL_MS)
+    return new Promise<void>(resolve => setTimeout(() => {
+      set(next)
+      if (scroll) window.scrollTo(0, 0)
+      resolve()
+    }, BOOT_SWITCH_MS))
   }
 
-  return {mode, isNative, isLegacy, bootTarget, set, toggle}
+  function toggle() {
+    boot(isLegacy.value ? 'native' : 'legacy')
+  }
+
+  return {mode, isNative, isLegacy, bootTarget, set, boot, toggle}
 }
