@@ -3,7 +3,7 @@
 import type {ContactMessage} from '~/composables/useContactForm'
 import type {BriefType} from '~/utils/brief'
 
-const {draft, status, submit} = useContactForm()
+const {draft, status, locked, submit} = useContactForm()
 const pageLink = usePageLink()
 
 const field = 'rounded-[10px] border border-line-control bg-bg p-3.5 font-sans text-[15px] text-ink outline-none placeholder:text-dim focus:border-accent focus:shadow-[0_0_0_3px_rgb(255_91_20/0.2)]'
@@ -29,63 +29,67 @@ const groups = computed(() => [
 </script>
 
 <template>
-  <form class="flex flex-col gap-12" @submit.prevent="submit">
-    <fieldset :class="fieldset">
-      <legend :class="legend">{{ $t('form.groups.project') }}<span class="h-px flex-1 bg-line-card"/></legend>
-      <div class="flex flex-col gap-8">
-        <div v-for="group in groups" :key="group.key" class="flex flex-col gap-3">
-          <span class="text-xs text-muted">{{ $t(`form.brief.${group.key}`) }}</span>
-          <div class="flex flex-wrap gap-2">
-            <button
-              v-for="{o, on, toggle} in group.options"
-              :key="o"
-              type="button"
-              :aria-pressed="on"
-              class="min-h-10 cursor-pointer rounded-full border px-3.5 font-mono text-[13px] transition-colors duration-300 hover:border-accent"
-              :class="on ? 'border-accent bg-accent text-bg' : 'border-line-control bg-transparent text-ink-soft'"
-              @click="toggle"
-            >
-              {{ $t(`form.brief.options.${group.key}.${o}`) }}
-            </button>
+  <form class="flex flex-col gap-8" @submit.prevent="submit">
+    <ContactConsentNotice v-if="locked"/>
+    <!-- without consent to reCAPTCHA every field and button is off -->
+    <fieldset :disabled="locked" class="m-0 flex min-w-0 flex-col gap-12 border-0 p-0 transition-opacity duration-300" :class="{'opacity-40': locked}">
+      <fieldset :class="fieldset">
+        <legend :class="legend">{{ $t('form.groups.project') }}<span class="h-px flex-1 bg-line-card"/></legend>
+        <div class="flex flex-col gap-8">
+          <div v-for="group in groups" :key="group.key" class="flex flex-col gap-3">
+            <span class="text-xs text-muted">{{ $t(`form.brief.${group.key}`) }}</span>
+            <div class="flex flex-wrap gap-2">
+              <button
+                v-for="{o, on, toggle} in group.options"
+                :key="o"
+                type="button"
+                :aria-pressed="on"
+                class="min-h-10 cursor-pointer rounded-full border px-3.5 font-mono text-[13px] transition-colors duration-300 hover:border-accent"
+                :class="on ? 'border-accent bg-accent text-bg' : 'border-line-control bg-transparent text-ink-soft'"
+                @click="toggle"
+              >
+                {{ $t(`form.brief.options.${group.key}.${o}`) }}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </fieldset>
+      </fieldset>
 
-    <fieldset :class="fieldset">
-      <legend :class="legend">{{ $t('form.groups.you') }}<span class="h-px flex-1 bg-line-card"/></legend>
-      <div class="flex flex-col gap-5">
-        <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-5">
-          <label :class="label">{{ $t('form.name') }}
-            <input v-model="draft.name" type="text" name="name" required autocomplete="name" :placeholder="$t('form.namePlaceholder')" :class="field">
-          </label>
-          <label :class="label">{{ $t('form.email') }}
-            <input v-model="draft.email" type="email" name="email" required autocomplete="email" :placeholder="$t('form.emailPlaceholder')" :class="field">
+      <fieldset :class="fieldset">
+        <legend :class="legend">{{ $t('form.groups.you') }}<span class="h-px flex-1 bg-line-card"/></legend>
+        <div class="flex flex-col gap-5">
+          <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-5">
+            <label :class="label">{{ $t('form.name') }}
+              <input v-model="draft.name" type="text" name="name" required autocomplete="name" :placeholder="$t('form.namePlaceholder')" :class="field">
+            </label>
+            <label :class="label">{{ $t('form.email') }}
+              <input v-model="draft.email" type="email" name="email" required autocomplete="email" :placeholder="$t('form.emailPlaceholder')" :class="field">
+            </label>
+          </div>
+          <label :class="label">{{ $t('form.message') }}
+            <textarea v-model="draft.message" name="message" rows="5" required :placeholder="$t('form.messagePlaceholder')" :class="[field, 'resize-y']"/>
           </label>
         </div>
-        <label :class="label">{{ $t('form.message') }}
-          <textarea v-model="draft.message" name="message" rows="5" required :placeholder="$t('form.messagePlaceholder')" :class="[field, 'resize-y']"/>
-        </label>
+      </fieldset>
+
+      <div class="flex flex-col items-start gap-4">
+        <UiButton type="submit" :disabled="status === 'sending'" class="justify-center max-[860px]:w-full">
+          <template v-if="status === 'sending'">{{ $t('form.sending') }}</template>
+          <template v-else>{{ $t('form.submit') }}<UiArrowIcon class="size-3.5"/></template>
+        </UiButton>
+        <p class="m-0 text-[11px] leading-[1.6] text-faint">
+          <i18n-t keypath="form.privacy" scope="global">
+            <template #link><NuxtLink :to="pageLink('privacy')" class="text-subtle underline hover:text-accent">{{ $t('form.privacyLink') }}</NuxtLink></template>
+          </i18n-t>
+          {{ ' ' }}
+          <i18n-t keypath="form.recaptcha" scope="global">
+            <template #privacy><a :href="RECAPTCHA_LINKS.privacy" target="_blank" rel="noopener" class="text-subtle underline hover:text-accent">{{ $t('form.recaptchaPrivacy') }}</a></template>
+            <template #terms><a :href="RECAPTCHA_LINKS.terms" target="_blank" rel="noopener" class="text-subtle underline hover:text-accent">{{ $t('form.recaptchaTerms') }}</a></template>
+          </i18n-t>
+        </p>
+        <p v-if="status === 'sent'" role="status" class="m-0 font-sans text-[15px] text-code-string">{{ $t('form.sent') }}</p>
+        <p v-else-if="status === 'error'" role="alert" class="m-0 font-sans text-[15px] text-accent">{{ $t('form.error') }}</p>
       </div>
     </fieldset>
-
-    <div class="flex flex-col items-start gap-4">
-      <UiButton type="submit" :disabled="status === 'sending'" class="justify-center max-[860px]:w-full">
-        <template v-if="status === 'sending'">{{ $t('form.sending') }}</template>
-        <template v-else>{{ $t('form.submit') }}<UiArrowIcon class="size-3.5"/></template>
-      </UiButton>
-      <p class="m-0 text-[11px] leading-[1.6] text-faint">
-        <i18n-t keypath="form.privacy" scope="global">
-          <template #link><NuxtLink :to="pageLink('privacy')" class="text-subtle underline hover:text-accent">{{ $t('form.privacyLink') }}</NuxtLink></template>
-        </i18n-t>
-        {{ ' ' }}
-        <i18n-t keypath="form.recaptcha" scope="global">
-          <template #privacy><a :href="RECAPTCHA_LINKS.privacy" target="_blank" rel="noopener" class="text-subtle underline hover:text-accent">{{ $t('form.recaptchaPrivacy') }}</a></template>
-          <template #terms><a :href="RECAPTCHA_LINKS.terms" target="_blank" rel="noopener" class="text-subtle underline hover:text-accent">{{ $t('form.recaptchaTerms') }}</a></template>
-        </i18n-t>
-      </p>
-      <p v-if="status === 'sent'" role="status" class="m-0 font-sans text-[15px] text-code-string">{{ $t('form.sent') }}</p>
-      <p v-else-if="status === 'error'" role="alert" class="m-0 font-sans text-[15px] text-accent">{{ $t('form.error') }}</p>
-    </div>
   </form>
 </template>

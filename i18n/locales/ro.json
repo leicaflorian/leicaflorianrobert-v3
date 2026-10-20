@@ -56,6 +56,11 @@
     "recaptcha": "Acest site este protejat de reCAPTCHA și se aplică {privacy} și {terms} Google.",
     "recaptchaPrivacy": "Politica de confidențialitate",
     "recaptchaTerms": "Termenii de utilizare",
+    "consent": {
+      "text": "Ca să-mi scrii de aici e nevoie de cookie-ul Google reCAPTCHA, care protejează formularul de spam.",
+      "manage": "Gestionează cookie-urile",
+      "email": "Sau scrie-mi la {email}."
+    },
     "privacy": "Folosesc datele tale doar ca să-ți răspund: detaliile sunt în {link}.",
     "privacyLink": "politica de confidențialitate",
     "legacy": {

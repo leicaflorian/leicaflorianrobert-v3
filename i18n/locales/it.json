@@ -56,6 +56,11 @@
     "recaptcha": "Questo sito è protetto da reCAPTCHA: si applicano la {privacy} e i {terms} di Google.",
     "recaptchaPrivacy": "Privacy Policy",
     "recaptchaTerms": "Termini di servizio",
+    "consent": {
+      "text": "Per scrivermi da qui serve il cookie di Google reCAPTCHA, che protegge il modulo dallo spam.",
+      "manage": "Gestisci i cookie",
+      "email": "Oppure scrivimi a {email}."
+    },
     "privacy": "Uso i tuoi dati solo per risponderti: i dettagli sono nell'{link}.",
     "privacyLink": "informativa privacy",
     "legacy": {
