@@ -44,6 +44,12 @@ const control = 'max-w-full border border-black px-1 font-legacy text-base'
         <template #link><LegacyLink :href="pageLink('privacy')">{{ $t('form.privacyLink') }}</LegacyLink></template>
       </i18n-t>
     </p>
+    <p class="m-0 text-sm">
+      <i18n-t keypath="form.recaptcha" scope="global">
+        <template #privacy><LegacyLink :href="RECAPTCHA_LINKS.privacy">{{ $t('form.recaptchaPrivacy') }}</LegacyLink></template>
+        <template #terms><LegacyLink :href="RECAPTCHA_LINKS.terms">{{ $t('form.recaptchaTerms') }}</LegacyLink></template>
+      </i18n-t>
+    </p>
     <p v-if="status === 'sent'" class="m-0"><b>{{ $t('form.sent') }}</b></p>
     <p v-else-if="status === 'error'" class="m-0 text-[red]"><b>{{ $t('form.error') }}</b></p>
   </form>

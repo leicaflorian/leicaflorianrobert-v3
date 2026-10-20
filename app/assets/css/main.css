@@ -183,6 +183,11 @@
     }
     75% { transform: translate(2px, 1px); clip-path: inset(20% 0 35% 0) }
 }
+/* No reCAPTCHA badge: Google allows it as long as the contact forms show its notice with the
+   links (form.recaptcha). Visibility, not display: with display: none reCAPTCHA stops working. */
+.grecaptcha-badge {
+    visibility: hidden;
+}
 /* The CRT monitor of legacy mode (legacy/Crt.vue). The text glows and fringes in red and cyan,
    like phosphors that don't quite converge. */
 .legacy-crt {

@@ -78,7 +78,11 @@ const groups = computed(() => [
         <i18n-t keypath="form.privacy" scope="global">
           <template #link><NuxtLink :to="pageLink('privacy')" class="text-subtle underline hover:text-accent">{{ $t('form.privacyLink') }}</NuxtLink></template>
         </i18n-t>
-        {{ $t('form.recaptcha') }}
+        {{ ' ' }}
+        <i18n-t keypath="form.recaptcha" scope="global">
+          <template #privacy><a :href="RECAPTCHA_LINKS.privacy" target="_blank" rel="noopener" class="text-subtle underline hover:text-accent">{{ $t('form.recaptchaPrivacy') }}</a></template>
+          <template #terms><a :href="RECAPTCHA_LINKS.terms" target="_blank" rel="noopener" class="text-subtle underline hover:text-accent">{{ $t('form.recaptchaTerms') }}</a></template>
+        </i18n-t>
       </p>
       <p v-if="status === 'sent'" role="status" class="m-0 font-sans text-[15px] text-code-string">{{ $t('form.sent') }}</p>
       <p v-else-if="status === 'error'" role="alert" class="m-0 font-sans text-[15px] text-accent">{{ $t('form.error') }}</p>
