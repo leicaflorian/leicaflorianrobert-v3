@@ -556,9 +556,9 @@ const PAGES = [
         ro: {title: 'Drepturile tale', text: paras('Îmi poți cere oricând să ai acces la datele tale, să le corectez sau să le șterg, să le restricționez prelucrarea, să te opui prelucrării sau să le primești într-un format ușor de citit (art. 15–22 din GDPR), scriindu-mi la adresa de email de mai sus.', 'Dacă crezi că prelucrarea nu este corectă, poți depune o plângere la autoritatea italiană pentru protecția datelor, Garante per la protezione dei dati personali (garanteprivacy.it).')},
       }),
       section('block_text', {}, {
-        it: {title: 'Modifiche', text: 'Se cambia il modo in cui tratto i dati, aggiorno questa pagina. Ultimo aggiornamento: 18 ottobre 2026.'},
-        en: {title: 'Changes', text: 'If the way I handle data changes, I update this page. Last updated: 18 October 2026.'},
-        ro: {title: 'Modificări', text: 'Dacă se schimbă felul în care prelucrez datele, actualizez această pagină. Ultima actualizare: 18 octombrie 2026.'},
+        it: {title: 'Modifiche', text: 'Se cambia il modo in cui tratto i dati, aggiorno questa pagina. Ultimo aggiornamento: 20 ottobre 2026.'},
+        en: {title: 'Changes', text: 'If the way I handle data changes, I update this page. Last updated: 20 October 2026.'},
+        ro: {title: 'Modificări', text: 'Dacă se schimbă felul în care prelucrez datele, actualizez această pagină. Ultima actualizare: 20 octombrie 2026.'},
       }),
     ],
   },
