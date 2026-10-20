@@ -69,6 +69,7 @@
     --color-legacy-title: #000080;        /* the title bar of a '90s window */
     --color-legacy-glitch-red: #FF0033;   /* the RGB split of the first-visit glitch */
     --color-legacy-glitch-cyan: #00E5FF;
+    --color-legacy-crt: #000000;          /* the CRT tube: bezel, scan lines, vignette */
 
     /* the printed CV: paper, not screen (the secondary text is --color-dim) */
     --color-paper: #FFFFFF;
@@ -177,6 +178,51 @@
         filter: drop-shadow(4px 0 var(--color-legacy-glitch-red)) drop-shadow(-4px 0 var(--color-legacy-glitch-cyan));
     }
     75% { transform: translate(2px, 1px); clip-path: inset(20% 0 35% 0) }
+}
+/* The CRT monitor of legacy mode (legacy/Crt.vue). The text glows and fringes in red and cyan,
+   like phosphors that don't quite converge. */
+.legacy-crt {
+    text-shadow:
+        -.6px 0 color-mix(in srgb, var(--color-legacy-glitch-red) 35%, transparent),
+        .6px 0 color-mix(in srgb, var(--color-legacy-glitch-cyan) 35%, transparent),
+        0 0 3px color-mix(in srgb, currentColor 30%, transparent);
+}
+/* Scan lines, and the RGB stripes of the phosphor mask over them. */
+.legacy-crt-lines {
+    background:
+        repeating-linear-gradient(0deg, color-mix(in srgb, var(--color-legacy-crt) 14%, transparent) 0 1px, transparent 1px 3px),
+        repeating-linear-gradient(90deg,
+            color-mix(in srgb, var(--color-legacy-glitch-red) 5%, transparent) 0 1px,
+            color-mix(in srgb, var(--color-code-ok) 5%, transparent) 1px 2px,
+            color-mix(in srgb, var(--color-legacy-link) 5%, transparent) 2px 3px);
+}
+/* A bulging tube: the corners are cut by the bezel, the edges darken. */
+.legacy-crt-tube {
+    border-radius: 3vmin / 4vmin;
+    box-shadow:
+        0 0 0 100px var(--color-legacy-crt),
+        inset 0 0 12vmin color-mix(in srgb, var(--color-legacy-crt) 45%, transparent),
+        inset 0 0 2px 1px color-mix(in srgb, var(--color-legacy-crt) 60%, transparent);
+}
+/* Power-on: a dot, a bright line, then the whole picture, overexposed for an instant.
+   `--crt-delay` holds it back while the engine boot overlay still covers the page. */
+@media (prefers-reduced-motion: no-preference) {
+    .legacy-crt-on {
+        transform-origin: 50% 50vh;
+        animation: legacy-crt-on .9s cubic-bezier(.2, .8, .3, 1) var(--crt-delay, 0s) backwards;
+    }
+
+    .legacy-crt-lines { animation: legacy-crt-flicker .12s steps(2) infinite }
+}
+@keyframes legacy-crt-on {
+    0% { transform: scale(.02, .002); filter: brightness(30) }
+    25% { transform: scale(1, .004); filter: brightness(12) }
+    55% { transform: scale(1, 1); filter: brightness(3) contrast(1.4) }
+    100% { transform: none; filter: none }
+}
+@keyframes legacy-crt-flicker {
+    from { opacity: 1 }
+    to { opacity: .82 }
 }
 /* The visuals in place of images: progress bar, lines appearing. */
 @keyframes bar-fill {
