@@ -59,6 +59,7 @@
     "recaptchaTerms": "Termini di servizio",
     "consent": {
       "text": "Per scrivermi da qui serve il cookie di Google reCAPTCHA, che protegge il modulo dallo spam.",
+      "accept": "Accetta e scrivimi",
       "manage": "Gestisci i cookie",
       "email": "Oppure scrivimi a {email}.",
       "legacyNote": "Lo so: nel 1999 i cookie c'erano già, ma nessuno chiedeva il permesso. Questo è un ritorno al futuro."
