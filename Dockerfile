@@ -12,6 +12,7 @@ RUN npx playwright install --with-deps chromium
 COPY . .
 ARG NUXT_PUBLIC_DIRECTUS_URL
 ARG NUXT_PUBLIC_RECAPTCHA_SITE_KEY
+ARG NUXT_PUBLIC_COOKIEYES_ID
 ARG NUXT_PUBLIC_SITE_URL
 # a push restarts Directus too: wait for it before reading the content
 RUN node scripts/wait-directus.mjs && npm run generate

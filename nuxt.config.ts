@@ -41,6 +41,7 @@ export default defineNuxtConfig({
       siteUrl: 'https://leicaflorianrobert.dev',
       directusUrl: 'http://localhost:8055',
       recaptchaSiteKey: '',
+      cookieyesId: '',
     },
   },
   experimental: {
