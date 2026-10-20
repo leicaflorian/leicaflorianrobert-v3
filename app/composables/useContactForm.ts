@@ -34,23 +34,19 @@ export function useContactDraft() {
 
 /**
  * Sends the contact form to the Directus `/contact` endpoint (the `contact-endpoint`
- * extension), with the reCAPTCHA v3 token if the key is configured. Google's script loads
- * only with the visitor's consent; until then the form is `locked`.
+ * extension), with the reCAPTCHA v3 token if the key is configured. reCAPTCHA is treated
+ * as necessary: Google's script loads with the form, whatever the visitor chose in CookieYes.
  */
 export function useContactForm() {
   const {public: {directusUrl, recaptchaSiteKey}} = useRuntimeConfig()
   const {locale} = useI18n()
   const draft = useContactDraft()
   const status = ref<Status>('idle')
-  const {granted} = useRecaptchaConsent()
-  const locked = computed(() => !granted.value)
 
   if (recaptchaSiteKey) {
-    useHead(() => ({
-      script: granted.value
-        ? [{key: 'recaptcha', src: `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`, async: true, defer: true}]
-        : [],
-    }))
+    useHead({
+      script: [{key: 'recaptcha', src: `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`, async: true, defer: true}],
+    })
   }
 
   async function recaptchaToken(): Promise<string | undefined> {
@@ -62,7 +58,6 @@ export function useContactForm() {
 
   /** Sends the draft; clears it if sending succeeds. */
   async function submit() {
-    if (locked.value) return
     status.value = 'sending'
     try {
       await $fetch(`${directusUrl}/contact`, {
@@ -82,5 +77,5 @@ export function useContactForm() {
     status.value = 'idle'
   }
 
-  return {draft, status, locked, submit, reset}
+  return {draft, status, submit, reset}
 }
