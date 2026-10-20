@@ -188,6 +188,139 @@
 .grecaptcha-badge {
     visibility: hidden;
 }
+/* The CookieYes banner and preferences (consent for reCAPTCHA), redrawn for the active mode:
+   CookieYes appends them outside the layout, so the mode comes from <html data-engine-mode>
+   (app.vue). It sets its panel colours as inline styles: hence the !important. Its floating
+   button is hidden, the footers have «Cookie preferences» instead. */
+html[data-engine-mode] .cky-btn-revisit-wrapper {
+    display: none !important;
+}
+
+/* legacy: a Windows '98 dialog */
+html[data-engine-mode="legacy"] .cky-consent-bar,
+html[data-engine-mode="legacy"] .cky-preference-center {
+    padding: 2px !important;
+    border: 2px solid !important;
+    border-color: var(--color-legacy-light) var(--color-legacy-shadow) var(--color-legacy-shadow) var(--color-legacy-light) !important;
+    border-radius: 0 !important;
+    background: var(--color-legacy-face) !important;
+    box-shadow: 1px 1px 0 var(--color-legacy-crt) !important;
+    color: var(--color-legacy-crt) !important;
+    font-family: var(--font-legacy) !important;
+}
+html[data-engine-mode="legacy"] .cky-consent-bar .cky-title,
+html[data-engine-mode="legacy"] .cky-preference-header {
+    margin: 0 !important;
+    padding: 4px 8px !important;
+    border: 0 !important;
+    background: var(--color-legacy-title) !important;
+    color: var(--color-legacy-light) !important;
+    font: bold 14px var(--font-legacy-mono) !important;
+}
+html[data-engine-mode="legacy"] .cky-preference-title {
+    color: var(--color-legacy-light) !important;
+    font: inherit !important;
+}
+html[data-engine-mode="legacy"] .cky-notice-group,
+html[data-engine-mode="legacy"] .cky-preference-body-wrapper,
+html[data-engine-mode="legacy"] .cky-footer-wrapper {
+    padding-inline: 14px !important;
+    border-color: var(--color-legacy-inset) !important;
+    background: var(--color-legacy-face) !important;
+}
+html[data-engine-mode="legacy"] .cky-notice-group { padding-block: 12px !important }
+html[data-engine-mode="legacy"] .cky-footer-shadow { display: none !important }
+html[data-engine-mode="legacy"] [data-cky-tag="detail-powered-by"] { background: var(--color-legacy-face) !important }
+html[data-engine-mode="legacy"] .cky-notice-group *,
+html[data-engine-mode="legacy"] .cky-preference-body-wrapper * {
+    color: var(--color-legacy-crt) !important;
+    font-family: var(--font-legacy) !important;
+}
+html[data-engine-mode="legacy"] .cky-consent-bar a,
+html[data-engine-mode="legacy"] .cky-preference-center a,
+html[data-engine-mode="legacy"] .cky-show-desc-btn {
+    color: var(--color-legacy-link) !important;
+    text-decoration: underline !important;
+}
+html[data-engine-mode="legacy"] .cky-btn,
+html[data-engine-mode="legacy"] .cky-btn-close {
+    border: 2px solid !important;
+    border-color: var(--color-legacy-light) var(--color-legacy-shadow) var(--color-legacy-shadow) var(--color-legacy-light) !important;
+    border-radius: 0 !important;
+    background: var(--color-legacy-face) !important;
+    color: var(--color-legacy-crt) !important;
+    font: 14px var(--font-legacy-mono) !important;
+}
+html[data-engine-mode="legacy"] .cky-btn-accept { font-weight: bold !important }
+html[data-engine-mode="legacy"] .cky-btn:active,
+html[data-engine-mode="legacy"] .cky-btn-close:active {
+    border-color: var(--color-legacy-shadow) var(--color-legacy-light) var(--color-legacy-light) var(--color-legacy-shadow) !important;
+}
+
+/* native: a panel of the terminal design */
+html[data-engine-mode="native"] .cky-consent-bar,
+html[data-engine-mode="native"] .cky-preference-center {
+    border: 1px solid var(--color-line-card) !important;
+    border-radius: 14px !important;
+    background: var(--color-surface) !important;
+    box-shadow: 0 24px 60px color-mix(in srgb, var(--color-bg-deep) 70%, transparent) !important;
+    color: var(--color-ink-soft) !important;
+    font-family: var(--font-mono) !important;
+}
+html[data-engine-mode="native"] .cky-preference-center { overflow: hidden }
+html[data-engine-mode="native"] .cky-consent-bar *,
+html[data-engine-mode="native"] .cky-preference-center * {
+    border-color: var(--color-line-card) !important;
+    color: var(--color-ink-soft) !important;
+    font-family: var(--font-mono) !important;
+}
+html[data-engine-mode="native"] .cky-consent-bar .cky-title,
+html[data-engine-mode="native"] .cky-preference-center .cky-preference-title,
+html[data-engine-mode="native"] .cky-accordion-btn {
+    color: var(--color-ink) !important;
+}
+html[data-engine-mode="native"] .cky-preference-header,
+html[data-engine-mode="native"] .cky-preference-body-wrapper,
+html[data-engine-mode="native"] .cky-footer-wrapper {
+    background: var(--color-surface) !important;
+}
+html[data-engine-mode="native"] .cky-footer-shadow {
+    background: linear-gradient(transparent, var(--color-surface)) !important;
+}
+html[data-engine-mode="native"] [data-cky-tag="detail-powered-by"] {
+    border-top: 1px solid var(--color-line-card) !important;
+    background: var(--color-bg-deep) !important;
+}
+html[data-engine-mode="native"] .cky-always-active { color: var(--color-code-ok) !important }
+html[data-engine-mode="native"] .cky-consent-bar a,
+html[data-engine-mode="native"] .cky-preference-center a,
+html[data-engine-mode="native"] .cky-show-desc-btn {
+    color: var(--color-accent) !important;
+}
+html[data-engine-mode="native"] .cky-btn {
+    border: 1px solid var(--color-line-strong) !important;
+    border-radius: 10px !important;
+    background: transparent !important;
+    color: var(--color-ink) !important;
+    font-family: var(--font-mono) !important;
+    transition: border-color .2s, background-color .2s;
+}
+html[data-engine-mode="native"] .cky-btn:hover { border-color: var(--color-accent) !important }
+html[data-engine-mode="native"] .cky-btn-accept {
+    border-color: var(--color-accent) !important;
+    background: var(--color-accent) !important;
+    color: var(--color-bg) !important;
+    font-weight: bold !important;
+}
+html[data-engine-mode="native"] .cky-btn-accept:hover { background: var(--color-accent-hover) !important }
+html[data-engine-mode="native"] .cky-btn-close {
+    border: 0 !important;
+    background: transparent !important;
+}
+html[data-engine-mode="native"] .cky-btn-close img { filter: invert(1) }
+html[data-engine-mode="native"] .cky-switch input[type="checkbox"] { background: var(--color-line-strong) !important }
+html[data-engine-mode="native"] .cky-switch input[type="checkbox"]:checked { background: var(--color-accent) !important }
+
 /* The CRT monitor of legacy mode (legacy/Crt.vue). The text glows and fringes in red and cyan,
    like phosphors that don't quite converge. */
 .legacy-crt {
