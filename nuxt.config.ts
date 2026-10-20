@@ -27,9 +27,9 @@ export default defineNuxtConfig({
       ],
       script: [
         {
-          // Before first paint: if the visitor had chosen native mode,
-          // the generated legacy page stays hidden until the engine.client plugin replaces it.
-          innerHTML: `try{if(localStorage.getItem('lfr-engine')==='native')document.documentElement.classList.add('engine-native-pending')}catch(e){}`,
+          // Before first paint: if the page opens in native mode (`?engine=`, or else the saved
+          // choice), the generated legacy page stays hidden until the engine.client plugin replaces it.
+          innerHTML: `try{var e=new URLSearchParams(location.search).get('engine');if(e!=='legacy'&&e!=='native')e=localStorage.getItem('lfr-engine');if(e==='native')document.documentElement.classList.add('engine-native-pending')}catch(e){}`,
           tagPosition: 'head',
         },
       ],
