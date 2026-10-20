@@ -199,11 +199,12 @@ html[data-engine-mode] .cky-btn-revisit-wrapper {
 }
 
 /* The notice waits for the opening: in native it stays hidden while the boot runs and fades in
-   once the pending class goes; in legacy it pops up after the CRT power-on (2.2s), as a '98
+   1.5s after the pending class goes, once the page has come in; in legacy it pops up after the CRT power-on (2.2s), as a '98
    dialog would. The same animation in both modes, so switching mode doesn't replay it. The
    preferences, opened on request, show at once. */
 @media (prefers-reduced-motion: no-preference) {
     html[data-engine-mode] .cky-consent-container { animation: cky-notice-in .4s ease-out both }
+    html[data-engine-mode="native"] .cky-consent-container { animation-delay: 1.5s }
     html[data-engine-mode="legacy"]:not(.engine-native-pending) .cky-consent-container {
         animation-delay: 2.2s;
         animation-timing-function: step-start;
