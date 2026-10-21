@@ -9,7 +9,7 @@ export interface ContactMessage {
   timeline: BriefTimeline | null
 }
 
-type Status = 'idle' | 'sending' | 'sent' | 'error'
+export type ContactStatus = 'idle' | 'sending' | 'sent' | 'error'
 
 declare global {
   interface Window {
@@ -39,9 +39,12 @@ export function useContactDraft() {
  */
 export function useContactForm() {
   const {public: {directusUrl, recaptchaSiteKey}} = useRuntimeConfig()
-  const {locale} = useI18n()
+  const {locale, t} = useI18n()
   const draft = useContactDraft()
-  const status = ref<Status>('idle')
+  const status = ref<ContactStatus>('idle')
+  /** Who wrote: the draft is cleared once sent, the thank-you still says the name. */
+  const sender = ref('')
+  const thanks = computed(() => sender.value ? t('form.terminal.thanks', {name: sender.value}) : t('form.terminal.thanksAnon'))
 
   if (recaptchaSiteKey) {
     useHead({
@@ -59,6 +62,7 @@ export function useContactForm() {
   /** Sends the draft; clears it if sending succeeds. */
   async function submit() {
     status.value = 'sending'
+    sender.value = draft.value.name.trim()
     try {
       await $fetch(`${directusUrl}/contact`, {
         method: 'POST',
@@ -77,5 +81,10 @@ export function useContactForm() {
     status.value = 'idle'
   }
 
-  return {draft, status, submit, reset}
+  /** Back to the form after sending: empty if it was sent, still filled in if it failed. */
+  function again() {
+    status.value = 'idle'
+  }
+
+  return {draft, status, thanks, submit, reset, again}
 }

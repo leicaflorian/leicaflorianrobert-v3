@@ -52,8 +52,25 @@
     "messagePlaceholder": "E.g. I run everything on an Excel sheet and would like to turn it into a web app for 5 colleagues…",
     "submit": "Send the request",
     "sending": "Sending...",
-    "sent": "Got it! I'll reply within 1–2 working days.",
     "error": "I couldn't send your message. Please try again, or email me directly.",
+    "terminal": {
+      "title": "~/contact — send",
+      "command": "./send-request --to florian",
+      "steps": {
+        "pack": "packing the brief",
+        "robot": "checking you're not a robot",
+        "deliver": "delivering the message"
+      },
+      "ok": "ok",
+      "fail": "failed",
+      "sent": "Message sent.",
+      "thanks": "Thanks, {name}!",
+      "thanksAnon": "Thanks!",
+      "reply": "I'll reply within 1–2 working days.",
+      "coffee": "Meanwhile, the coffee's already on ☕",
+      "again": "Write another message",
+      "retry": "Try again"
+    },
     "recaptcha": "This site is protected by reCAPTCHA and the Google {privacy} and {terms} apply.",
     "recaptchaPrivacy": "Privacy Policy",
     "recaptchaTerms": "Terms of Service",
@@ -64,7 +81,9 @@
       "email": "Email:",
       "message": "Message:",
       "submit": "Send",
-      "reset": "Clear"
+      "reset": "Clear",
+      "sent": "Message sent!",
+      "again": "Send another message"
     },
     "groups": {
       "project": "The project",

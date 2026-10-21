@@ -52,8 +52,25 @@
     "messagePlaceholder": "Es. Ho un gestionale in Excel e vorrei trasformarlo in una web app per 5 colleghi…",
     "submit": "Invia la richiesta",
     "sending": "Invio in corso...",
-    "sent": "Ricevuto! Ti rispondo entro 1–2 giorni lavorativi.",
     "error": "Non sono riuscito a inviare il messaggio. Riprova, oppure scrivimi via email.",
+    "terminal": {
+      "title": "~/contatti — invio",
+      "command": "./invia-richiesta --a florian",
+      "steps": {
+        "pack": "impacchetto il brief",
+        "robot": "controllo che tu non sia un robot",
+        "deliver": "consegno il messaggio"
+      },
+      "ok": "ok",
+      "fail": "errore",
+      "sent": "Messaggio inviato.",
+      "thanks": "Grazie, {name}!",
+      "thanksAnon": "Grazie!",
+      "reply": "Ti rispondo entro 1–2 giorni lavorativi.",
+      "coffee": "Nel frattempo il caffè è già sul fuoco ☕",
+      "again": "Scrivi un altro messaggio",
+      "retry": "Riprova"
+    },
     "recaptcha": "Questo sito è protetto da reCAPTCHA: si applicano la {privacy} e i {terms} di Google.",
     "recaptchaPrivacy": "Privacy Policy",
     "recaptchaTerms": "Termini di servizio",
@@ -64,7 +81,9 @@
       "email": "Email:",
       "message": "Messaggio:",
       "submit": "Invia",
-      "reset": "Cancella"
+      "reset": "Cancella",
+      "sent": "Messaggio inviato!",
+      "again": "Invia un altro messaggio"
     },
     "groups": {
       "project": "Il progetto",
