@@ -1,6 +1,7 @@
 <!--
   The sections of a page or case study: for each block, its native or legacy component.
   Labels are numbered in order ("servizi" → "01 / servizi"), except those starting with "//".
+  A labelled section gets an anchor before it, so links can lead there (`#premio`).
 -->
 <script setup lang="ts">
 import type {Component} from 'vue'
@@ -74,14 +75,17 @@ const labels = computed(() => {
 })
 
 const visible = computed(() => sections.value.filter(s => s.item.engines === 'both' || s.item.engines === mode.value))
+const anchors = computed(() => sectionAnchors(sections.value, mode.value))
 </script>
 
 <template>
-  <component
-    :is="COMPONENTS[section.collection][mode]"
-    v-for="section in visible"
-    :key="`${section.collection}-${section.id}`"
-    :block="section.item"
-    v-bind="mode === 'native' ? {label: labels.get(section.id)} : {}"
-  />
+  <template v-for="section in visible" :key="`${section.collection}-${section.id}`">
+    <!-- an empty marker, not an id on the block: some blocks have more than one root -->
+    <span v-if="anchors.has(section.id)" :id="anchors.get(section.id)" class="block scroll-mt-16"/>
+    <component
+      :is="COMPONENTS[section.collection][mode]"
+      :block="section.item"
+      v-bind="mode === 'native' ? {label: labels.get(section.id)} : {}"
+    />
+  </template>
 </template>

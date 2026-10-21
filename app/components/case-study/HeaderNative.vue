@@ -5,6 +5,7 @@ import type {CaseStudy} from '~/types/content'
 const props = defineProps<{project: CaseStudy}>()
 const {t} = useI18n()
 const pageLink = usePageLink()
+const awardLink = useAwardLink(() => props.project)
 
 const facts = computed(() => [
   {label: t('caseStudy.facts.role'), value: props.project.role},
@@ -33,7 +34,8 @@ const facts = computed(() => [
         <!-- a whole row: it's a sentence, not a short fact -->
         <div v-if="project.award" class="col-span-full bg-surface px-6 py-5">
           <p class="m-0 mb-1.5 text-xs text-dim">{{ $t('caseStudy.facts.award') }}</p>
-          <p class="m-0 text-sm">{{ project.award }}</p>
+          <a v-if="awardLink" :href="awardLink" class="text-sm text-ink underline decoration-line-strong underline-offset-4 hover:text-accent hover:decoration-accent">{{ project.award }} <UiArrowIcon direction="down" class="inline-block align-[-0.1em]"/></a>
+          <p v-else class="m-0 text-sm">{{ project.award }}</p>
         </div>
       </div>
     </div>
