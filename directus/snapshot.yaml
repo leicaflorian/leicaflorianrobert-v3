@@ -9338,8 +9338,9 @@ fields:
       hidden: false
       interface: file-image
       note: >-
-        Anteprima nei social e nelle chat (1200×630); se vuota, l'immagine del
-        sito
+        Anteprima nei social e nelle chat (1200×630); se vuota, una scheda
+        disegnata al build con titolo e descrizione (la home usa l'immagine del
+        sito)
       options: null
       readonly: false
       required: false
@@ -10731,7 +10732,8 @@ fields:
       interface: file-image
       note: >-
         Case study: anteprima nei social e nelle chat (1200×630); se vuota, la
-        copertina, poi lo screenshot
+        copertina, poi una scheda disegnata al build con nome, sottotitolo e
+        screenshot
       options: null
       readonly: false
       required: false
