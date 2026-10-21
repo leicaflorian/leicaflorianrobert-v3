@@ -352,9 +352,9 @@ const PAGES = [
     key: 'about',
     in_menu: true,
     translations: tr({
-      it: {slug: 'chi-sono', title: 'Chi sono', description: 'Sono Leica Florian Robert, sviluppatore Web & Mobile: sviluppo full stack, progetto interfacce (UI e UX) e insegno tecnologie web.'},
-      en: {slug: 'about', title: 'About me', description: 'I\'m Leica Florian Robert, a Web & Mobile Developer: I build full stack, design interfaces (UI and UX) and teach web technologies.'},
-      ro: {slug: 'despre-mine', title: 'Despre mine', description: 'Sunt Leica Florian Robert, dezvoltator Web & Mobile: dezvolt full stack, proiectez interfețe (UI și UX) și predau tehnologii web.'},
+      it: {slug: 'chi-sono', title: 'Chi sono', seo_title: 'Chi sono: sviluppatore Web & Mobile', description: 'Sono Leica Florian Robert, sviluppatore Web & Mobile: sviluppo full stack, progetto interfacce (UI e UX) e insegno tecnologie web.'},
+      en: {slug: 'about', title: 'About me', seo_title: 'About me: Web & Mobile Developer', description: 'I\'m Leica Florian Robert, a Web & Mobile Developer: I build full stack, design interfaces (UI and UX) and teach web technologies.'},
+      ro: {slug: 'despre-mine', title: 'Despre mine', seo_title: 'Despre mine: dezvoltator Web & Mobile', description: 'Sunt Leica Florian Robert, dezvoltator Web & Mobile: dezvolt full stack, proiectez interfețe (UI și UX) și predau tehnologii web.'},
     }),
     sections: [
       section('block_page_header', {variant: 'about', cv_button: true}, {
@@ -419,9 +419,9 @@ const PAGES = [
     in_menu: true,
     children: 'projects',
     translations: tr({
-      it: {slug: 'progetti', title: 'Progetti', description: 'Alcuni dei progetti che ho realizzato: siti, web app, app mobile ed esperimenti.'},
-      en: {slug: 'projects', title: 'Projects', description: 'Some of the projects I\'ve built: websites, web apps, mobile apps and experiments.'},
-      ro: {slug: 'proiecte', title: 'Proiecte', description: 'Câteva dintre proiectele pe care le-am realizat: site-uri, aplicații web, aplicații mobile și experimente.'},
+      it: {slug: 'progetti', title: 'Progetti', seo_title: 'Progetti: siti, web app e app mobile', description: 'Alcuni dei progetti che ho realizzato: siti, web app, app mobile ed esperimenti.'},
+      en: {slug: 'projects', title: 'Projects', seo_title: 'Projects: websites, web and mobile apps', description: 'Some of the projects I\'ve built: websites, web apps, mobile apps and experiments.'},
+      ro: {slug: 'proiecte', title: 'Proiecte', seo_title: 'Proiecte: site-uri, aplicații web și mobile', description: 'Câteva dintre proiectele pe care le-am realizat: site-uri, aplicații web, aplicații mobile și experimente.'},
     }),
     sections: [
       section('block_page_header', {variant: 'projects'}, {
@@ -478,9 +478,9 @@ const PAGES = [
     key: 'contact',
     in_menu: true,
     translations: tr({
-      it: {slug: 'contatti', title: 'Contatti', description: 'Sito, app, consulenza o solo un parere tecnico — scrivimi e vediamo insieme come darti una mano.'},
-      en: {slug: 'contact', title: 'Contact', description: 'A website, an app, consulting or just a technical opinion — write to me and let\'s figure out together how I can help.'},
-      ro: {slug: 'contact', title: 'Contact', description: 'Site, aplicație, consultanță sau doar o părere tehnică — scrie-mi și vedem împreună cum te pot ajuta.'},
+      it: {slug: 'contatti', title: 'Contatti', seo_title: 'Contatti: parliamo del tuo progetto', description: 'Sito, app, consulenza o solo un parere tecnico — scrivimi e vediamo insieme come darti una mano.'},
+      en: {slug: 'contact', title: 'Contact', seo_title: 'Contact: let\'s talk about your project', description: 'A website, an app, consulting or just a technical opinion — write to me and let\'s figure out together how I can help.'},
+      ro: {slug: 'contact', title: 'Contact', seo_title: 'Contact: hai să vorbim despre proiectul tău', description: 'Site, aplicație, consultanță sau doar o părere tehnică — scrie-mi și vedem împreună cum te pot ajuta.'},
     }),
     sections: [
       section('block_page_header', {variant: 'contact'}, {
@@ -505,9 +505,9 @@ const PAGES = [
     key: 'privacy',
     in_menu: false,
     translations: tr({
-      it: {slug: 'privacy', title: 'Privacy', description: 'Come tratto i dati che mi lasci quando mi scrivi dal modulo di contatto di questo sito.'},
-      en: {slug: 'privacy', title: 'Privacy', description: 'How I handle the data you leave me when you write to me through this site\'s contact form.'},
-      ro: {slug: 'confidentialitate', title: 'Confidențialitate', description: 'Cum folosesc datele pe care mi le lași când îmi scrii prin formularul de contact al acestui site.'},
+      it: {slug: 'privacy', title: 'Privacy', seo_title: 'Privacy del modulo contatti', description: 'Come tratto i dati che mi lasci quando mi scrivi dal modulo di contatto di questo sito.'},
+      en: {slug: 'privacy', title: 'Privacy', seo_title: 'Contact form privacy notice', description: 'How I handle the data you leave me when you write to me through this site\'s contact form.'},
+      ro: {slug: 'confidentialitate', title: 'Confidențialitate', seo_title: 'Confidențialitate: formularul de contact', description: 'Cum folosesc datele pe care mi le lași când îmi scrii prin formularul de contact al acestui site.'},
     }),
     sections: [
       section('block_page_header', {}, {
