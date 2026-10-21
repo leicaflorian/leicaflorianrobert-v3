@@ -5,8 +5,9 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "generate": "nuxt generate && node scripts/seo-files.mjs && node scripts/cv-pdf.mjs",
+    "generate": "nuxt generate && node scripts/seo-files.mjs && node scripts/cv-pdf.mjs && node scripts/og-cards.mjs",
     "cv:pdf": "node scripts/cv-pdf.mjs",
+    "og:cards": "node scripts/og-cards.mjs",
     "preview": "nuxt preview",
     "directus:up": "docker compose -f directus/docker-compose.yml up -d",
     "directus:down": "docker compose -f directus/docker-compose.yml down",

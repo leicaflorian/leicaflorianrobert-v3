@@ -4,9 +4,10 @@
 -->
 <script setup lang="ts">
 import type {Page} from '~/types/content'
+import type {OgCard} from '~/utils/seo'
 
 const {isNative} = useEngine()
-const {locales} = useI18n()
+const {locale, locales} = useI18n()
 const path = useCurrentPath().value
 const pages = await usePages()
 
@@ -25,13 +26,26 @@ const sections = computed(() => (caseStudy?.value ?? pages.value.find(p => p.id 
 
 const title = () => caseStudy?.value?.name ?? page!.seo_title ?? page!.title
 const description = () => caseStudy?.value?.intro ?? page!.description
-// A case study falls back to its cover, then its screenshot (not a phone one: cropped to
-// 1200×630 it's a thin slice); every page to the site's /og.png, set in app.vue.
+
+const {directusUrl, siteUrl} = useRuntimeConfig().public
+const route = useRoute()
+/** A Directus image cropped to `width`×`height`, as JPEG: every social network reads it. */
+const asset = (id: string, width: number, height?: number) =>
+  `${directusUrl}/assets/${id}?width=${width}${height ? `&height=${height}&fit=cover` : ''}&format=jpg`
+
+// An image uploaded in Directus wins (a case study's `cover` too); otherwise the card is drawn
+// at build time by scripts/og-cards.mjs, from the og-card meta. A phone screenshot shows in a
+// phone, not cropped to 1200×630.
 const project = caseStudy?.value
-const ogImageId = project
-  ? project.og_image ?? project.cover ?? (project.mockup === 'phone' ? null : project.image)
-  : page!.og_image
-const {directusUrl} = useRuntimeConfig().public
+const uploaded = project ? project.og_image ?? project.cover : page!.og_image
+const card: OgCard = {
+  label: `// ${[(parent ?? page)!.title.toLowerCase(), project?.year].filter(Boolean).join(' · ')}`,
+  title: title(),
+  text: project ? project.subtitle ?? project.intro : page!.description,
+  prompt: ['~/leica', path].filter(Boolean).join('/'),
+  locale: locale.value,
+  ...project?.image && {shot: {src: asset(project.image, project.mockup === 'phone' ? 480 : 1200), phone: project.mockup === 'phone'}},
+}
 
 useSeoMeta({
   title,
@@ -39,12 +53,13 @@ useSeoMeta({
   ogTitle: () => fullTitle(title()),
   ogDescription: description,
   ogType: project ? 'article' : 'website',
-  ...ogImageId && {
-    // JPEG, which every social network reads; `fit=cover` crops to the card's size
-    ogImage: `${directusUrl}/assets/${ogImageId}?width=${OG_IMAGE_SIZE.width}&height=${OG_IMAGE_SIZE.height}&fit=cover&format=jpg`,
+  // the home keeps the site's /og.png, set in app.vue
+  ...(uploaded || path) && {
+    ogImage: uploaded ? asset(uploaded, OG_IMAGE_SIZE.width, OG_IMAGE_SIZE.height) : `${siteUrl}/og${route.path.replace(/\/$/, '')}.png`,
     ogImageAlt: title,
   },
 })
+if (!uploaded && path) useHead({meta: [{name: 'og-card', content: JSON.stringify(card)}]})
 
 // The language switcher leads to the same page with the slug of the other language.
 const {data: raw} = useNuxtData<RawItem[]>(PAGES_KEY)

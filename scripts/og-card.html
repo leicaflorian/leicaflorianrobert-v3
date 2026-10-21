@@ -1,0 +1,195 @@
+<!doctype html>
+<!--
+  The social card of a page, 1200×630, in the style of public/og.png. scripts/og-cards.mjs loads
+  it once, then calls render(card) for each page and takes a screenshot. The colours are the
+  theme tokens of app/assets/css/main.css, copied: this page can't read them.
+-->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=block">
+<style>
+  :root {
+    --bg: #111113;
+    --bg-deep: #0C0C0E;
+    --surface: #18181B;
+    --line: #222226;
+    --line-card: #26262B;
+    --gutter: #3A3A40;
+    --ink: #EDEBE6;
+    --ink-soft: #BDBAB2;
+    --subtle: #8F8C85;
+    --dim: #6A675F;
+    --accent: #FF5B14;
+    --ok: #5BD48A;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    position: relative;
+    background-color: var(--bg);
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.025) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: var(--ink);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-variant-ligatures: none;
+  }
+  .content {
+    position: absolute;
+    inset: 72px 80px auto 80px;
+    display: flex;
+    flex-direction: column;
+  }
+  .with-shot .content { right: 520px; }
+  .top { display: flex; align-items: center; gap: 20px; font-size: 22px; color: var(--subtle); }
+  /* the logo tile of public/og.png */
+  .logo {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    border: 2px solid #2C2C31;
+    border-radius: 16px;
+    background: #1C1C20;
+    color: var(--accent);
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+  }
+  .logo::after { content: ""; width: 12px; height: 4px; margin: 14px 0 0 2px; background: var(--accent); }
+  .label { margin-top: 56px; font-size: 26px; color: var(--accent); }
+  .title { margin-top: 18px; font-weight: 800; line-height: 1.08; letter-spacing: -0.02em; }
+  .title::after {
+    content: "";
+    display: inline-block;
+    width: 0.5em;
+    height: 0.09em;
+    margin-left: 0.12em;
+    background: var(--accent);
+  }
+  .text {
+    margin-top: 26px;
+    font-size: 24px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+  .footer {
+    position: absolute;
+    inset: auto 80px 56px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 32px;
+    border-top: 2px solid var(--line-card);
+    font-size: 22px;
+  }
+  .with-shot .footer { right: 520px; }
+  .domain { font-weight: 700; }
+  .locales { color: var(--dim); }
+  .locales .on { color: var(--ink); }
+  .locales .dot {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background: var(--ok);
+  }
+
+  /* a case study's screenshot, running off the right edge */
+  .shot { display: none; position: absolute; overflow: hidden; background: var(--bg-deep); }
+  .shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .with-shot .shot { display: flex; flex-direction: column; }
+  .browser {
+    top: 72px;
+    left: 730px;
+    width: 640px;
+    height: 486px;
+    border: 2px solid var(--line-card);
+    border-radius: 16px;
+    box-shadow: 0 24px 80px rgb(0 0 0 / 0.5);
+  }
+  .browser .bar {
+    display: flex;
+    gap: 9px;
+    flex: none;
+    padding: 16px 18px;
+    border-bottom: 2px solid var(--line);
+    background: var(--surface);
+  }
+  .browser .bar span { width: 13px; height: 13px; border-radius: 50%; background: var(--gutter); }
+  .browser img { flex: 1; min-height: 0; }
+  .phone {
+    top: 64px;
+    left: 800px;
+    width: 300px;
+    height: 620px;
+    padding: 12px;
+    border: 2px solid var(--line-card);
+    border-radius: 48px;
+    background: var(--surface);
+    box-shadow: 0 24px 80px rgb(0 0 0 / 0.5);
+  }
+  .phone img { border-radius: 36px; }
+  .phone .bar { display: none; }
+</style>
+</head>
+<body>
+  <div class="content">
+    <div class="top"><span class="logo">lfr</span><span class="prompt"></span></div>
+    <div class="label"></div>
+    <div class="title"></div>
+    <div class="text"></div>
+  </div>
+  <div class="footer">
+    <span class="domain">leicaflorianrobert.dev</span>
+    <span class="locales"></span>
+  </div>
+  <div class="shot"><div class="bar"><span></span><span></span><span></span></div><img alt=""></div>
+
+<script>
+  const LOCALES = ['it', 'en', 'ro']
+  const $ = selector => document.querySelector(selector)
+
+  /** Draws a card (see OgCard in app/utils/seo.ts); resolves once fonts and screenshot are in. */
+  window.render = async (card) => {
+    $('.prompt').textContent = card.prompt
+    $('.label').textContent = card.label
+    $('.title').textContent = card.title
+    $('.text').textContent = card.text ?? ''
+    $('.text').style.display = card.text ? '' : 'none'
+    $('.locales').innerHTML = '<span class="dot"></span>' + LOCALES
+      .map(code => `<span class="${code === card.locale ? 'on' : ''}">${code}</span>`).join(' · ')
+
+    document.body.classList.toggle('with-shot', Boolean(card.shot))
+    const shot = $('.shot')
+    shot.className = `shot ${card.shot?.phone ? 'phone' : 'browser'}`
+    const img = $('.shot img')
+    if (card.shot) {
+      img.src = card.shot.src
+      await img.decode()
+    } else {
+      img.removeAttribute('src')
+    }
+    await document.fonts.ready
+
+    // the biggest title that fits in three lines with the text above the footer
+    const title = $('.title')
+    const limit = $('.footer').getBoundingClientRect().top - 32
+    for (let size = card.shot ? 72 : 84; size >= 32; size -= 2) {
+      title.style.fontSize = `${size}px`
+      const lines = Math.round(title.offsetHeight / (size * 1.08))
+      if (lines <= 3 && $('.content').getBoundingClientRect().bottom <= limit) break
+    }
+  }
+</script>
+</body>
+</html>
