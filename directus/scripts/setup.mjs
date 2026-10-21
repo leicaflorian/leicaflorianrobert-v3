@@ -139,7 +139,7 @@ const COLLECTIONS = [
       string('role', 'Case study: ruolo', {width: 'half'}),
       string('type', 'Case study: tipo di progetto', {width: 'half'}),
       string('stack', 'Case study: tecnologie, facoltativo'),
-      string('award', 'Case study: un premio, facoltativo'),
+      string('award', 'Case study: un premio, facoltativo. Diventa un link alla sezione con l\'etichetta «premio» (in inglese «award», in rumeno «premiu»), se c\'è'),
     ],
   },
   {

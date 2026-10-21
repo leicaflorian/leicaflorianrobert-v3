@@ -11374,7 +11374,9 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: 'Case study: un premio, facoltativo'
+      note: >-
+        Case study: un premio, facoltativo. Diventa un link alla sezione con
+        l'etichetta «premio» (in inglese «award», in rumeno «premiu»), se c'è
       options: null
       readonly: false
       required: false
