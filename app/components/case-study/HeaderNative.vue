@@ -11,7 +11,6 @@ const facts = computed(() => [
   {label: t('caseStudy.facts.year'), value: props.project.year},
   {label: t('caseStudy.facts.type'), value: props.project.type},
   {label: t('caseStudy.facts.stack'), value: props.project.stack},
-  {label: t('caseStudy.facts.award'), value: props.project.award},
 ].filter(fact => fact.value))
 </script>
 
@@ -22,7 +21,7 @@ const facts = computed(() => [
       <p class="m-0 mb-4 mt-12 text-[13px] text-accent">{{ $t('caseStudy.comment') }}</p>
       <UiPageTitle>{{ project.name }}</UiPageTitle>
       <p v-if="project.intro" v-reveal class="m-0 mt-8 max-w-[640px] text-[17px] leading-[1.8] text-muted">{{ project.intro }}</p>
-      <div v-if="facts.length || project.url" v-reveal class="mt-14 grid grid-cols-[repeat(auto-fit,minmax(min(100%,180px),1fr))] gap-px overflow-hidden rounded-[14px] border border-line-card bg-line-card">
+      <div v-if="facts.length || project.url || project.award" v-reveal class="mt-14 grid grid-cols-[repeat(auto-fit,minmax(min(100%,180px),1fr))] gap-px overflow-hidden rounded-[14px] border border-line-card bg-line-card">
         <div v-for="fact in facts" :key="fact.label" class="bg-surface px-6 py-5">
           <p class="m-0 mb-1.5 text-xs text-dim">{{ fact.label }}</p>
           <p class="m-0 text-sm">{{ fact.value }}</p>
@@ -30,6 +29,11 @@ const facts = computed(() => [
         <div v-if="project.url" class="bg-surface px-6 py-5">
           <p class="m-0 mb-1.5 text-xs text-dim">{{ $t('caseStudy.facts.link') }}</p>
           <a :href="project.url" target="_blank" rel="noopener" class="break-all text-sm text-ink hover:text-accent">{{ hostOf(project.url) }} <UiArrowIcon direction="up-right" class="inline-block align-[-0.1em]"/></a>
+        </div>
+        <!-- a whole row: it's a sentence, not a short fact -->
+        <div v-if="project.award" class="col-span-full bg-surface px-6 py-5">
+          <p class="m-0 mb-1.5 text-xs text-dim">{{ $t('caseStudy.facts.award') }}</p>
+          <p class="m-0 text-sm">{{ project.award }}</p>
         </div>
       </div>
     </div>
