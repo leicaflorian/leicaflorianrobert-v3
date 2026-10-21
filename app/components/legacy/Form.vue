@@ -1,14 +1,25 @@
-<!-- The "bare" contact form of legacy mode: the same two groups, with checkboxes and drop-downs. -->
+<!--
+  The "bare" contact form of legacy mode: the same two groups, with checkboxes and drop-downs.
+  Locked while sending; once sent, a plain thank-you takes its place.
+-->
 <script setup lang="ts">
-const {draft, status, submit, reset} = useContactForm()
+const {draft, status, thanks, submit, reset, again} = useContactForm()
 const pageLink = usePageLink()
 
 const control = 'max-w-full border border-black px-1 font-legacy text-base'
+const button = 'cursor-pointer border border-black bg-legacy-face px-2'
+const sending = computed(() => status.value === 'sending')
 </script>
 
 <template>
-  <form class="flex max-w-[420px] flex-col gap-2" @submit.prevent="submit" @reset.prevent="reset">
-    <fieldset class="m-0 min-w-0 flex flex-col gap-2 border border-black px-2 pb-2">
+  <div v-if="status === 'sent'" role="status" class="flex max-w-[420px] flex-col gap-2 border border-black p-2">
+    <p class="m-0"><b>{{ $t('form.legacy.sent') }}</b></p>
+    <p class="m-0">{{ thanks }} {{ $t('form.terminal.reply') }}</p>
+    <p class="m-0"><i>{{ $t('form.terminal.coffee') }}</i></p>
+    <div><input type="button" :value="$t('form.legacy.again')" :class="button" @click="again"></div>
+  </div>
+  <form v-else class="flex max-w-[420px] flex-col gap-2" @submit.prevent="submit" @reset.prevent="reset">
+    <fieldset :disabled="sending" class="m-0 min-w-0 flex flex-col gap-2 border border-black px-2 pb-2">
       <legend>{{ $t('form.groups.project') }}</legend>
       <fieldset class="m-0 min-w-0 border border-black px-2 pb-1">
         <legend>{{ $t('form.brief.legacy.types') }}</legend>
@@ -29,16 +40,17 @@ const control = 'max-w-full border border-black px-1 font-legacy text-base'
         </select>
       </label>
     </fieldset>
-    <fieldset class="m-0 min-w-0 flex flex-col gap-2 border border-black px-2 pb-2">
+    <fieldset :disabled="sending" class="m-0 min-w-0 flex flex-col gap-2 border border-black px-2 pb-2">
       <legend>{{ $t('form.groups.you') }}</legend>
       <label>{{ $t('form.legacy.name') }} <input v-model="draft.name" type="text" name="name" required :class="control"></label>
       <label>{{ $t('form.legacy.email') }} <input v-model="draft.email" type="email" name="email" required :class="control"></label>
       <label>{{ $t('form.legacy.message') }}<br><textarea v-model="draft.message" name="message" rows="4" cols="40" required :class="control"/></label>
     </fieldset>
     <div class="flex gap-1">
-      <input type="submit" :value="$t('form.legacy.submit')" :disabled="status === 'sending'" class="cursor-pointer border border-black bg-legacy-face px-2">
-      <input type="reset" :value="$t('form.legacy.reset')" class="cursor-pointer border border-black bg-legacy-face px-2">
+      <input type="submit" :value="$t('form.legacy.submit')" :disabled="sending" :class="button">
+      <input type="reset" :value="$t('form.legacy.reset')" :disabled="sending" :class="button">
     </div>
+    <p v-if="sending" role="status" class="m-0"><i>{{ $t('form.sending') }}</i></p>
     <p class="m-0 text-sm">
       <i18n-t keypath="form.privacy" scope="global">
         <template #link><LegacyLink :href="pageLink('privacy')">{{ $t('form.privacyLink') }}</LegacyLink></template>
@@ -50,7 +62,6 @@ const control = 'max-w-full border border-black px-1 font-legacy text-base'
         <template #terms><LegacyLink :href="RECAPTCHA_LINKS.terms">{{ $t('form.recaptchaTerms') }}</LegacyLink></template>
       </i18n-t>
     </p>
-    <p v-if="status === 'sent'" class="m-0"><b>{{ $t('form.sent') }}</b></p>
-    <p v-else-if="status === 'error'" class="m-0 text-[red]"><b>{{ $t('form.error') }}</b></p>
+    <p v-if="status === 'error'" role="alert" class="m-0 text-[red]"><b>{{ $t('form.error') }}</b></p>
   </form>
 </template>
