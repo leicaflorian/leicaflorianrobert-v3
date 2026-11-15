@@ -16,7 +16,8 @@
     "directus:snapshot": "docker compose -f directus/docker-compose.yml exec -T directus node cli.js schema snapshot --yes /directus/uploads/snapshot.yaml && mv directus/uploads/snapshot.yaml directus/snapshot.yaml",
     "typecheck": "nuxi typecheck",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "test:directus": "node --test directus/extensions/*/test/*.test.mjs"
   },
   "dependencies": {
     "@directus/sdk": "^18.0.3",

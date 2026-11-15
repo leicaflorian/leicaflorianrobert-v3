@@ -376,7 +376,8 @@ const OBSOLETE_FIELDS = [['block_page_header', 'image'], ['block_contact_form', 
 
 /** Flows from earlier setups, removed by setup. */
 // the automatic rebuild, once per saved collection: replaced by the «Pubblica il sito» button
-const OBSOLETE_FLOWS = ['Ricostruisci il sito']
+// 'Email per un nuovo messaggio': the contact endpoint sends that email itself, through the Hostinger Mail API
+const OBSOLETE_FLOWS = ['Ricostruisci il sito', 'Email per un nuovo messaggio']
 
 /**
  * The folders of the Data Model and of the content menu, in order. Collections left out stay at
@@ -770,33 +771,6 @@ async function createFlows() {
         options: {
           method: 'POST', url: '{{$env.DEPLOY_WEBHOOK_URL}}',
           headers: [{header: 'Authorization', value: 'Bearer {{$env.DEPLOY_WEBHOOK_TOKEN}}'}],
-        },
-      },
-    ],
-  })
-
-  await createFlow({
-    name: 'Email per un nuovo messaggio',
-    description: 'Manda a CONTACT_EMAIL_TO ogni messaggio arrivato dal form di contatto.',
-    icon: 'forward_to_inbox',
-    options: {type: 'action', scope: ['items.create'], collections: ['messages']},
-    operations: [
-      {
-        key: 'email', name: 'Email', type: 'mail',
-        options: {
-          to: ['{{$env.CONTACT_EMAIL_TO}}'],
-          subject: 'Nuovo messaggio dal sito: {{$trigger.payload.name}} <{{$trigger.payload.email}}>',
-          type: 'markdown',
-          body: [
-            '**Nome:** {{$trigger.payload.name}}',
-            '**Email:** {{$trigger.payload.email}}',
-            '**Lingua:** {{$trigger.payload.locale}}',
-            '**Tipo di progetto:** {{$trigger.payload.project_types}}',
-            '**Budget:** {{$trigger.payload.budget}}',
-            '**Tempi:** {{$trigger.payload.timeline}}',
-            '',
-            '{{$trigger.payload.message}}',
-          ].join('\n'),
         },
       },
     ],
