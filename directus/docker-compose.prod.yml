@@ -26,8 +26,8 @@ services:
       RECAPTCHA_SECRET: ${RECAPTCHA_SECRET:-}
       RECAPTCHA_MIN_SCORE: ${RECAPTCHA_MIN_SCORE:-0.5}
       CONTACT_EMAIL_TO: ${CONTACT_EMAIL_TO:-info@leicaflorianrobert.dev}
-      # the contact endpoint emails each message through the Hostinger Mail API (HTTPS: the droplet
-      # blocks the SMTP ports); empty, no email is sent
+      # every Directus email (flows, password reset) goes through the Hostinger Mail API
+      # (extensions/hostinger-mail: the droplet blocks the SMTP ports); empty, EMAIL_TRANSPORT is used
       HOSTINGER_MAIL_TOKEN: ${HOSTINGER_MAIL_TOKEN:-}
       HOSTINGER_MAILBOX_ID: ${HOSTINGER_MAILBOX_ID:-}
       DEPLOY_WEBHOOK_URL: ${DEPLOY_WEBHOOK_URL:-}
@@ -41,7 +41,7 @@ services:
       # crawlers may read it, to see the noindex header (extensions/noindex-hook)
       ROBOTS_TXT: "User-agent: *\nAllow: /\n"
       # the variables flows can read with {{ $env.NAME }}
-      FLOWS_ENV_ALLOW_LIST: DEPLOY_WEBHOOK_URL,DEPLOY_WEBHOOK_TOKEN
+      FLOWS_ENV_ALLOW_LIST: DEPLOY_WEBHOOK_URL,DEPLOY_WEBHOOK_TOKEN,CONTACT_EMAIL_TO
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:8055/server/ping"]
       interval: 10s

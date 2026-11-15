@@ -8,9 +8,6 @@
 //   must be at least RECAPTCHA_MIN_SCORE (0.5 if not set).
 // - The message is saved to `messages` with server permissions: the public can
 //   neither read nor write that collection.
-// - Then it is emailed to CONTACT_EMAIL_TO through the Hostinger Mail API (HTTPS: the droplet
-//   blocks the SMTP ports), from the mailbox HOSTINGER_MAILBOX_ID with HOSTINGER_MAIL_TOKEN.
-//   Without them no email is sent. A failed email is only logged: the message is already saved.
 
 const LIMITS = {name: 100, surname: 100, email: 200, message: 5000, locale: 5}
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -38,36 +35,6 @@ function clean(body) {
     out[field] = value.slice(0, max)
   }
   return out
-}
-
-const MAIL_API = 'https://api.mail.hostinger.com/api/v1/mailboxes'
-
-/** The notification for the site's owner, in Italian like the admin. */
-function notification(message, brief) {
-  const sender = [message.name, message.surname].filter(Boolean).join(' ')
-  return {
-    subject: `Nuovo messaggio dal sito: ${sender} <${message.email}>`,
-    text: [
-      `Nome: ${sender}`,
-      `Email: ${message.email}`,
-      `Lingua: ${message.locale || '-'}`,
-      `Tipo di progetto: ${brief.project_types.join(', ') || '-'}`,
-      `Budget: ${brief.budget || '-'}`,
-      `Tempi: ${brief.timeline || '-'}`,
-      '',
-      message.message,
-    ].join('\n'),
-  }
-}
-
-/** Sends the notification; throws when the API refuses it or can't be reached. */
-async function sendNotification(env, message, brief) {
-  const response = await fetch(`${MAIL_API}/${encodeURIComponent(env.HOSTINGER_MAILBOX_ID)}/send`, {
-    method: 'POST',
-    headers: {'Authorization': `Bearer ${env.HOSTINGER_MAIL_TOKEN}`, 'Content-Type': 'application/json'},
-    body: JSON.stringify({to: [env.CONTACT_EMAIL_TO], displayName: 'leicaflorianrobert.dev', ...notification(message, brief)}),
-  })
-  if (!response.ok) throw new Error(`Hostinger Mail API answered ${response.status}: ${await response.text()}`)
 }
 
 async function verifyRecaptcha(secret, token, minScore) {
@@ -102,23 +69,14 @@ export default {
         }
       }
 
-      const brief = cleanBrief(req.body)
       try {
         const items = new services.ItemsService('messages', {schema: await getSchema(), accountability: null})
-        await items.createOne({...message, ...brief, locale: message.locale || null, surname: message.surname || null})
+        await items.createOne({...message, ...cleanBrief(req.body), locale: message.locale || null, surname: message.surname || null})
+        return res.status(204).end()
       } catch (error) {
         logger.error(error, 'contact-endpoint: failed to save the message')
         return res.status(500).json({errors: [{message: 'Message not saved.'}]})
       }
-
-      if (env.HOSTINGER_MAIL_TOKEN && env.HOSTINGER_MAILBOX_ID && env.CONTACT_EMAIL_TO) {
-        try {
-          await sendNotification(env, message, brief)
-        } catch (error) {
-          logger.error(error, 'contact-endpoint: the email for the new message was not sent')
-        }
-      }
-      return res.status(204).end()
     })
   },
 }

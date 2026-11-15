@@ -1,4 +1,5 @@
-// Tests for POST /contact. Run with `npm run test:directus` (node:test, no dependencies).
+// Tests for POST /contact. The email for a new message is the flow's job (extensions/hostinger-mail).
+// Run with `npm run test:directus` (node:test, no dependencies).
 // The endpoint is driven through a fake router; only the outside world is faked:
 // Directus' ItemsService and the network (globalThis.fetch).
 
@@ -6,11 +7,8 @@ import {test, beforeEach, afterEach} from 'node:test'
 import assert from 'node:assert/strict'
 import endpoint from '../dist/index.js'
 
-const HOSTINGER_ENV = {
-  CONTACT_EMAIL_TO: 'info@leicaflorianrobert.dev',
-  HOSTINGER_MAIL_TOKEN: 'token-test',
-  HOSTINGER_MAILBOX_ID: 'mbx-123',
-}
+// set, to show the endpoint ignores them: the email is sent by the flow through extensions/hostinger-mail
+const HOSTINGER_ENV = {HOSTINGER_MAIL_TOKEN: 'token-test', HOSTINGER_MAILBOX_ID: 'mbx-123'}
 
 const BODY = {
   name: 'Ada', surname: 'Lovelace', email: 'ada@example.com', message: 'Hello\n"there"',
@@ -18,16 +16,14 @@ const BODY = {
 }
 
 let requests
-let fetchResponse
 let originalFetch
 
 beforeEach(() => {
   requests = []
-  fetchResponse = () => new Response(null, {status: 204})
   originalFetch = globalThis.fetch
   globalThis.fetch = async (url, init) => {
     requests.push({url: String(url), init})
-    return fetchResponse()
+    return new Response(null, {status: 204})
   }
 })
 
@@ -69,59 +65,17 @@ async function post(body, {env = HOSTINGER_ENV, saveFails = false} = {}) {
   return {res, saved, errors}
 }
 
-test('a saved message is emailed to CONTACT_EMAIL_TO through the Hostinger Mail API', async () => {
+test('a valid message is saved and the endpoint sends no email itself (the flow does)', async () => {
   const {res, saved} = await post(BODY)
 
   assert.equal(res.statusCode, 204)
   assert.equal(saved.length, 1)
-  assert.equal(requests.length, 1)
-  const [{url, init}] = requests
-  assert.equal(url, 'https://api.mail.hostinger.com/api/v1/mailboxes/mbx-123/send')
-  assert.equal(init.method, 'POST')
-  assert.equal(init.headers.Authorization, 'Bearer token-test')
-  assert.equal(init.headers['Content-Type'], 'application/json')
-  const mail = JSON.parse(init.body)
-  assert.deepEqual(mail.to, ['info@leicaflorianrobert.dev'])
-  assert.equal(mail.subject, 'Nuovo messaggio dal sito: Ada Lovelace <ada@example.com>')
-  assert.match(mail.text, /Email: ada@example.com/)
-  assert.match(mail.text, /Tipo di progetto: site\n/)
-  assert.match(mail.text, /Budget: 3-10k/)
-  assert.match(mail.text, /Tempi: flexible/)
-  assert.match(mail.text, /Lingua: en/)
-  assert.ok(mail.text.endsWith('Hello\n"there"'))
-})
-
-test('without the Hostinger settings the message is saved and no email is sent', async () => {
-  const {res, saved} = await post(BODY, {env: {}})
-
-  assert.equal(res.statusCode, 204)
-  assert.equal(saved.length, 1)
+  assert.equal(saved[0].email, 'ada@example.com')
+  assert.deepEqual(saved[0].project_types, ['site'])
   assert.equal(requests.length, 0)
 })
 
-test('a failed email is logged and the visitor still gets a success', async () => {
-  fetchResponse = () => new Response('{"message":"nope"}', {status: 422})
-
-  const {res, saved, errors} = await post(BODY)
-
-  assert.equal(res.statusCode, 204)
-  assert.equal(saved.length, 1)
-  assert.equal(errors.length, 1)
-  assert.match(String(errors[0][1]), /email/i)
-})
-
-test('an unreachable mail API is logged and the visitor still gets a success', async () => {
-  fetchResponse = () => {
-    throw new TypeError('fetch failed')
-  }
-
-  const {res, errors} = await post(BODY)
-
-  assert.equal(res.statusCode, 204)
-  assert.equal(errors.length, 1)
-})
-
-test('a message that is not saved is not emailed', async () => {
+test('a message that is not saved answers 500', async () => {
   const {res} = await post(BODY, {saveFails: true})
 
   assert.equal(res.statusCode, 500)

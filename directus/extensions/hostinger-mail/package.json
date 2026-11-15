@@ -1,0 +1,13 @@
+{
+  "name": "hostinger-mail",
+  "description": "Sends every Directus email (flows, password reset, invites) through the Hostinger Mail API, because the droplet blocks the SMTP ports.",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "directus:extension": {
+    "type": "hook",
+    "path": "dist/index.js",
+    "source": "dist/index.js",
+    "host": "^12.0.0"
+  }
+}
